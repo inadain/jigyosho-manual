@@ -178,7 +178,7 @@ td.note { font-size: 11.5px; color: var(--text-sub); }
 <div class="topbar">
   <button class="topbar-menu" onclick="toggleSidebar()">☰</button>
   <span id="mobile-title">1日の業務フロー</span>
-  <a href="../index.html" class="topbar-back">← 一覧へ</a>
+  <a href="#" onclick="history.back(); return false;" class="topbar-back">← 戻る</a>
 </div>
 
 <!-- オーバーレイ -->
@@ -193,7 +193,7 @@ td.note { font-size: 11.5px; color: var(--text-sub); }
       <h1>かしわじま居宅介護支援センター</h1>
       <p>居宅介護支援 スタッフマニュアル</p>
     </div>
-    <a href="../index.html" class="sidebar-back">← 一覧へ</a>
+    <a href="#" onclick="history.back(); return false;" class="sidebar-back">← 戻る</a>
     <nav class="sidebar-nav">
       <div class="nav-section-label">日常業務</div>
       <button class="nav-item active" onclick="showPage('daily', this)">

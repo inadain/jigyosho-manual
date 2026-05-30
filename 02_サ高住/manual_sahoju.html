@@ -227,7 +227,7 @@ td.note { font-size: 11.5px; color: var(--text-sub); }
 <div class="top-bar">
   <button class="top-bar-menu" onclick="toggleSidebar()" aria-label="メニュー">☰</button>
   <span class="top-bar-title" id="mobile-title">業務フロー</span>
-  <a href="../index.html" class="top-bar-back">← 一覧</a>
+  <a href="#" onclick="history.back(); return false;" class="top-bar-back">← 戻る</a>
 </div>
 
 <!-- オーバーレイ -->
@@ -238,7 +238,7 @@ td.note { font-size: 11.5px; color: var(--text-sub); }
   <!-- サイドバー -->
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-header">
-      <a href="../index.html" class="back-link">← 事業所一覧へ</a>
+      <a href="#" onclick="history.back(); return false;" class="back-link">← 戻る</a>
       <div class="sidebar-logo">🏠</div>
       <div class="sidebar-title">メディケアビレッジ<br>かしわじま</div>
       <div class="sidebar-sub">サービス付き高齢者向け住宅</div>

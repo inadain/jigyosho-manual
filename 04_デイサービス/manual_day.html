@@ -189,7 +189,7 @@ td.note { font-size: 11.5px; color: var(--text-sub); }
 <div class="topbar">
   <button class="topbar-menu" onclick="toggleSidebar()" aria-label="メニュー">☰</button>
   <span class="topbar-title">☀️ デイサービスマニュアル</span>
-  <a href="../index.html" class="topbar-back">← 一覧へ</a>
+  <a href="#" onclick="history.back(); return false;" class="topbar-back">← 戻る</a>
 </div>
 
 <!-- Overlay -->
@@ -203,7 +203,7 @@ td.note { font-size: 11.5px; color: var(--text-sub); }
       <h1>☀️ デイサービスセンターこはる日和</h1>
       <p>通所介護 スタッフマニュアル</p>
     </div>
-    <a href="../index.html" class="sidebar-back">← 一覧へ戻る</a>
+    <a href="#" onclick="history.back(); return false;" class="sidebar-back">← 戻る</a>
     <nav class="sidebar-nav">
       <button class="nav-item active" onclick="showPage('page-flow', this)">
         <span class="nav-icon">📋</span>業務フロー

@@ -163,7 +163,7 @@ td.note { font-size: 11.5px; color: var(--text-sub); }
 <div class="topbar">
   <button class="topbar-menu" onclick="toggleSidebar()">☰</button>
   <span id="mobile-title">訪問介護とは</span>
-  <a href="../index.html" class="topbar-back">← 一覧へ</a>
+  <a href="#" onclick="history.back(); return false;" class="topbar-back">← 戻る</a>
 </div>
 
 <!-- オーバーレイ -->
@@ -178,7 +178,7 @@ td.note { font-size: 11.5px; color: var(--text-sub); }
       <h1>訪問介護事業所</h1>
       <p>訪問介護 スタッフマニュアル</p>
     </div>
-    <a href="../index.html" class="sidebar-back">← 一覧へ</a>
+    <a href="#" onclick="history.back(); return false;" class="sidebar-back">← 戻る</a>
     <nav class="sidebar-nav">
       <button class="nav-item active" onclick="showPage('about', this)">
         <span class="icon">📖</span>訪問介護とは

@@ -9,6 +9,7 @@
 <meta name="apple-mobile-web-app-title" content="訪問看護マニュアル">
 <style>
 :root {
+  --accent:     #db2777;
   --main:       #db2777;
   --main-mid:   #ec4899;
   --main-light: #fce7f3;
@@ -31,33 +32,88 @@
   --r: 12px; --r-sm: 8px;
   --sh: 0 1px 4px rgba(0,0,0,.08);
   --sh-md: 0 4px 16px rgba(0,0,0,.12);
+  --sidebar-w: 240px;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body { font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", sans-serif;
        font-size: 15px; line-height: 1.6; color: var(--text); background: var(--bg); }
-.site-header { background: linear-gradient(135deg, #831843 0%, var(--main) 55%, var(--main-mid) 100%);
-  padding: 14px 20px; position: sticky; top: 0; z-index: 50; box-shadow: 0 2px 10px rgba(131,24,67,.4); }
-.header-inner { max-width: 900px; margin: 0 auto; display: flex; align-items: center; gap: 12px; }
-.header-text h1 { font-size: 15px; font-weight: 800; color: #fff; }
-.header-text p  { font-size: 11px; color: rgba(255,255,255,.65); margin-top: 1px; }
-.header-back { margin-left: auto; color: rgba(255,255,255,.8); font-size: 12px; text-decoration: none;
-               background: rgba(255,255,255,.15); padding: 5px 12px; border-radius: 20px; }
-.hero { background: linear-gradient(135deg, var(--main) 0%, var(--main-mid) 100%);
-        padding: 22px 20px 26px; text-align: center; color: #fff; }
-.hero h2 { font-size: 18px; font-weight: 800; margin-bottom: 4px; }
-.hero p  { font-size: 12px; color: rgba(255,255,255,.72); line-height: 1.7; }
-.nav-tabs { background: var(--white); border-bottom: 2px solid var(--gray-mid);
-            display: flex; overflow-x: auto; scrollbar-width: none; position: sticky; top: 52px; z-index: 40; }
-.nav-tabs::-webkit-scrollbar { display: none; }
-.nav-tab { flex-shrink: 0; padding: 12px 16px; font-size: 13px; font-weight: 700;
-           color: var(--gray); border: none; background: none; cursor: pointer;
-           border-bottom: 3px solid transparent; margin-bottom: -2px; white-space: nowrap; }
-.nav-tab.active { color: var(--main); border-bottom-color: var(--main); }
-.nav-tab:hover:not(.active) { color: var(--text); }
-.main { max-width: 900px; margin: 0 auto; padding: 20px 16px 60px; }
-.section { display: none; }
-.section.active { display: block; }
+
+/* ========== LAYOUT ========== */
+.layout { display: flex; min-height: 100vh; }
+
+/* ========== SIDEBAR ========== */
+.sidebar {
+  width: var(--sidebar-w);
+  flex-shrink: 0;
+  background: linear-gradient(180deg, #831843 0%, var(--main) 100%);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  z-index: 100;
+  overflow-y: auto;
+}
+.sidebar-header {
+  padding: 20px 16px 16px;
+  border-bottom: 1px solid rgba(255,255,255,.15);
+}
+.sidebar-header .logo { font-size: 22px; margin-bottom: 6px; }
+.sidebar-header h1 { font-size: 13px; font-weight: 800; color: #fff; line-height: 1.4; }
+.sidebar-header p  { font-size: 10px; color: rgba(255,255,255,.6); margin-top: 4px; }
+.sidebar-back {
+  display: block; margin: 12px 16px 0;
+  color: rgba(255,255,255,.75); font-size: 11px; text-decoration: none;
+  background: rgba(255,255,255,.12); padding: 5px 10px; border-radius: 20px;
+  text-align: center;
+}
+.sidebar-nav { padding: 12px 0 20px; flex: 1; }
+.nav-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 11px 18px; font-size: 13px; font-weight: 600;
+  color: rgba(255,255,255,.75); cursor: pointer;
+  border: none; background: none; width: 100%; text-align: left;
+  transition: background .15s, color .15s;
+}
+.nav-item:hover { background: rgba(255,255,255,.1); color: #fff; }
+.nav-item.active { background: rgba(255,255,255,.18); color: #fff; }
+.nav-item .icon { font-size: 16px; flex-shrink: 0; }
+
+/* ========== TOPBAR (mobile) ========== */
+.topbar {
+  display: none;
+  position: fixed; top: 0; left: 0; right: 0; z-index: 90;
+  background: linear-gradient(135deg, #831843 0%, var(--main) 100%);
+  padding: 0 16px;
+  height: 52px; align-items: center; gap: 12px;
+  box-shadow: 0 2px 10px rgba(131,24,67,.4);
+}
+.topbar-menu {
+  background: none; border: none; color: #fff; font-size: 22px;
+  cursor: pointer; padding: 4px; line-height: 1;
+}
+#mobile-title { flex: 1; font-size: 14px; font-weight: 800; color: #fff; }
+.topbar-back {
+  color: rgba(255,255,255,.8); font-size: 11px; text-decoration: none;
+  background: rgba(255,255,255,.15); padding: 4px 10px; border-radius: 20px;
+}
+
+/* ========== OVERLAY ========== */
+.overlay {
+  display: none; position: fixed; inset: 0; background: rgba(0,0,0,.4); z-index: 99;
+}
+.overlay.open { display: block; }
+
+/* ========== CONTENT ========== */
+.content {
+  margin-left: var(--sidebar-w);
+  flex: 1;
+  min-width: 0;
+}
+.page { display: none; padding: 24px 20px 60px; max-width: 860px; }
+.page.active { display: block; }
+
+/* ========== COMPONENTS ========== */
 .sec-head { display: flex; align-items: center; gap: 10px; margin: 0 0 16px; }
 .sec-icon { width: 36px; height: 36px; border-radius: 9px; display: flex; align-items: center;
             justify-content: center; font-size: 18px; flex-shrink: 0; background: var(--main-light); }
@@ -89,244 +145,283 @@ td.note { font-size: 11.5px; color: var(--text-sub); }
 .point { background: var(--main-xl); border-radius: var(--r-sm); padding: 12px 14px; margin: 10px 0; font-size: 13.5px; }
 .point strong { color: var(--main); }
 .site-footer { text-align: center; padding: 20px; font-size: 11px; color: var(--text-sub); border-top: 1px solid var(--gray-mid); background: var(--white); }
+
+/* ========== MOBILE ========== */
+@media (max-width: 768px) {
+  .sidebar { transform: translateX(-100%); transition: transform .25s; }
+  .sidebar.open { transform: translateX(0); }
+  .topbar { display: flex; }
+  .content { margin-left: 0; padding-top: 52px; }
+  .page { padding: 20px 14px 60px; }
+}
 </style>
 </head>
 <body>
-<header class="site-header">
-  <div class="header-inner">
-    <div class="header-text">
-      <h1>💊 いなだ医院 訪問看護</h1>
-      <p>みなし訪問看護 スタッフマニュアル</p>
-    </div>
-    <a href="../index.html" class="header-back">← 一覧へ</a>
-  </div>
-</header>
 
-<div class="hero">
-  <h2>訪問看護 スタッフマニュアル</h2>
-  <p>業務フロー・書類管理・カンファレンス運用</p>
+<!-- モバイル用トップバー -->
+<div class="topbar">
+  <button class="topbar-menu" onclick="toggleSidebar()">☰</button>
+  <span id="mobile-title">業務フロー</span>
+  <a href="../index.html" class="topbar-back">← 一覧へ</a>
 </div>
 
-<nav class="nav-tabs">
-  <button class="nav-tab active" onclick="showSection('flow')">📋 業務フロー</button>
-  <button class="nav-tab" onclick="showSection('documents')">📄 書類管理</button>
-  <button class="nav-tab" onclick="showSection('conference')">👥 カンファレンス</button>
-</nav>
+<!-- オーバーレイ -->
+<div class="overlay" id="overlay" onclick="closeSidebar()"></div>
 
-<main class="main">
+<div class="layout">
 
-  <!-- ① 業務フロー -->
-  <section id="flow" class="section active">
-    <div class="sec-head">
-      <div class="sec-icon">📋</div>
-      <div><h2>訪問看護業務フロー</h2><p>利用開始から終了までの流れ</p></div>
+  <!-- サイドバー -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="logo">💊</div>
+      <h1>いなだ医院 訪問看護</h1>
+      <p>みなし訪問看護 スタッフマニュアル</p>
     </div>
+    <a href="../index.html" class="sidebar-back">← 一覧へ</a>
+    <nav class="sidebar-nav">
+      <button class="nav-item active" onclick="showPage('flow', this)">
+        <span class="icon">📋</span>業務フロー
+      </button>
+      <button class="nav-item" onclick="showPage('documents', this)">
+        <span class="icon">📄</span>書類管理
+      </button>
+      <button class="nav-item" onclick="showPage('conference', this)">
+        <span class="icon">👥</span>カンファレンス
+      </button>
+    </nav>
+  </aside>
 
-    <div class="card">
-      <h3>基本方針</h3>
-      <ul class="list">
-        <li>利用者が住み慣れた地域・自宅で安心して生活できるよう、医療・介護両面から支援する</li>
-        <li><strong>医療保険</strong>の訪問看護：主治医の指示書に基づき、医師の指示を遵守して行う</li>
-        <li><strong>介護保険</strong>の訪問看護：ケアプランに基づき、利用者の生活状況と医師の指示を踏まえて行う</li>
-        <li>医師・ケアマネジャー・介護職・家族と連携し、生活の質（QOL）を維持・向上させる</li>
-        <li>記録・書類業務を適切に行い、法令遵守と情報共有を徹底する</li>
-      </ul>
-    </div>
+  <!-- コンテンツ -->
+  <div class="content">
 
-    <div class="card">
-      <h3>主な業務内容</h3>
-      <div class="tbl-wrap">
-        <table>
-          <thead><tr><th>区分</th><th>内容</th></tr></thead>
-          <tbody>
-            <tr><td><strong>訪問看護業務</strong></td><td class="note">バイタルサイン測定・病状観察 / 医師の指示に基づく処置（点滴・吸引・創傷処置等）/ 薬剤管理（残薬確認・服薬指導）/ ターミナルケア（疼痛コントロール・看取り支援）/ 精神的ケア・ご家族への支援</td></tr>
-            <tr><td><strong>書類業務</strong></td><td class="note">訪問看護計画書（指示書発行時・ケアプラン変更時・状態変化時）/ 訪問看護報告書（月次・翌月3日まで）/ 訪問記録（訪問ごと・原則訪問日に記載）</td></tr>
-          </tbody>
-        </table>
+    <!-- ① 業務フロー -->
+    <div id="page-flow" class="page active">
+      <div class="sec-head">
+        <div class="sec-icon">📋</div>
+        <div><h2>訪問看護業務フロー</h2><p>利用開始から終了までの流れ</p></div>
+      </div>
+
+      <div class="card">
+        <h3>基本方針</h3>
+        <ul class="list">
+          <li>利用者が住み慣れた地域・自宅で安心して生活できるよう、医療・介護両面から支援する</li>
+          <li><strong>医療保険</strong>の訪問看護：主治医の指示書に基づき、医師の指示を遵守して行う</li>
+          <li><strong>介護保険</strong>の訪問看護：ケアプランに基づき、利用者の生活状況と医師の指示を踏まえて行う</li>
+          <li>医師・ケアマネジャー・介護職・家族と連携し、生活の質（QOL）を維持・向上させる</li>
+          <li>記録・書類業務を適切に行い、法令遵守と情報共有を徹底する</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>主な業務内容</h3>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>区分</th><th>内容</th></tr></thead>
+            <tbody>
+              <tr><td><strong>訪問看護業務</strong></td><td class="note">バイタルサイン測定・病状観察 / 医師の指示に基づく処置（点滴・吸引・創傷処置等）/ 薬剤管理（残薬確認・服薬指導）/ ターミナルケア（疼痛コントロール・看取り支援）/ 精神的ケア・ご家族への支援</td></tr>
+              <tr><td><strong>書類業務</strong></td><td class="note">訪問看護計画書（指示書発行時・ケアプラン変更時・状態変化時）/ 訪問看護報告書（月次・翌月3日まで）/ 訪問記録（訪問ごと・原則訪問日に記載）</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>業務フローの概要</h3>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>フェーズ</th><th>内容</th></tr></thead>
+            <tbody>
+              <tr><td><strong>利用開始準備</strong></td><td class="note">依頼受付 → 訪問看護指示書の取得 → 初回訪問前カンファレンス（利用者情報確認・他職種と情報共有）</td></tr>
+              <tr><td><strong>サービス導入</strong></td><td class="note">初回訪問（契約・計画書の説明と同意・状態把握・生活環境確認） → 記録作成</td></tr>
+              <tr><td><strong>定期訪問（継続支援）</strong></td><td class="note">医師の指示に基づく処置 → ケアプランに沿った支援 → 家族支援 → 記録・報告（状態変化時は医師・ケアマネへ速やかに報告）</td></tr>
+              <tr><td><strong>状態変化・緊急対応</strong></td><td class="note">容体急変時：医師へ連絡 → 必要に応じ救急要請 → ケアマネ・家族へ報告 → 管理者へ連絡 → 記録・再カンファレンス</td></tr>
+              <tr><td><strong>サービス終了</strong></td><td class="note">病状改善・入院・施設入所・看取り・利用者希望による終了。関連書類の整理・保管。</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>情報共有・連携先</h3>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>連携先</th><th>内容</th></tr></thead>
+            <tbody>
+              <tr><td><strong>主治医</strong></td><td class="note">状態変化・処置内容の報告、報告書提出</td></tr>
+              <tr><td><strong>訪問看護管理者</strong></td><td class="note">状態変化・その他報告事項・利用者家族からの要望・苦情内容</td></tr>
+              <tr><td><strong>ケアマネジャー</strong></td><td class="note">計画書・報告書で情報共有。緊急時は随時連絡</td></tr>
+              <tr><td><strong>多職種</strong></td><td class="note">定期カンファレンス等での情報交換</td></tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
 
-    <div class="card">
-      <h3>業務フローの概要</h3>
-      <div class="tbl-wrap">
-        <table>
-          <thead><tr><th>フェーズ</th><th>内容</th></tr></thead>
-          <tbody>
-            <tr><td><strong>利用開始準備</strong></td><td class="note">依頼受付 → 訪問看護指示書の取得 → 初回訪問前カンファレンス（利用者情報確認・他職種と情報共有）</td></tr>
-            <tr><td><strong>サービス導入</strong></td><td class="note">初回訪問（契約・計画書の説明と同意・状態把握・生活環境確認） → 記録作成</td></tr>
-            <tr><td><strong>定期訪問（継続支援）</strong></td><td class="note">医師の指示に基づく処置 → ケアプランに沿った支援 → 家族支援 → 記録・報告（状態変化時は医師・ケアマネへ速やかに報告）</td></tr>
-            <tr><td><strong>状態変化・緊急対応</strong></td><td class="note">容体急変時：医師へ連絡 → 必要に応じ救急要請 → ケアマネ・家族へ報告 → 管理者へ連絡 → 記録・再カンファレンス</td></tr>
-            <tr><td><strong>サービス終了</strong></td><td class="note">病状改善・入院・施設入所・看取り・利用者希望による終了。関連書類の整理・保管。</td></tr>
-          </tbody>
-        </table>
+    <!-- ② 書類管理 -->
+    <div id="page-documents" class="page">
+      <div class="sec-head">
+        <div class="sec-icon">📄</div>
+        <div><h2>書類管理（受け持ち看護師の責任）</h2><p>計画書・報告書・指示書の期限管理</p></div>
+      </div>
+
+      <div class="card">
+        <h3>訪問看護計画書の作成・管理</h3>
+        <h4>作成タイミング</h4>
+        <ul class="list">
+          <li>訪問看護指示書発行時（初回訪問の場合は初回訪問までに必ず作成する）</li>
+          <li>ケアプラン作成時・更新時</li>
+          <li>利用者の状態変化があった時</li>
+        </ul>
+        <div class="alert red">🔏 計画書の代表者氏名欄の横に<strong>院長の認印を捺印</strong>してもらうこと。捺印のない計画書は正式書類として扱わない。</div>
+        <h4>サイン取得と配布</h4>
+        <ul class="list-num">
+          <li>計画書は<strong>2部印刷</strong>する</li>
+          <li>利用者本人または家族（可能であればキーパーソン）より<strong>署名をもらう</strong></li>
+          <li>1部：利用者控えとして利用者または家族へ渡す</li>
+          <li>1部：法人保管用</li>
+        </ul>
+        <h4>保険別の処理方法</h4>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>保険種別</th><th>処理方法</th></tr></thead>
+            <tbody>
+              <tr><td><strong>医療保険</strong></td><td class="note">計画書原本を「訪問看護利用者 個別ファイル」へ綴じる</td></tr>
+              <tr><td><strong>介護保険</strong></td><td class="note">サイン済み計画書を1部コピーする。原本：個別ファイルへ。コピー：担当ケアマネジャーへ提出する</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>訪問看護報告書</h3>
+        <ul class="list">
+          <li>訪問看護を利用している<strong>全利用者</strong>について、毎月作成する</li>
+          <li>作成期限：<strong>翌月3日まで</strong></li>
+          <li>報告書を1部印刷し、「報告書提出ファイル」へ提出する</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>訪問看護指示書の期限管理</h3>
+        <div class="point">受け持ち看護師は担当する<strong>全利用者の指示書の有効期限</strong>を把握・管理する責任を負います。</div>
+        <ul class="list">
+          <li>訪問看護指示書期限一覧・訪問看護利用者 個人ファイルにて確認</li>
+          <li>期限直近の場合は<strong>医師へ再度依頼</strong>を行う</li>
+          <li>確認責任は受け持ち看護師が負う</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>データ管理・USB</h3>
+        <ul class="list">
+          <li>訪問看護に関するデータは<strong>訪問看護USB内</strong>に保存する</li>
+          <li>USBは訪問看護ファイル棚に保管する</li>
+        </ul>
+        <div class="alert red">🚫 いなだ医院外へのUSBの持ち出しは<strong>絶対禁止</strong>。紛失・破損・データ不具合があった場合は速やかに訪問看護管理者へ報告すること。</div>
+      </div>
+
+      <div class="card">
+        <h3>書類の訂正方法（公文書として取り扱う）</h3>
+        <div class="alert red">🚫 修正テープ・修正液の使用は<strong>禁止</strong>。記載内容を消去・判読不能にする訂正は禁止。</div>
+        <h4>正しい訂正方法（手書き書類）</h4>
+        <ul class="list-num">
+          <li>誤記部分に<strong>二重線</strong>を引く（判読可能な状態で）</li>
+          <li><strong>訂正印または訂正者氏名</strong>を記載する</li>
+          <li>正しい内容を近くに追記する</li>
+        </ul>
+        <div class="point">提出済み書類は無断で差し替えを行わない。訂正・再提出の要否は<strong>管理者判断</strong>とする。</div>
       </div>
     </div>
 
-    <div class="card">
-      <h3>情報共有・連携先</h3>
-      <div class="tbl-wrap">
-        <table>
-          <thead><tr><th>連携先</th><th>内容</th></tr></thead>
-          <tbody>
-            <tr><td><strong>主治医</strong></td><td class="note">状態変化・処置内容の報告、報告書提出</td></tr>
-            <tr><td><strong>訪問看護管理者</strong></td><td class="note">状態変化・その他報告事項・利用者家族からの要望・苦情内容</td></tr>
-            <tr><td><strong>ケアマネジャー</strong></td><td class="note">計画書・報告書で情報共有。緊急時は随時連絡</td></tr>
-            <tr><td><strong>多職種</strong></td><td class="note">定期カンファレンス等での情報交換</td></tr>
-          </tbody>
-        </table>
+    <!-- ③ カンファレンス -->
+    <div id="page-conference" class="page">
+      <div class="sec-head">
+        <div class="sec-icon">👥</div>
+        <div><h2>看護師カンファレンス運用マニュアル</h2><p>2026年4月13日制定</p></div>
       </div>
-    </div>
-  </section>
 
-  <!-- ② 書類管理 -->
-  <section id="documents" class="section">
-    <div class="sec-head">
-      <div class="sec-icon">📄</div>
-      <div><h2>書類管理（受け持ち看護師の責任）</h2><p>計画書・報告書・指示書の期限管理</p></div>
-    </div>
-
-    <div class="card">
-      <h3>訪問看護計画書の作成・管理</h3>
-      <h4>作成タイミング</h4>
-      <ul class="list">
-        <li>訪問看護指示書発行時（初回訪問の場合は初回訪問までに必ず作成する）</li>
-        <li>ケアプラン作成時・更新時</li>
-        <li>利用者の状態変化があった時</li>
-      </ul>
-      <div class="alert red">🔏 計画書の代表者氏名欄の横に<strong>院長の認印を捺印</strong>してもらうこと。捺印のない計画書は正式書類として扱わない。</div>
-      <h4>サイン取得と配布</h4>
-      <ul class="list-num">
-        <li>計画書は<strong>2部印刷</strong>する</li>
-        <li>利用者本人または家族（可能であればキーパーソン）より<strong>署名をもらう</strong></li>
-        <li>1部：利用者控えとして利用者または家族へ渡す</li>
-        <li>1部：法人保管用</li>
-      </ul>
-      <h4>保険別の処理方法</h4>
-      <div class="tbl-wrap">
-        <table>
-          <thead><tr><th>保険種別</th><th>処理方法</th></tr></thead>
-          <tbody>
-            <tr><td><strong>医療保険</strong></td><td class="note">計画書原本を「訪問看護利用者 個別ファイル」へ綴じる</td></tr>
-            <tr><td><strong>介護保険</strong></td><td class="note">サイン済み計画書を1部コピーする。原本：個別ファイルへ。コピー：担当ケアマネジャーへ提出する</td></tr>
-          </tbody>
-        </table>
+      <div class="card">
+        <h3>開催概要</h3>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>項目</th><th>内容</th></tr></thead>
+            <tbody>
+              <tr><td>開催頻度</td><td class="note">毎月 1回</td></tr>
+              <tr><td>開催日時</td><td class="note">毎月のシフト表にて事前に周知（目安：30分〜1時間以内）</td></tr>
+              <tr><td>開催場所</td><td class="note">メディケアビレッジかしわじま 相談室</td></tr>
+              <tr><td>司会・書記</td><td class="note">スタッフによる交代制（別紙の「看護師シフト票」を確認）</td></tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
 
-    <div class="card">
-      <h3>訪問看護報告書</h3>
-      <ul class="list">
-        <li>訪問看護を利用している<strong>全利用者</strong>について、毎月作成する</li>
-        <li>作成期限：<strong>翌月3日まで</strong></li>
-        <li>報告書を1部印刷し、「報告書提出ファイル」へ提出する</li>
-      </ul>
-    </div>
+      <div class="card">
+        <h3>検討・共有内容</h3>
+        <h4>利用者情報共有</h4>
+        <ul class="list">
+          <li>新規入所予定者：氏名・入所予定日・利用者背景・ADL等</li>
+          <li>退所者：氏名・退所日・退所理由</li>
+          <li>訪問看護開始者：氏名・開始日・開始理由・具体的な訪問内容</li>
+          <li>訪問看護終了者：氏名・終了日・終了理由</li>
+        </ul>
+        <h4>業務改善・連絡事項</h4>
+        <ul class="list">
+          <li>日々の気づき・意見・具体的な改善提案</li>
+          <li>現在進行中の改善取り組みの経過報告</li>
+          <li>その他、全体で周知が必要な事項</li>
+        </ul>
+      </div>
 
-    <div class="card">
-      <h3>訪問看護指示書の期限管理</h3>
-      <div class="point">受け持ち看護師は担当する<strong>全利用者の指示書の有効期限</strong>を把握・管理する責任を負います。</div>
-      <ul class="list">
-        <li>訪問看護指示書期限一覧・訪問看護利用者 個人ファイルにて確認</li>
-        <li>期限直近の場合は<strong>医師へ再度依頼</strong>を行う</li>
-        <li>確認責任は受け持ち看護師が負う</li>
-      </ul>
-    </div>
+      <div class="card">
+        <h3>議事録の作成と管理</h3>
+        <ul class="list-num">
+          <li>作成期限：カンファレンス終了後<strong>3日以内</strong>に作成</li>
+          <li>データ保存先：施設看護師用USB（黄色のUSBメモリ）内の原本データをコピーしてPCで編集</li>
+          <li>印刷は計<strong>2枚</strong> — 1枚：統括（稲田崇志）へ提出。1枚：カンファレンスファイルへファイリング</li>
+        </ul>
+        <div class="alert pink">📝 議事録は欠席したスタッフへの重要な情報伝達ツールです。決定事項や経過が誰にでも分かるよう、簡潔かつ正確に記載してください。</div>
+      </div>
 
-    <div class="card">
-      <h3>データ管理・USB</h3>
-      <ul class="list">
-        <li>訪問看護に関するデータは<strong>訪問看護USB内</strong>に保存する</li>
-        <li>USBは訪問看護ファイル棚に保管する</li>
-      </ul>
-      <div class="alert red">🚫 いなだ医院外へのUSBの持ち出しは<strong>絶対禁止</strong>。紛失・破損・データ不具合があった場合は速やかに訪問看護管理者へ報告すること。</div>
-    </div>
-
-    <div class="card">
-      <h3>書類の訂正方法（公文書として取り扱う）</h3>
-      <div class="alert red">🚫 修正テープ・修正液の使用は<strong>禁止</strong>。記載内容を消去・判読不能にする訂正は禁止。</div>
-      <h4>正しい訂正方法（手書き書類）</h4>
-      <ul class="list-num">
-        <li>誤記部分に<strong>二重線</strong>を引く（判読可能な状態で）</li>
-        <li><strong>訂正印または訂正者氏名</strong>を記載する</li>
-        <li>正しい内容を近くに追記する</li>
-      </ul>
-      <div class="point">提出済み書類は無断で差し替えを行わない。訂正・再提出の要否は<strong>管理者判断</strong>とする。</div>
-    </div>
-  </section>
-
-  <!-- ③ カンファレンス -->
-  <section id="conference" class="section">
-    <div class="sec-head">
-      <div class="sec-icon">👥</div>
-      <div><h2>看護師カンファレンス運用マニュアル</h2><p>2026年4月13日制定</p></div>
-    </div>
-
-    <div class="card">
-      <h3>開催概要</h3>
-      <div class="tbl-wrap">
-        <table>
-          <thead><tr><th>項目</th><th>内容</th></tr></thead>
-          <tbody>
-            <tr><td>開催頻度</td><td class="note">毎月 1回</td></tr>
-            <tr><td>開催日時</td><td class="note">毎月のシフト表にて事前に周知（目安：30分〜1時間以内）</td></tr>
-            <tr><td>開催場所</td><td class="note">メディケアビレッジかしわじま 相談室</td></tr>
-            <tr><td>司会・書記</td><td class="note">スタッフによる交代制（別紙の「看護師シフト票」を確認）</td></tr>
-          </tbody>
-        </table>
+      <div class="card">
+        <h3>業務改善のフロー</h3>
+        <ul class="list-num">
+          <li><strong>協議</strong> — カンファレンス内で意見を出し合い、方向性をまとめる</li>
+          <li><strong>記載</strong> — 議事録内の「改善提案項目」に記入する際、<strong>目印や色付け</strong>を付けて分かりやすく記載する</li>
+          <li><strong>提案</strong> — 書記が議事録を提出する際、統括（稲田崇志）へ直接提案を行う</li>
+          <li><strong>実施</strong> — <strong>統括の承認を得てから</strong>、実際の業務変更・導入を行う</li>
+        </ul>
       </div>
     </div>
 
-    <div class="card">
-      <h3>検討・共有内容</h3>
-      <h4>利用者情報共有</h4>
-      <ul class="list">
-        <li>新規入所予定者：氏名・入所予定日・利用者背景・ADL等</li>
-        <li>退所者：氏名・退所日・退所理由</li>
-        <li>訪問看護開始者：氏名・開始日・開始理由・具体的な訪問内容</li>
-        <li>訪問看護終了者：氏名・終了日・終了理由</li>
-      </ul>
-      <h4>業務改善・連絡事項</h4>
-      <ul class="list">
-        <li>日々の気づき・意見・具体的な改善提案</li>
-        <li>現在進行中の改善取り組みの経過報告</li>
-        <li>その他、全体で周知が必要な事項</li>
-      </ul>
-    </div>
+    <footer class="site-footer">
+      いなだ医院 訪問看護 スタッフマニュアル｜最終更新: 2026年5月（2026年1月9日制定・4月13日改訂版対応）
+    </footer>
 
-    <div class="card">
-      <h3>議事録の作成と管理</h3>
-      <ul class="list-num">
-        <li>作成期限：カンファレンス終了後<strong>3日以内</strong>に作成</li>
-        <li>データ保存先：施設看護師用USB（黄色のUSBメモリ）内の原本データをコピーしてPCで編集</li>
-        <li>印刷は計<strong>2枚</strong> — 1枚：統括（稲田崇志）へ提出。1枚：カンファレンスファイルへファイリング</li>
-      </ul>
-      <div class="alert pink">📝 議事録は欠席したスタッフへの重要な情報伝達ツールです。決定事項や経過が誰にでも分かるよう、簡潔かつ正確に記載してください。</div>
-    </div>
-
-    <div class="card">
-      <h3>業務改善のフロー</h3>
-      <ul class="list-num">
-        <li><strong>協議</strong> — カンファレンス内で意見を出し合い、方向性をまとめる</li>
-        <li><strong>記載</strong> — 議事録内の「改善提案項目」に記入する際、<strong>目印や色付け</strong>を付けて分かりやすく記載する</li>
-        <li><strong>提案</strong> — 書記が議事録を提出する際、統括（稲田崇志）へ直接提案を行う</li>
-        <li><strong>実施</strong> — <strong>統括の承認を得てから</strong>、実際の業務変更・導入を行う</li>
-      </ul>
-    </div>
-  </section>
-
-</main>
-
-<footer class="site-footer">
-  いなだ医院 訪問看護 スタッフマニュアル｜最終更新: 2026年5月（2026年1月9日制定・4月13日改訂版対応）
-</footer>
+  </div><!-- /content -->
+</div><!-- /layout -->
 
 <script>
-function showSection(id) {
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  event.target.classList.add('active');
+const pages = {
+  flow:       '業務フロー',
+  documents:  '書類管理',
+  conference: 'カンファレンス'
+};
+function showPage(id, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  btn.classList.add('active');
+  document.getElementById('mobile-title').textContent = pages[id] || '';
+  closeSidebar();
   window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('open');
+}
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('overlay').classList.remove('open');
 }
 </script>
 </body>

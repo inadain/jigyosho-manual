@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>デイサービスマニュアル｜こはる日和</title>
+<meta name="theme-color" content="#d97706">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="デイマニュアル">
+<style>
+:root {
+  --main:       #d97706;
+  --main-mid:   #f59e0b;
+  --main-light: #fef3c7;
+  --main-xl:    #fffbeb;
+  --blue:       #1558a0;
+  --blue-light: #dbeafe;
+  --green:      #16a34a;
+  --green-lt:   #dcfce7;
+  --red:        #dc2626;
+  --red-lt:     #fee2e2;
+  --teal:       #0d9488;
+  --teal-light: #ccfbf1;
+  --gray:       #64748b;
+  --gray-lt:    #f1f5f9;
+  --gray-mid:   #e2e8f0;
+  --text:       #0f172a;
+  --text-sub:   #475569;
+  --bg:         #f0f4f8;
+  --white:      #ffffff;
+  --r: 12px; --r-sm: 8px;
+  --sh: 0 1px 4px rgba(0,0,0,.08);
+  --sh-md: 0 4px 16px rgba(0,0,0,.12);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", sans-serif;
+       font-size: 15px; line-height: 1.6; color: var(--text); background: var(--bg); }
+.site-header { background: linear-gradient(135deg, #78350f 0%, var(--main) 55%, var(--main-mid) 100%);
+  padding: 14px 20px; position: sticky; top: 0; z-index: 50; box-shadow: 0 2px 10px rgba(120,53,15,.4); }
+.header-inner { max-width: 900px; margin: 0 auto; display: flex; align-items: center; gap: 12px; }
+.header-text h1 { font-size: 15px; font-weight: 800; color: #fff; }
+.header-text p  { font-size: 11px; color: rgba(255,255,255,.65); margin-top: 1px; }
+.header-back { margin-left: auto; color: rgba(255,255,255,.8); font-size: 12px; text-decoration: none;
+               background: rgba(255,255,255,.15); padding: 5px 12px; border-radius: 20px; }
+.header-back:hover { background: rgba(255,255,255,.25); }
+.hero { background: linear-gradient(135deg, var(--main) 0%, var(--main-mid) 100%);
+        padding: 22px 20px 26px; text-align: center; color: #fff; }
+.hero h2 { font-size: 18px; font-weight: 800; margin-bottom: 4px; }
+.hero p  { font-size: 12px; color: rgba(255,255,255,.72); line-height: 1.7; }
+.nav-tabs { background: var(--white); border-bottom: 2px solid var(--gray-mid);
+            display: flex; overflow-x: auto; scrollbar-width: none; position: sticky; top: 52px; z-index: 40; }
+.nav-tabs::-webkit-scrollbar { display: none; }
+.nav-tab { flex-shrink: 0; padding: 12px 16px; font-size: 13px; font-weight: 700;
+           color: var(--gray); border: none; background: none; cursor: pointer;
+           border-bottom: 3px solid transparent; margin-bottom: -2px; white-space: nowrap; }
+.nav-tab.active { color: var(--main); border-bottom-color: var(--main); }
+.nav-tab:hover:not(.active) { color: var(--text); }
+.main { max-width: 900px; margin: 0 auto; padding: 20px 16px 60px; }
+.section { display: none; }
+.section.active { display: block; }
+.sec-head { display: flex; align-items: center; gap: 10px; margin: 0 0 16px; }
+.sec-icon { width: 36px; height: 36px; border-radius: 9px; display: flex; align-items: center;
+            justify-content: center; font-size: 18px; flex-shrink: 0; background: var(--main-light); }
+.sec-head h2 { font-size: 17px; font-weight: 800; color: var(--main); }
+.sec-head p  { font-size: 12px; color: var(--text-sub); margin-top: 2px; }
+.card { background: var(--white); border-radius: var(--r); box-shadow: var(--sh); padding: 18px 20px; margin-bottom: 16px; border: 1px solid var(--gray-mid); }
+.card h3 { font-size: 14px; font-weight: 800; color: var(--main); margin-bottom: 12px; border-bottom: 2px solid var(--main-light); padding-bottom: 8px; }
+.card h4 { font-size: 13px; font-weight: 700; color: var(--text); margin: 14px 0 8px; }
+.alert { border-radius: var(--r-sm); padding: 10px 14px; margin-bottom: 12px; font-size: 13px; display: flex; align-items: flex-start; gap: 8px; }
+.alert.red   { background: var(--red-lt);    border-left: 4px solid var(--red);   color: #7f1d1d; }
+.alert.amber { background: var(--main-light); border-left: 4px solid var(--main); color: #78350f; }
+.alert.green { background: var(--green-lt);  border-left: 4px solid var(--green); color: #14532d; }
+.alert.blue  { background: var(--blue-light); border-left: 4px solid var(--blue); color: #1e3a5f; }
+.tbl-wrap { overflow-x: auto; margin-bottom: 12px; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th { background: var(--main); color: #fff; padding: 8px 10px; text-align: left; font-weight: 700; }
+td { padding: 8px 10px; border-bottom: 1px solid var(--gray-mid); vertical-align: top; }
+tr:last-child td { border-bottom: none; }
+tr:nth-child(even) td { background: var(--gray-lt); }
+td.time { white-space: nowrap; font-weight: 700; color: var(--main); width: 80px; }
+td.note { font-size: 11.5px; color: var(--text-sub); }
+.list { padding-left: 0; list-style: none; }
+.list li { padding: 6px 0 6px 22px; position: relative; font-size: 13.5px; border-bottom: 1px solid var(--gray-mid); }
+.list li:last-child { border-bottom: none; }
+.list li::before { content: "▶"; position: absolute; left: 2px; color: var(--main); font-size: 10px; top: 9px; }
+.list-num { counter-reset: item; padding-left: 0; list-style: none; }
+.list-num li { counter-increment: item; padding: 7px 0 7px 28px; position: relative; font-size: 13.5px; border-bottom: 1px solid var(--gray-mid); }
+.list-num li:last-child { border-bottom: none; }
+.list-num li::before { content: counter(item); position: absolute; left: 0; background: var(--main); color: #fff; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; top: 9px; }
+.symptom-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 12px; }
+@media (max-width: 600px) { .symptom-grid { grid-template-columns: 1fr; } }
+.symptom-card { border: 1px solid var(--gray-mid); border-radius: var(--r-sm); padding: 12px 14px; }
+.symptom-card h5 { font-size: 13px; font-weight: 800; color: var(--main); margin-bottom: 6px; }
+.symptom-card p { font-size: 12.5px; line-height: 1.6; }
+.point { background: var(--main-xl); border-radius: var(--r-sm); padding: 12px 14px; margin: 10px 0; font-size: 13.5px; }
+.point strong { color: var(--main); }
+.site-footer { text-align: center; padding: 20px; font-size: 11px; color: var(--text-sub); border-top: 1px solid var(--gray-mid); background: var(--white); }
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-text">
+      <h1>☀️ デイサービスセンターこはる日和</h1>
+      <p>通所介護 スタッフマニュアル</p>
+    </div>
+    <a href="../index.html" class="header-back">← 一覧へ</a>
+  </div>
+</header>
+
+<div class="hero">
+  <h2>デイサービス スタッフマニュアル</h2>
+  <p>業務フロー・介助技術・認知症ケア・身体拘束排除</p>
+</div>
+
+<nav class="nav-tabs">
+  <button class="nav-tab active" onclick="showSection('flow')">📋 業務フロー</button>
+  <button class="nav-tab" onclick="showSection('bath')">🛁 入浴介助</button>
+  <button class="nav-tab" onclick="showSection('toilet')">🚽 排泄介助</button>
+  <button class="nav-tab" onclick="showSection('dementia')">🧠 認知症ケア</button>
+  <button class="nav-tab" onclick="showSection('restraint')">🚫 身体拘束</button>
+</nav>
+
+<main class="main">
+
+  <!-- ① 業務フロー -->
+  <section id="flow" class="section active">
+    <div class="sec-head">
+      <div class="sec-icon">📋</div>
+      <div><h2>業務フロー</h2><p>1日の業務時間割と注意事項</p></div>
+    </div>
+    <div class="card">
+      <h3>1日の流れ</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>時刻</th><th>業務</th><th>注意点</th></tr></thead>
+          <tbody>
+            <tr><td class="time">08:30</td><td>送迎・手洗い・うがい誘導</td><td class="note">安全運転。特変あれば家族に確認。転倒注意</td></tr>
+            <tr><td class="time">09:00</td><td>バイタル測定</td><td class="note">※体温37度以上・バイタル異常は看護師・管理者へ報告</td></tr>
+            <tr><td class="time">09:00〜</td><td>入浴介助・見守り・記録</td><td class="note">転倒注意・身体観察。問題あれば看護師・管理者へ報告</td></tr>
+            <tr><td class="time">09:30</td><td>朝礼・テレビ体操</td><td class="note">転倒注意</td></tr>
+            <tr><td class="time">10:00</td><td>水分補給・トイレ誘導・午前の作業</td><td class="note">誤嚥・誤薬注意。食事量・水分量記載（必要者）。転倒注意・汚染時交換・尿量記載（必要者）</td></tr>
+            <tr><td class="time">10:00〜</td><td>バイク・メドマー</td><td class="note">転倒注意</td></tr>
+            <tr><td class="time">11:00</td><td>平行棒体操</td><td class="note"></td></tr>
+            <tr><td class="time">11:30</td><td>トイレ誘導</td><td class="note"></td></tr>
+            <tr><td class="time">12:00</td><td>配膳・食事介助</td><td class="note"></td></tr>
+            <tr><td class="time">12:30</td><td>服薬・口腔ケア・下膳・トイレ誘導</td><td class="note"></td></tr>
+            <tr><td class="time">13:00</td><td>水分補給・午後の作業</td><td class="note">コミュニケーション</td></tr>
+            <tr><td class="time">14:30</td><td>トイレ誘導・テレビ体操</td><td class="note">転倒注意</td></tr>
+            <tr><td class="time">15:00</td><td>おやつ（介助）</td><td class="note"></td></tr>
+            <tr><td class="time">15:30</td><td>帰りの会</td><td class="note"></td></tr>
+            <tr><td class="time">16:00</td><td>トイレ誘導・帰宅準備・送迎</td><td class="note">今日の特変あれば報告</td></tr>
+            <tr><td class="time">16:30</td><td>清掃・翌日準備</td><td class="note"></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="alert amber">📝 傷・痣・出血（かさぶた）などが見られる場合は必ず管理者へ報告してください</div>
+    </div>
+  </section>
+
+  <!-- ② 入浴介助 -->
+  <section id="bath" class="section">
+    <div class="sec-head">
+      <div class="sec-icon">🛁</div>
+      <div><h2>入浴介助マニュアル</h2><p>事故防止のための確認手順</p></div>
+    </div>
+    <div class="card">
+      <h3>入浴による危険性</h3>
+      <div class="alert red">⚠️ 転倒 / 血圧変動 / 疲労 / のぼせ / 湯冷め / 火傷 / 溺れる</div>
+    </div>
+
+    <div class="card">
+      <h3>🚿 一般浴の手順</h3>
+      <h4>準備する物</h4>
+      <p style="font-size:13px;margin-bottom:12px;">着替え、バスタオル、タオル、アカスリ、ガーゼなど洗うもの、石鹸、シャンプー、リンス、ブラシ、ドライヤー、シャワーチェア、マット、温度計、薬、化粧品</p>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>確認事項</th><th>留意点</th></tr></thead>
+          <tbody>
+            <tr><td>着替えを準備</td><td class="note">暑さ・寒さに応じたもの。麻痺がある場合は前開きのもの</td></tr>
+            <tr><td>浴室環境整備</td><td class="note">室温・湯温の確認。浴室と脱衣所の温度差を少なくする。湯温の適温は38℃〜41℃程度</td></tr>
+            <tr><td>身体状況チェック</td><td class="note">顔色・表情・全身状態の変化の確認。検温・血圧測定。必要があれば医療との連携を取る</td></tr>
+            <tr><td>食事・服薬の確認</td><td class="note">食事直後や空腹時、服薬直後は避ける</td></tr>
+            <tr><td>入浴前後の水分補給</td><td class="note">必ず実施する</td></tr>
+            <tr><td>排泄確認</td><td class="note">入浴前にトイレ誘導をする</td></tr>
+            <tr><td>入浴後の保湿</td><td class="note">クリームなどで保湿し皮膚を守る。湿疹・床ずれの発生を確認</td></tr>
+            <tr><td>湯冷め防止</td><td class="note">衣類や布団など掛け物に注意する</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>🛁 機械浴の手順</h3>
+      <h4>準備する物</h4>
+      <p style="font-size:13px;margin-bottom:12px;">ストレッチャー（敷くタオルケット、掛け物）、着替え、バスタオル、タオル、アカスリ、ガーゼなど洗うもの、石鹸、シャンプー、リンス、ブラシ、ドライヤー、薬、化粧品</p>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>手順</th><th>留意点</th></tr></thead>
+          <tbody>
+            <tr><td>入浴することを伝える</td><td class="note">本人の意思をきちんと聞く</td></tr>
+            <tr><td>脱衣所へ移動</td><td class="note">ストレッチャーで移動時は進行方向へ足を向ける。室温・湯温の確認</td></tr>
+            <tr><td>衣類を脱ぐ</td><td class="note">いきなり脱がし始めず説明してから。麻痺がある場合は健側から脱ぐ。脱いだらすぐタオルで覆う</td></tr>
+            <tr><td>機械浴用ストレッチャーへ移動</td><td class="note">ストレッチャーが濡れていれば拭く。ストッパー確認。移動前に声かけする</td></tr>
+            <tr><td>身体を洗う</td><td class="note">健側にシャワーをかけ、湯加減を聴く</td></tr>
+            <tr><td>衣類を着る</td><td class="note">陰部を早く覆う。麻痺側の手などに十分注意</td></tr>
+            <tr><td>移動用ストレッチャーへ</td><td class="note">ストッパーを確認してから移動</td></tr>
+            <tr><td>髪を乾かす</td><td class="note">ドライヤーを近づけすぎない・温度が高くなりすぎないよう注意</td></tr>
+            <tr><td>保湿・居室へ戻る</td><td class="note">クリームで保湿。湯冷めしないよう衣類・掛け物に注意</td></tr>
+            <tr><td>水分補給</td><td class="note">入浴後は必ず水分補給を行う</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ③ 排泄介助 -->
+  <section id="toilet" class="section">
+    <div class="sec-head">
+      <div class="sec-icon">🚽</div>
+      <div><h2>排泄介助マニュアル</h2><p>トイレ・ポータブルトイレ・おむつの手順</p></div>
+    </div>
+
+    <div class="card">
+      <h3>共通の介助ポイント</h3>
+      <ul class="list">
+        <li>排泄のリズムを知った上で、時間をみて誘導する</li>
+        <li>便意・尿意の訴えには気持ちよく応じる</li>
+        <li>介助は、本人ができないことだけを手早く手伝う</li>
+        <li>ゆったりとした気持ちで排泄してもらうためにせかさない</li>
+        <li>排泄物を観察し、変化に注意し記録する</li>
+        <li>転倒の恐れがあるときは、必ず付き添うようにする</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>🚻 トイレでの排泄介助</h3>
+      <h4>準備</h4>
+      <ul class="list" style="margin-bottom:12px;">
+        <li>トイレまでの通路を明るくし、障害になるものや段差を無くす</li>
+        <li>滑らない履物を用意し、床が濡れているときは拭き取る</li>
+        <li>トイレ内を暖かくし、部屋との温度差をなくす</li>
+        <li>排泄しやすい衣服の工夫をし、動作に時間をかけない</li>
+      </ul>
+      <h4>手順</h4>
+      <ul class="list-num">
+        <li>トイレに入ったら壁に寄りかからせるか手すりを持たせ、介護者が後ろから下着を下ろす</li>
+        <li>利用者の両腕を介護者の首に回させ、抱きかかえるように便器に座らせる</li>
+        <li>呼ばれてから入り、手すりをつかませ、中腰の姿勢をとらせ、陰部を前から後ろに拭く</li>
+        <li>利用者の足を少し後ろに引かせ、両腕を介護者の首に回させ、立ち上がらせて下着を上にあげる</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>🪑 ポータブルトイレの介助</h3>
+      <div class="alert amber">💡 ポータブルトイレはベッドと同じ高さにし、寝たときの健側に置き、使うときに手すりの近くに置くと使いやすい</div>
+      <h4>手順</h4>
+      <ul class="list-num">
+        <li>ポータブルトイレはベッドの足元に置く。呼び鈴やトイレットペーパーを手の届くところに置く</li>
+        <li>プライバシー保護のため、スクリーンなどで囲う</li>
+        <li>健側の肘で支えて起き、介護者は膝をさえる</li>
+        <li>健側の手で介護者の肩またはベッドの柵につかまり立ち上がる</li>
+        <li>健側の足を前に出し、軸にして体を回し、衣服をはずし、トイレに腰掛ける</li>
+        <li>介護者は退出し、呼ばれてから入り始末などの介助を行う</li>
+      </ul>
+      <h4>後始末</h4>
+      <ul class="list">
+        <li>換気・消臭を手早く行う</li>
+        <li>中の容器は蓋をしてトイレで処理する</li>
+        <li>昼間は排泄のたびに洗浄する</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>🩺 おむつ介助</h3>
+      <div class="alert red">⚠️ おむつはできるだけ避けるようにする。最後の手段であることを忘れない。介護者の都合でおむつをしない</div>
+      <h4>介助のポイント</h4>
+      <ul class="list">
+        <li>利用者の排泄間隔を読み取り、排泄物で汚れて不快になっている時間を短くする</li>
+        <li>1日1回はぬるま湯で陰部洗い、乾いた布で水分を拭き取る</li>
+        <li>男性は前の部分を、女性は後ろの部分を厚くする</li>
+        <li>陰部や臀部の清潔・乾燥に努める</li>
+        <li>腹部を圧迫しないように下腹部でおむつを固定する</li>
+        <li>腰部にしわや縫い目がこないようにする</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ④ 認知症ケア -->
+  <section id="dementia" class="section">
+    <div class="sec-head">
+      <div class="sec-icon">🧠</div>
+      <div><h2>認知症ケアマニュアル</h2><p>症状の理解と適切な対応</p></div>
+    </div>
+
+    <div class="card">
+      <h3>認知症の主な種類</h3>
+      <div class="symptom-grid">
+        <div class="symptom-card">
+          <h5>アルツハイマー型</h5>
+          <p>脳の神経細胞が変性・減少し、脳全体が小さくなる原因不明の病気。認知症状のみが徐々に、かつ確実に進行する。</p>
+        </div>
+        <div class="symptom-card">
+          <h5>脳血管性認知症</h5>
+          <p>脳卒中が原因で脳の血管が詰まったり破れたりすることにより、片麻痺・言語障害などを伴う。脳卒中の発作を起こすたびに症状が悪化する。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>症状別の対応方法</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>症状</th><th>状態</th><th>対応方法</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>幻覚</strong></td>
+              <td class="note">現実にはないものを見たり聞いたりと訴える</td>
+              <td class="note">本人には実際に見えたり聞こえたりしているので、<strong>否定せず</strong>、本人が安心するような受け答えをする。病気として受け止める。</td>
+            </tr>
+            <tr>
+              <td><strong>妄想</strong></td>
+              <td class="note">実際にはなかったことを事実と思い込む</td>
+              <td class="note">否定するとかえって興奮させてしまう。物盗られ妄想などは<strong>一緒に探してあげる</strong>と良い。</td>
+            </tr>
+            <tr>
+              <td><strong>徘徊</strong></td>
+              <td class="note">家の中や屋外をさまよい歩く。帰り道がわからなくなる</td>
+              <td class="note">他の人にも連絡先がわかるよう工夫する。ご近所や交番にあらかじめ状況を説明して協力をお願いする。一緒に散歩するのも良い。</td>
+            </tr>
+            <tr>
+              <td><strong>拒否</strong></td>
+              <td class="note">食事や入浴など介護に対して抵抗を示す</td>
+              <td class="note">その場は<strong>無理強いせず</strong>、本人の要求に耳を傾ける。本人が落ち着いたところで再び声かけを試みる。</td>
+            </tr>
+            <tr>
+              <td><strong>興奮</strong></td>
+              <td class="note">注意されると急に怒り出し、暴力に及ぶこともある</td>
+              <td class="note">慌てず落ち着いた対応が大切。<strong>話題や状況を変える</strong>などしてみる。興奮が続くようであれば医師に相談する。</td>
+            </tr>
+            <tr>
+              <td><strong>夜間不眠</strong></td>
+              <td class="note">昼間は居眠り、夜になると眠れなくなる</td>
+              <td class="note">昼間の居眠りや運動不足が原因のことも。<strong>日中に体を動かす</strong>ようにする。それでも不眠が続くようであれば医師に相談する。</td>
+            </tr>
+            <tr>
+              <td><strong>失禁</strong></td>
+              <td class="note">トイレの場所がわからなくなったり、尿意を感じなくなる</td>
+              <td class="note">ドアに「トイレ」と書いた紙を貼るなどの工夫。<strong>時間を決めてトイレに誘う</strong>。部屋にポータブルトイレを置くのも良い。</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑤ 身体拘束 -->
+  <section id="restraint" class="section">
+    <div class="sec-head">
+      <div class="sec-icon">🚫</div>
+      <div><h2>身体拘束排除マニュアル</h2><p>身体拘束ゼロを目指して</p></div>
+    </div>
+
+    <div class="card">
+      <h3>基本方針</h3>
+      <div class="alert red">🚫 当施設では<strong>身体拘束ゼロ</strong>を目指します。但し、生命に危険のある場合等一時的に拘束を行う必要がある場合には、ご家族の承認があれば、この限りではありません。</div>
+    </div>
+
+    <div class="card">
+      <h3>5つの基本的ケアの徹底</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>基本ケア</th><th>なぜ重要か</th></tr></thead>
+          <tbody>
+            <tr><td><strong>起きる</strong></td><td class="note">座っているとき重力が上からかかることで覚醒する。目が開き、耳が聞こえ、周囲がわかるようになる。人間らしさを追求する第一歩。</td></tr>
+            <tr><td><strong>食べる</strong></td><td class="note">食べることは楽しみや生きがいであり、脱水予防・感染予防にもなる。点滴や経管栄養が不要になる。ケアの基本。</td></tr>
+            <tr><td><strong>排泄する</strong></td><td class="note">なるべくトイレで排泄してもらうことを基本に。おむつに排泄物がついたままになっていると気持ち悪く「おむついじり」などの行為につながる。</td></tr>
+            <tr><td><strong>清潔にする</strong></td><td class="note">きちんと風呂に入ることが基本。皮膚の不潔がかゆみの原因になり、大声や夜間不眠の原因になることがある。</td></tr>
+            <tr><td><strong>活動する</strong></td><td class="note">その人の状態や生活歴に合ったよい刺激を提供することが重要。音楽・工芸・園芸・ゲーム・体操・家事・ペット・テレビなどが考えられる。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>やむを得ず行う場合の3つの要件（全て満たすこと）</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>要件</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td><strong>切迫性</strong></td><td class="note">利用者本人または他の利用者等の生命または身体が危険にさらされる可能性が著しく高いこと</td></tr>
+            <tr><td><strong>非代替性</strong></td><td class="note">身体拘束その他の行動制限を行う以外に代替する介護方法がないこと</td></tr>
+            <tr><td><strong>一時性</strong></td><td class="note">身体拘束その他の行動制限が一時的なものであること</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="alert amber">⚠️ 担当スタッフ個人では判断せず、施設全体としての判断が行われるよう、あらかじめルールや手続きを定めてください。実施する場合は必ず記録を残してください。</div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  デイサービスセンターこはる日和 スタッフマニュアル｜最終更新: 2026年5月
+</footer>
+
+<script>
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>

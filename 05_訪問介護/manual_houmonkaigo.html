@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>訪問介護マニュアル｜いなだ医院</title>
+<meta name="theme-color" content="#16a34a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="訪問介護マニュアル">
+<style>
+:root {
+  --main:       #16a34a;
+  --main-mid:   #22c55e;
+  --main-light: #dcfce7;
+  --main-xl:    #f0fdf4;
+  --blue:       #1558a0;
+  --blue-light: #dbeafe;
+  --amber:      #d97706;
+  --amber-lt:   #fef3c7;
+  --red:        #dc2626;
+  --red-lt:     #fee2e2;
+  --gray:       #64748b;
+  --gray-lt:    #f1f5f9;
+  --gray-mid:   #e2e8f0;
+  --text:       #0f172a;
+  --text-sub:   #475569;
+  --bg:         #f0f4f8;
+  --white:      #ffffff;
+  --r: 12px; --r-sm: 8px;
+  --sh: 0 1px 4px rgba(0,0,0,.08);
+  --sh-md: 0 4px 16px rgba(0,0,0,.12);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", sans-serif;
+       font-size: 15px; line-height: 1.6; color: var(--text); background: var(--bg); }
+.site-header { background: linear-gradient(135deg, #14532d 0%, var(--main) 55%, var(--main-mid) 100%);
+  padding: 14px 20px; position: sticky; top: 0; z-index: 50; box-shadow: 0 2px 10px rgba(20,83,45,.4); }
+.header-inner { max-width: 900px; margin: 0 auto; display: flex; align-items: center; gap: 12px; }
+.header-text h1 { font-size: 15px; font-weight: 800; color: #fff; }
+.header-text p  { font-size: 11px; color: rgba(255,255,255,.65); margin-top: 1px; }
+.header-back { margin-left: auto; color: rgba(255,255,255,.8); font-size: 12px; text-decoration: none;
+               background: rgba(255,255,255,.15); padding: 5px 12px; border-radius: 20px; }
+.hero { background: linear-gradient(135deg, var(--main) 0%, var(--main-mid) 100%);
+        padding: 22px 20px 26px; text-align: center; color: #fff; }
+.hero h2 { font-size: 18px; font-weight: 800; margin-bottom: 4px; }
+.hero p  { font-size: 12px; color: rgba(255,255,255,.72); line-height: 1.7; }
+.nav-tabs { background: var(--white); border-bottom: 2px solid var(--gray-mid);
+            display: flex; overflow-x: auto; scrollbar-width: none; position: sticky; top: 52px; z-index: 40; }
+.nav-tabs::-webkit-scrollbar { display: none; }
+.nav-tab { flex-shrink: 0; padding: 12px 16px; font-size: 13px; font-weight: 700;
+           color: var(--gray); border: none; background: none; cursor: pointer;
+           border-bottom: 3px solid transparent; margin-bottom: -2px; white-space: nowrap; }
+.nav-tab.active { color: var(--main); border-bottom-color: var(--main); }
+.nav-tab:hover:not(.active) { color: var(--text); }
+.main { max-width: 900px; margin: 0 auto; padding: 20px 16px 60px; }
+.section { display: none; }
+.section.active { display: block; }
+.sec-head { display: flex; align-items: center; gap: 10px; margin: 0 0 16px; }
+.sec-icon { width: 36px; height: 36px; border-radius: 9px; display: flex; align-items: center;
+            justify-content: center; font-size: 18px; flex-shrink: 0; background: var(--main-light); }
+.sec-head h2 { font-size: 17px; font-weight: 800; color: var(--main); }
+.sec-head p  { font-size: 12px; color: var(--text-sub); margin-top: 2px; }
+.card { background: var(--white); border-radius: var(--r); box-shadow: var(--sh); padding: 18px 20px; margin-bottom: 16px; border: 1px solid var(--gray-mid); }
+.card h3 { font-size: 14px; font-weight: 800; color: var(--main); margin-bottom: 12px; border-bottom: 2px solid var(--main-light); padding-bottom: 8px; }
+.card h4 { font-size: 13px; font-weight: 700; color: var(--text); margin: 14px 0 8px; }
+.alert { border-radius: var(--r-sm); padding: 10px 14px; margin-bottom: 12px; font-size: 13px; display: flex; align-items: flex-start; gap: 8px; }
+.alert.red   { background: var(--red-lt);    border-left: 4px solid var(--red);   color: #7f1d1d; }
+.alert.amber { background: var(--amber-lt);  border-left: 4px solid var(--amber); color: #78350f; }
+.alert.green { background: var(--main-light); border-left: 4px solid var(--main);  color: #14532d; }
+.alert.blue  { background: var(--blue-light); border-left: 4px solid var(--blue); color: #1e3a5f; }
+.tbl-wrap { overflow-x: auto; margin-bottom: 12px; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th { background: var(--main); color: #fff; padding: 8px 10px; text-align: left; font-weight: 700; }
+td { padding: 8px 10px; border-bottom: 1px solid var(--gray-mid); vertical-align: top; }
+tr:last-child td { border-bottom: none; }
+tr:nth-child(even) td { background: var(--gray-lt); }
+td.time { white-space: nowrap; font-weight: 700; color: var(--main); width: 100px; }
+td.note { font-size: 11.5px; color: var(--text-sub); }
+.list { padding-left: 0; list-style: none; }
+.list li { padding: 6px 0 6px 22px; position: relative; font-size: 13.5px; border-bottom: 1px solid var(--gray-mid); }
+.list li:last-child { border-bottom: none; }
+.list li::before { content: "▶"; position: absolute; left: 2px; color: var(--main); font-size: 10px; top: 9px; }
+.list-num { counter-reset: item; padding-left: 0; list-style: none; }
+.list-num li { counter-increment: item; padding: 7px 0 7px 28px; position: relative; font-size: 13.5px; border-bottom: 1px solid var(--gray-mid); }
+.list-num li:last-child { border-bottom: none; }
+.list-num li::before { content: counter(item); position: absolute; left: 0; background: var(--main); color: #fff; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; top: 9px; }
+.point { background: var(--main-xl); border-radius: var(--r-sm); padding: 12px 14px; margin: 10px 0; font-size: 13.5px; }
+.point strong { color: var(--main); }
+.example { background: var(--gray-lt); border-radius: var(--r-sm); padding: 12px 14px; margin: 10px 0; font-size: 13px; }
+.example-label { font-size: 11px; font-weight: 700; color: var(--gray); letter-spacing: .06em; margin-bottom: 6px; }
+.site-footer { text-align: center; padding: 20px; font-size: 11px; color: var(--text-sub); border-top: 1px solid var(--gray-mid); background: var(--white); }
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-text">
+      <h1>🚶 訪問介護事業所</h1>
+      <p>訪問介護 スタッフマニュアル</p>
+    </div>
+    <a href="../index.html" class="header-back">← 一覧へ</a>
+  </div>
+</header>
+
+<div class="hero">
+  <h2>訪問介護 スタッフマニュアル</h2>
+  <p>業務の流れ・記録の手順・感染対策</p>
+</div>
+
+<nav class="nav-tabs">
+  <button class="nav-tab active" onclick="showSection('about')">📖 訪問介護とは</button>
+  <button class="nav-tab" onclick="showSection('flow')">📋 1日の流れ</button>
+  <button class="nav-tab" onclick="showSection('teresa')">📝 テレッサ記録</button>
+  <button class="nav-tab" onclick="showSection('infection')">🧴 感染対策</button>
+</nav>
+
+<main class="main">
+
+  <!-- ① 訪問介護とは -->
+  <section id="about" class="section active">
+    <div class="sec-head">
+      <div class="sec-icon">📖</div>
+      <div><h2>訪問介護とは</h2><p>サービスの種類と範囲</p></div>
+    </div>
+    <div class="card">
+      <h3>提供サービスの概要</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>種類</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td><strong>身体介護</strong></td><td class="note">利用者の身体に直接接触して行う介助や日常生活を営むのに必要な機能を高めるための援助。排泄介助・食事介助・更衣介助など</td></tr>
+            <tr><td><strong>生活援助</strong></td><td class="note">家事を行うことが困難な利用者に対して、家事の援助を行う。洗濯・掃除・買い物など</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h4>訪問先</h4>
+      <p style="font-size:13.5px;margin-bottom:12px;">倉敷市（玉島支所、水島支所）</p>
+      <h4>提供できないサービス</h4>
+      <ul class="list">
+        <li>医療行為や医療補助行為</li>
+        <li>各種支払いや年金等の管理、金銭の貸し借りなど金銭に関する取扱い</li>
+        <li>他の家族の方に対する食事の準備など</li>
+      </ul>
+      <div class="alert amber">🎁 利用者・家族からの贈り物や飲み物の提供は<strong>お断りしてください</strong></div>
+      <div class="alert amber">👔 使用したエプロンは<strong>現場で脱いでから</strong>帰宅すること</div>
+    </div>
+  </section>
+
+  <!-- ② 1日の流れ -->
+  <section id="flow" class="section">
+    <div class="sec-head">
+      <div class="sec-icon">📋</div>
+      <div><h2>1日の業務フロー</h2><p>出勤から退勤までの流れ</p></div>
+    </div>
+    <div class="card">
+      <h3>業務フロー</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>タイミング</th><th>業務</th><th>詳細</th></tr></thead>
+          <tbody>
+            <tr><td class="time">出勤時</td><td>スタッフ検温・体調確認</td><td class="note">KT=37.0以上ある場合は相談。体調不良等あれば無理せず相談</td></tr>
+            <tr><td class="time">当日</td><td>週間予定表確認</td><td class="note">事務所とサ高住の予定表どちらも確認する</td></tr>
+            <tr><td class="time"></td><td>業務日報確認</td><td class="note">サービス内容・時間の確認</td></tr>
+            <tr><td class="time">8:00〜17:00（休憩1時間）</td><td>各訪問サービス</td><td class="note">個人ファイル内手順書に基づきサービス提供</td></tr>
+            <tr><td class="time">サービスのない時間</td><td>週間予定表・業務日報作成</td><td class="note">アセスメント記入なども行う</td></tr>
+            <tr><td class="time">サービス終了時までに</td><td>テレッサ記入</td><td class="note">事務所に原本・控えは自室または事務所</td></tr>
+            <tr><td class="time">15:30〜16:30</td><td>バスマット・エプロン消毒</td><td class="note">ハイター消毒後、浴室または脱衣所に干す</td></tr>
+            <tr><td class="time">翌日朝</td><td>バスマット・エプロン片付け</td><td class="note">エプロンは畳んで事務所へ。バスマットは定位置へ</td></tr>
+            <tr><td class="time">当日</td><td>業務日報FAX送信</td><td class="note">いなだ医院へ（FAX: 086-525-0605）</td></tr>
+            <tr><td class="time">翌日朝</td><td>業務日報ファイルに挟む</td><td class="note"></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>週間予定表の確認方法</h3>
+      <div class="point">週間予定表とは：1日の流れ、サービス時間と名前などが時間ごとに記されたもの。出勤者全員の動きが分かる表。</div>
+      <ul class="list">
+        <li>当日のスケジュールを確認する（時間8:00〜必要に応じて）</li>
+        <li>自分の名前に記されたサービスを確認する（サービス内容は日報で確認）</li>
+        <li><strong>事務所とサ高住の予定表が異なることがあるため、必ずどちらも当日の朝確認する</strong></li>
+      </ul>
+      <div class="alert red">⚠️ 当日中止・キャンセル・追加の連絡を受けた際は、予定表に変更を書き加え、ケアマネに報告し、関係スタッフにも情報共有してください</div>
+
+      <h4>業務日報の記入例</h4>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>ご利用者様</th><th>訪問時間</th><th>業務内容</th><th>備考</th></tr></thead>
+          <tbody>
+            <tr><td>〇〇様</td><td class="note">8:00〜8:19</td><td class="note">排泄確認・介助</td><td class="note"></td></tr>
+            <tr><td>〇〇様</td><td class="note">8:30〜8:49</td><td class="note">口腔ケア、デイ入浴準備</td><td class="note">体調不良の為デイ休み。訪問追加となる</td></tr>
+            <tr><td>〇〇様</td><td class="note">14:00〜14:59</td><td class="note">入浴介助</td><td class="note"></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ③ テレッサ記録 -->
+  <section id="teresa" class="section">
+    <div class="sec-head">
+      <div class="sec-icon">📝</div>
+      <div><h2>テレッサ（サービス実施記録）</h2><p>記録の記入方法と管理</p></div>
+    </div>
+    <div class="card">
+      <h3>テレッサとは</h3>
+      <p style="font-size:13.5px;margin-bottom:12px;">サービス実施記録（複写あり）のことです。サービスごとに記入します。</p>
+      <ul class="list">
+        <li><strong>原紙は事務所保管</strong>、控えは自室にある控え用ファイルにサービス終了時各自挟む</li>
+        <li>業務日報の内容に沿ってチェック項目・記入を行う</li>
+        <li>間違った場合は<strong>訂正印を押す</strong></li>
+        <li><strong>サービス時間終了までに記入すること</strong></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>サービス実施記録の記入内容</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>項目</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>サービスの種類</td><td class="note">介護サービス（身体介護中心/生活援助）/ 共生型 / 総合事業（A1・A2・A3）</td></tr>
+            <tr><td>事前チェック</td><td class="note">顔色・発汗・体温等</td></tr>
+            <tr><td>記録など</td><td class="note">環境整備 / 相談援助・情報収集・情報提供・記録など</td></tr>
+            <tr><td>身体介護</td><td class="note">トイレ介助 / パッド交換 / 清拭 / 全身浴 / 服薬介助</td></tr>
+            <tr><td>生活援助</td><td class="note">居室 / ゴミ出し / 洗濯 / シーツ交換 / 日常品の買い物</td></tr>
+            <tr><td>退室確認</td><td class="note">電気 / 水道 / 戸締り</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>個人ファイルの書類一覧</h3>
+      <ul class="list">
+        <li>アセスメント表 / 基本情報（フェイスシート） / 長谷川式</li>
+        <li>介護負担割合証のコピー / 支援経過記録 / 居宅サービス計画書</li>
+        <li>モニタリング表 / 訪問介護計画書</li>
+        <li>サービス担当者会議の記録 / 薬情報</li>
+        <li>手順書 / 緊急連絡先 / 介護保険証のコピー / その他</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ④ 感染対策 -->
+  <section id="infection" class="section">
+    <div class="sec-head">
+      <div class="sec-icon">🧴</div>
+      <div><h2>感染対策</h2><p>自分を守ることが利用者を守ること</p></div>
+    </div>
+    <div class="card">
+      <h3>基本ルール</h3>
+      <div class="alert green">✋ <strong>【1介助1手洗い】は介護の基本</strong> — 忙しいからと疎かにせず介護のプロとして徹底する</div>
+      <ul class="list">
+        <li>日ごろから感染症や風邪の予防を行う</li>
+        <li>出先から戻った時は、必ずハンドソープ等を使用した手洗いとうがいを行う</li>
+        <li>利用者の方に移さないためにも職員がしっかりと感染対策を行いながらケアをおこなうこと</li>
+        <li>研修の記録や感染対策マニュアルにて自身でも定期的に学びを得ることに取り組む</li>
+        <li>長期休養になると職員全体に支障が出ることが考えられるため、僅かな体の変化でも無理なく伝えられる環境であれるよう、日常的に予防していく</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>体調管理チェック</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>項目</th><th>タイミング</th><th>方法</th></tr></thead>
+          <tbody>
+            <tr><td>体温・体調確認</td><td class="note">出勤時・帰宅前（1日2回）および体調不良時</td><td class="note">検温ごとにアルコール消毒。チェックシートに記録</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="alert red">🌡️ KT=37.0度以上ある場合は管理者に相談。施設内への立ち入りを控える</div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  訪問介護事業所 スタッフマニュアル｜最終更新: 2026年5月
+</footer>
+
+<script>
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>

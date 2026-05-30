@@ -9,6 +9,7 @@
 <meta name="apple-mobile-web-app-title" content="居宅マニュアル">
 <style>
 :root {
+  --accent:     #7c3aed;
   --main:       #7c3aed;
   --main-mid:   #8b5cf6;
   --main-light: #ede9fe;
@@ -31,33 +32,95 @@
   --r: 12px; --r-sm: 8px;
   --sh: 0 1px 4px rgba(0,0,0,.08);
   --sh-md: 0 4px 16px rgba(0,0,0,.12);
+  --sidebar-w: 240px;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body { font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", sans-serif;
        font-size: 15px; line-height: 1.6; color: var(--text); background: var(--bg); }
-.site-header { background: linear-gradient(135deg, #4c1d95 0%, var(--main) 55%, var(--main-mid) 100%);
-  padding: 14px 20px; position: sticky; top: 0; z-index: 50; box-shadow: 0 2px 10px rgba(76,29,149,.4); }
-.header-inner { max-width: 900px; margin: 0 auto; display: flex; align-items: center; gap: 12px; }
-.header-text h1 { font-size: 15px; font-weight: 800; color: #fff; }
-.header-text p  { font-size: 11px; color: rgba(255,255,255,.65); margin-top: 1px; }
-.header-back { margin-left: auto; color: rgba(255,255,255,.8); font-size: 12px; text-decoration: none;
-               background: rgba(255,255,255,.15); padding: 5px 12px; border-radius: 20px; }
-.hero { background: linear-gradient(135deg, var(--main) 0%, var(--main-mid) 100%);
-        padding: 22px 20px 26px; text-align: center; color: #fff; }
-.hero h2 { font-size: 18px; font-weight: 800; margin-bottom: 4px; }
-.hero p  { font-size: 12px; color: rgba(255,255,255,.72); line-height: 1.7; }
-.nav-tabs { background: var(--white); border-bottom: 2px solid var(--gray-mid);
-            display: flex; overflow-x: auto; scrollbar-width: none; position: sticky; top: 52px; z-index: 40; }
-.nav-tabs::-webkit-scrollbar { display: none; }
-.nav-tab { flex-shrink: 0; padding: 12px 14px; font-size: 12px; font-weight: 700;
-           color: var(--gray); border: none; background: none; cursor: pointer;
-           border-bottom: 3px solid transparent; margin-bottom: -2px; white-space: nowrap; }
-.nav-tab.active { color: var(--main); border-bottom-color: var(--main); }
-.nav-tab:hover:not(.active) { color: var(--text); }
-.main { max-width: 900px; margin: 0 auto; padding: 20px 16px 60px; }
-.section { display: none; }
-.section.active { display: block; }
+
+/* ========== LAYOUT ========== */
+.layout { display: flex; min-height: 100vh; }
+
+/* ========== SIDEBAR ========== */
+.sidebar {
+  width: var(--sidebar-w);
+  flex-shrink: 0;
+  background: linear-gradient(180deg, #4c1d95 0%, var(--main) 100%);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  z-index: 100;
+  overflow-y: auto;
+}
+.sidebar-header {
+  padding: 20px 16px 16px;
+  border-bottom: 1px solid rgba(255,255,255,.15);
+}
+.sidebar-header .logo { font-size: 22px; margin-bottom: 6px; }
+.sidebar-header h1 { font-size: 13px; font-weight: 800; color: #fff; line-height: 1.4; }
+.sidebar-header p  { font-size: 10px; color: rgba(255,255,255,.6); margin-top: 4px; }
+.sidebar-back {
+  display: block; margin: 12px 16px 0;
+  color: rgba(255,255,255,.75); font-size: 11px; text-decoration: none;
+  background: rgba(255,255,255,.12); padding: 5px 10px; border-radius: 20px;
+  text-align: center;
+}
+.sidebar-nav { padding: 12px 0 20px; flex: 1; }
+.nav-section-label {
+  padding: 10px 18px 4px;
+  font-size: 10px; font-weight: 700;
+  color: rgba(255,255,255,.45);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.nav-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 11px 18px; font-size: 13px; font-weight: 600;
+  color: rgba(255,255,255,.75); cursor: pointer;
+  border: none; background: none; width: 100%; text-align: left;
+  transition: background .15s, color .15s;
+}
+.nav-item:hover { background: rgba(255,255,255,.1); color: #fff; }
+.nav-item.active { background: rgba(255,255,255,.18); color: #fff; }
+.nav-item .icon { font-size: 16px; flex-shrink: 0; }
+
+/* ========== TOPBAR (mobile) ========== */
+.topbar {
+  display: none;
+  position: fixed; top: 0; left: 0; right: 0; z-index: 90;
+  background: linear-gradient(135deg, #4c1d95 0%, var(--main) 100%);
+  padding: 0 16px;
+  height: 52px; align-items: center; gap: 12px;
+  box-shadow: 0 2px 10px rgba(76,29,149,.4);
+}
+.topbar-menu {
+  background: none; border: none; color: #fff; font-size: 22px;
+  cursor: pointer; padding: 4px; line-height: 1;
+}
+#mobile-title { flex: 1; font-size: 14px; font-weight: 800; color: #fff; }
+.topbar-back {
+  color: rgba(255,255,255,.8); font-size: 11px; text-decoration: none;
+  background: rgba(255,255,255,.15); padding: 4px 10px; border-radius: 20px;
+}
+
+/* ========== OVERLAY ========== */
+.overlay {
+  display: none; position: fixed; inset: 0; background: rgba(0,0,0,.4); z-index: 99;
+}
+.overlay.open { display: block; }
+
+/* ========== CONTENT ========== */
+.content {
+  margin-left: var(--sidebar-w);
+  flex: 1;
+  min-width: 0;
+}
+.page { display: none; padding: 24px 20px 60px; max-width: 860px; }
+.page.active { display: block; }
+
+/* ========== COMPONENTS ========== */
 .sec-head { display: flex; align-items: center; gap: 10px; margin: 0 0 16px; }
 .sec-icon { width: 36px; height: 36px; border-radius: 9px; display: flex; align-items: center;
             justify-content: center; font-size: 18px; flex-shrink: 0; background: var(--main-light); }
@@ -98,301 +161,352 @@ td.note { font-size: 11.5px; color: var(--text-sub); }
 .month-card h4 { font-size: 13px; font-weight: 800; color: var(--main); margin-bottom: 8px; }
 .month-card p { font-size: 12px; color: var(--text-sub); line-height: 1.6; }
 .site-footer { text-align: center; padding: 20px; font-size: 11px; color: var(--text-sub); border-top: 1px solid var(--gray-mid); background: var(--white); }
+
+/* ========== MOBILE ========== */
+@media (max-width: 768px) {
+  .sidebar { transform: translateX(-100%); transition: transform .25s; }
+  .sidebar.open { transform: translateX(0); }
+  .topbar { display: flex; }
+  .content { margin-left: 0; padding-top: 52px; }
+  .page { padding: 20px 14px 60px; }
+}
 </style>
 </head>
 <body>
-<header class="site-header">
-  <div class="header-inner">
-    <div class="header-text">
-      <h1>📋 かしわじま居宅介護支援センター</h1>
-      <p>居宅介護支援 スタッフマニュアル</p>
-    </div>
-    <a href="../index.html" class="header-back">← 一覧へ</a>
-  </div>
-</header>
 
-<div class="hero">
-  <h2>居宅介護支援 スタッフマニュアル</h2>
-  <p>ケアマネジメント業務の標準手順</p>
+<!-- モバイル用トップバー -->
+<div class="topbar">
+  <button class="topbar-menu" onclick="toggleSidebar()">☰</button>
+  <span id="mobile-title">1日の業務フロー</span>
+  <a href="../index.html" class="topbar-back">← 一覧へ</a>
 </div>
 
-<nav class="nav-tabs">
-  <button class="nav-tab active" onclick="showSection('daily')">📅 1日の業務</button>
-  <button class="nav-tab" onclick="showSection('monthly')">📆 月間業務</button>
-  <button class="nav-tab" onclick="showSection('process')">🔄 ケアマネ業務</button>
-  <button class="nav-tab" onclick="showSection('hospital')">🏥 入退院対応</button>
-  <button class="nav-tab" onclick="showSection('emergency')">🚨 緊急時対応</button>
-  <button class="nav-tab" onclick="showSection('complaint')">💬 苦情対応</button>
-</nav>
+<!-- オーバーレイ -->
+<div class="overlay" id="overlay" onclick="closeSidebar()"></div>
 
-<main class="main">
+<div class="layout">
 
-  <!-- ① 1日の業務 -->
-  <section id="daily" class="section active">
-    <div class="sec-head">
-      <div class="sec-icon">📅</div>
-      <div><h2>1日の業務フロー</h2><p>新人ケアマネのための基本手順</p></div>
+  <!-- サイドバー -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="logo">📋</div>
+      <h1>かしわじま居宅介護支援センター</h1>
+      <p>居宅介護支援 スタッフマニュアル</p>
     </div>
+    <a href="../index.html" class="sidebar-back">← 一覧へ</a>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">日常業務</div>
+      <button class="nav-item active" onclick="showPage('daily', this)">
+        <span class="icon">📅</span>1日の業務フロー
+      </button>
+      <button class="nav-item" onclick="showPage('monthly', this)">
+        <span class="icon">📆</span>月間業務フロー
+      </button>
+      <div class="nav-section-label">ケアマネ業務</div>
+      <button class="nav-item" onclick="showPage('process', this)">
+        <span class="icon">🔄</span>ケアマネ業務プロセス
+      </button>
+      <button class="nav-item" onclick="showPage('hospital', this)">
+        <span class="icon">🏥</span>入院・退院時対応
+      </button>
+      <div class="nav-section-label">緊急時・苦情</div>
+      <button class="nav-item" onclick="showPage('emergency', this)">
+        <span class="icon">🚨</span>緊急時対応
+      </button>
+      <button class="nav-item" onclick="showPage('complaint', this)">
+        <span class="icon">💬</span>苦情対応
+      </button>
+    </nav>
+  </aside>
 
-    <div class="card">
-      <h3>出勤後の確認事項</h3>
-      <ul class="list-num">
-        <li>タイムカード打刻（正確に出勤時刻を記録）</li>
-        <li>本日の全体の予定確認</li>
-        <li>訪問予定・来所予定確認 → <strong>必ず管理者へ報告</strong>（何時にどこへ行く。要件やだいたいの帰る時間等）</li>
-        <li>固定電話の伝言・FAX・メール・伝達ノートを確認</li>
-      </ul>
-      <div class="alert red">⚠️ 急ぎの連絡や判断に迷う内容があった場合は、必ずすぐに管理者へ報告してください。自己判断は避けましょう。</div>
-    </div>
+  <!-- コンテンツ -->
+  <div class="content">
 
-    <div class="card">
-      <h3>本日の基本業務</h3>
-      <ul class="list">
-        <li>利用者宅訪問（モニタリング）</li>
-        <li>サービス担当者会議の開催</li>
-        <li>ケアプラン作成・修正</li>
-        <li>各事業所との連絡調整</li>
-        <li>各種記録</li>
-        <li>給付管理業務・実績確認</li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <h3>訪問時の最低限チェック項目</h3>
-      <ul class="list">
-        <li>体調変化（発熱・咳・顔色・活気など）</li>
-        <li>転倒の有無</li>
-        <li>食事摂取状況（量・回数・食欲の変化など）</li>
-        <li>服薬状況（飲み忘れがないか・残薬の状況など）</li>
-        <li>サービス満足度（現在のサービスに不満はないか）</li>
-        <li>ご家族の負担状況</li>
-      </ul>
-      <div class="alert amber">📝 変化があれば必ず事務所へ報告してください</div>
-    </div>
-
-    <div class="card">
-      <h3>記録の基本ルール</h3>
-      <div class="example">
-        <div class="example-label">支援経過・モニタリング記録</div>
-        <div class="bad">✕ 元気そう</div>
-        <div class="good">〇 自立歩行で室内移動、食欲あり。笑顔も見られた</div>
+    <!-- ① 1日の業務 -->
+    <div id="page-daily" class="page active">
+      <div class="sec-head">
+        <div class="sec-icon">📅</div>
+        <div><h2>1日の業務フロー</h2><p>新人ケアマネのための基本手順</p></div>
       </div>
-      <div class="point"><strong>事実を書く</strong>（感想ではなく客観的な事実を記載）。<strong>当日中に入力</strong>することが原則。</div>
-      <h4>管理者へ相談するケース（自己判断しない）</h4>
-      <ul class="list">
-        <li>転倒・骨折疑い</li>
-        <li>入院連絡</li>
-        <li>ご家族からの強い苦情</li>
-        <li>虐待疑い</li>
-        <li>サービス拒否</li>
-        <li>給付超過の可能性</li>
-      </ul>
-    </div>
 
-    <div class="card">
-      <h3>退勤前チェック</h3>
-      <ul class="list">
-        <li>今日の記録は全て入力済みか</li>
-        <li>折り返し連絡は完了したか</li>
-        <li>明日の予定確認</li>
-        <li>書類は保管済みか</li>
-        <li>個人情報は机上に残っていないか</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- ② 月間業務 -->
-  <section id="monthly" class="section">
-    <div class="sec-head">
-      <div class="sec-icon">📆</div>
-      <div><h2>月間業務フロー</h2><p>月の流れを把握して計画的に</p></div>
-    </div>
-
-    <div class="month-grid">
-      <div class="month-card">
-        <h4>🗓️ 月初（1〜10日）</h4>
-        <p>前月分の確定と請求準備<br>・給付管理票の作成・国保連伝送<br>・申請手続きの提出<br>・記録の整理・確定<br>・情報共有（状態変化・特記事項）</p>
+      <div class="card">
+        <h3>出勤後の確認事項</h3>
+        <ul class="list-num">
+          <li>タイムカード打刻（正確に出勤時刻を記録）</li>
+          <li>本日の全体の予定確認</li>
+          <li>訪問予定・来所予定確認 → <strong>必ず管理者へ報告</strong>（何時にどこへ行く。要件やだいたいの帰る時間等）</li>
+          <li>固定電話の伝言・FAX・メール・伝達ノートを確認</li>
+        </ul>
+        <div class="alert red">⚠️ 急ぎの連絡や判断に迷う内容があった場合は、必ずすぐに管理者へ報告してください。自己判断は避けましょう。</div>
       </div>
-      <div class="month-card">
-        <h4>📋 月中（10〜25日）</h4>
-        <p>ケアプランの実行とモニタリング<br>・翌月分の利用票作成・交付<br>・モニタリング訪問（月1回以上）<br>・サービス担当者会議（必要時）<br>・新規利用者対応・関係機関との連携</p>
-      </div>
-      <div class="month-card">
-        <h4>📝 月末（25〜末日）</h4>
-        <p>翌月分の準備と次月計画<br>・翌月申請・変更準備<br>・翌月サービス提供票を作成・交付<br>・ケアプランの見直し・修正</p>
-      </div>
-    </div>
 
-    <div class="card">
-      <h3>給付管理業務（毎月1日〜10日）</h3>
-      <ul class="list-num">
-        <li>各事業所からの実績報告を基に給付管理票を作成</li>
-        <li>サービス利用票とサービス提供票別表を照合し、実績内容・回数・単位数に相違がないか確認</li>
-        <li>相違がある場合はサービス利用票および別表を修正</li>
-        <li>国保連が定める期日（通常は10日まで）までに電子請求にて提出</li>
-      </ul>
-      <div class="alert red">⚠️ 提出期限を厳守してください</div>
-    </div>
-  </section>
+      <div class="card">
+        <h3>本日の基本業務</h3>
+        <ul class="list">
+          <li>利用者宅訪問（モニタリング）</li>
+          <li>サービス担当者会議の開催</li>
+          <li>ケアプラン作成・修正</li>
+          <li>各事業所との連絡調整</li>
+          <li>各種記録</li>
+          <li>給付管理業務・実績確認</li>
+        </ul>
+      </div>
 
-  <!-- ③ ケアマネ業務プロセス -->
-  <section id="process" class="section">
-    <div class="sec-head">
-      <div class="sec-icon">🔄</div>
-      <div><h2>ケアマネジメント業務プロセス</h2><p>新規受付から継続管理まで</p></div>
-    </div>
-    <div class="card">
-      <h3>業務の流れ</h3>
-      <div class="tbl-wrap">
-        <table>
-          <thead><tr><th>ステップ</th><th>業務内容</th><th>ポイント</th></tr></thead>
-          <tbody>
-            <tr><td><strong>1. 新規受付</strong></td><td class="note">相談受付票に記入。介護保険証の確認。契約日の設定。</td><td class="note">必要書類：相談受付票、事業所パンフレット</td></tr>
-            <tr><td><strong>2. 契約・初回訪問</strong></td><td class="note">重要事項説明書・契約書の説明と交付。居宅サービス計画等作成依頼届出書を市区町村へ提出。</td><td class="note">苦情窓口や緊急連絡先を確実に伝える</td></tr>
-            <tr><td><strong>3. アセスメント</strong></td><td class="note">課題分析23項目に沿ってヒアリング。ADL・IADLの確認。本人・家族の「意向」と「解決すべき課題」を整理。</td><td class="note">自所指定のアセスメントシートを使用</td></tr>
-            <tr><td><strong>4. ケアプラン作成・担当者会議</strong></td><td class="note">ケアプラン原案・利用票の作成。サービス担当者会議の開催・進行。プランへの同意署名と交付。各サービス事業所に提供票の交付。</td><td class="note">サービス開始前までに交付すること</td></tr>
-            <tr><td><strong>5. モニタリング</strong></td><td class="note">月1回以上の自宅訪問。支援経過（第5表）・モニタリング表への記録。サービス事業所からの実績・状況報告の確認。</td><td class="note">プランの適正を確認し、必要に応じて見直す</td></tr>
-            <tr><td><strong>6. 給付管理</strong></td><td class="note">各事業所からの実績確認（受け持ちケアマネが各自確認）。国保連への伝送（10日締切）。</td><td class="note">報酬請求が正しく行われるよう管理する</td></tr>
-          </tbody>
-        </table>
+      <div class="card">
+        <h3>訪問時の最低限チェック項目</h3>
+        <ul class="list">
+          <li>体調変化（発熱・咳・顔色・活気など）</li>
+          <li>転倒の有無</li>
+          <li>食事摂取状況（量・回数・食欲の変化など）</li>
+          <li>服薬状況（飲み忘れがないか・残薬の状況など）</li>
+          <li>サービス満足度（現在のサービスに不満はないか）</li>
+          <li>ご家族の負担状況</li>
+        </ul>
+        <div class="alert amber">📝 変化があれば必ず事務所へ報告してください</div>
+      </div>
+
+      <div class="card">
+        <h3>記録の基本ルール</h3>
+        <div class="example">
+          <div class="example-label">支援経過・モニタリング記録</div>
+          <div class="bad">✕ 元気そう</div>
+          <div class="good">〇 自立歩行で室内移動、食欲あり。笑顔も見られた</div>
+        </div>
+        <div class="point"><strong>事実を書く</strong>（感想ではなく客観的な事実を記載）。<strong>当日中に入力</strong>することが原則。</div>
+        <h4>管理者へ相談するケース（自己判断しない）</h4>
+        <ul class="list">
+          <li>転倒・骨折疑い</li>
+          <li>入院連絡</li>
+          <li>ご家族からの強い苦情</li>
+          <li>虐待疑い</li>
+          <li>サービス拒否</li>
+          <li>給付超過の可能性</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>退勤前チェック</h3>
+        <ul class="list">
+          <li>今日の記録は全て入力済みか</li>
+          <li>折り返し連絡は完了したか</li>
+          <li>明日の予定確認</li>
+          <li>書類は保管済みか</li>
+          <li>個人情報は机上に残っていないか</li>
+        </ul>
       </div>
     </div>
 
-    <div class="card">
-      <h3>新規契約手続き</h3>
-      <ul class="list-num">
-        <li>問い合わせを受け付け、氏名・連絡先・認定状況を確認。初回面接の日程調整を行う。</li>
-        <li>利用者宅を訪問し、重要事項説明書に基づき内容を説明する</li>
-        <li>同意が得られた場合、居宅介護支援契約書・重要事項説明書により契約を締結する</li>
-        <li>契約締結後、速やかに「居宅サービス計画作成依頼届出書」を市町村に提出する</li>
-        <li>正式なアセスメントを実施し、ケアプラン作成を開始する</li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <h3>医療連携時の連絡手順（5W1H）</h3>
-      <div class="alert purple">📞 医療機関への連絡は必要な情報を正確かつ端的に伝えることが重要です</div>
-      <div class="tbl-wrap">
-        <table>
-          <thead><tr><th>伝えること</th><th>内容</th></tr></thead>
-          <tbody>
-            <tr><td><strong>誰の（Who）</strong></td><td class="note">利用者氏名・年齢・要介護度・特記事項（認知症の診断・独居・嚥下状態など）</td></tr>
-            <tr><td><strong>いつから（When）</strong></td><td class="note">病状の変化や問題が発生した日時。現在の状態が続いている期間</td></tr>
-            <tr><td><strong>どのような状態か（What/How）</strong></td><td class="note">現在の客観的な症状を具体的に。普段の状態との違いを明確に</td></tr>
-            <tr><td><strong>どうしたいか（Action/Why）</strong></td><td class="note">要望・相談したい内容（至急受診の必要性・今後の訪問看護の頻度など）</td></tr>
-          </tbody>
-        </table>
+    <!-- ② 月間業務 -->
+    <div id="page-monthly" class="page">
+      <div class="sec-head">
+        <div class="sec-icon">📆</div>
+        <div><h2>月間業務フロー</h2><p>月の流れを把握して計画的に</p></div>
       </div>
-      <div class="example">
-        <div class="example-label">電話の第一声（例）</div>
-        <p>「〇〇病院 〇〇科の先生でいらっしゃいますか。居宅介護支援事業所『かしわじま』の〇〇と申します。当事業所の利用者 [氏名] 様のことでご相談したい事項があり、[主治医名] 先生にお取り次ぎいただけますでしょうか。」</p>
-      </div>
-    </div>
-  </section>
 
-  <!-- ④ 入退院対応 -->
-  <section id="hospital" class="section">
-    <div class="sec-head">
-      <div class="sec-icon">🏥</div>
-      <div><h2>入院・退院時対応マニュアル</h2><p>途切れのない継続支援のために</p></div>
-    </div>
-    <div class="card">
-      <h3>入院時の手順</h3>
-      <div class="tbl-wrap">
-        <table>
-          <thead><tr><th>手順</th><th>内容</th></tr></thead>
-          <tbody>
-            <tr><td>1. 情報収集</td><td class="note">利用者または家族から入院の事実・病院名・病棟・主な入院理由・見込み期間を聴取</td></tr>
-            <tr><td>2. 関係機関への連絡</td><td class="note">全居宅サービス事業所にサービスの中断・変更を連絡。主治医に入院の事実と情報提供を依頼</td></tr>
-            <tr><td>3. ケアプランの取り扱い</td><td class="note">居宅サービス計画を「中止」または「休止」とし、必要な変更手続きを行う</td></tr>
-            <tr><td>4. 病院側への情報提供</td><td class="note">入院後速やかに担当者に対し、利用者情報（既往歴・生活状況・ケアプラン・キーパーソン・特記事項など）を提供する</td></tr>
-          </tbody>
-        </table>
+      <div class="month-grid">
+        <div class="month-card">
+          <h4>🗓️ 月初（1〜10日）</h4>
+          <p>前月分の確定と請求準備<br>・給付管理票の作成・国保連伝送<br>・申請手続きの提出<br>・記録の整理・確定<br>・情報共有（状態変化・特記事項）</p>
+        </div>
+        <div class="month-card">
+          <h4>📋 月中（10〜25日）</h4>
+          <p>ケアプランの実行とモニタリング<br>・翌月分の利用票作成・交付<br>・モニタリング訪問（月1回以上）<br>・サービス担当者会議（必要時）<br>・新規利用者対応・関係機関との連携</p>
+        </div>
+        <div class="month-card">
+          <h4>📝 月末（25〜末日）</h4>
+          <p>翌月分の準備と次月計画<br>・翌月申請・変更準備<br>・翌月サービス提供票を作成・交付<br>・ケアプランの見直し・修正</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>給付管理業務（毎月1日〜10日）</h3>
+        <ul class="list-num">
+          <li>各事業所からの実績報告を基に給付管理票を作成</li>
+          <li>サービス利用票とサービス提供票別表を照合し、実績内容・回数・単位数に相違がないか確認</li>
+          <li>相違がある場合はサービス利用票および別表を修正</li>
+          <li>国保連が定める期日（通常は10日まで）までに電子請求にて提出</li>
+        </ul>
+        <div class="alert red">⚠️ 提出期限を厳守してください</div>
       </div>
     </div>
-    <div class="card">
-      <h3>退院時の手順</h3>
-      <div class="tbl-wrap">
-        <table>
-          <thead><tr><th>手順</th><th>内容</th></tr></thead>
-          <tbody>
-            <tr><td>1. 退院情報の収集</td><td class="note">退院予定日・病状・医学的留意事項・ADLの状況・認知機能の変化などの情報提供を受ける</td></tr>
-            <tr><td>2. 退院前カンファレンスへの参加</td><td class="note">原則参加し、主治医・看護師・リハビリ専門職・ソーシャルワーカーらと連携を図る</td></tr>
-            <tr><td>3. 居宅サービス計画の作成</td><td class="note">収集した情報とカンファレンスの合意に基づき、新しいケアプラン案を迅速に作成する</td></tr>
-            <tr><td>4. サービス調整・環境確認</td><td class="note">必要に応じて退院前に利用者宅を訪問し、福祉用具・住宅改修の必要性を確認する</td></tr>
-            <tr><td>5. 退院後のモニタリング</td><td class="note">計画通りにサービスが提供されているか・心身の状態が安定しているかを確認する</td></tr>
-          </tbody>
-        </table>
+
+    <!-- ③ ケアマネ業務プロセス -->
+    <div id="page-process" class="page">
+      <div class="sec-head">
+        <div class="sec-icon">🔄</div>
+        <div><h2>ケアマネジメント業務プロセス</h2><p>新規受付から継続管理まで</p></div>
+      </div>
+      <div class="card">
+        <h3>業務の流れ</h3>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>ステップ</th><th>業務内容</th><th>ポイント</th></tr></thead>
+            <tbody>
+              <tr><td><strong>1. 新規受付</strong></td><td class="note">相談受付票に記入。介護保険証の確認。契約日の設定。</td><td class="note">必要書類：相談受付票、事業所パンフレット</td></tr>
+              <tr><td><strong>2. 契約・初回訪問</strong></td><td class="note">重要事項説明書・契約書の説明と交付。居宅サービス計画等作成依頼届出書を市区町村へ提出。</td><td class="note">苦情窓口や緊急連絡先を確実に伝える</td></tr>
+              <tr><td><strong>3. アセスメント</strong></td><td class="note">課題分析23項目に沿ってヒアリング。ADL・IADLの確認。本人・家族の「意向」と「解決すべき課題」を整理。</td><td class="note">自所指定のアセスメントシートを使用</td></tr>
+              <tr><td><strong>4. ケアプラン作成・担当者会議</strong></td><td class="note">ケアプラン原案・利用票の作成。サービス担当者会議の開催・進行。プランへの同意署名と交付。各サービス事業所に提供票の交付。</td><td class="note">サービス開始前までに交付すること</td></tr>
+              <tr><td><strong>5. モニタリング</strong></td><td class="note">月1回以上の自宅訪問。支援経過（第5表）・モニタリング表への記録。サービス事業所からの実績・状況報告の確認。</td><td class="note">プランの適正を確認し、必要に応じて見直す</td></tr>
+              <tr><td><strong>6. 給付管理</strong></td><td class="note">各事業所からの実績確認（受け持ちケアマネが各自確認）。国保連への伝送（10日締切）。</td><td class="note">報酬請求が正しく行われるよう管理する</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>新規契約手続き</h3>
+        <ul class="list-num">
+          <li>問い合わせを受け付け、氏名・連絡先・認定状況を確認。初回面接の日程調整を行う。</li>
+          <li>利用者宅を訪問し、重要事項説明書に基づき内容を説明する</li>
+          <li>同意が得られた場合、居宅介護支援契約書・重要事項説明書により契約を締結する</li>
+          <li>契約締結後、速やかに「居宅サービス計画作成依頼届出書」を市町村に提出する</li>
+          <li>正式なアセスメントを実施し、ケアプラン作成を開始する</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>医療連携時の連絡手順（5W1H）</h3>
+        <div class="alert purple">📞 医療機関への連絡は必要な情報を正確かつ端的に伝えることが重要です</div>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>伝えること</th><th>内容</th></tr></thead>
+            <tbody>
+              <tr><td><strong>誰の（Who）</strong></td><td class="note">利用者氏名・年齢・要介護度・特記事項（認知症の診断・独居・嚥下状態など）</td></tr>
+              <tr><td><strong>いつから（When）</strong></td><td class="note">病状の変化や問題が発生した日時。現在の状態が続いている期間</td></tr>
+              <tr><td><strong>どのような状態か（What/How）</strong></td><td class="note">現在の客観的な症状を具体的に。普段の状態との違いを明確に</td></tr>
+              <tr><td><strong>どうしたいか（Action/Why）</strong></td><td class="note">要望・相談したい内容（至急受診の必要性・今後の訪問看護の頻度など）</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="example">
+          <div class="example-label">電話の第一声（例）</div>
+          <p>「〇〇病院 〇〇科の先生でいらっしゃいますか。居宅介護支援事業所『かしわじま』の〇〇と申します。当事業所の利用者 [氏名] 様のことでご相談したい事項があり、[主治医名] 先生にお取り次ぎいただけますでしょうか。」</p>
+        </div>
       </div>
     </div>
-  </section>
 
-  <!-- ⑤ 緊急時対応 -->
-  <section id="emergency" class="section">
-    <div class="sec-head">
-      <div class="sec-icon">🚨</div>
-      <div><h2>緊急時対応フローチャート</h2><p>まず「命」と「安全」を確保。次に「報告」を最優先。</p></div>
-    </div>
-    <div class="card">
-      <h3>急変・事故発生時の対応手順</h3>
-      <div class="tbl-wrap">
-        <table>
-          <thead><tr><th>ステップ</th><th>アクション</th><th>詳細</th></tr></thead>
-          <tbody>
-            <tr><td><strong>Step 1</strong></td><td>安全確保</td><td class="note">冷静に利用者の状況（意識・呼吸・出血・痛み）を確認。周囲の危険があれば除去し、自身の安全も確保する。</td></tr>
-            <tr><td><strong>Step 2</strong></td><td>緊急連絡・救急要請</td><td class="note">生命の危機がある場合（意識不明・大量出血・重度の呼吸困難）は迷わず<strong>119番通報</strong>。住所と状況を正確に伝える。</td></tr>
-            <tr><td><strong>Step 3</strong></td><td>関係者への連絡</td><td class="note">①事業所（管理者または優先順位1位の先輩）へ状況を速報 → ②主治医へ報告し指示を仰ぐ → ③緊急連絡先（ご家族・キーパーソン）へ連絡</td></tr>
-            <tr><td><strong>Step 4</strong></td><td>応急処置と指示待機</td><td class="note">救急車や医療機関の指示に従う。<strong>勝手な判断での投薬や専門的な処置は絶対に行わない</strong></td></tr>
-            <tr><td><strong>Step 5</strong></td><td>詳細な記録</td><td class="note">発生日時・場所・発見時の状況を詳細にメモ。対応内容を時刻と共に記録する</td></tr>
-            <tr><td><strong>Step 6</strong></td><td>事後報告</td><td class="note">帰所後、管理者へ口頭で詳細に報告。事故報告書を作成し、関係機関（保険者など）への連絡を行う</td></tr>
-          </tbody>
-        </table>
+    <!-- ④ 入退院対応 -->
+    <div id="page-hospital" class="page">
+      <div class="sec-head">
+        <div class="sec-icon">🏥</div>
+        <div><h2>入院・退院時対応マニュアル</h2><p>途切れのない継続支援のために</p></div>
       </div>
-      <div class="alert red">🚨 担当スタッフ個人では判断せず、帰所後すぐに管理者へ報告することが原則です</div>
+      <div class="card">
+        <h3>入院時の手順</h3>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>手順</th><th>内容</th></tr></thead>
+            <tbody>
+              <tr><td>1. 情報収集</td><td class="note">利用者または家族から入院の事実・病院名・病棟・主な入院理由・見込み期間を聴取</td></tr>
+              <tr><td>2. 関係機関への連絡</td><td class="note">全居宅サービス事業所にサービスの中断・変更を連絡。主治医に入院の事実と情報提供を依頼</td></tr>
+              <tr><td>3. ケアプランの取り扱い</td><td class="note">居宅サービス計画を「中止」または「休止」とし、必要な変更手続きを行う</td></tr>
+              <tr><td>4. 病院側への情報提供</td><td class="note">入院後速やかに担当者に対し、利用者情報（既往歴・生活状況・ケアプラン・キーパーソン・特記事項など）を提供する</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card">
+        <h3>退院時の手順</h3>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>手順</th><th>内容</th></tr></thead>
+            <tbody>
+              <tr><td>1. 退院情報の収集</td><td class="note">退院予定日・病状・医学的留意事項・ADLの状況・認知機能の変化などの情報提供を受ける</td></tr>
+              <tr><td>2. 退院前カンファレンスへの参加</td><td class="note">原則参加し、主治医・看護師・リハビリ専門職・ソーシャルワーカーらと連携を図る</td></tr>
+              <tr><td>3. 居宅サービス計画の作成</td><td class="note">収集した情報とカンファレンスの合意に基づき、新しいケアプラン案を迅速に作成する</td></tr>
+              <tr><td>4. サービス調整・環境確認</td><td class="note">必要に応じて退院前に利用者宅を訪問し、福祉用具・住宅改修の必要性を確認する</td></tr>
+              <tr><td>5. 退院後のモニタリング</td><td class="note">計画通りにサービスが提供されているか・心身の状態が安定しているかを確認する</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
-  </section>
 
-  <!-- ⑥ 苦情対応 -->
-  <section id="complaint" class="section">
-    <div class="sec-head">
-      <div class="sec-icon">💬</div>
-      <div><h2>苦情相談マニュアル</h2><p>苦情を「事業改善の機会」と捉えて対応</p></div>
+    <!-- ⑤ 緊急時対応 -->
+    <div id="page-emergency" class="page">
+      <div class="sec-head">
+        <div class="sec-icon">🚨</div>
+        <div><h2>緊急時対応フローチャート</h2><p>まず「命」と「安全」を確保。次に「報告」を最優先。</p></div>
+      </div>
+      <div class="card">
+        <h3>急変・事故発生時の対応手順</h3>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>ステップ</th><th>アクション</th><th>詳細</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Step 1</strong></td><td>安全確保</td><td class="note">冷静に利用者の状況（意識・呼吸・出血・痛み）を確認。周囲の危険があれば除去し、自身の安全も確保する。</td></tr>
+              <tr><td><strong>Step 2</strong></td><td>緊急連絡・救急要請</td><td class="note">生命の危機がある場合（意識不明・大量出血・重度の呼吸困難）は迷わず<strong>119番通報</strong>。住所と状況を正確に伝える。</td></tr>
+              <tr><td><strong>Step 3</strong></td><td>関係者への連絡</td><td class="note">①事業所（管理者または優先順位1位の先輩）へ状況を速報 → ②主治医へ報告し指示を仰ぐ → ③緊急連絡先（ご家族・キーパーソン）へ連絡</td></tr>
+              <tr><td><strong>Step 4</strong></td><td>応急処置と指示待機</td><td class="note">救急車や医療機関の指示に従う。<strong>勝手な判断での投薬や専門的な処置は絶対に行わない</strong></td></tr>
+              <tr><td><strong>Step 5</strong></td><td>詳細な記録</td><td class="note">発生日時・場所・発見時の状況を詳細にメモ。対応内容を時刻と共に記録する</td></tr>
+              <tr><td><strong>Step 6</strong></td><td>事後報告</td><td class="note">帰所後、管理者へ口頭で詳細に報告。事故報告書を作成し、関係機関（保険者など）への連絡を行う</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="alert red">🚨 担当スタッフ個人では判断せず、帰所後すぐに管理者へ報告することが原則です</div>
+      </div>
     </div>
-    <div class="card">
-      <h3>苦情受付時の初期対応</h3>
-      <ul class="list-num">
-        <li><strong>傾聴と共感</strong> — 相手の訴えを遮らず、最後まで聞く。「ご不快な思いをさせて申し訳ございません」など、まず共感の言葉を述べる。（非を認める断定的な発言は避ける）</li>
-        <li><strong>記録の徹底</strong> — 日時・相手の氏名・連絡先を必ず確認。「誰が・いつ・どこで・何を・どうされた」を詳細にメモする。</li>
-        <li><strong>回答の保留</strong> — 「事実を確認し、改めて〇〇時までに折り返しお電話いたします」と伝える。その場で反論しない。</li>
-        <li><strong>管理者への即時報告</strong> — 電話を切った直後、メモ（5W1H）と共に管理者へ報告する。</li>
-      </ul>
-      <div class="alert red">🚫 「私のせいではない」「〇〇さんが悪いです」などと反論しないこと</div>
-    </div>
-    <div class="card">
-      <h3>事業所内の対応（管理者主導）</h3>
-      <ul class="list-num">
-        <li>苦情に関わる職員・関係書類から事実関係を収集・確認する（管理者・主任ケアマネが主導）</li>
-        <li>管理者または上司が主体となり、利用者へ回答・謝罪を行う</li>
-        <li>解決策と今後の予防策を具体的に伝える</li>
-        <li>苦情内容と解決策を職員間で共有し、同様の事案発生を予防する</li>
-      </ul>
-      <div class="alert purple">📌 苦情対応における最終的な責任者は<strong>管理者</strong>です。初期対応（受けた職員）→ 事実確認・解決策・謝罪（管理者または上司）</div>
-    </div>
-  </section>
 
-</main>
+    <!-- ⑥ 苦情対応 -->
+    <div id="page-complaint" class="page">
+      <div class="sec-head">
+        <div class="sec-icon">💬</div>
+        <div><h2>苦情相談マニュアル</h2><p>苦情を「事業改善の機会」と捉えて対応</p></div>
+      </div>
+      <div class="card">
+        <h3>苦情受付時の初期対応</h3>
+        <ul class="list-num">
+          <li><strong>傾聴と共感</strong> — 相手の訴えを遮らず、最後まで聞く。「ご不快な思いをさせて申し訳ございません」など、まず共感の言葉を述べる。（非を認める断定的な発言は避ける）</li>
+          <li><strong>記録の徹底</strong> — 日時・相手の氏名・連絡先を必ず確認。「誰が・いつ・どこで・何を・どうされた」を詳細にメモする。</li>
+          <li><strong>回答の保留</strong> — 「事実を確認し、改めて〇〇時までに折り返しお電話いたします」と伝える。その場で反論しない。</li>
+          <li><strong>管理者への即時報告</strong> — 電話を切った直後、メモ（5W1H）と共に管理者へ報告する。</li>
+        </ul>
+        <div class="alert red">🚫 「私のせいではない」「〇〇さんが悪いです」などと反論しないこと</div>
+      </div>
+      <div class="card">
+        <h3>事業所内の対応（管理者主導）</h3>
+        <ul class="list-num">
+          <li>苦情に関わる職員・関係書類から事実関係を収集・確認する（管理者・主任ケアマネが主導）</li>
+          <li>管理者または上司が主体となり、利用者へ回答・謝罪を行う</li>
+          <li>解決策と今後の予防策を具体的に伝える</li>
+          <li>苦情内容と解決策を職員間で共有し、同様の事案発生を予防する</li>
+        </ul>
+        <div class="alert purple">📌 苦情対応における最終的な責任者は<strong>管理者</strong>です。初期対応（受けた職員）→ 事実確認・解決策・謝罪（管理者または上司）</div>
+      </div>
+    </div>
 
-<footer class="site-footer">
-  かしわじま居宅介護支援センター スタッフマニュアル｜最終更新: 2026年5月（令和6年3月改訂版対応）
-</footer>
+    <footer class="site-footer">
+      かしわじま居宅介護支援センター スタッフマニュアル｜最終更新: 2026年5月（令和6年3月改訂版対応）
+    </footer>
+
+  </div><!-- /content -->
+</div><!-- /layout -->
 
 <script>
-function showSection(id) {
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  event.target.classList.add('active');
+const pages = {
+  daily:     '1日の業務フロー',
+  monthly:   '月間業務フロー',
+  process:   'ケアマネ業務プロセス',
+  hospital:  '入院・退院時対応',
+  emergency: '緊急時対応',
+  complaint: '苦情対応'
+};
+function showPage(id, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  btn.classList.add('active');
+  document.getElementById('mobile-title').textContent = pages[id] || '';
+  closeSidebar();
   window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('open');
+}
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('overlay').classList.remove('open');
 }
 </script>
 </body>

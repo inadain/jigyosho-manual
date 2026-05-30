@@ -9,6 +9,11 @@
 <meta name="apple-mobile-web-app-title" content="小多機マニュアル">
 <style>
 :root {
+  --accent:     #0d9488;
+  --accent-mid: #14b8a6;
+  --accent-lt:  #ccfbf1;
+  --accent-xl:  #f0fdfa;
+  --grad-from:  #065f46;
   --main:       #0d9488;
   --main-mid:   #14b8a6;
   --main-light: #ccfbf1;
@@ -32,37 +37,99 @@
   --r-sm:       8px;
   --sh:         0 1px 4px rgba(0,0,0,.08);
   --sh-md:      0 4px 16px rgba(0,0,0,.12);
+  --sidebar-w:  240px;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body { font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", sans-serif;
        font-size: 15px; line-height: 1.6; color: var(--text); background: var(--bg); min-height: 100vh; }
-.site-header {
-  background: linear-gradient(135deg, #065f46 0%, var(--main) 55%, var(--main-mid) 100%);
-  padding: 14px 20px; position: sticky; top: 0; z-index: 50;
+
+/* ===== TOPBAR (mobile only) ===== */
+.topbar {
+  display: none;
+  background: linear-gradient(135deg, var(--grad-from) 0%, var(--accent) 55%, var(--accent-mid) 100%);
+  padding: 12px 16px;
+  position: sticky; top: 0; z-index: 100;
   box-shadow: 0 2px 10px rgba(6,95,70,.4);
+  align-items: center; gap: 12px;
 }
-.header-inner { max-width: 900px; margin: 0 auto; display: flex; align-items: center; gap: 12px; }
-.header-text h1 { font-size: 15px; font-weight: 800; color: #fff; }
-.header-text p  { font-size: 11px; color: rgba(255,255,255,.65); margin-top: 1px; }
-.header-back { margin-left: auto; color: rgba(255,255,255,.8); font-size: 12px; text-decoration: none;
-               background: rgba(255,255,255,.15); padding: 5px 12px; border-radius: 20px; }
-.header-back:hover { background: rgba(255,255,255,.25); }
-.hero { background: linear-gradient(135deg, var(--main) 0%, var(--main-mid) 100%);
-        padding: 22px 20px 26px; text-align: center; color: #fff; }
-.hero h2 { font-size: 18px; font-weight: 800; margin-bottom: 4px; }
-.hero p  { font-size: 12px; color: rgba(255,255,255,.72); line-height: 1.7; }
-.nav-tabs { background: var(--white); border-bottom: 2px solid var(--gray-mid);
-            display: flex; overflow-x: auto; scrollbar-width: none; position: sticky; top: 52px; z-index: 40; }
-.nav-tabs::-webkit-scrollbar { display: none; }
-.nav-tab { flex-shrink: 0; padding: 12px 16px; font-size: 13px; font-weight: 700;
-           color: var(--gray); border: none; background: none; cursor: pointer;
-           border-bottom: 3px solid transparent; margin-bottom: -2px; white-space: nowrap; transition: color .15s, border-color .15s; }
-.nav-tab.active { color: var(--main); border-bottom-color: var(--main); }
-.nav-tab:hover:not(.active) { color: var(--text); }
-.main { max-width: 900px; margin: 0 auto; padding: 20px 16px 60px; }
-.section { display: none; }
-.section.active { display: block; }
+.topbar-menu {
+  background: rgba(255,255,255,.2); border: none; color: #fff;
+  width: 36px; height: 36px; border-radius: 8px; font-size: 18px;
+  cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.topbar-title { color: #fff; font-size: 14px; font-weight: 800; flex: 1; }
+.topbar-back { color: rgba(255,255,255,.85); font-size: 12px; text-decoration: none;
+               background: rgba(255,255,255,.15); padding: 5px 12px; border-radius: 20px; white-space: nowrap; }
+
+/* ===== LAYOUT ===== */
+.layout { display: flex; min-height: 100vh; }
+
+/* ===== SIDEBAR ===== */
+.sidebar {
+  width: var(--sidebar-w);
+  background: linear-gradient(180deg, var(--grad-from) 0%, var(--accent) 100%);
+  position: fixed; top: 0; left: 0; height: 100vh;
+  display: flex; flex-direction: column;
+  z-index: 90; overflow-y: auto;
+  box-shadow: 2px 0 12px rgba(0,0,0,.15);
+}
+.sidebar-logo {
+  padding: 20px 16px 16px;
+  border-bottom: 1px solid rgba(255,255,255,.15);
+}
+.sidebar-logo h1 { font-size: 13px; font-weight: 800; color: #fff; line-height: 1.4; }
+.sidebar-logo p  { font-size: 10px; color: rgba(255,255,255,.65); margin-top: 3px; }
+.sidebar-back {
+  display: block; margin: 10px 12px 0;
+  color: rgba(255,255,255,.8); font-size: 11px; text-decoration: none;
+  background: rgba(255,255,255,.15); padding: 5px 10px; border-radius: 16px;
+  text-align: center;
+}
+.sidebar-back:hover { background: rgba(255,255,255,.25); }
+.sidebar-nav { padding: 12px 0; flex: 1; }
+.nav-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 11px 16px; cursor: pointer;
+  color: rgba(255,255,255,.75); font-size: 13px; font-weight: 600;
+  border: none; background: none; width: 100%; text-align: left;
+  border-left: 3px solid transparent;
+  transition: background .15s, color .15s, border-color .15s;
+}
+.nav-item:hover { background: rgba(255,255,255,.1); color: #fff; }
+.nav-item.active {
+  background: rgba(255,255,255,.18);
+  color: #fff;
+  border-left-color: #fff;
+}
+.nav-item .nav-icon { font-size: 16px; flex-shrink: 0; }
+
+/* ===== OVERLAY (mobile) ===== */
+.overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,.45); z-index: 85;
+}
+.overlay.show { display: block; }
+
+/* ===== CONTENT ===== */
+.content {
+  margin-left: var(--sidebar-w);
+  flex: 1; min-width: 0;
+  display: flex; flex-direction: column;
+}
+.content-header {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-mid) 100%);
+  padding: 22px 24px 26px; text-align: center; color: #fff;
+}
+.content-header h2 { font-size: 18px; font-weight: 800; margin-bottom: 4px; }
+.content-header p  { font-size: 12px; color: rgba(255,255,255,.72); line-height: 1.7; }
+.main { max-width: 860px; margin: 0 auto; padding: 24px 20px 60px; width: 100%; }
+
+/* ===== PAGES ===== */
+.page { display: none; }
+.page.active { display: block; }
+
+/* ===== CONTENT COMPONENTS ===== */
 .sec-head { display: flex; align-items: center; gap: 10px; margin: 0 0 16px; }
 .sec-icon { width: 36px; height: 36px; border-radius: 9px; display: flex; align-items: center;
             justify-content: center; font-size: 18px; flex-shrink: 0; background: var(--main-light); }
@@ -101,327 +168,374 @@ td.note { font-size: 11.5px; color: var(--text-sub); }
 .point { background: var(--main-xl); border-radius: var(--r-sm); padding: 12px 14px; margin: 10px 0; font-size: 13.5px; }
 .point strong { color: var(--main); }
 .site-footer { text-align: center; padding: 20px; font-size: 11px; color: var(--text-sub); border-top: 1px solid var(--gray-mid); background: var(--white); }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .topbar { display: flex; }
+  .sidebar {
+    transform: translateX(-100%);
+    transition: transform .25s ease;
+    top: 0;
+  }
+  .sidebar.open { transform: translateX(0); }
+  .content { margin-left: 0; }
+  .content-header { display: none; }
+  .main { padding: 16px 14px 60px; }
+}
 </style>
 </head>
 <body>
 
-<header class="site-header">
-  <div class="header-inner">
-    <div>
-      <div class="header-text">
-        <h1>🌸 小規模多機能ホームこはる日和</h1>
-        <p>小規模多機能型居宅介護 スタッフマニュアル</p>
-      </div>
-    </div>
-    <a href="../index.html" class="header-back">← 一覧へ</a>
-  </div>
-</header>
-
-<div class="hero">
-  <h2>小規模多機能 スタッフマニュアル</h2>
-  <p>通い・泊まり・訪問の業務手順をまとめています</p>
+<!-- Mobile topbar -->
+<div class="topbar">
+  <button class="topbar-menu" onclick="toggleSidebar()" aria-label="メニュー">☰</button>
+  <span class="topbar-title">🌸 小規模多機能マニュアル</span>
+  <a href="../index.html" class="topbar-back">← 一覧へ</a>
 </div>
 
-<nav class="nav-tabs">
-  <button class="nav-tab active" onclick="showSection('about')">🏡 サービスとは</button>
-  <button class="nav-tab" onclick="showSection('flow')">📋 業務フロー</button>
-  <button class="nav-tab" onclick="showSection('visit')">🚗 訪問サービス</button>
-  <button class="nav-tab" onclick="showSection('record')">📝 記録</button>
-  <button class="nav-tab" onclick="showSection('car')">🚙 公用車</button>
-</nav>
+<!-- Overlay -->
+<div class="overlay" id="overlay" onclick="closeSidebar()"></div>
 
-<main class="main">
+<div class="layout">
 
-  <!-- ① サービスとは -->
-  <section id="about" class="section active">
-    <div class="sec-head">
-      <div class="sec-icon">🏡</div>
-      <div>
-        <h2>小規模多機能型居宅介護とは</h2>
-        <p>3つのサービスを同じスタッフが一体提供します</p>
-      </div>
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <h1>🌸 小規模多機能ホームこはる日和</h1>
+      <p>小規模多機能型居宅介護 スタッフマニュアル</p>
     </div>
-    <div class="card">
-      <h3>基本的な考え方</h3>
-      <p style="font-size:13.5px;line-height:1.8;margin-bottom:12px;">「通い」「泊まり」「訪問」をひとつの事業所で受けられる介護保険サービスです。介護が必要になっても、<strong>住み慣れた自宅や地域で暮らし続けられるよう支援</strong>することを目的とします。<br>同じスタッフが対応するため安心感があり、状況に合わせて3つのサービスを柔軟に切り替えて提供します。</p>
-      <div class="service-grid">
-        <div class="service-card">
-          <div class="icon">🏠</div>
-          <h4>① 通い</h4>
-          <p>事業所に通い、食事・入浴・機能訓練などを行う。利用者同士の交流も支援する。</p>
+    <a href="../index.html" class="sidebar-back">← 一覧へ戻る</a>
+    <nav class="sidebar-nav">
+      <button class="nav-item active" onclick="showPage('page-about', this)">
+        <span class="nav-icon">🏡</span>サービス概要
+      </button>
+      <button class="nav-item" onclick="showPage('page-flow', this)">
+        <span class="nav-icon">📋</span>業務フロー（通い・日勤・夜間）
+      </button>
+      <button class="nav-item" onclick="showPage('page-visit', this)">
+        <span class="nav-icon">🚗</span>訪問サービス
+      </button>
+      <button class="nav-item" onclick="showPage('page-record', this)">
+        <span class="nav-icon">📝</span>記録の書き方
+      </button>
+      <button class="nav-item" onclick="showPage('page-car', this)">
+        <span class="nav-icon">🚙</span>公用車マニュアル
+      </button>
+    </nav>
+  </aside>
+
+  <!-- Main content -->
+  <div class="content">
+    <div class="content-header">
+      <h2>小規模多機能 スタッフマニュアル</h2>
+      <p>通い・泊まり・訪問の業務手順をまとめています</p>
+    </div>
+
+    <main class="main">
+
+      <!-- ① サービス概要 -->
+      <section id="page-about" class="page active">
+        <div class="sec-head">
+          <div class="sec-icon">🏡</div>
+          <div>
+            <h2>小規模多機能型居宅介護とは</h2>
+            <p>3つのサービスを同じスタッフが一体提供します</p>
+          </div>
         </div>
-        <div class="service-card">
-          <div class="icon">🌙</div>
-          <h4>② 泊まり</h4>
-          <p>家族が外出する日や急用のときなどに、泊まりサービスを提供する。</p>
+        <div class="card">
+          <h3>基本的な考え方</h3>
+          <p style="font-size:13.5px;line-height:1.8;margin-bottom:12px;">「通い」「泊まり」「訪問」をひとつの事業所で受けられる介護保険サービスです。介護が必要になっても、<strong>住み慣れた自宅や地域で暮らし続けられるよう支援</strong>することを目的とします。<br>同じスタッフが対応するため安心感があり、状況に合わせて3つのサービスを柔軟に切り替えて提供します。</p>
+          <div class="service-grid">
+            <div class="service-card">
+              <div class="icon">🏠</div>
+              <h4>① 通い</h4>
+              <p>事業所に通い、食事・入浴・機能訓練などを行う。利用者同士の交流も支援する。</p>
+            </div>
+            <div class="service-card">
+              <div class="icon">🌙</div>
+              <h4>② 泊まり</h4>
+              <p>家族が外出する日や急用のときなどに、泊まりサービスを提供する。</p>
+            </div>
+            <div class="service-card">
+              <div class="icon">🚶</div>
+              <h4>③ 訪問</h4>
+              <p>自宅を訪問し、生活支援・見守り・服薬確認・身体ケアなどを行う。</p>
+            </div>
+          </div>
         </div>
-        <div class="service-card">
-          <div class="icon">🚶</div>
-          <h4>③ 訪問</h4>
-          <p>自宅を訪問し、生活支援・見守り・服薬確認・身体ケアなどを行う。</p>
+      </section>
+
+      <!-- ② 業務フロー -->
+      <section id="page-flow" class="page">
+        <div class="sec-head">
+          <div class="sec-icon">📋</div>
+          <div>
+            <h2>業務フロー</h2>
+            <p>通い・日勤帯・夜間帯の時間割</p>
+          </div>
         </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- ② 業務フロー -->
-  <section id="flow" class="section">
-    <div class="sec-head">
-      <div class="sec-icon">📋</div>
-      <div>
-        <h2>業務フロー</h2>
-        <p>通い・日勤帯・夜間帯の時間割</p>
-      </div>
-    </div>
+        <div class="card">
+          <h3>🌅 通い（デイ）日課表</h3>
+          <div class="tbl-wrap">
+            <table>
+              <thead><tr><th>時刻</th><th>業務内容</th><th>留意事項</th></tr></thead>
+              <tbody>
+                <tr><td class="time">08:30</td><td>申し送り（朝礼）</td><td class="note">フロア担当者が司会を行う</td></tr>
+                <tr><td class="time">09:00</td><td>バイタル測定</td><td class="note">血圧・体温・脈拍。状態確認後、入浴の可否をNSに確認</td></tr>
+                <tr><td class="time">09:00〜</td><td>入浴支援</td><td class="note">バイタル等をNSに確認してから実施</td></tr>
+                <tr><td class="time">09:30</td><td>送迎</td><td class="note">乗降・移動時の事故に留意</td></tr>
+                <tr><td class="time">10:00</td><td>水分提供</td><td class="note">温度・禁忌物・トロミの有無を確認して提供</td></tr>
+                <tr><td class="time">10:00〜</td><td>排泄介助</td><td class="note">声を掛け合いながらフロア内の見守りを並行して行う</td></tr>
+                <tr><td class="time">11:00</td><td>集団体操・口腔体操</td><td class="note">転倒などに注意</td></tr>
+                <tr><td class="time">12:00</td><td>昼食</td><td class="note">誤嚥・窒息に留意し、見守り及び介助を行う</td></tr>
+                <tr><td class="time">12:00〜</td><td>服薬支援</td><td class="note">日付・名前・服用時間を声に出して確認し誤投薬を防ぐ</td></tr>
+                <tr><td class="time">12:00〜</td><td>口腔ケア</td><td class="note">使用後の物品は消毒</td></tr>
+                <tr><td class="time">13:00</td><td>排泄介助</td><td class="note">声を掛け合いながらフロア内の見守りを並行して行う</td></tr>
+                <tr><td class="time">14:00</td><td>余暇活動</td><td class="note"></td></tr>
+                <tr><td class="time">15:00</td><td>おやつ・水分提供</td><td class="note">温度・禁忌物・トロミの有無を確認して提供</td></tr>
+                <tr><td class="time">15:30</td><td>送迎</td><td class="note">乗降・移動時の事故に留意</td></tr>
+                <tr><td class="time">15:30〜</td><td>環境整備</td><td class="note">各担当箇所の清掃を行う</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
 
-    <div class="card">
-      <h3>🌅 通い（デイ）日課表</h3>
-      <div class="tbl-wrap">
-        <table>
-          <thead><tr><th>時刻</th><th>業務内容</th><th>留意事項</th></tr></thead>
-          <tbody>
-            <tr><td class="time">08:30</td><td>申し送り（朝礼）</td><td class="note">フロア担当者が司会を行う</td></tr>
-            <tr><td class="time">09:00</td><td>バイタル測定</td><td class="note">血圧・体温・脈拍。状態確認後、入浴の可否をNSに確認</td></tr>
-            <tr><td class="time">09:00〜</td><td>入浴支援</td><td class="note">バイタル等をNSに確認してから実施</td></tr>
-            <tr><td class="time">09:30</td><td>送迎</td><td class="note">乗降・移動時の事故に留意</td></tr>
-            <tr><td class="time">10:00</td><td>水分提供</td><td class="note">温度・禁忌物・トロミの有無を確認して提供</td></tr>
-            <tr><td class="time">10:00〜</td><td>排泄介助</td><td class="note">声を掛け合いながらフロア内の見守りを並行して行う</td></tr>
-            <tr><td class="time">11:00</td><td>集団体操・口腔体操</td><td class="note">転倒などに注意</td></tr>
-            <tr><td class="time">12:00</td><td>昼食</td><td class="note">誤嚥・窒息に留意し、見守り及び介助を行う</td></tr>
-            <tr><td class="time">12:00〜</td><td>服薬支援</td><td class="note">日付・名前・服用時間を声に出して確認し誤投薬を防ぐ</td></tr>
-            <tr><td class="time">12:00〜</td><td>口腔ケア</td><td class="note">使用後の物品は消毒</td></tr>
-            <tr><td class="time">13:00</td><td>排泄介助</td><td class="note">声を掛け合いながらフロア内の見守りを並行して行う</td></tr>
-            <tr><td class="time">14:00</td><td>余暇活動</td><td class="note"></td></tr>
-            <tr><td class="time">15:00</td><td>おやつ・水分提供</td><td class="note">温度・禁忌物・トロミの有無を確認して提供</td></tr>
-            <tr><td class="time">15:30</td><td>送迎</td><td class="note">乗降・移動時の事故に留意</td></tr>
-            <tr><td class="time">15:30〜</td><td>環境整備</td><td class="note">各担当箇所の清掃を行う</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+        <div class="card">
+          <h3>☀️ 日勤帯</h3>
+          <div class="tbl-wrap">
+            <table>
+              <thead><tr><th>時刻</th><th>業務内容</th><th>備考</th></tr></thead>
+              <tbody>
+                <tr><td class="time">07:30</td><td>申し送り（夜勤者→早出）</td><td class="note">朝食を厨房に取りに行く</td></tr>
+                <tr><td class="time">07:30〜</td><td>朝食</td><td class="note">服薬・口腔ケア・排泄介助</td></tr>
+                <tr><td class="time">08:00</td><td>送迎</td><td class="note">藤川さま</td></tr>
+                <tr><td class="time">08:30</td><td>申し送り（朝礼）</td><td class="note">バイタル測定・入浴準備（浴室・衣類の準備）</td></tr>
+                <tr><td class="time">09:00〜</td><td>入浴ケア</td><td class="note"></td></tr>
+                <tr><td class="time">10:00</td><td>水分補給・換気・排泄介助</td><td class="note">炊飯・シーツ交換（日曜日）</td></tr>
+                <tr><td class="time">11:00</td><td>昼食準備（調理）</td><td class="note"></td></tr>
+                <tr><td class="time">12:00〜</td><td>昼食</td><td class="note">服薬・口腔ケア・排泄介助</td></tr>
+                <tr><td class="time">14:00</td><td>入浴ケア</td><td class="note"></td></tr>
+                <tr><td class="time">15:00</td><td>おやつ・換気・検温</td><td class="note"></td></tr>
+                <tr><td class="time">15:30</td><td>送迎</td><td class="note"></td></tr>
+                <tr><td class="time">16:00</td><td>環境整備</td><td class="note">トイレ掃除・フロア掃除機・洗面台掃除</td></tr>
+                <tr><td class="time">16:00〜</td><td>記録</td><td class="note">業務日誌・バイタル・食事摂取量</td></tr>
+                <tr><td class="time">16:30</td><td>申し送り（日勤者→夜勤者）</td><td class="note">業務日誌をいなだ医院へFAX</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
 
-    <div class="card">
-      <h3>☀️ 日勤帯</h3>
-      <div class="tbl-wrap">
-        <table>
-          <thead><tr><th>時刻</th><th>業務内容</th><th>備考</th></tr></thead>
-          <tbody>
-            <tr><td class="time">07:30</td><td>申し送り（夜勤者→早出）</td><td class="note">朝食を厨房に取りに行く</td></tr>
-            <tr><td class="time">07:30〜</td><td>朝食</td><td class="note">服薬・口腔ケア・排泄介助</td></tr>
-            <tr><td class="time">08:00</td><td>送迎</td><td class="note">藤川さま</td></tr>
-            <tr><td class="time">08:30</td><td>申し送り（朝礼）</td><td class="note">バイタル測定・入浴準備（浴室・衣類の準備）</td></tr>
-            <tr><td class="time">09:00〜</td><td>入浴ケア</td><td class="note"></td></tr>
-            <tr><td class="time">10:00</td><td>水分補給・換気・排泄介助</td><td class="note">炊飯・シーツ交換（日曜日）</td></tr>
-            <tr><td class="time">11:00</td><td>昼食準備（調理）</td><td class="note"></td></tr>
-            <tr><td class="time">12:00〜</td><td>昼食</td><td class="note">服薬・口腔ケア・排泄介助</td></tr>
-            <tr><td class="time">14:00</td><td>入浴ケア</td><td class="note"></td></tr>
-            <tr><td class="time">15:00</td><td>おやつ・換気・検温</td><td class="note"></td></tr>
-            <tr><td class="time">15:30</td><td>送迎</td><td class="note"></td></tr>
-            <tr><td class="time">16:00</td><td>環境整備</td><td class="note">トイレ掃除・フロア掃除機・洗面台掃除</td></tr>
-            <tr><td class="time">16:00〜</td><td>記録</td><td class="note">業務日誌・バイタル・食事摂取量</td></tr>
-            <tr><td class="time">16:30</td><td>申し送り（日勤者→夜勤者）</td><td class="note">業務日誌をいなだ医院へFAX</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+        <div class="card">
+          <h3>🌙 夜間帯</h3>
+          <div class="tbl-wrap">
+            <table>
+              <thead><tr><th>時刻</th><th>業務内容</th><th>備考</th></tr></thead>
+              <tbody>
+                <tr><td class="time">16:30</td><td>申し送り（日勤→夜勤）</td><td class="note">ナイトケア準備・室温・環境整備・夕服薬準備</td></tr>
+                <tr><td class="time">17:00〜</td><td>夕食</td><td class="note">服薬・口腔ケア・口腔ケア用品回収・臥床介助</td></tr>
+                <tr><td class="time">21:00</td><td>巡回</td><td class="note">安否確認・排泄介助・体位変換</td></tr>
+                <tr><td class="time">00:00</td><td>巡回・排泄介助</td><td class="note"></td></tr>
+                <tr><td class="time">03:00</td><td>巡回・排泄介助</td><td class="note"></td></tr>
+                <tr><td class="time">06:30</td><td>起床介助・整容ケア・排泄介助</td><td class="note"></td></tr>
+                <tr><td class="time">07:30</td><td>申し送り（夜勤→早出）</td><td class="note">朝食・服薬・口腔ケア・排泄介助・検温・血圧測定</td></tr>
+                <tr><td class="time">08:30</td><td>申し送り（朝礼）</td><td class="note">バイタル測定・ゴミ捨て</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
 
-    <div class="card">
-      <h3>🌙 夜間帯</h3>
-      <div class="tbl-wrap">
-        <table>
-          <thead><tr><th>時刻</th><th>業務内容</th><th>備考</th></tr></thead>
-          <tbody>
-            <tr><td class="time">16:30</td><td>申し送り（日勤→夜勤）</td><td class="note">ナイトケア準備・室温・環境整備・夕服薬準備</td></tr>
-            <tr><td class="time">17:00〜</td><td>夕食</td><td class="note">服薬・口腔ケア・口腔ケア用品回収・臥床介助</td></tr>
-            <tr><td class="time">21:00</td><td>巡回</td><td class="note">安否確認・排泄介助・体位変換</td></tr>
-            <tr><td class="time">00:00</td><td>巡回・排泄介助</td><td class="note"></td></tr>
-            <tr><td class="time">03:00</td><td>巡回・排泄介助</td><td class="note"></td></tr>
-            <tr><td class="time">06:30</td><td>起床介助・整容ケア・排泄介助</td><td class="note"></td></tr>
-            <tr><td class="time">07:30</td><td>申し送り（夜勤→早出）</td><td class="note">朝食・服薬・口腔ケア・排泄介助・検温・血圧測定</td></tr>
-            <tr><td class="time">08:30</td><td>申し送り（朝礼）</td><td class="note">バイタル測定・ゴミ捨て</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
+      <!-- ③ 訪問サービス -->
+      <section id="page-visit" class="page">
+        <div class="sec-head">
+          <div class="sec-icon">🚗</div>
+          <div>
+            <h2>訪問サービスマニュアル</h2>
+            <p>訪問前・到着後・注意事項の確認</p>
+          </div>
+        </div>
 
-  <!-- ③ 訪問サービス -->
-  <section id="visit" class="section">
-    <div class="sec-head">
-      <div class="sec-icon">🚗</div>
-      <div>
-        <h2>訪問サービスマニュアル</h2>
-        <p>訪問前・到着後・注意事項の確認</p>
-      </div>
-    </div>
+        <div class="card">
+          <h3>訪問時の基本持ち物</h3>
+          <ul class="list">
+            <li>バイタル測定用品（血圧計・体温計・必要に応じてパルスオキシメーター）</li>
+            <li>PPE用品（マスク・ディスポーザブル手袋・必要に応じてフェイスシールド・ガウンなど）</li>
+            <li>携帯電話</li>
+            <li>訪問介護職員証</li>
+            <li>その他、個別に必要な物品</li>
+          </ul>
+        </div>
 
-    <div class="card">
-      <h3>訪問時の基本持ち物</h3>
-      <ul class="list">
-        <li>バイタル測定用品（血圧計・体温計・必要に応じてパルスオキシメーター）</li>
-        <li>PPE用品（マスク・ディスポーザブル手袋・必要に応じてフェイスシールド・ガウンなど）</li>
-        <li>携帯電話</li>
-        <li>訪問介護職員証</li>
-        <li>その他、個別に必要な物品</li>
-      </ul>
-    </div>
+        <div class="card">
+          <h3>訪問前の確認事項</h3>
+          <ul class="list-num">
+            <li>サービス提供表にて訪問サービス提供時間を確認</li>
+            <li>利用者宅へのアクセス方法を確認</li>
+            <li>交通状況などを事前に確認</li>
+            <li>他職員に行先及び帰社時間を確認</li>
+            <li>公用車を使用する際は<strong>公用車使用マニュアルを順守</strong></li>
+          </ul>
+        </div>
 
-    <div class="card">
-      <h3>訪問前の確認事項</h3>
-      <ul class="list-num">
-        <li>サービス提供表にて訪問サービス提供時間を確認</li>
-        <li>利用者宅へのアクセス方法を確認</li>
-        <li>交通状況などを事前に確認</li>
-        <li>他職員に行先及び帰社時間を確認</li>
-        <li>公用車を使用する際は<strong>公用車使用マニュアルを順守</strong></li>
-      </ul>
-    </div>
+        <div class="card">
+          <h3>利用者宅到着後の手順</h3>
+          <ul class="list-num">
+            <li>挨拶・手指消毒を行い入室</li>
+            <li>応答がない場合は<strong>管理者・管理者補佐または介護支援専門員に報告</strong>し指示を仰ぐ
+              <div class="alert red">🚫 応答がなく解錠されていても自身の判断では入室しない</div>
+            </li>
+            <li>居宅介護計画に則りサービス提供を行う</li>
+            <li>バイタル測定・顔色など全身状態の確認</li>
+            <li>イレギュラーや不安なことは勝手な判断をせず管理者・介護支援専門員に報告・相談</li>
+            <li>サービス提供終了後、実施内容を本人と確認</li>
+            <li>買い物など金銭の支援を行った際は<strong>本人と必ず確認</strong></li>
+            <li>挨拶を行い退室・手指消毒</li>
+            <li>帰社後に記録（5W1Hを基本に正確に）</li>
+          </ul>
+        </div>
 
-    <div class="card">
-      <h3>利用者宅到着後の手順</h3>
-      <ul class="list-num">
-        <li>挨拶・手指消毒を行い入室</li>
-        <li>応答がない場合は<strong>管理者・管理者補佐または介護支援専門員に報告</strong>し指示を仰ぐ
-          <div class="alert red">🚫 応答がなく解錠されていても自身の判断では入室しない</div>
-        </li>
-        <li>居宅介護計画に則りサービス提供を行う</li>
-        <li>バイタル測定・顔色など全身状態の確認</li>
-        <li>イレギュラーや不安なことは勝手な判断をせず管理者・介護支援専門員に報告・相談</li>
-        <li>サービス提供終了後、実施内容を本人と確認</li>
-        <li>買い物など金銭の支援を行った際は<strong>本人と必ず確認</strong></li>
-        <li>挨拶を行い退室・手指消毒</li>
-        <li>帰社後に記録（5W1Hを基本に正確に）</li>
-      </ul>
-    </div>
+        <div class="card">
+          <h3>訪問の注意事項</h3>
+          <ul class="list">
+            <li>自宅というプライベートな場所に入るという意識を持つ</li>
+            <li>利用者・家族・関係者からの金品などの授与は丁重に断る</li>
+            <li>個人情報の持ち出しは原則禁止（必要時は管理者に報告の上、適切に管理）</li>
+            <li>スタンダードプリコーションを意識する</li>
+            <li>利用者の物品に触れる際は必ず承諾を取る</li>
+            <li>異性の利用者・家族との接触時はパーソナルスペースと退室経路を確保する</li>
+          </ul>
+        </div>
 
-    <div class="card">
-      <h3>訪問の注意事項</h3>
-      <ul class="list">
-        <li>自宅というプライベートな場所に入るという意識を持つ</li>
-        <li>利用者・家族・関係者からの金品などの授与は丁重に断る</li>
-        <li>個人情報の持ち出しは原則禁止（必要時は管理者に報告の上、適切に管理）</li>
-        <li>スタンダードプリコーションを意識する</li>
-        <li>利用者の物品に触れる際は必ず承諾を取る</li>
-        <li>異性の利用者・家族との接触時はパーソナルスペースと退室経路を確保する</li>
-      </ul>
-    </div>
+        <div class="card">
+          <h3>🛒 買い物支援マニュアル</h3>
+          <div class="point">小規模多機能は訪問介護との違いとして、<strong>買い物支援（代行）と買い物同行</strong>が行えます。</div>
+          <ul class="list">
+            <li>基本的に生活圏域での支援を行う</li>
+            <li>買い物の内容・金銭を本人と確認する</li>
+            <li>買い物同行時は、店内及び道中の移動を安全に行う</li>
+            <li><strong>レシート及び領収書を必ず受け取る</strong></li>
+            <li>金銭の授受は基本的に本人に行ってもらう</li>
+            <li>買い物の内容とレシート・残金を本人と確認する</li>
+          </ul>
+        </div>
 
-    <div class="card">
-      <h3>🛒 買い物支援マニュアル</h3>
-      <div class="point">小規模多機能は訪問介護との違いとして、<strong>買い物支援（代行）と買い物同行</strong>が行えます。</div>
-      <ul class="list">
-        <li>基本的に生活圏域での支援を行う</li>
-        <li>買い物の内容・金銭を本人と確認する</li>
-        <li>買い物同行時は、店内及び道中の移動を安全に行う</li>
-        <li><strong>レシート及び領収書を必ず受け取る</strong></li>
-        <li>金銭の授受は基本的に本人に行ってもらう</li>
-        <li>買い物の内容とレシート・残金を本人と確認する</li>
-      </ul>
-    </div>
+        <div class="card">
+          <h3>🏥 通院支援マニュアル</h3>
+          <ul class="list">
+            <li>診察券・保険証・金銭・おくすり手帳を準備（必要に応じて診療情報提供書など）</li>
+            <li>既往歴や現状・バイタルなどを説明できるようにしておく</li>
+            <li>医療機関内はマスクを着用し感染対策に努める</li>
+            <li>診察室への同席は本人・医療機関への同意を得る</li>
+            <li>個人情報の取り扱いには留意する</li>
+            <li>受診後は本人の同意を得て、関係者に報告を行う</li>
+          </ul>
+        </div>
+      </section>
 
-    <div class="card">
-      <h3>🏥 通院支援マニュアル</h3>
-      <ul class="list">
-        <li>診察券・保険証・金銭・おくすり手帳を準備（必要に応じて診療情報提供書など）</li>
-        <li>既往歴や現状・バイタルなどを説明できるようにしておく</li>
-        <li>医療機関内はマスクを着用し感染対策に努める</li>
-        <li>診察室への同席は本人・医療機関への同意を得る</li>
-        <li>個人情報の取り扱いには留意する</li>
-        <li>受診後は本人の同意を得て、関係者に報告を行う</li>
-      </ul>
-    </div>
-  </section>
+      <!-- ④ 記録の書き方 -->
+      <section id="page-record" class="page">
+        <div class="sec-head">
+          <div class="sec-icon">📝</div>
+          <div>
+            <h2>記録の書き方</h2>
+            <p>正確な記録が利用者支援の質を守ります</p>
+          </div>
+        </div>
 
-  <!-- ④ 記録 -->
-  <section id="record" class="section">
-    <div class="sec-head">
-      <div class="sec-icon">📝</div>
-      <div>
-        <h2>記録の書き方</h2>
-        <p>正確な記録が利用者支援の質を守ります</p>
-      </div>
-    </div>
+        <div class="card">
+          <h3>記録の種類</h3>
+          <div class="tbl-wrap">
+            <table>
+              <thead><tr><th>サービス</th><th>記録の種類</th></tr></thead>
+              <tbody>
+                <tr><td>訪問</td><td>サービス実施記録</td></tr>
+                <tr><td>通い</td><td>日誌・個別記録・排泄記録</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
 
-    <div class="card">
-      <h3>記録の種類</h3>
-      <div class="tbl-wrap">
-        <table>
-          <thead><tr><th>サービス</th><th>記録の種類</th></tr></thead>
-          <tbody>
-            <tr><td>訪問</td><td>サービス実施記録</td></tr>
-            <tr><td>通い</td><td>日誌・個別記録・排泄記録</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+        <div class="card">
+          <h3>記録の基本原則（5W1H）</h3>
+          <div class="alert teal">✏️ <strong>誰が見てもわかりやすい記録</strong>を書くことが目標です。5W1Hを基本に記載しましょう。</div>
+          <div class="tbl-wrap">
+            <table>
+              <thead><tr><th>項目</th><th>内容</th></tr></thead>
+              <tbody>
+                <tr><td><strong>When（いつ）</strong></td><td>介護を実施した日時</td></tr>
+                <tr><td><strong>Where（どこで）</strong></td><td>場所（自宅・事業所内など）</td></tr>
+                <tr><td><strong>Who（誰が）</strong></td><td>実施担当者名</td></tr>
+                <tr><td><strong>What（何を）</strong></td><td>介護の具体的な内容と根拠</td></tr>
+                <tr><td><strong>Why（なぜ）</strong></td><td>利用者の状態と反応</td></tr>
+                <tr><td><strong>How（どのように）</strong></td><td>具体的な介護内容</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
 
-    <div class="card">
-      <h3>記録の基本原則（5W1H）</h3>
-      <div class="alert teal">✏️ <strong>誰が見てもわかりやすい記録</strong>を書くことが目標です。5W1Hを基本に記載しましょう。</div>
-      <div class="tbl-wrap">
-        <table>
-          <thead><tr><th>項目</th><th>内容</th></tr></thead>
-          <tbody>
-            <tr><td><strong>When（いつ）</strong></td><td>介護を実施した日時</td></tr>
-            <tr><td><strong>Where（どこで）</strong></td><td>場所（自宅・事業所内など）</td></tr>
-            <tr><td><strong>Who（誰が）</strong></td><td>実施担当者名</td></tr>
-            <tr><td><strong>What（何を）</strong></td><td>介護の具体的な内容と根拠</td></tr>
-            <tr><td><strong>Why（なぜ）</strong></td><td>利用者の状態と反応</td></tr>
-            <tr><td><strong>How（どのように）</strong></td><td>具体的な介護内容</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
+      <!-- ⑤ 公用車マニュアル -->
+      <section id="page-car" class="page">
+        <div class="sec-head">
+          <div class="sec-icon">🚙</div>
+          <div>
+            <h2>公用車使用マニュアル</h2>
+            <p>安全運転と適切な記録が基本です</p>
+          </div>
+        </div>
 
-  <!-- ⑤ 公用車 -->
-  <section id="car" class="section">
-    <div class="sec-head">
-      <div class="sec-icon">🚙</div>
-      <div>
-        <h2>公用車使用マニュアル</h2>
-        <p>安全運転と適切な記録が基本です</p>
-      </div>
-    </div>
+        <div class="card">
+          <h3>公用車使用のルール</h3>
+          <ul class="list">
+            <li>運行前点検を行う</li>
+            <li>自動車運転免許証を携帯する</li>
+            <li>交通規則（道路標識・一時停止・速度など）を厳守する</li>
+            <li>事前に交通状況・一方通行・進入禁止などを確認する</li>
+            <li><strong>ながら運転は厳禁</strong>。電話を使用する際は必ず停車して行う</li>
+            <li>違法駐車は厳禁</li>
+            <li>後部座席はチャイルドロックをかける</li>
+            <li>利用者を乗車している際は目を離さないように留意する</li>
+          </ul>
+        </div>
 
-    <div class="card">
-      <h3>公用車使用のルール</h3>
-      <ul class="list">
-        <li>運行前点検を行う</li>
-        <li>自動車運転免許証を携帯する</li>
-        <li>交通規則（道路標識・一時停止・速度など）を厳守する</li>
-        <li>事前に交通状況・一方通行・進入禁止などを確認する</li>
-        <li><strong>ながら運転は厳禁</strong>。電話を使用する際は必ず停車して行う</li>
-        <li>違法駐車は厳禁</li>
-        <li>後部座席はチャイルドロックをかける</li>
-        <li>利用者を乗車している際は目を離さないように留意する</li>
-      </ul>
-    </div>
+        <div class="card">
+          <h3>運行記録の記入</h3>
+          <div class="point">運転後は<strong>運行表に日付・使用時間・使用者・使途を記載</strong>してください。</div>
+          <ul class="list">
+            <li>運行後点検を行う</li>
+            <li>事故・自損・交通違反時は<strong>管理者及び管理者補佐に報告</strong>する</li>
+          </ul>
+          <div class="alert red">🚨 <strong>交通事故時</strong>：受傷者の安全確保を最優先に行い、警察及び救急要請を速やかに行ってください</div>
+        </div>
+      </section>
 
-    <div class="card">
-      <h3>運行記録の記入</h3>
-      <div class="point">運転後は<strong>運行表に日付・使用時間・使用者・使途を記載</strong>してください。</div>
-      <ul class="list">
-        <li>運行後点検を行う</li>
-        <li>事故・自損・交通違反時は<strong>管理者及び管理者補佐に報告</strong>する</li>
-      </ul>
-      <div class="alert red">🚨 <strong>交通事故時</strong>：受傷者の安全確保を最優先に行い、警察及び救急要請を速やかに行ってください</div>
-    </div>
-  </section>
+    </main>
 
-</main>
+    <footer class="site-footer">
+      小規模多機能ホームこはる日和 スタッフマニュアル｜最終更新: 2026年5月
+    </footer>
+  </div><!-- /.content -->
 
-<footer class="site-footer">
-  小規模多機能ホームこはる日和 スタッフマニュアル｜最終更新: 2026年5月
-</footer>
+</div><!-- /.layout -->
 
 <script>
-function showSection(id) {
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  event.target.classList.add('active');
+function showPage(pageId, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+  document.getElementById(pageId).classList.add('active');
+  btn.classList.add('active');
+  document.querySelector('.main').scrollTop = 0;
   window.scrollTo({ top: 0, behavior: 'smooth' });
+  closeSidebar();
+}
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('show');
+}
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('overlay').classList.remove('show');
 }
 </script>
 </body>

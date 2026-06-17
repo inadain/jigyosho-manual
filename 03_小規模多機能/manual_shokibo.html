@@ -37,7 +37,7 @@
   --r-sm:       8px;
   --sh:         0 1px 4px rgba(0,0,0,.08);
   --sh-md:      0 4px 16px rgba(0,0,0,.12);
-  --sidebar-w:  240px;
+  --sidebar-w:  260px;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
@@ -88,10 +88,14 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sa
 }
 .sidebar-back:hover { background: rgba(255,255,255,.25); }
 .sidebar-nav { padding: 12px 0; flex: 1; }
+.nav-group {
+  font-size: 10px; font-weight: 700; color: rgba(255,255,255,.4);
+  padding: 10px 16px 4px; letter-spacing: .05em;
+}
 .nav-item {
   display: flex; align-items: center; gap: 10px;
-  padding: 11px 16px; cursor: pointer;
-  color: rgba(255,255,255,.75); font-size: 13px; font-weight: 600;
+  padding: 10px 16px; cursor: pointer;
+  color: rgba(255,255,255,.75); font-size: 12.5px; font-weight: 600;
   border: none; background: none; width: 100%; text-align: left;
   border-left: 3px solid transparent;
   transition: background .15s, color .15s, border-color .15s;
@@ -102,7 +106,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sa
   color: #fff;
   border-left-color: #fff;
 }
-.nav-item .nav-icon { font-size: 16px; flex-shrink: 0; }
+.nav-item .nav-icon { font-size: 15px; flex-shrink: 0; }
 
 /* ===== OVERLAY (mobile) ===== */
 .overlay {
@@ -167,6 +171,15 @@ td.note { font-size: 11.5px; color: var(--text-sub); }
 .service-card p { font-size: 12px; color: var(--text-sub); line-height: 1.6; }
 .point { background: var(--main-xl); border-radius: var(--r-sm); padding: 12px 14px; margin: 10px 0; font-size: 13.5px; }
 .point strong { color: var(--main); }
+.contact-box { background: var(--red-lt); border: 2px solid var(--red); border-radius: var(--r); padding: 16px 20px; margin-bottom: 16px; }
+.contact-box h3 { color: var(--red); font-size: 14px; font-weight: 800; margin-bottom: 8px; border-bottom: none; }
+.contact-box .tel { font-size: 22px; font-weight: 800; color: var(--red); letter-spacing: .05em; }
+.contact-box p { font-size: 12px; color: #7f1d1d; margin-top: 4px; }
+.flow-step { display: flex; gap: 12px; margin-bottom: 8px; align-items: flex-start; }
+.flow-num { background: var(--main); color: #fff; min-width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; flex-shrink: 0; margin-top: 1px; }
+.flow-text { font-size: 13.5px; flex: 1; padding-top: 3px; line-height: 1.6; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+@media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
 .site-footer { text-align: center; padding: 20px; font-size: 11px; color: var(--text-sub); border-top: 1px solid var(--gray-mid); background: var(--white); }
 
 /* ===== RESPONSIVE ===== */
@@ -206,20 +219,46 @@ td.note { font-size: 11.5px; color: var(--text-sub); }
     </div>
     <a href="#" onclick="history.back(); return false;" class="sidebar-back">← 戻る</a>
     <nav class="sidebar-nav">
+      <div class="nav-group">基本情報</div>
       <button class="nav-item active" onclick="showPage('page-about', this)">
         <span class="nav-icon">🏡</span>サービス概要
       </button>
       <button class="nav-item" onclick="showPage('page-flow', this)">
-        <span class="nav-icon">📋</span>業務フロー（通い・日勤・夜間）
+        <span class="nav-icon">📋</span>業務フロー
       </button>
+      <div class="nav-group">緊急・リスク対応</div>
+      <button class="nav-item" onclick="showPage('page-emergency', this)">
+        <span class="nav-icon">🚑</span>緊急対応・急変時
+      </button>
+      <button class="nav-item" onclick="showPage('page-incident', this)">
+        <span class="nav-icon">⚠️</span>事故・ヒヤリハット
+      </button>
+      <button class="nav-item" onclick="showPage('page-night', this)">
+        <span class="nav-icon">🌙</span>夜間・緊急連絡
+      </button>
+      <div class="nav-group">日常ケア</div>
+      <button class="nav-item" onclick="showPage('page-medication', this)">
+        <span class="nav-icon">💊</span>服薬・バイタル管理
+      </button>
+      <button class="nav-item" onclick="showPage('page-care', this)">
+        <span class="nav-icon">🛁</span>介護ケア（入浴・移乗・口腔）
+      </button>
+      <button class="nav-item" onclick="showPage('page-dementia', this)">
+        <span class="nav-icon">🧠</span>認知症ケア・BPSD
+      </button>
+      <div class="nav-group">訪問・送迎</div>
       <button class="nav-item" onclick="showPage('page-visit', this)">
         <span class="nav-icon">🚗</span>訪問サービス
       </button>
+      <button class="nav-item" onclick="showPage('page-switch', this)">
+        <span class="nav-icon">🔄</span>サービス切り替え
+      </button>
+      <div class="nav-group">記録・管理</div>
       <button class="nav-item" onclick="showPage('page-record', this)">
-        <span class="nav-icon">📝</span>記録の書き方
+        <span class="nav-icon">📝</span>記録・ケアマネ連絡
       </button>
       <button class="nav-item" onclick="showPage('page-car', this)">
-        <span class="nav-icon">🚙</span>公用車マニュアル
+        <span class="nav-icon">🚙</span>公用車・送迎
       </button>
     </nav>
   </aside>
@@ -333,7 +372,7 @@ td.note { font-size: 11.5px; color: var(--text-sub); }
               <thead><tr><th>時刻</th><th>業務内容</th><th>備考</th></tr></thead>
               <tbody>
                 <tr><td class="time">16:30</td><td>申し送り（日勤→夜勤）</td><td class="note">ナイトケア準備・室温・環境整備・夕服薬準備</td></tr>
-                <tr><td class="time">17:00〜</td><td>夕食</td><td class="note">服薬・口腔ケア・口腔ケア用品回収・臥床介助</td></tr>
+                <tr><td class="time">17:00〜</td><td>夕食</td><td class="note">服薬・口腔ケア・臥床介助</td></tr>
                 <tr><td class="time">21:00</td><td>巡回</td><td class="note">安否確認・排泄介助・体位変換</td></tr>
                 <tr><td class="time">00:00</td><td>巡回・排泄介助</td><td class="note"></td></tr>
                 <tr><td class="time">03:00</td><td>巡回・排泄介助</td><td class="note"></td></tr>
@@ -346,7 +385,300 @@ td.note { font-size: 11.5px; color: var(--text-sub); }
         </div>
       </section>
 
-      <!-- ③ 訪問サービス -->
+      <!-- ③ 緊急対応・急変時 -->
+      <section id="page-emergency" class="page">
+        <div class="sec-head">
+          <div class="sec-icon">🚑</div>
+          <div>
+            <h2>緊急対応・急変時の手順</h2>
+            <p>日中・夜勤帯それぞれの初動対応を確認してください</p>
+          </div>
+        </div>
+
+        <div class="alert red">🚨 まず利用者の安全を確保し状態を観察する。一人で判断せず、必ず管理者・看護師へ報告を。</div>
+
+        <div class="card">
+          <h3>☀️ 日中帯の急変対応</h3>
+          <div class="flow-step"><div class="flow-num">1</div><div class="flow-text"><strong>バイタル測定・全身状態の観察・安全確保</strong>を行う</div></div>
+          <div class="flow-step"><div class="flow-num">2</div><div class="flow-text"><strong>管理者・管理者補佐・看護師</strong>へ報告する</div></div>
+          <div class="flow-step"><div class="flow-num">3</div><div class="flow-text">Dr（いなだ医院）へ上申し、<strong>指示を受ける</strong></div></div>
+          <div class="flow-step"><div class="flow-num">4</div><div class="flow-text">指示に従い追加対応を行う</div></div>
+          <div class="alert red">🚨 意識なし・呼吸停止・大量出血などの場合は、報告と同時に<strong>即119番</strong></div>
+        </div>
+
+        <div class="card">
+          <h3>🌙 夜勤帯の急変対応</h3>
+          <div class="flow-step"><div class="flow-num">1</div><div class="flow-text"><strong>バイタル測定・全身状態の観察・安全確保</strong>を行う</div></div>
+          <div class="flow-step"><div class="flow-num">2</div><div class="flow-text"><strong>管理者・管理者補佐</strong>へ報告する</div></div>
+          <div class="flow-step"><div class="flow-num">3</div><div class="flow-text">Dr（いなだ医院）へ上申し、<strong>指示を受ける</strong></div></div>
+          <div class="flow-step"><div class="flow-num">4</div><div class="flow-text">指示に従い追加対応を行う</div></div>
+          <div class="contact-box">
+            <h3>📞 夜間緊急連絡先</h3>
+            <div class="tel">080-9795-4368</div>
+            <p>管理者補佐 業務用携帯 ― 24時間対応</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>緊急時の判断チェックリスト</h3>
+          <ul class="list">
+            <li>意識がない・呼吸が止まっている → 即119番・管理者報告</li>
+            <li>大きく転倒した・外傷・強い痛みの訴えがある → 管理者・看護師へ報告</li>
+            <li>バイタルが平常と大きく異なる（体温37.5℃以上など） → 看護師へ報告</li>
+            <li>急激な顔色変化・嘔吐・意識の変容がある → 管理者・看護師へ報告</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ④ 事故・ヒヤリハット -->
+      <section id="page-incident" class="page">
+        <div class="sec-head">
+          <div class="sec-icon">⚠️</div>
+          <div>
+            <h2>事故・ヒヤリハット発生時の対応</h2>
+            <p>初動から報告・記録までの流れ</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>対応の流れ</h3>
+          <div class="flow-step"><div class="flow-num">1</div><div class="flow-text"><strong>状況確認</strong>：バイタル測定・全身状態の観察を行う</div></div>
+          <div class="flow-step"><div class="flow-num">2</div><div class="flow-text"><strong>応援要請</strong>：他スタッフに応援を求める（一人で対応しない）</div></div>
+          <div class="flow-step"><div class="flow-num">3</div><div class="flow-text"><strong>看護師へ報告</strong>：状態・状況を正確に伝える</div></div>
+          <div class="flow-step"><div class="flow-num">4</div><div class="flow-text"><strong>事故報告書を当日中に記入・提出</strong>する</div></div>
+          <div class="flow-step"><div class="flow-num">5</div><div class="flow-text">必要に応じて<strong>管理者・管理者補佐に報告</strong>する</div></div>
+          <div class="alert red">🚨 119番が必要な場合は<strong>報告より先に119番</strong>。要請後すぐ管理者へも連絡する。</div>
+        </div>
+
+        <div class="card">
+          <h3>ヒヤリハットとは</h3>
+          <p style="font-size:13.5px;line-height:1.8;margin-bottom:10px;">実際には事故にならなかったが、一歩間違えれば事故になっていた「ヒヤっとした」場面のことです。軽微な出来事でも報告・記録することで、事故を未然に防ぐことができます。</p>
+          <div class="alert green">✅ ヒヤリハットも同日中に所定の用紙へ記録し、提出してください。</div>
+        </div>
+      </section>
+
+      <!-- ⑤ 夜間・緊急連絡 -->
+      <section id="page-night" class="page">
+        <div class="sec-head">
+          <div class="sec-icon">🌙</div>
+          <div>
+            <h2>夜間・緊急連絡の基準</h2>
+            <p>一人対応時の判断基準と連絡先</p>
+          </div>
+        </div>
+
+        <div class="contact-box">
+          <h3>📞 夜間緊急連絡先</h3>
+          <div class="tel">080-9795-4368</div>
+          <p>管理者補佐 業務用携帯 ― 24時間対応</p>
+        </div>
+
+        <div class="card">
+          <h3>管理者を呼び出す・連絡すべき状況</h3>
+          <div class="alert amber">⚠️ 判断に迷ったとき・不安を感じたときは、遠慮なく上記番号に連絡してください。</div>
+          <ul class="list">
+            <li>利用者が転倒し、外傷・痛みの訴えがある</li>
+            <li>意識・呼吸の異常を認める</li>
+            <li>バイタルが基準値を超え、かつ本人の状態が平常と異なる</li>
+            <li>119番を要請した（要請後も速やかに連絡）</li>
+            <li>宿泊利用者が複数人同時に体調不良になった</li>
+            <li>対応に迷い、一人では判断できない場面</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>🔴 AED配置場所</h3>
+          <div class="alert red">🔴 AEDは<strong>サービス付き高齢者住宅（建物内）</strong>に配置しています。緊急時はすぐに取りに行けるよう場所を把握しておくこと。</div>
+        </div>
+
+        <div class="card">
+          <h3>夜間帯の基本姿勢</h3>
+          <p style="font-size:13.5px;line-height:1.8;">夜間帯の判断基準は個々のスタッフ経験に委ねられている部分があります。<strong>少しでも迷ったらすぐ連絡する</strong>ことを基本としています。一人で抱え込まず、管理者補佐に相談してください。</p>
+        </div>
+      </section>
+
+      <!-- ⑥ 服薬・バイタル管理 -->
+      <section id="page-medication" class="page">
+        <div class="sec-head">
+          <div class="sec-icon">💊</div>
+          <div>
+            <h2>服薬・バイタル管理</h2>
+            <p>誤投薬防止と観察基準の確認</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>💊 服薬管理の手順</h3>
+          <h4>薬の保管場所</h4>
+          <div class="point">事務所 看護師用デスク 引き出し に個別保管</div>
+          <h4>服薬準備（看護師が実施）</h4>
+          <p style="font-size:13.5px;margin-bottom:12px;">看護師が翌日分まで <strong>朝・昼・夕・眠前</strong> の各ケースに準備する。</p>
+          <h4>服薬の流れ</h4>
+          <div class="flow-step"><div class="flow-num">1</div><div class="flow-text">食事前にキッチンカウンターへ<strong>薬BOXごと移動</strong>する</div></div>
+          <div class="flow-step"><div class="flow-num">2</div><div class="flow-text">薬ケースから取り出す際、<strong>目視で日付・名前を確認</strong>する</div></div>
+          <div class="flow-step"><div class="flow-num">3</div><div class="flow-text">本人の横で薬包から取り出し、服薬を行う</div></div>
+          <div class="alert amber">⚠️ 服薬できなかった場合は<strong>看護師へ報告</strong>する。夜勤帯は翌日に対応。</div>
+        </div>
+
+        <div class="card">
+          <h3>📊 バイタル管理基準</h3>
+          <div class="alert teal">✅ 毎朝 体温・血圧・脈拍を測定し、バイタル記入表に記録する。看護師が確認し、必要に応じて再検・指示を行う。</div>
+          <div class="tbl-wrap">
+            <table>
+              <thead><tr><th>項目</th><th>サービス中止・報告の基準</th></tr></thead>
+              <tbody>
+                <tr><td><strong>体温（℃）</strong></td><td>37.5℃以上</td></tr>
+                <tr><td><strong>血圧収縮期（mmHg）</strong></td><td>基準設定中 → 看護師に確認</td></tr>
+                <tr><td><strong>脈拍（回/分）</strong></td><td>基準設定中 → 看護師に確認</td></tr>
+                <tr><td><strong>SpO₂（%）</strong></td><td>基準設定中 → 看護師に確認</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="alert amber">⚠️ 発熱以外の基準は現在整備中。平常値と明らかに異なる・本人の状態に変化がある場合は<strong>必ず看護師へ報告</strong>する。</div>
+        </div>
+      </section>
+
+      <!-- ⑦ 介護ケア -->
+      <section id="page-care" class="page">
+        <div class="sec-head">
+          <div class="sec-icon">🛁</div>
+          <div>
+            <h2>介護ケア</h2>
+            <p>入浴・移乗・口腔ケアの手順</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>🛁 入浴介助の手順</h3>
+          <div class="point">使用設備：<strong>一般浴（介助浴）</strong>／<strong>機械浴</strong></div>
+
+          <h4>入浴前の確認事項</h4>
+          <ul class="list-num">
+            <li>入浴予定者の確認</li>
+            <li>バイタル測定・体調確認（異常があれば看護師へ報告し入浴可否を判断）</li>
+          </ul>
+
+          <h4>一般浴（介助浴）の手順</h4>
+          <ul class="list-num">
+            <li>バイタルチェック・体調の確認</li>
+            <li>脱衣所・浴室の温度を一定にする</li>
+            <li>脱衣所へ誘導し、脱衣介助をする</li>
+            <li>洗身・洗髪を行う。全身状態を確認する。</li>
+            <li>浴槽への介助を行う</li>
+            <li>入浴中は声かけ・見守りを行う</li>
+            <li>浴槽からの介助を行う</li>
+            <li>脱衣所へ誘導し着衣介助をする</li>
+            <li>乾髪を行い、フロアへ誘導する</li>
+            <li>水分補給を提供する</li>
+          </ul>
+
+          <h4>機械浴の手順</h4>
+          <ul class="list-num">
+            <li>バイタルチェック・体調の確認</li>
+            <li>脱衣所・浴室の温度を一定にする</li>
+            <li>入浴用ストレッチャーへ移乗し、脱衣介助をする</li>
+            <li>洗身・洗髪を行う。全身状態を確認する。</li>
+            <li>浴槽への介助を行う</li>
+            <li>入浴中は声かけ・見守りを行う</li>
+            <li>浴槽からの介助を行う</li>
+            <li>入浴用ストレッチャー上にて着衣介助をする</li>
+            <li>車いす等に移乗し乾髪を行い、フロアへ誘導する</li>
+            <li>水分補給を提供する</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>🔄 移乗介助（ベッド → 車いす）の手順</h3>
+          <ul class="list-num">
+            <li>声かけを行う</li>
+            <li>利用者の腕を胸の上で組み、足を立てるなどできる限り体をコンパクトにする</li>
+            <li>ベッド端まで水平移動させる</li>
+            <li>利用者の体の向きを変える</li>
+            <li>テコの原理を活用して上体を起き上がらせる（首の下と膝の裏に手を回し体を支える。尻を支点に掛け声とともに体重と遠心力を利用して回転させる）</li>
+            <li>ベッドの高さを調整する</li>
+            <li>車いすの角度を調整する（<strong>ブレーキ確認・フットレスト確認</strong>）</li>
+            <li>足の角度をやや斜めにしておく</li>
+            <li>車いすへ移動することを伝える</li>
+            <li>掛け声とともに車いすへ移乗する（支持基底面を大きく取り、腰を落として重心を下げ、利用者に密着する）</li>
+            <li>尻の位置を整える</li>
+          </ul>
+
+          <h4>2名介助が必要な場合</h4>
+          <div class="alert amber">⚠️ 体重・体格・禁忌動作により2名介助が必要な利用者は、無理なく応援を頼む。対象者は<strong>入浴一覧表（脱衣場に配置）に印</strong>をつけて共有。新スタッフへはOJTにて情報共有を行う。</div>
+
+          <h4>転倒防止の注意点</h4>
+          <ul class="list">
+            <li>環境：床の濡れ・障害物の有無を確認する</li>
+            <li>介護者：踵のある靴を使用する</li>
+            <li>入眠導入剤・抗精神薬服用者はリスクを把握しておく</li>
+            <li>サイズに合った靴の着用を確認する</li>
+            <li>精神状態を確認し、落ち着いた状態で介助を行う</li>
+            <li>身体状況に応じた歩行補助具を使用する</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>🦷 口腔ケアの手順</h3>
+          <div class="point">担当：<strong>毎食後</strong>、フロア対応スタッフが実施する</div>
+
+          <h4>使用用品</h4>
+          <ul class="list">
+            <li>歯ブラシ・歯磨き粉・コップ・ガーグルベースン・スポンジブラシ</li>
+            <li>必要に応じて吸引機</li>
+          </ul>
+
+          <h4>手順</h4>
+          <ul class="list-num">
+            <li>準備と声かけ</li>
+            <li>義歯がある場合は外す</li>
+            <li>口腔内の観察（汚れ・傷・腫れなど確認）</li>
+            <li>ブラッシング（残存歯・歯茎・頬の内側・舌）</li>
+          </ul>
+          <div class="alert teal">ℹ️ 誤嚥リスクが高い利用者は座位または側臥位で実施し、水は少量にする。使用後の物品は消毒する。</div>
+        </div>
+      </section>
+
+      <!-- ⑧ 認知症ケア -->
+      <section id="page-dementia" class="page">
+        <div class="sec-head">
+          <div class="sec-icon">🧠</div>
+          <div>
+            <h2>認知症ケア・BPSD対応</h2>
+            <p>徘徊・帰宅願望・暴言・興奮への対応方針</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>🚶 徘徊・帰宅願望が見られた場合</h3>
+          <ul class="list-num">
+            <li><strong>否定せず穏やかに声かけ</strong>を行う</li>
+            <li>外に出ようとする場合は<strong>一緒に散歩に行くなど場面を転換</strong>させる</li>
+            <li>夜間の場合は<strong>管理者補佐に報告</strong>する</li>
+          </ul>
+          <div class="alert teal">ℹ️「違いますよ」「ダメです」などの否定は不安・興奮を高めるため避けましょう。</div>
+        </div>
+
+        <div class="card">
+          <h3>😤 暴言・興奮が見られた場合</h3>
+          <ul class="list-num">
+            <li><strong>物理的に距離を保ちながら見守り</strong>を行う</li>
+            <li>否定・制止は興奮を強めるため避ける</li>
+            <li>一人で対応できないと判断した場合は<strong>他のスタッフを呼ぶか管理者補佐に報告</strong>する</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>管理者への即時報告が必要な状況</h3>
+          <ul class="list">
+            <li>他の利用者や自身への危険が生じる可能性がある場合</li>
+            <li>一人では対応が困難な場合</li>
+            <li>自身で判断がつかない場合</li>
+            <li>ケガ・転倒が発生した場合</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ⑨ 訪問サービス -->
       <section id="page-visit" class="page">
         <div class="sec-head">
           <div class="sec-icon">🚗</div>
@@ -382,9 +714,7 @@ td.note { font-size: 11.5px; color: var(--text-sub); }
           <h3>利用者宅到着後の手順</h3>
           <ul class="list-num">
             <li>挨拶・手指消毒を行い入室</li>
-            <li>応答がない場合は<strong>管理者・管理者補佐または介護支援専門員に報告</strong>し指示を仰ぐ
-              <div class="alert red">🚫 応答がなく解錠されていても自身の判断では入室しない</div>
-            </li>
+            <li>応答がない場合は後述「応答がない場合の手順」に従う</li>
             <li>居宅介護計画に則りサービス提供を行う</li>
             <li>バイタル測定・顔色など全身状態の確認</li>
             <li>イレギュラーや不安なことは勝手な判断をせず管理者・介護支援専門員に報告・相談</li>
@@ -393,6 +723,16 @@ td.note { font-size: 11.5px; color: var(--text-sub); }
             <li>挨拶を行い退室・手指消毒</li>
             <li>帰社後に記録（5W1Hを基本に正確に）</li>
           </ul>
+        </div>
+
+        <div class="card">
+          <h3>🚫 応答がない場合の手順</h3>
+          <div class="alert red">🚫 通常と異なる状況の際は、<strong>一人で自宅内に入らない</strong>こと</div>
+          <div class="flow-step"><div class="flow-num">1</div><div class="flow-text">インターフォンや扉をたたくなどを<strong>複数回</strong>行い呼びかける</div></div>
+          <div class="flow-step"><div class="flow-num">2</div><div class="flow-text">窓越しや周辺環境・室内を確認する（①と並行して実施）</div></div>
+          <div class="flow-step"><div class="flow-num">3</div><div class="flow-text">①②を行いながら<strong>事業所へ連絡</strong>。事業所から本人・キーパーソンに連絡を入れる</div></div>
+          <div class="flow-step"><div class="flow-num">4</div><div class="flow-text">管理者・管理者補佐・CMへ報告し指示を仰ぐ</div></div>
+          <div class="alert amber">⚠️ 室内で倒れているなど異常が疑われる場合は、速やかに<strong>119番</strong>に連絡する</div>
         </div>
 
         <div class="card">
@@ -433,13 +773,52 @@ td.note { font-size: 11.5px; color: var(--text-sub); }
         </div>
       </section>
 
-      <!-- ④ 記録の書き方 -->
+      <!-- ⑩ サービス切り替え -->
+      <section id="page-switch" class="page">
+        <div class="sec-head">
+          <div class="sec-icon">🔄</div>
+          <div>
+            <h2>サービス切り替えの判断</h2>
+            <p>通い・泊まり・訪問の切り替えフロー</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>判断の流れ</h3>
+          <div class="flow-step"><div class="flow-num">1</div><div class="flow-text">管理者補佐が状況を確認し、<strong>介護支援専門員（今井CM）・管理者（稲田代表兼CM）</strong>に連絡する</div></div>
+          <div class="flow-step"><div class="flow-num">2</div><div class="flow-text">3者で総合的に判断する</div></div>
+          <div class="flow-step"><div class="flow-num">3</div><div class="flow-text">管理者補佐または看護師より<strong>キーパーソン・本人へ電話</strong>で連絡する</div></div>
+          <div class="flow-step"><div class="flow-num">4</div><div class="flow-text">スタッフへの周知・業務日誌・申し送りノートへ記録する</div></div>
+          <div class="alert teal">ℹ️ 急を要する場合は管理者補佐が先に判断し、後からCM・管理者へ報告することもあります。</div>
+        </div>
+
+        <div class="card">
+          <h3>よくある切り替えケース</h3>
+          <div class="tbl-wrap">
+            <table>
+              <thead><tr><th>状況</th><th>対応</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td>体調不良で通いを泊まりに変更</td>
+                  <td>管理者補佐がキーパーソン・本人・CMに連絡し調整</td>
+                </tr>
+                <tr>
+                  <td>家族の急用で泊まり追加</td>
+                  <td>管理者補佐の判断で当日対応。後からCMへ報告</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ⑪ 記録・ケアマネ連絡 -->
       <section id="page-record" class="page">
         <div class="sec-head">
           <div class="sec-icon">📝</div>
           <div>
-            <h2>記録の書き方</h2>
-            <p>正確な記録が利用者支援の質を守ります</p>
+            <h2>記録・ケアマネ連絡</h2>
+            <p>正確な記録と情報共有が利用者支援の質を守ります</p>
           </div>
         </div>
 
@@ -450,7 +829,8 @@ td.note { font-size: 11.5px; color: var(--text-sub); }
               <thead><tr><th>サービス</th><th>記録の種類</th></tr></thead>
               <tbody>
                 <tr><td>訪問</td><td>サービス実施記録</td></tr>
-                <tr><td>通い</td><td>日誌・個別記録・排泄記録</td></tr>
+                <tr><td>通い</td><td>業務日誌・個別記録・排泄記録</td></tr>
+                <tr><td>泊まり</td><td>業務日誌・バイタル記録</td></tr>
               </tbody>
             </table>
           </div>
@@ -466,22 +846,38 @@ td.note { font-size: 11.5px; color: var(--text-sub); }
                 <tr><td><strong>When（いつ）</strong></td><td>介護を実施した日時</td></tr>
                 <tr><td><strong>Where（どこで）</strong></td><td>場所（自宅・事業所内など）</td></tr>
                 <tr><td><strong>Who（誰が）</strong></td><td>実施担当者名</td></tr>
-                <tr><td><strong>What（何を）</strong></td><td>介護の具体的な内容と根拠</td></tr>
+                <tr><td><strong>What（何を）</strong></td><td>介護の具体的な内容</td></tr>
                 <tr><td><strong>Why（なぜ）</strong></td><td>利用者の状態と反応</td></tr>
                 <tr><td><strong>How（どのように）</strong></td><td>具体的な介護内容</td></tr>
               </tbody>
             </table>
           </div>
         </div>
+
+        <div class="card">
+          <h3>📞 ケアマネへの連絡・報告</h3>
+          <div class="point"><strong>基本方針：</strong>CMとは常に情報共有を図る。小さな出来事であっても報告・相談を行う。</div>
+          <h4>報告のタイミング</h4>
+          <ul class="list">
+            <li>体重の変動・転倒・BPSD出現など<strong>状態変化があった際はその都度報告</strong></li>
+            <li>日常的な小さな変化も申し送りノートへ記入し、スタッフ間で共有する</li>
+          </ul>
+          <h4>記録の方法</h4>
+          <ul class="list">
+            <li>CMは<strong>支援経過</strong>へ入力する</li>
+            <li>スタッフは<strong>申し送りノート</strong>へ記入し他スタッフと情報共有する</li>
+            <li>報告後は「〇月〇日 〇〇CMへ電話報告・内容」と記録に残す</li>
+          </ul>
+        </div>
       </section>
 
-      <!-- ⑤ 公用車マニュアル -->
+      <!-- ⑫ 公用車・送迎 -->
       <section id="page-car" class="page">
         <div class="sec-head">
           <div class="sec-icon">🚙</div>
           <div>
-            <h2>公用車使用マニュアル</h2>
-            <p>安全運転と適切な記録が基本です</p>
+            <h2>公用車・送迎マニュアル</h2>
+            <p>安全運転・送迎段取り・キャンセル対応</p>
           </div>
         </div>
 
@@ -500,6 +896,23 @@ td.note { font-size: 11.5px; color: var(--text-sub); }
         </div>
 
         <div class="card">
+          <h3>🗺️ 送迎ルートの組み方</h3>
+          <ul class="list-num">
+            <li><strong>前日</strong>に翌日の業務分担用ホワイトボードに送迎順を記載する</li>
+            <li><strong>当日</strong>、ホワイトボードと週間サービス表で確認を行う</li>
+          </ul>
+          <div class="alert amber">⚠️ 出発前の車確認・利用者宅での確認手順は現在規定整備中。安全を最優先に行動すること。</div>
+        </div>
+
+        <div class="card">
+          <h3>📵 当日キャンセルへの対応</h3>
+          <div class="flow-step"><div class="flow-num">1</div><div class="flow-text">利用者・家族からキャンセル連絡が来たら、<strong>受け付けたスタッフが送迎担当者に報告</strong>する</div></div>
+          <div class="flow-step"><div class="flow-num">2</div><div class="flow-text">送迎車がすでに出発している場合は、<strong>フロア担当が送迎担当者に電話</strong>でキャンセルを伝える</div></div>
+          <div class="flow-step"><div class="flow-num">3</div><div class="flow-text"><strong>キャンセルの理由・連絡者名・連絡を受けた時刻</strong>を記録に残す</div></div>
+          <div class="flow-step"><div class="flow-num">4</div><div class="flow-text">連続してキャンセルが続く利用者は、<strong>管理者またはCMが家族に状況確認</strong>の連絡を入れる</div></div>
+        </div>
+
+        <div class="card">
           <h3>運行記録の記入</h3>
           <div class="point">運転後は<strong>運行表に日付・使用時間・使用者・使途を記載</strong>してください。</div>
           <ul class="list">
@@ -513,7 +926,7 @@ td.note { font-size: 11.5px; color: var(--text-sub); }
     </main>
 
     <footer class="site-footer">
-      小規模多機能ホームこはる日和 スタッフマニュアル｜最終更新: 2026年5月
+      小規模多機能ホームこはる日和 スタッフマニュアル｜最終更新: 2026年6月17日
     </footer>
   </div><!-- /.content -->
 

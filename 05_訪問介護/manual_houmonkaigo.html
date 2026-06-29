@@ -192,6 +192,15 @@ td.note { font-size: 11.5px; color: var(--text-sub); }
       <button class="nav-item" onclick="showPage('infection', this)">
         <span class="icon">🧴</span>感染対策
       </button>
+      <button class="nav-item" onclick="showPage('emergency', this)">
+        <span class="icon">🚨</span>急変・緊急時対応
+      </button>
+      <button class="nav-item" onclick="showPage('bodycare', this)">
+        <span class="icon">🤲</span>身体介護手順
+      </button>
+      <button class="nav-item" onclick="showPage('other', this)">
+        <span class="icon">📋</span>ハラスメント・家事援助
+      </button>
     </nav>
   </aside>
 
@@ -356,6 +365,194 @@ td.note { font-size: 11.5px; color: var(--text-sub); }
       </div>
     </div>
 
+    <!-- ⑤ 急変・緊急時対応 -->
+    <div id="page-emergency" class="page">
+      <div class="sec-head">
+        <div class="sec-icon">🚨</div>
+        <div><h2>急変・緊急時対応</h2><p>バイタル基準・急変フロー・事故・無応答</p></div>
+      </div>
+
+      <div class="card">
+        <h3>バイタル異常の基準値</h3>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>項目</th><th>報告が必要な基準</th></tr></thead>
+            <tbody>
+              <tr><td>体温</td><td>37.0〜37.5℃ <strong>以上</strong></td></tr>
+              <tr><td>血圧（収縮期）</td><td>160mmHg以上（上下幅50以内を目安）</td></tr>
+              <tr><td>脈拍</td><td>100回/分 <strong>以上</strong> または 50回/分 <strong>以下</strong></td></tr>
+              <tr><td>SpO₂</td><td>95% <strong>以下</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>急変時対応フロー</h3>
+        <h4>【意識なし・生命の危険がある場合】</h4>
+        <ul class="list-num">
+          <li>119番通報</li>
+          <li>ケアマネジャー（CM）へ連絡（CMから主治医・家族へ）</li>
+          <li>管理者へ報告</li>
+        </ul>
+        <h4>【意識あり・状態変化がある場合】</h4>
+        <ul class="list-num">
+          <li>状況把握・バイタル確認</li>
+          <li>管理者へ報告</li>
+          <li>管理者よりCMへ連絡</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>訪問先で無応答だった場合</h3>
+        <ul class="list-num">
+          <li>自宅電話・本人携帯に電話</li>
+          <li>連絡がつかなければ管理者へ報告</li>
+          <li>現地で約15分待機し再訪問</li>
+          <li>不在・応答なしが続く場合 → 管理者へ報告 → CMの指示を仰ぐ</li>
+        </ul>
+        <div class="alert red">⚠️ 不審な状況（倒れている様子・鍵のトラブル等）は<strong>迷わず119番</strong>。判断は現場に任せず管理者へ連絡。</div>
+      </div>
+
+      <div class="card">
+        <h3>事故・ヒヤリハット発生時</h3>
+        <ul class="list-num">
+          <li>状況確認・安全確保（必要に応じて119番）</li>
+          <li>管理者・CMへ報告</li>
+          <li>事故・ヒヤリハット・クレーム発生報告書を記入</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>訪問前の持ち物・確認事項</h3>
+        <h4>持ち物チェック</h4>
+        <ul class="list">
+          <li>エプロン・使い捨て手袋</li>
+          <li>血圧計・体温計・パルスオキシメーター</li>
+          <li>緊急連絡先ファイル</li>
+        </ul>
+        <h4>確認書類</h4>
+        <ul class="list">
+          <li>個人ファイル：フェイスシート・感染症情報・支援経過</li>
+          <li>テレッサ（サービス実施記録）</li>
+          <li>個別手順書</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>キャンセル・時間変更の対応</h3>
+        <h4>利用者・家族からのキャンセル</h4>
+        <ul class="list">
+          <li>CMへ報告し、今後の対応を相談</li>
+        </ul>
+        <h4>スタッフ欠勤・時間変更</h4>
+        <ul class="list">
+          <li>CMへ連絡し振替の日時を調整</li>
+          <li>業務日報・支援経過記録に記録を残す</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ⑥ 身体介護手順 -->
+    <div id="page-bodycare" class="page">
+      <div class="sec-head">
+        <div class="sec-icon">🤲</div>
+        <div><h2>身体介護手順</h2><p>移乗・排泄・口腔ケア・入浴</p></div>
+      </div>
+
+      <div class="card">
+        <h3>移乗介助の手順</h3>
+        <ul class="list-num">
+          <li>声掛けをして協力を得る・安全確保</li>
+          <li>端移動（ベッド端へ寄ってもらう）</li>
+          <li>向き変えをして端座位へ</li>
+          <li>テコ動作で起き上がり・立位</li>
+          <li>車椅子を45度の角度に設置・ブレーキ・フットレストを上げた状態で軸足側から誘導</li>
+          <li>靴を確認してから着座</li>
+        </ul>
+        <div class="alert amber">⚠️ 2名介助が必要な方は個別台帳に明記。必ず2名で対応。</div>
+      </div>
+
+      <div class="card">
+        <h3>排泄介助の手順</h3>
+        <ul class="list">
+          <li>手すりを使用・立位が安定していることを確認</li>
+          <li>自立座位がとれる方はドアの外で声かけしながら待機</li>
+          <li>トイレットペーパーをポケットへ入れる行為には注意（誤嚥・異食リスク）</li>
+          <li>排便後に反応が鈍い場合 → ナースコールを使用</li>
+          <li>記録：有無・時間・発語の状況</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>口腔ケアの手順</h3>
+        <p style="font-size:13px;margin-bottom:8px;">自立支援を優先。介助が必要な場合のみ以下の手順で実施。</p>
+        <ul class="list-num">
+          <li>コップ・タオルを準備し声かけ・了承を得る</li>
+          <li>ガーグルベースを持参しうがいをしてもらう</li>
+          <li>口腔内・口周りを拭き取る</li>
+        </ul>
+        <div class="alert amber">⚠️ 誤嚥リスクのある方 → 座位または側臥位・少量の水・ガーゼを使用</div>
+      </div>
+
+      <div class="card">
+        <h3>入浴介助の注意事項</h3>
+        <ul class="list">
+          <li>前日・当日の体調変化を直前に確認してから入浴判断</li>
+          <li>2名介助が必要な方は個別台帳に明記</li>
+          <li>湯温確認が必要な方は、NSが確認してから入浴</li>
+          <li>皮膚トラブル発見時 → NS・管理者へ報告</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>服薬管理の手順</h3>
+        <ul class="list">
+          <li>薬の保管場所は家族と事前に取り決めた方法に従う</li>
+          <li>服薬時：名前・日付・薬の種類と数を口頭で確認</li>
+          <li>未服薬が判明した場合 → 家族に連絡（直接TELまたはテレッサに記入）＋CMへ報告</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ⑦ ハラスメント・家事援助 -->
+    <div id="page-other" class="page">
+      <div class="sec-head">
+        <div class="sec-icon">📋</div>
+        <div><h2>ハラスメント・家事援助</h2><p>ハラスメント対応と家事援助の範囲</p></div>
+      </div>
+
+      <div class="card">
+        <h3>ハラスメント対応</h3>
+        <ul class="list-num">
+          <li>危険を感じた場合 → その場を離れ、管理者・CMへ連絡</li>
+          <li>暴言・不快な言動は日時・内容をメモしておく</li>
+          <li>帰設後に管理者へ報告</li>
+          <li>支援経過記録に記入・次のスタッフへ引き継ぎ</li>
+        </ul>
+        <div class="alert red">🚨 一人で抱え込まず、必ず管理者へ報告してください。</div>
+      </div>
+
+      <div class="card">
+        <h3>家事援助の範囲</h3>
+        <div class="alert green">✅ 対応できるサービス</div>
+        <ul class="list">
+          <li>洗濯・調理・掃除・買い物代行</li>
+          <li>ベッドメイク・衣類整理</li>
+        </ul>
+        <div class="alert red" style="margin-top:12px">❌ 対応できないサービス</div>
+        <ul class="list">
+          <li>家族分の調理・特別料理（お節・漬物等）</li>
+          <li>ペットの世話・来客用お茶の準備</li>
+          <li>草むしり・模様替え</li>
+          <li>嗜好品の購入・仏壇・神棚の手入れ</li>
+          <li>ベランダ・換気扇の掃除</li>
+          <li>普段使用していない部屋の掃除</li>
+        </ul>
+        <div class="alert amber">⚠️ 「これはできますか？」と聞かれた際は、すぐに答えず管理者に確認してから回答してください。</div>
+      </div>
+    </div>
+
     <footer class="site-footer">
       訪問介護事業所 スタッフマニュアル｜最終更新: 2026年5月
     </footer>
@@ -368,7 +565,10 @@ const pages = {
   about:     '訪問介護とは',
   flow:      '1日の業務フロー',
   teresa:    'テレッサ（記録）',
-  infection: '感染対策'
+  infection: '感染対策',
+  emergency: '急変・緊急時対応',
+  bodycare:  '身体介護手順',
+  other:     'ハラスメント・家事援助'
 };
 function showPage(id, btn) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));

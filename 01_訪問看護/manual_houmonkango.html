@@ -188,6 +188,15 @@ td.note { font-size: 11.5px; color: var(--text-sub); }
       <button class="nav-item" onclick="showPage('conference', this)">
         <span class="icon">👥</span>カンファレンス
       </button>
+      <button class="nav-item" onclick="showPage('emergency', this)">
+        <span class="icon">🚨</span>急変・夜間緊急訪問
+      </button>
+      <button class="nav-item" onclick="showPage('nursing', this)">
+        <span class="icon">💉</span>看護ケア手順
+      </button>
+      <button class="nav-item" onclick="showPage('terminal', this)">
+        <span class="icon">🌸</span>ターミナル・申し送り
+      </button>
     </nav>
   </aside>
 
@@ -393,6 +402,145 @@ td.note { font-size: 11.5px; color: var(--text-sub); }
       </div>
     </div>
 
+    <!-- 急変・夜間緊急訪問 -->
+    <div id="page-emergency" class="page">
+      <div class="sec-head">
+        <div class="sec-icon">🚨</div>
+        <div><h2>急変・夜間緊急訪問</h2><p>緊急訪問の判断基準と対応フロー</p></div>
+      </div>
+
+      <div class="card">
+        <h3>緊急訪問を行う判断基準</h3>
+        <ul class="list">
+          <li>呼吸困難・チアノーゼ</li>
+          <li>意識レベルの低下・反応の著しい低下</li>
+          <li>大量出血・止血困難</li>
+          <li>激しい疼痛・苦痛の訴え</li>
+        </ul>
+        <p style="font-size:13px;margin-top:10px;">連絡フロー：利用者・家族 → 当番スタッフ → 管理者（夜間対応電話：各自確認）</p>
+      </div>
+
+      <div class="card">
+        <h3>バイタル測定の手順と基準</h3>
+        <p style="font-size:13px;margin-bottom:8px;">測定順：体温 → 血圧 → 脈拍 → SpO₂ → 呼吸数</p>
+        <ul class="list">
+          <li>前回値と必ず比較して記録</li>
+          <li>基準超過時は個別の主治医指示を優先</li>
+          <li>異常値を確認したら管理者・主治医へ報告</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>事故・ヒヤリハット発生時</h3>
+        <ul class="list-num">
+          <li>状況確認・安全確保</li>
+          <li>緊急連絡・救急要請（必要時）</li>
+          <li>主治医へ報告・指示を受ける</li>
+          <li>関係者（管理者・家族）への連絡</li>
+          <li>訪問記録・事故報告書の作成</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 看護ケア手順 -->
+    <div id="page-nursing" class="page">
+      <div class="sec-head">
+        <div class="sec-icon">💉</div>
+        <div><h2>看護ケア手順</h2><p>医療的ケア・創傷処置・医療廃棄物・療養指導・訪問前準備</p></div>
+      </div>
+
+      <div class="card">
+        <h3>訪問前の準備確認</h3>
+        <h4>確認書類</h4>
+        <ul class="list">
+          <li>看護指示書・看護計画</li>
+          <li>前回の訪問記録</li>
+        </ul>
+        <h4>処置用品チェック（補充・確認）</h4>
+        <ul class="list">
+          <li>手袋・ガーゼ・テープ・消毒薬</li>
+          <li>吸引カテーテル（必要な方）</li>
+        </ul>
+        <div class="alert blue">ℹ️ 初回訪問時は管理者が同行。病状・鍵・緊急連絡先・用品保管場所を事前に説明。</div>
+      </div>
+
+      <div class="card">
+        <h3>医療的ケアの注意点</h3>
+        <ul class="list">
+          <li><strong>点滴</strong>：滴下数・ルートの状態を確認し記録</li>
+          <li><strong>創傷処置</strong>：処置前後に写真撮影。主治医指示と異なる状態の場合は管理者へ報告</li>
+          <li><strong>吸引</strong>：個別台帳に吸引圧・手技を記載。台帳に従って実施</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>創傷処置の手順</h3>
+        <ul class="list-num">
+          <li>手袋を着用</li>
+          <li>旧ガーゼを除去・創傷の状態を観察</li>
+          <li>生理食塩水等で洗浄</li>
+          <li>新しいガーゼに交換・固定</li>
+          <li>写真撮影（業務用端末のみ使用・<strong>個人スマホ禁止</strong>）</li>
+        </ul>
+        <div class="alert red">⚠️ 前回と異なる状態・悪化が見られる場合は速やかに管理者へ報告。</div>
+      </div>
+
+      <div class="card">
+        <h3>医療廃棄物の取り扱い</h3>
+        <ul class="list">
+          <li><strong>針</strong>：専用の針捨てボックス（利用者宅へ持参）に廃棄</li>
+          <li><strong>血液汚染物</strong>：二重ビニール袋に入れて事業所に持ち帰る。利用者宅のゴミに混入禁止</li>
+          <li>廃棄業者の回収スケジュールは管理者に確認</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>療養指導のポイント</h3>
+        <ul class="list">
+          <li>パンフレット・メモ・図を使って視覚的に説明する</li>
+          <li>1回の訪問で伝える内容は<strong>1〜2点に絞る</strong></li>
+          <li>次回の訪問時に復習・確認する</li>
+          <li>専門用語を避け、具体的な行動で伝える</li>
+          <li>記録：訪問記録の「指導・説明」欄に内容を記入</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ターミナル・申し送り -->
+    <div id="page-terminal" class="page">
+      <div class="sec-head">
+        <div class="sec-icon">🌸</div>
+        <div><h2>ターミナル・申し送り</h2><p>ターミナルケア・主治医報告・スタッフ間申し送り</p></div>
+      </div>
+
+      <div class="card">
+        <h3>ターミナルケアの基本方針</h3>
+        <ul class="list">
+          <li>本人・家族の意向を定期的に確認し、看護計画に反映する</li>
+          <li>「苦痛の除去」「本人らしい時間の確保」を最優先とする</li>
+          <li>家族の精神的サポートも訪問時間の中に組み込む</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>主治医への定期報告</h3>
+        <ul class="list">
+          <li>月1回：訪問看護計画書・報告書をFAXまたは診察時持参</li>
+          <li>状態変化があった場合は随時電話で報告</li>
+          <li>報告後は日時・内容・医師の反応を訪問記録に記入</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>スタッフ間の申し送り</h3>
+        <ul class="list">
+          <li>訪問後、当日中に訪問記録を記入 ＋ 申し送り欄に記載</li>
+          <li>緊急時は管理者・次回担当者に直接電話</li>
+          <li>連絡ツール：グループLINEまたは連絡帳（管理者に確認）</li>
+        </ul>
+      </div>
+    </div>
+
     <footer class="site-footer">
       いなだ医院 訪問看護 スタッフマニュアル｜最終更新: 2026年5月（2026年1月9日制定・4月13日改訂版対応）
     </footer>
@@ -404,7 +552,10 @@ td.note { font-size: 11.5px; color: var(--text-sub); }
 const pages = {
   flow:       '業務フロー',
   documents:  '書類管理',
-  conference: 'カンファレンス'
+  conference: 'カンファレンス',
+  emergency:  '急変・夜間緊急訪問',
+  nursing:    '看護ケア手順',
+  terminal:   'ターミナル・申し送り'
 };
 function showPage(id, btn) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));

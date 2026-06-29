@@ -251,6 +251,13 @@ td.note { font-size: 11.5px; color: var(--text-sub); }
       <button class="nav-item" onclick="showPage('journal', this)">
         <span class="ni">📝</span>業務日誌の書き方
       </button>
+      <div class="sidebar-section-label">緊急・ケア対応</div>
+      <button class="nav-item" onclick="showPage('emergency', this)">
+        <span class="ni">🚨</span>急変・緊急時対応
+      </button>
+      <button class="nav-item" onclick="showPage('care', this)">
+        <span class="ni">🤲</span>ケア手順
+      </button>
       <div class="sidebar-section-label">入職ガイド</div>
       <button class="nav-item" onclick="showPage('newstaff', this)">
         <span class="ni">👋</span>新人向けガイド
@@ -418,7 +425,190 @@ td.note { font-size: 11.5px; color: var(--text-sub); }
       </div>
     </div>
 
-    <!-- ③ 新人向け -->
+    <!-- ④ 急変・緊急時対応 -->
+    <div class="page" id="page-emergency">
+      <div class="page-title">🚨 急変・緊急時対応</div>
+      <div class="page-desc">バイタル基準・急変フロー・事故対応・夜間呼び出し基準</div>
+
+      <div class="card">
+        <h3>バイタル異常の基準値</h3>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>項目</th><th>報告が必要な基準</th></tr></thead>
+            <tbody>
+              <tr><td>体温</td><td>37.0℃ <strong>以上</strong></td></tr>
+              <tr><td>血圧（収縮期）</td><td>140mmHg <strong>以上</strong> または 100mmHg <strong>以下</strong></td></tr>
+              <tr><td>血圧（拡張期）</td><td>90mmHg <strong>以上</strong></td></tr>
+              <tr><td>脈拍</td><td>100回/分 <strong>以上</strong> または 50回/分 <strong>以下</strong></td></tr>
+              <tr><td>SpO₂</td><td>95% <strong>以下</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="alert amber">⚠️ 基準を超えた場合は<strong>必ずNS・管理者へ報告</strong>し、指示を仰いでください。</div>
+      </div>
+
+      <div class="card">
+        <h3>急変時の対応フロー</h3>
+        <h4>【日中】</h4>
+        <ul class="list-num">
+          <li>バイタル確認・全身状態の把握</li>
+          <li>管理者・看護師（NS）へ報告</li>
+          <li>NSよりDr（いなだ医院）へ報告・指示を受ける</li>
+        </ul>
+        <h4>【夜間】</h4>
+        <ul class="list-num">
+          <li>バイタル確認・全身状態の把握</li>
+          <li>Dr（いなだ医院）へ直接報告・指示を受ける</li>
+        </ul>
+        <div class="alert blue">ℹ️ AEDはサ高住1F詰所に設置。場所を必ず事前に確認しておくこと。</div>
+        <div class="alert red">🚑 Dr指示のもと119番を要請した場合は、出動後すぐに管理者へ報告。</div>
+      </div>
+
+      <div class="card">
+        <h3>夜間管理者呼び出し基準</h3>
+        <p style="font-size:13px;margin-bottom:10px;">以下に該当する場合は夜間でも速やかに呼び出してください。</p>
+        <ul class="list">
+          <li>入居者の急変・容態の急変</li>
+          <li>転倒・転落（ケガあり）</li>
+          <li>意識・呼吸の異常</li>
+          <li>バイタル異常かつ全身状態の変化</li>
+          <li>119番要請後</li>
+          <li>施錠トラブル・鍵紛失</li>
+          <li>クレーム・トラブル発生</li>
+          <li>判断に迷う場面（迷ったら必ず連絡）</li>
+        </ul>
+        <div class="tbl-wrap" style="margin-top:12px">
+          <table>
+            <thead><tr><th>連絡先</th><th>番号</th></tr></thead>
+            <tbody>
+              <tr><td>いなだ医院（夜間対応）</td><td class="note">086-525-0600</td></tr>
+              <tr><td>管理者（岡本）携帯</td><td class="note">080-1636-5071</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>事故・ヒヤリハット発生時の対応</h3>
+        <ul class="list-num">
+          <li>バイタル確認・安全確保（必要に応じて119番）</li>
+          <li>管理者・看護師（NS）へ報告 → Dr報告</li>
+          <li>事故報告書・個人記録の作成（当日中）</li>
+          <li>対策の検討・チームで共有</li>
+          <li>家族への報告</li>
+          <li>市への報告（事故の場合は<strong>3日以内</strong>）</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ⑤ ケア手順 -->
+    <div class="page" id="page-care">
+      <div class="page-title">🤲 ケア手順</div>
+      <div class="page-desc">服薬・安否確認・食事・入浴・移乗・口腔ケア・認知症・外出外泊・金銭管理</div>
+
+      <div class="card">
+        <h3>服薬管理</h3>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>薬の種類</th><th>保管場所</th></tr></thead>
+            <tbody>
+              <tr><td>塗布薬・下剤（錠剤）</td><td>1F詰所</td></tr>
+              <tr><td>下剤（液体）</td><td>各階</td></tr>
+              <tr><td>内服薬</td><td>医務室 施錠棚</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h4>服薬確認の3点チェック</h4>
+        <ul class="list">
+          <li>氏名（名前の確認）</li>
+          <li>日付</li>
+          <li>時間帯（朝・昼・夕・眠前）</li>
+        </ul>
+        <div class="alert red">⚠️ 未服薬が判明した場合 → NS・管理者へ報告 → Dr指示を仰ぐ</div>
+      </div>
+
+      <div class="card">
+        <h3>朝の安否確認（7:00〜）</h3>
+        <ul class="list">
+          <li><strong>1F</strong>：早出① ＋ 夜勤者が担当</li>
+          <li><strong>2F</strong>：早出②が担当</li>
+          <li>無応答・施錠されている場合 → マスターキーで開錠して確認</li>
+          <li>記録：夜間日誌 ＋ 個人記録に記入</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>食事・食形態の管理</h3>
+        <ul class="list">
+          <li>配膳時は<strong>食札で氏名・食形態を確認</strong>してから提供</li>
+          <li>食形態の変更があった場合 → 食事箋を作成して厨房へ提出</li>
+          <li>とろみ剤は<strong>計量スプーンで規定量</strong>を使用</li>
+          <li>禁忌食は食事箋で共有し、代替食品を用意</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>入浴介助</h3>
+        <ul class="list">
+          <li>設備：個浴（チェアー使用あり）。基本は訪問介護スタッフが入浴介助を担当。</li>
+          <li>湯温は<strong>41℃を上限</strong>とする</li>
+          <li>皮膚トラブル（発赤・傷・発疹等）を発見した場合 → NS・管理者へ報告</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>移乗介助の手順</h3>
+        <ul class="list-num">
+          <li>車椅子を45度の角度に設置・ブレーキ確認・フットレストを上げる</li>
+          <li>端座位をとってもらう</li>
+          <li>軸足側を支持しながら立位 → 車椅子へ誘導</li>
+        </ul>
+        <div class="alert amber">⚠️ 重介助者は<strong>必ず2名対応</strong>。バスタオル使用可。スリッパでの移乗は禁止。</div>
+      </div>
+
+      <div class="card">
+        <h3>口腔ケアの手順</h3>
+        <p style="font-size:13px;margin-bottom:8px;">実施タイミング：食後30分以内</p>
+        <ul class="list-num">
+          <li>義歯を外す（義歯がある場合）</li>
+          <li>スポンジブラシで口腔内全体を清拭</li>
+          <li>歯ブラシでブラッシング</li>
+          <li>うがい（自立者）</li>
+        </ul>
+        <div class="alert amber">⚠️ 誤嚥リスクのある方 → 座位または側臥位で実施・少量の水を使用</div>
+      </div>
+
+      <div class="card">
+        <h3>外出・外泊の対応</h3>
+        <ul class="list">
+          <li>外出・外泊には<strong>Dr許可</strong>が必要</li>
+          <li>希望があった場合：期間・迎え者・食事・服薬状況を確認してから対応</li>
+          <li>帰設時：食事内容・飲水量・服薬状況・バイタルを確認し個人記録に記入</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>認知症・BPSD対応</h3>
+        <ul class="list">
+          <li>傾聴・否定しない・穏やかな声かけを基本とする</li>
+          <li>行動の背景（不安・痛み・排泄サインなど）を深掘りして原因を探る</li>
+          <li>一人での対応が困難な場合 → 人を変える・タイミングをずらして再試みる</li>
+          <li>夜間のBPSDが継続する場合 → 管理者へ報告</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>金銭・貴重品の管理</h3>
+        <div class="alert red">⚠️ 金銭の持ち込みは原則お断り。</div>
+        <ul class="list">
+          <li>やむを得ず預かる場合 → 【預り金等の管理に関する合意書】を取り交わし金庫管理</li>
+          <li>管理料：3,000円/月</li>
+          <li>金銭の取り扱いには必ず複数人で対応し、記録を残すこと</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ⑥ 新人向け -->
     <div class="page" id="page-newstaff">
       <div class="page-title">👋 新人向けガイド</div>
       <div class="page-desc">入職時に必ず確認してください</div>
@@ -466,7 +656,7 @@ td.note { font-size: 11.5px; color: var(--text-sub); }
 </div>
 
 <script>
-const pages = { flow: '業務フロー', journal: '業務日誌の書き方', newstaff: '新人向けガイド' };
+const pages = { flow: '業務フロー', journal: '業務日誌の書き方', emergency: '急変・緊急時対応', care: 'ケア手順', newstaff: '新人向けガイド' };
 
 function showPage(id, btn) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));

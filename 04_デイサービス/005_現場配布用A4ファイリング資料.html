@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>機能訓練 現場配布用資料｜A4ファイリング</title>
+<style>
+:root{
+  --accent:#d97706; --accent-lt:#fef3c7; --accent-xl:#fffbeb;
+  --green:#16a34a; --green-lt:#dcfce7;
+  --red:#dc2626; --red-lt:#fee2e2;
+  --blue:#1558a0; --blue-lt:#dbeafe;
+  --text:#0f172a; --text-sub:#475569;
+  --border:#dbe3ec; --gray-lt:#f1f5f9;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Noto Sans JP",sans-serif;
+  background:#94a3b8;color:var(--text);line-height:1.55}
+
+/* ===== 画面上のビューア表示（印刷対象外） ===== */
+.viewer-note{max-width:210mm;margin:0 auto;padding:14px 4mm 4px;font-size:13px;color:#1e293b;
+  background:#fff;border-radius:8px 8px 0 0}
+.viewer-note b{color:var(--accent)}
+
+/* ===== A4ページ ===== */
+.a4page{
+  width:210mm; min-height:297mm; margin:0 auto 10mm; background:#fff;
+  padding:14mm 15mm; box-shadow:0 4px 18px rgba(0,0,0,.25);
+  display:flex; flex-direction:column; position:relative;
+}
+.a4page:first-of-type{margin-top:0}
+.pg-head{display:flex; align-items:center; gap:12px; border-bottom:3px solid var(--accent); padding-bottom:8px; margin-bottom:14px}
+.pg-icon{font-size:30px; flex-shrink:0}
+.pg-head h1{font-size:21px; color:#78350f; font-weight:800}
+.pg-head p{font-size:12px; color:var(--text-sub); margin-top:2px}
+.pg-foot{margin-top:auto; padding-top:10px; border-top:1px solid var(--border);
+  font-size:10px; color:#94a3b8; display:flex; justify-content:space-between}
+
+.card{background:#fff; border:1px solid var(--border); border-radius:10px; padding:12px 15px; margin-bottom:10px}
+.card h2{font-size:14px; color:var(--accent); font-weight:800; margin-bottom:8px; border-bottom:2px solid var(--accent-lt); padding-bottom:5px}
+.alert{border-radius:8px; padding:9px 13px; margin-bottom:10px; font-size:12.5px; line-height:1.6}
+.alert.green{background:var(--green-lt); border-left:4px solid var(--green); color:#14532d}
+.alert.red{background:var(--red-lt); border-left:4px solid var(--red); color:#7f1d1d}
+.alert.amber{background:var(--accent-lt); border-left:4px solid var(--accent); color:#78350f}
+.alert.blue{background:var(--blue-lt); border-left:4px solid var(--blue); color:#1e3a5f}
+
+ol.steps{counter-reset:s; list-style:none}
+ol.steps li{counter-increment:s; position:relative; padding:8px 0 8px 34px; font-size:13px; border-bottom:1px solid var(--gray-lt)}
+ol.steps li:last-child{border-bottom:none}
+ol.steps li::before{content:counter(s); position:absolute; left:0; top:7px; width:22px; height:22px; border-radius:50%;
+  background:var(--accent); color:#fff; font-size:11px; font-weight:800; display:flex; align-items:center; justify-content:center}
+ol.steps li b{color:#78350f}
+
+ul.plain{list-style:none; font-size:12.5px}
+ul.plain li{padding:5px 0 5px 16px; position:relative; border-bottom:1px solid var(--gray-lt)}
+ul.plain li:last-child{border-bottom:none}
+ul.plain li::before{content:"▶"; position:absolute; left:0; color:var(--accent); font-size:9px; top:9px}
+
+table{width:100%; border-collapse:collapse; font-size:12px}
+th{background:var(--accent); color:#fff; padding:6px 8px; text-align:left; font-weight:700}
+td{padding:6px 8px; border-bottom:1px solid var(--border); vertical-align:top}
+tr:nth-child(even) td{background:var(--gray-lt)}
+td.tag{font-weight:800; color:#78350f; white-space:nowrap}
+.pn{text-align:center; font-weight:800; background:var(--gray-lt); width:34px; color:#78350f}
+
+.step-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:8px}
+.step-card{background:var(--gray-lt); border-radius:8px; padding:9px 10px; border-top:3px solid var(--accent)}
+.step-card .no{font-size:10px; font-weight:800; color:var(--accent); margin-bottom:3px}
+.step-card p{font-size:11.5px; line-height:1.5}
+
+.vital-ok{color:var(--green); font-weight:700}
+.vital-warn{color:var(--accent); font-weight:700}
+.vital-stop{color:var(--red); font-weight:700}
+
+/* ===== 運動アイコン ===== */
+.exrow{display:flex; gap:12px; align-items:flex-start; padding:9px 0; border-bottom:1px solid var(--gray-lt)}
+.exrow:last-child{border-bottom:none}
+.exicon{flex:none; width:96px; height:76px; background:#fafbfc; border:1px solid var(--border); border-radius:8px}
+.exicon svg{width:100%; height:100%}
+.exbody{flex:1; font-size:12px; line-height:1.6}
+.exname{font-weight:800; color:#78350f; font-size:13px}
+.exreps{float:right; font-weight:700; font-size:11.5px; color:#b45309}
+.exbody .lb{font-weight:700; color:#334155; font-size:11px}
+.ex-icon-lg{width:150px; height:118px}
+
+@media print{
+  body{background:#fff}
+  .viewer-note{display:none}
+  .a4page{box-shadow:none; margin:0; width:auto; min-height:auto; page-break-after:always}
+  .a4page:last-of-type{page-break-after:auto}
+  @page{ size:A4; margin:12mm }
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute">
+<defs>
+  <marker id="ah-g" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0L10,5L0,10Z" fill="#16a34a"/></marker>
+  <marker id="ah-b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0L10,5L0,10Z" fill="#1558a0"/></marker>
+  <marker id="ah-r" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0L10,5L0,10Z" fill="#dc2626"/></marker>
+</defs>
+</svg>
+
+<div class="viewer-note">📋 <b>機能訓練 現場配布用資料</b>｜全8枚・A4サイズ。ブラウザの印刷機能でA4・カラー印刷し、パンチファイルに綴じて現場で使用してください（各ページで自動的に改ページされます）。</div>
+
+<!-- ============================================================ -->
+<!-- 1/8 今日の流れ -->
+<!-- ============================================================ -->
+<div class="a4page">
+  <div class="pg-head"><div class="pg-icon">🆕</div><div><h1>今日の流れ（初めての方向け）</h1><p>機能訓練　実施ガイド　1枚目</p></div></div>
+
+  <div class="alert green">✅ 難しい制度や書類の話は後回しでOK。まずは「今日、利用者と何をするか」を掴みましょう。</div>
+
+  <div class="card">
+    <h2>🔁 今日の流れ（1人あたり約5〜10分）</h2>
+    <ol class="steps">
+      <li><b>体調確認・声かけ</b>：「今日の調子はいかがですか」と声をかけ、痛み・気分・（必要なら）血圧を確認。痛みや体調不良があれば無理に行わない。</li>
+      <li><b>メニューを見せる</b>：3つの区分（可動域・筋力・転倒予防）の運動一覧（2〜4枚目）を利用者に見せる。</li>
+      <li><b>利用者に選んでもらう</b>：各区分から1つずつ＝合計3種を、利用者自身に選んでもらう。「今日はどれをやってみましょうか？」</li>
+      <li><b>看護師がお手本（デモ）</b>：まず看護師が実際にやって見せる。各運動の「デモ・声かけのコツ」を使う。</li>
+      <li><b>一緒に実施</b>：各運動60〜90秒を目安に一緒に行う。声かけ・見守りをしながら、回数やレベルを利用者に合わせる。</li>
+      <li><b>称賛・記録</b>：「よくできました」と称賛。実施した種目・回数・様子・痛みの有無を記録する（8枚目参照）。</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h2>💡「選んでもらう」で飽きさせない</h2>
+    <ul class="plain">
+      <li><b>自分で選ぶ＝意欲・主体性</b>につながり、続けやすい</li>
+      <li>毎回ちがう組み合わせになり<b>マンネリ・飽きを防ぐ</b></li>
+      <li>「今日はどれにしますか？」と<b>会話のきっかけ</b>にもなる</li>
+      <li>選べない・迷う方には、看護師が2〜3個に絞って提示するとスムーズ</li>
+    </ul>
+  </div>
+
+  <div class="alert red">🛑 運動中に痛みが出たらその運動を中断・中止。体調不良・強い疲労時は無理に行わない。詳しい中止基準は7枚目「安全管理・中止基準」参照。</div>
+
+  <div class="pg-foot"><span>デイサービスセンターこはる日和｜機能訓練 現場配布用資料</span><span>1 / 8</span></div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 2/8 運動メニュー① 可動域運動 -->
+<!-- ============================================================ -->
+<div class="a4page">
+  <div class="pg-head"><div class="pg-icon">🟢</div><div><h1>運動メニュー ① 関節可動域運動（準備運動）</h1><p>全種目、イスに座ったまま安全に実施できます</p></div></div>
+
+  <div class="card">
+    <div style="display:flex;gap:16px;align-items:flex-start">
+      <div class="exicon ex-icon-lg">
+        <svg viewBox="0 0 130 100" fill="none" stroke="#16a34a" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="6" y1="86" x2="124" y2="86" stroke="#cbd5e1" stroke-width="2"/>
+          <circle cx="18" cy="50" r="7" fill="#fff"/>
+          <line x1="25" y1="50" x2="68" y2="50"/>
+          <line x1="68" y1="50" x2="80" y2="60"/>
+          <line x1="80" y1="60" x2="90" y2="61"/>
+          <ellipse cx="100" cy="65" rx="13" ry="8" fill="#fff"/>
+          <line x1="76" y1="38" x2="112" y2="38" marker-start="url(#ah-g)" marker-end="url(#ah-g)"/>
+        </svg>
+      </div>
+      <div style="flex:1">
+        <h2>R1　ロール運動　（めやす：10往復）</h2>
+        <ul class="plain">
+          <li><b>ねらい</b>：股関節・膝・足首を同時に動かし、自然に近い形で関節をほぐす（本運動の前の準備）</li>
+          <li><b>準備するもの</b>：ロール（丸めたバスタオルや専用ロール）</li>
+          <li><b>やり方</b>：①仰向けに寝てもらう ②踵の下にロールを置く ③足の裏全体でロールを前後に転がす ④これを繰り返す</li>
+          <li><b>デモ・声かけのコツ</b>：看護師が自分の足で「足裏全体で押して転がす」を見せる。「かかとの下の棒を、足の裏でコロコロ転がしましょう」</li>
+          <li><b>注意</b>：股関節の人工関節術後の方は屈曲角度により避ける。足が左右にブレる場合は「まっすぐ前後だけ」と手を添えて誘導</li>
+          <li><b>レベル調整</b>：踵の位置を遠くにすると可動域が広がる</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div style="display:flex;gap:16px;align-items:flex-start">
+      <div class="exicon ex-icon-lg">
+        <svg viewBox="0 0 130 100" fill="none" stroke="#16a34a" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="6" y1="90" x2="124" y2="90" stroke="#cbd5e1" stroke-width="2"/>
+          <line x1="45" y1="55" x2="88" y2="55"/>
+          <line x1="45" y1="55" x2="45" y2="15"/>
+          <line x1="88" y1="55" x2="88" y2="90"/>
+          <circle cx="62" cy="28" r="7" fill="#fff"/>
+          <line x1="62" y1="35" x2="58" y2="55"/>
+          <line x1="60" y1="40" x2="72" y2="48"/>
+          <line x1="58" y1="55" x2="92" y2="57"/>
+          <line x1="92" y1="57" x2="88" y2="90"/>
+          <line x1="88" y1="90" x2="104" y2="90"/>
+          <line x1="80" y1="80" x2="110" y2="80" marker-start="url(#ah-g)" marker-end="url(#ah-g)"/>
+        </svg>
+      </div>
+      <div style="flex:1">
+        <h2>R2　足すり運動　（めやす：3回くらい）</h2>
+        <ul class="plain">
+          <li><b>ねらい</b>：動作の前の"油をさす"ような軽い準備運動。膝・腰を動きやすくする</li>
+          <li><b>準備するもの</b>：特になし（イス）</li>
+          <li><b>やり方</b>：①座位で足を前後にこする（膝の準備） ②腰は立膝で痛みのない範囲で軽くねじる</li>
+          <li><b>デモ・声かけのコツ</b>：座って「すっ、すっ」と足を前後にこすって見せる。「油をさすように、すっすっと軽く動かしましょう」</li>
+          <li><b>注意</b>：3回くらいで十分。それ以上は効果が上がらない。力を入れすぎる場合は「軽くでいいですよ」</li>
+          <li><b>レベル調整</b>：痛みのない範囲で</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert amber">🔄 ローテーション表（5枚目）では、R1・R2を1回おきに交互に使用します。</div>
+
+  <div class="pg-foot"><span>デイサービスセンターこはる日和｜機能訓練 現場配布用資料</span><span>2 / 8</span></div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 3/8 運動メニュー② 筋力増強運動 -->
+<!-- ============================================================ -->
+<div class="a4page">
+  <div class="pg-head"><div class="pg-icon">🔵</div><div><h1>運動メニュー ② 筋力増強運動</h1><p>全種目、イスに座ったまま安全に実施できます</p></div></div>
+
+  <div class="exrow">
+    <div class="exicon">
+      <svg viewBox="0 0 130 100" fill="none" stroke="#1558a0" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="20" y1="90" x2="110" y2="90" stroke="#cbd5e1" stroke-width="2"/>
+        <circle cx="62" cy="22" r="8" fill="#fff"/>
+        <line x1="62" y1="30" x2="62" y2="58"/>
+        <line x1="62" y1="36" x2="48" y2="50"/>
+        <line x1="62" y1="36" x2="76" y2="50"/>
+        <line x1="59" y1="58" x2="52" y2="60"/>
+        <line x1="52" y1="60" x2="50" y2="90"/>
+        <line x1="44" y1="90" x2="58" y2="90"/>
+        <line x1="65" y1="58" x2="90" y2="50"/>
+        <line x1="90" y1="50" x2="98" y2="63"/>
+        <line x1="92" y1="64" x2="107" y2="67"/>
+        <path d="M78,55 C84,48 89,44 93,42" marker-end="url(#ah-b)"/>
+      </svg>
+    </div>
+    <div class="exbody">
+      <span class="exname">S1　座位 脚の横上げ運動</span><span class="exreps">左右10回ずつ</span><br>
+      <span class="lb">やり方</span>イスに深く座り座面の両端をつかみ、片脚をまっすぐ横に持ち上げて戻す。テンポよく左右交互に。<br>
+      <span class="lb">コツ</span>「座ったまま、脚を横にスッと上げて戻しましょう」。上体が傾かないことを見せる　<span class="lb">注意</span>股関節に痛みがあれば上げる高さを控えめに
+    </div>
+  </div>
+
+  <div class="exrow">
+    <div class="exicon">
+      <svg viewBox="0 0 130 100" fill="none" stroke="#1558a0" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="16" y1="90" x2="114" y2="90" stroke="#cbd5e1" stroke-width="2"/>
+        <circle cx="62" cy="22" r="8" fill="#fff"/>
+        <line x1="62" y1="30" x2="62" y2="58"/>
+        <line x1="62" y1="36" x2="48" y2="50"/>
+        <line x1="62" y1="36" x2="76" y2="50"/>
+        <line x1="59" y1="58" x2="42" y2="68"/>
+        <line x1="42" y1="68" x2="47" y2="90"/>
+        <line x1="40" y1="90" x2="54" y2="90"/>
+        <line x1="65" y1="58" x2="82" y2="68"/>
+        <line x1="82" y1="68" x2="77" y2="90"/>
+        <line x1="70" y1="90" x2="84" y2="90"/>
+        <line x1="46" y1="70" x2="55" y2="70" marker-end="url(#ah-b)"/>
+        <line x1="78" y1="70" x2="69" y2="70" marker-end="url(#ah-b)"/>
+      </svg>
+    </div>
+    <div class="exbody">
+      <span class="exname">S2　座位 膝の開閉運動</span><span class="exreps">20回めやす</span><br>
+      <span class="lb">やり方</span>イスに座り、両膝を軽く開いて閉じる。なるべく早く。慣れたら座面を持たずに。<br>
+      <span class="lb">コツ</span>「両膝を開いて閉じて、肩は動かさずに」　<span class="lb">注意</span>最初はゆっくり、徐々に早く。揺れる場合は回数か振幅を減らす
+    </div>
+  </div>
+
+  <div class="exrow">
+    <div class="exicon">
+      <svg viewBox="0 0 130 100" fill="none" stroke="#1558a0" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="6" y1="86" x2="124" y2="86" stroke="#cbd5e1" stroke-width="2"/>
+        <circle cx="20" cy="58" r="7" fill="#fff"/>
+        <line x1="27" y1="58" x2="55" y2="58"/>
+        <line x1="55" y1="58" x2="72" y2="38"/>
+        <line x1="72" y1="38" x2="66" y2="60"/>
+        <circle cx="72" cy="38" r="9" fill="#fff"/>
+        <line x1="58" y1="38" x2="65" y2="38" marker-end="url(#ah-b)"/>
+        <line x1="86" y1="38" x2="79" y2="38" marker-end="url(#ah-b)"/>
+      </svg>
+    </div>
+    <div class="exbody">
+      <span class="exname">S3　ボールはさみ運動</span><span class="exreps">2〜3秒×5回</span><br>
+      <span class="lb">やり方</span>仰向けで膝を立て、膝の間にボールをはさみ、潰すように2〜3秒保持。<br>
+      <span class="lb">コツ</span>「息を吐きながら、内ももでギューっと2〜3秒」　<span class="lb">注意</span>腹圧性失禁の予防・改善にも。息を止めないよう声かけ
+    </div>
+  </div>
+
+  <div class="exrow">
+    <div class="exicon">
+      <svg viewBox="0 0 130 100" fill="none" stroke="#1558a0" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="6" y1="90" x2="124" y2="90" stroke="#cbd5e1" stroke-width="2"/>
+        <line x1="45" y1="55" x2="88" y2="55"/>
+        <line x1="45" y1="55" x2="45" y2="15"/>
+        <line x1="88" y1="55" x2="88" y2="90"/>
+        <circle cx="62" cy="28" r="7" fill="#fff"/>
+        <line x1="62" y1="35" x2="58" y2="55"/>
+        <line x1="60" y1="40" x2="72" y2="48"/>
+        <line x1="58" y1="55" x2="92" y2="57"/>
+        <line x1="92" y1="57" x2="89" y2="80"/>
+        <line x1="89" y1="80" x2="98" y2="90"/>
+        <line x1="98" y1="90" x2="106" y2="88"/>
+        <line x1="88" y1="90" x2="104" y2="90" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="2,3"/>
+        <line x1="89" y1="83" x2="89" y2="68" marker-end="url(#ah-b)"/>
+      </svg>
+    </div>
+    <div class="exbody">
+      <span class="exname">S4　座位 かかと上げ運動</span><span class="exreps">10回めやす</span><br>
+      <span class="lb">やり方</span>イスに座り、両足のかかとを持ち上げてつま先立ちにし、ゆっくり下ろす。<br>
+      <span class="lb">コツ</span>「座ったまま、かかとをスッと持ち上げましょう」　<span class="lb">注意</span>回数を多くできない運動。反動を使わずゆっくりと
+    </div>
+  </div>
+
+  <div class="exrow">
+    <div class="exicon">
+      <svg viewBox="0 0 130 100" fill="none" stroke="#1558a0" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="6" y1="90" x2="124" y2="90" stroke="#cbd5e1" stroke-width="2"/>
+        <line x1="45" y1="55" x2="88" y2="55"/>
+        <line x1="45" y1="55" x2="45" y2="15"/>
+        <line x1="88" y1="55" x2="88" y2="90" stroke="#cbd5e1" stroke-width="2.4" stroke-dasharray="2,3"/>
+        <circle cx="62" cy="28" r="7" fill="#fff"/>
+        <line x1="62" y1="35" x2="58" y2="55"/>
+        <line x1="60" y1="40" x2="72" y2="48"/>
+        <line x1="58" y1="55" x2="78" y2="38"/>
+        <line x1="78" y1="38" x2="83" y2="58"/>
+        <line x1="76" y1="58" x2="90" y2="60"/>
+        <line x1="70" y1="50" x2="70" y2="34" marker-end="url(#ah-b)"/>
+      </svg>
+    </div>
+    <div class="exbody">
+      <span class="exname">S5　座位ステップ運動（足踏み）</span><span class="exreps">左右計20回</span><br>
+      <span class="lb">やり方</span>イスに座り、腿を高く上げるように左右交互に足踏みする。<br>
+      <span class="lb">コツ</span>「腿を高く上げて、その場で足踏みしましょう」　<span class="lb">注意</span>疲労が強く残るなら回数を減らす
+    </div>
+  </div>
+
+  <div class="alert amber" style="margin-top:10px">💡 各運動 60〜90秒が目安。声かけ・見守りをしながら、回数やレベルは利用者に合わせて調整してください。</div>
+
+  <div class="pg-foot"><span>デイサービスセンターこはる日和｜機能訓練 現場配布用資料</span><span>3 / 8</span></div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 4/8 運動メニュー③ 転倒予防運動 -->
+<!-- ============================================================ -->
+<div class="a4page">
+  <div class="pg-head"><div class="pg-icon">🔴</div><div><h1>運動メニュー ③ 転倒予防運動</h1><p>全種目、イスに座ったまま安全に実施できます</p></div></div>
+
+  <div class="exrow">
+    <div class="exicon">
+      <svg viewBox="0 0 130 100" fill="none" stroke="#dc2626" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="6" y1="90" x2="124" y2="90" stroke="#cbd5e1" stroke-width="2"/>
+        <line x1="45" y1="55" x2="88" y2="55"/>
+        <line x1="45" y1="55" x2="45" y2="15"/>
+        <line x1="88" y1="55" x2="88" y2="90"/>
+        <circle cx="62" cy="28" r="7" fill="#fff"/>
+        <line x1="62" y1="35" x2="58" y2="55"/>
+        <line x1="60" y1="40" x2="72" y2="48"/>
+        <line x1="58" y1="55" x2="92" y2="57"/>
+        <line x1="92" y1="57" x2="88" y2="90"/>
+        <line x1="88" y1="90" x2="104" y2="90"/>
+        <path d="M82,90 q4,-5 8,0 q4,5 8,0 q4,-5 8,0 q4,5 8,0" stroke-width="2.4"/>
+        <line x1="110" y1="88" x2="100" y2="88" marker-end="url(#ah-r)"/>
+      </svg>
+    </div>
+    <div class="exbody">
+      <span class="exname">F1　タオルギャザー</span><span class="exreps">左右各10回</span><br>
+      <span class="lb">やり方</span>イスに座り、足の下にタオルを敷き、足の指でたぐり寄せる。負荷は先端に重り。<br>
+      <span class="lb">コツ</span>「足の指でタオルをたぐり寄せましょう」　<span class="lb">注意</span>初期は踵が浮いてもよいが徐々に踵をつけたまま。負荷はペットボトルで調節
+    </div>
+  </div>
+
+  <div class="exrow">
+    <div class="exicon">
+      <svg viewBox="0 0 130 100" fill="none" stroke="#dc2626" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="6" y1="90" x2="124" y2="90" stroke="#cbd5e1" stroke-width="2"/>
+        <line x1="45" y1="55" x2="88" y2="55"/>
+        <line x1="45" y1="55" x2="45" y2="15"/>
+        <line x1="88" y1="55" x2="88" y2="90"/>
+        <circle cx="62" cy="28" r="7" fill="#fff"/>
+        <line x1="62" y1="35" x2="58" y2="55"/>
+        <line x1="60" y1="40" x2="72" y2="48"/>
+        <line x1="58" y1="55" x2="92" y2="57"/>
+        <line x1="92" y1="57" x2="90" y2="82"/>
+        <line x1="85" y1="82" x2="101" y2="82"/>
+        <circle cx="93" cy="88" r="8" fill="#fff"/>
+        <line x1="80" y1="72" x2="106" y2="72" marker-start="url(#ah-r)" marker-end="url(#ah-r)"/>
+      </svg>
+    </div>
+    <div class="exbody">
+      <span class="exname">F2　ボール踏み</span><span class="exreps">前後10往復</span><br>
+      <span class="lb">やり方</span>イスに座り、足の下のボールが逃げないように踏む。慣れたら踏んだまま前後に動かす。<br>
+      <span class="lb">コツ</span>「ボールを踏んで、そのまま前後にコロコロ」　<span class="lb">注意</span>力を入れすぎて足を捻じらない
+    </div>
+  </div>
+
+  <div class="exrow">
+    <div class="exicon">
+      <svg viewBox="0 0 130 100" fill="none" stroke="#dc2626" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="6" y1="94" x2="124" y2="94" stroke="#cbd5e1" stroke-width="2"/>
+        <line x1="45" y1="55" x2="88" y2="55"/>
+        <line x1="45" y1="55" x2="45" y2="15"/>
+        <line x1="88" y1="55" x2="88" y2="90"/>
+        <circle cx="62" cy="28" r="7" fill="#fff"/>
+        <line x1="62" y1="35" x2="58" y2="55"/>
+        <line x1="60" y1="40" x2="72" y2="48"/>
+        <line x1="58" y1="55" x2="92" y2="57"/>
+        <line x1="92" y1="57" x2="90" y2="80"/>
+        <rect x="74" y="80" width="34" height="4" fill="#fff"/>
+        <circle cx="81" cy="90" r="4" fill="#fff"/>
+        <circle cx="101" cy="90" r="4" fill="#fff"/>
+        <line x1="72" y1="74" x2="110" y2="74" marker-start="url(#ah-r)" marker-end="url(#ah-r)"/>
+      </svg>
+    </div>
+    <div class="exbody">
+      <span class="exname">F3　棒の上で板を動かす</span><span class="exreps">前後10往復</span><br>
+      <span class="lb">やり方</span>2本の棒の上に板を置き、目印（ハンコ等）を倒さないように前後に動かす。<br>
+      <span class="lb">コツ</span>「倒さないように、ゆっくり大きく」　<span class="lb">注意</span>神経を非常に使う。底面の大きいものから徐々に小さくしてレベルUP
+    </div>
+  </div>
+
+  <div class="exrow">
+    <div class="exicon">
+      <svg viewBox="0 0 130 100" fill="none" stroke="#dc2626" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="6" y1="90" x2="124" y2="90" stroke="#cbd5e1" stroke-width="2"/>
+        <line x1="45" y1="55" x2="88" y2="55"/>
+        <line x1="45" y1="55" x2="45" y2="15"/>
+        <line x1="88" y1="55" x2="88" y2="90" stroke="#cbd5e1" stroke-width="2.4" stroke-dasharray="2,3"/>
+        <circle cx="62" cy="28" r="7" fill="#fff"/>
+        <line x1="62" y1="35" x2="58" y2="55"/>
+        <line x1="60" y1="40" x2="72" y2="48"/>
+        <line x1="58" y1="55" x2="92" y2="57"/>
+        <line x1="92" y1="57" x2="114" y2="50"/>
+        <line x1="114" y1="50" x2="122" y2="54"/>
+        <path d="M95,80 C100,72 106,64 110,58" marker-end="url(#ah-r)"/>
+      </svg>
+    </div>
+    <div class="exbody">
+      <span class="exname">F4　座位 膝伸ばし運動</span><span class="exreps">左右各10回</span><br>
+      <span class="lb">やり方</span>イスに座り、片膝をゆっくり伸ばしてつま先を天井に向け2〜3秒保持し、ゆっくり戻す。<br>
+      <span class="lb">コツ</span>「膝をゆっくり伸ばして、つま先を天井に向けましょう」　<span class="lb">注意</span>膝に痛みがあれば可動範囲を狭める。つまずき軽減に有効
+    </div>
+  </div>
+
+  <div class="alert red" style="margin-top:10px">🛑 運動中に痛みが出たら中断・中止。全11種すべて座位で実施できるよう設計されています（立位運動なし）。</div>
+
+  <div class="pg-foot"><span>デイサービスセンターこはる日和｜機能訓練 現場配布用資料</span><span>4 / 8</span></div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 5/8 日替わりローテーション表 -->
+<!-- ============================================================ -->
+<div class="a4page">
+  <div class="pg-head"><div class="pg-icon">🔄</div><div><h1>日替わりローテーション表</h1><p>3区分から1つずつ＝計3種を、パターン①→⑩の順に</p></div></div>
+
+  <div class="alert amber">パターン①→⑩を順に回すと、毎回ちがう組み合わせになり飽きずに続けられます（2週間で一巡）。利用者の状態に合わせて種目・回数・レベルは調整してください。1回 約5分（各運動60〜90秒×3種）。</div>
+
+  <table>
+    <thead><tr><th class="pn">パターン</th><th>① 可動域（緑）</th><th>② 筋力（青）</th><th>③ 転倒予防（赤）</th></tr></thead>
+    <tbody>
+      <tr><td class="pn">1</td><td>R1 ロール運動</td><td>S1 座位 脚の横上げ運動</td><td>F1 タオルギャザー</td></tr>
+      <tr><td class="pn">2</td><td>R2 足すり運動</td><td>S2 座位 膝の開閉運動</td><td>F2 ボール踏み</td></tr>
+      <tr><td class="pn">3</td><td>R1 ロール運動</td><td>S3 ボールはさみ運動</td><td>F3 棒の上で板を動かす</td></tr>
+      <tr><td class="pn">4</td><td>R2 足すり運動</td><td>S4 座位 かかと上げ運動</td><td>F4 座位 膝伸ばし運動</td></tr>
+      <tr><td class="pn">5</td><td>R1 ロール運動</td><td>S5 座位ステップ運動（足踏み）</td><td>F1 タオルギャザー</td></tr>
+      <tr><td class="pn">6</td><td>R2 足すり運動</td><td>S1 座位 脚の横上げ運動</td><td>F2 ボール踏み</td></tr>
+      <tr><td class="pn">7</td><td>R1 ロール運動</td><td>S2 座位 膝の開閉運動</td><td>F3 棒の上で板を動かす</td></tr>
+      <tr><td class="pn">8</td><td>R2 足すり運動</td><td>S3 ボールはさみ運動</td><td>F4 座位 膝伸ばし運動</td></tr>
+      <tr><td class="pn">9</td><td>R1 ロール運動</td><td>S4 座位 かかと上げ運動</td><td>F1 タオルギャザー</td></tr>
+      <tr><td class="pn">10</td><td>R2 足すり運動</td><td>S5 座位ステップ運動（足踏み）</td><td>F2 ボール踏み</td></tr>
+    </tbody>
+  </table>
+
+  <div class="card" style="margin-top:14px">
+    <h2>各運動の詳しいやり方</h2>
+    <p style="font-size:12.5px;color:var(--text-sub)">① 可動域運動 → 2枚目　／　② 筋力増強運動 → 3枚目　／　③ 転倒予防運動 → 4枚目　を参照してください。</p>
+  </div>
+
+  <div class="pg-foot"><span>デイサービスセンターこはる日和｜機能訓練 現場配布用資料</span><span>5 / 8</span></div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 6/8 レベルアップ訓練 -->
+<!-- ============================================================ -->
+<div class="a4page">
+  <div class="pg-head"><div class="pg-icon">📈</div><div><h1>レベルアップ訓練</h1><p>座位メニューに慣れ、状態が安定している方向け（一部立位・見守り必須）</p></div></div>
+
+  <div class="alert red">⚠️ 立位を含む種目は<b>必ず手すり・見守りを確保</b>してから実施。座位メニュー（2〜4枚目）に慣れ、状態が安定していることを確認したうえで導入すること。</div>
+
+  <div class="card">
+    <h2>🪑 座位でできる上級種目</h2>
+    <ul class="plain">
+      <li><b>座位ヒップリフト（骨盤挙上）</b>：座面から軽くお尻を浮かせて戻す（5〜10秒保持×5回）。殿筋・体幹強化</li>
+      <li><b>骨盤前後傾運動</b>：座位で骨盤を前後に傾ける（体幹深部筋）</li>
+      <li><b>ゴムバンド使用</b>（Thera-band等）：Ns判断で実施可。強度は「ちょうどきつい」程度</li>
+      <li><b>座位での上肢リーチ動作</b>：手を前・横・斜め方向に伸ばす</li>
+      <li><b>座位での体幹傾斜</b>：反対側へ体幹を傾けてから戻す</li>
+      <li><b>背もたれなし座位保持</b>：手を膝に置いた状態で30秒〜</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>🧍 立ち上がり練習</h2>
+    <ul class="plain">
+      <li>椅子からの<b>立ち座り（5〜10回）</b>：椅子は膝関節90°になる高さに調整</li>
+      <li>必要に応じて肘掛け使用・介助者を前方に配置</li>
+      <li>「足を引いてから前傾して立つ」の動作手順を毎回声かけで確認</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>🧍 立位バランス訓練（段階的に）</h2>
+    <div class="step-grid">
+      <div class="step-card"><div class="no">STEP 1</div><p><b>両脚立位</b><br>足幅を肩幅に開き30秒〜1分</p></div>
+      <div class="step-card"><div class="no">STEP 2</div><p><b>半歩幅立位</b><br>足を半歩前後にずらす</p></div>
+      <div class="step-card"><div class="no">STEP 3</div><p><b>タンデム立位</b><br>一直線に前後に並べる</p></div>
+      <div class="step-card"><div class="no">STEP 4</div><p><b>片脚立位</b><br>5秒以上・最初は手すり保持</p></div>
+    </div>
+  </div>
+
+  <div class="pg-foot"><span>デイサービスセンターこはる日和｜機能訓練 現場配布用資料</span><span>6 / 8</span></div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 7/8 安全管理・中止基準 -->
+<!-- ============================================================ -->
+<div class="a4page">
+  <div class="pg-head"><div class="pg-icon">🛡️</div><div><h1>安全管理・中止基準</h1><p>迷ったら中止。安全最優先</p></div></div>
+
+  <div class="card">
+    <h2>📊 バイタル 訓練中止基準</h2>
+    <table>
+      <thead><tr><th>項目</th><th class="vital-ok">◯ OK</th><th class="vital-warn">△ 慎重に</th><th class="vital-stop">✕ 中止・連絡</th></tr></thead>
+      <tbody>
+        <tr><td>収縮期血圧</td><td class="vital-ok">100〜159</td><td class="vital-warn">160〜179 / 90〜99</td><td class="vital-stop">180以上 / 90未満</td></tr>
+        <tr><td>拡張期血圧</td><td class="vital-ok">60〜99</td><td class="vital-warn">100〜109</td><td class="vital-stop">110以上</td></tr>
+        <tr><td>心拍数</td><td class="vital-ok">50〜100</td><td class="vital-warn">101〜119</td><td class="vital-stop">120以上 / 40未満</td></tr>
+        <tr><td>SpO2</td><td class="vital-ok">95%以上</td><td class="vital-warn">92〜94%</td><td class="vital-stop">91%以下</td></tr>
+        <tr><td>体温</td><td class="vital-ok">36.0〜37.5℃</td><td class="vital-warn">37.6〜37.9℃</td><td class="vital-stop">38.0℃以上</td></tr>
+        <tr><td>症状</td><td class="vital-ok">なし</td><td class="vital-warn">軽度の息切れ・発汗</td><td class="vital-stop">胸痛・強い動悸・意識変容・めまい・嘔気</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>⚠️ 転倒リスクが高い方への対応</h2>
+    <ul class="plain">
+      <li>TUG14秒以上／転倒既往あり／片脚立位保持困難な方は特に注意</li>
+      <li>環境：手すり設置・滑り止め・段差解消・照明確保</li>
+      <li>起立時「めまいはないですか」を毎回確認</li>
+      <li>ヒヤリハット・転倒発生時は速やかに記録・多職種共有</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>🆘 緊急時対応フロー</h2>
+    <ol class="steps">
+      <li><b>安全確保</b>：安全な姿勢に保護。転倒時は無理に起こさない</li>
+      <li><b>意識・呼吸・循環の確認</b></li>
+      <li><b>119番通報</b>：意識消失・呼吸停止・胸痛・大出血等は即時</li>
+      <li><b>配置医・協力医療機関へ連絡</b></li>
+      <li><b>家族へ連絡</b>：速やかに電話で第一報</li>
+      <li><b>記録・管理者報告</b></li>
+    </ol>
+  </div>
+
+  <div class="pg-foot"><span>デイサービスセンターこはる日和｜機能訓練 現場配布用資料</span><span>7 / 8</span></div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 8/8 記録の書き方 -->
+<!-- ============================================================ -->
+<div class="a4page">
+  <div class="pg-head"><div class="pg-icon">📝</div><div><h1>記録の書き方</h1><p>毎回の訓練記録　簡易ガイド</p></div></div>
+
+  <div class="card">
+    <h2>🪑 日々の運動メニュー実施記録（簡易）</h2>
+    <ul class="plain">
+      <li>実施した種目（区分ごと）と回数・時間</li>
+      <li>実施時の様子（意欲・ふらつき・疲労の程度）</li>
+      <li><b>痛みの有無・部位</b>、中止した場合はその理由</li>
+      <li>次回への申し送り（レベルを上げる／下げる など）</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>📋 SOAP形式（詳しく書く場合）</h2>
+    <table>
+      <thead><tr><th>項目</th><th>記載内容</th></tr></thead>
+      <tbody>
+        <tr><td><b>S（主観）</b></td><td>利用者の主訴・体調訴え・当日の気分や意欲</td></tr>
+        <tr><td><b>O（客観）</b></td><td>バイタル（BP・HR・SpO2・体温）、訓練実施項目と回数、実施中の様子</td></tr>
+        <tr><td><b>A（評価）</b></td><td>訓練中の反応、計画達成度、リスクの気づき</td></tr>
+        <tr><td><b>P（計画）</b></td><td>次回に向けての調整事項、目標達成見込みの記載</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="alert blue">📌 最低限の記載：<b>日付・開始時間・訓練内容（種目と回数）・バイタル・特記事項・実施者署名</b></div>
+
+  <div class="card">
+    <h2>📚 もっと詳しく知りたいときは</h2>
+    <ul class="plain">
+      <li>制度・加算・個別プログラム作成 → <b>002_機能訓練マニュアル.html</b>（画面版）</li>
+      <li>アセスメントに基づく個別プログラム → <b>003・004</b></li>
+    </ul>
+  </div>
+
+  <div class="pg-foot"><span>デイサービスセンターこはる日和｜機能訓練 現場配布用資料</span><span>8 / 8</span></div>
+</div>
+
+</body>
+</html>

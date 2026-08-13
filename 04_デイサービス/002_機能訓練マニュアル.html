@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>機能訓練マニュアル｜デイサービス看護師向け</title>
+<meta name="theme-color" content="#d97706">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="機能訓練マニュアル">
+<style>
+:root {
+  --accent:     #d97706;
+  --accent-mid: #f59e0b;
+  --accent-lt:  #fef3c7;
+  --accent-xl:  #fffbeb;
+  --grad-from:  #78350f;
+  --blue:       #1558a0;
+  --blue-light: #dbeafe;
+  --green:      #16a34a;
+  --green-lt:   #dcfce7;
+  --red:        #dc2626;
+  --red-lt:     #fee2e2;
+  --teal:       #0d9488;
+  --teal-light: #ccfbf1;
+  --gray:       #64748b;
+  --gray-lt:    #f1f5f9;
+  --gray-mid:   #e2e8f0;
+  --text:       #0f172a;
+  --text-sub:   #475569;
+  --bg:         #f0f4f8;
+  --white:      #ffffff;
+  --r:          12px;
+  --r-sm:       8px;
+  --sh:         0 1px 4px rgba(0,0,0,.08);
+  --sh-md:      0 4px 16px rgba(0,0,0,.12);
+  --sidebar-w:  240px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", sans-serif;
+       font-size: 15px; line-height: 1.6; color: var(--text); background: var(--bg); }
+
+/* ===== TOPBAR ===== */
+.topbar {
+  display: none;
+  background: linear-gradient(135deg, var(--grad-from) 0%, var(--accent) 55%, var(--accent-mid) 100%);
+  padding: 12px 16px; position: sticky; top: 0; z-index: 100;
+  box-shadow: 0 2px 10px rgba(120,53,15,.4);
+  align-items: center; gap: 12px;
+}
+.topbar-menu {
+  background: rgba(255,255,255,.2); border: none; color: #fff;
+  width: 36px; height: 36px; border-radius: 8px; font-size: 18px;
+  cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.topbar-title { color: #fff; font-size: 14px; font-weight: 800; flex: 1; }
+.topbar-back { color: rgba(255,255,255,.85); font-size: 12px; text-decoration: none;
+               background: rgba(255,255,255,.15); padding: 5px 12px; border-radius: 20px; white-space: nowrap; }
+
+/* ===== LAYOUT ===== */
+.layout { display: flex; min-height: 100vh; }
+
+/* ===== SIDEBAR ===== */
+.sidebar {
+  width: var(--sidebar-w);
+  background: linear-gradient(180deg, var(--grad-from) 0%, var(--accent) 100%);
+  position: fixed; top: 0; left: 0; height: 100vh;
+  display: flex; flex-direction: column;
+  z-index: 90; overflow-y: auto;
+  box-shadow: 2px 0 12px rgba(0,0,0,.15);
+}
+.sidebar-logo { padding: 20px 16px 16px; border-bottom: 1px solid rgba(255,255,255,.15); }
+.sidebar-logo h1 { font-size: 13px; font-weight: 800; color: #fff; line-height: 1.4; }
+.sidebar-logo p  { font-size: 10px; color: rgba(255,255,255,.65); margin-top: 3px; }
+.sidebar-back {
+  display: block; margin: 10px 12px 0;
+  color: rgba(255,255,255,.8); font-size: 11px; text-decoration: none;
+  background: rgba(255,255,255,.15); padding: 5px 10px; border-radius: 16px; text-align: center;
+}
+.sidebar-back:hover { background: rgba(255,255,255,.25); }
+.sidebar-nav { padding: 12px 0; flex: 1; }
+.nav-group { padding: 8px 16px 4px; font-size: 10px; font-weight: 700; color: rgba(255,255,255,.45); letter-spacing: .06em; }
+.nav-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 16px; cursor: pointer;
+  color: rgba(255,255,255,.75); font-size: 13px; font-weight: 600;
+  border: none; background: none; width: 100%; text-align: left;
+  border-left: 3px solid transparent;
+  transition: background .15s, color .15s, border-color .15s;
+}
+.nav-item:hover { background: rgba(255,255,255,.1); color: #fff; }
+.nav-item.active { background: rgba(255,255,255,.18); color: #fff; border-left-color: #fff; }
+.nav-item .nav-icon { font-size: 16px; flex-shrink: 0; }
+
+/* ===== OVERLAY ===== */
+.overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 85; }
+.overlay.show { display: block; }
+
+/* ===== CONTENT ===== */
+.content { margin-left: var(--sidebar-w); flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.content-header {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-mid) 100%);
+  padding: 22px 24px 26px; text-align: center; color: #fff;
+}
+.content-header h2 { font-size: 18px; font-weight: 800; margin-bottom: 4px; }
+.content-header p  { font-size: 12px; color: rgba(255,255,255,.72); line-height: 1.7; }
+.main { max-width: 860px; margin: 0 auto; padding: 24px 20px 60px; width: 100%; }
+
+/* ===== PAGES ===== */
+.page { display: none; }
+.page.active { display: block; }
+
+/* ===== COMPONENTS ===== */
+.sec-head { display: flex; align-items: center; gap: 10px; margin: 0 0 16px; }
+.sec-icon { width: 36px; height: 36px; border-radius: 9px; display: flex; align-items: center;
+            justify-content: center; font-size: 18px; flex-shrink: 0; background: var(--accent-lt); }
+.sec-head h2 { font-size: 17px; font-weight: 800; color: var(--accent); }
+.sec-head p  { font-size: 12px; color: var(--text-sub); margin-top: 2px; }
+.card { background: var(--white); border-radius: var(--r); box-shadow: var(--sh); padding: 18px 20px; margin-bottom: 16px; border: 1px solid var(--gray-mid); }
+.card h3 { font-size: 14px; font-weight: 800; color: var(--accent); margin-bottom: 12px; border-bottom: 2px solid var(--accent-lt); padding-bottom: 8px; }
+.card h4 { font-size: 13px; font-weight: 700; color: var(--text); margin: 14px 0 8px; }
+.alert { border-radius: var(--r-sm); padding: 10px 14px; margin-bottom: 12px; font-size: 13px; display: flex; align-items: flex-start; gap: 8px; line-height: 1.65; }
+.alert.red   { background: var(--red-lt);    border-left: 4px solid var(--red);   color: #7f1d1d; }
+.alert.amber { background: var(--accent-lt); border-left: 4px solid var(--accent); color: #78350f; }
+.alert.green { background: var(--green-lt);  border-left: 4px solid var(--green); color: #14532d; }
+.alert.blue  { background: var(--blue-light); border-left: 4px solid var(--blue); color: #1e3a5f; }
+.alert.teal  { background: var(--teal-light); border-left: 4px solid var(--teal); color: #134e4a; }
+.tbl-wrap { overflow-x: auto; margin-bottom: 12px; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th { background: var(--accent); color: #fff; padding: 8px 10px; text-align: left; font-weight: 700; }
+td { padding: 8px 10px; border-bottom: 1px solid var(--gray-mid); vertical-align: top; font-size: 13px; }
+tr:last-child td { border-bottom: none; }
+tr:nth-child(even) td { background: var(--gray-lt); }
+.list { padding-left: 0; list-style: none; }
+.list li { padding: 6px 0 6px 22px; position: relative; font-size: 13.5px; border-bottom: 1px solid var(--gray-mid); }
+.list li:last-child { border-bottom: none; }
+.list li::before { content: "▶"; position: absolute; left: 2px; color: var(--accent); font-size: 10px; top: 9px; }
+.list-num { counter-reset: item; padding-left: 0; list-style: none; }
+.list-num li { counter-increment: item; padding: 7px 0 7px 28px; position: relative; font-size: 13.5px; border-bottom: 1px solid var(--gray-mid); }
+.list-num li:last-child { border-bottom: none; }
+.list-num li::before { content: counter(item); position: absolute; left: 0; background: var(--accent); color: #fff; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; top: 9px; }
+.point { background: var(--accent-xl); border-radius: var(--r-sm); padding: 12px 14px; margin: 10px 0; font-size: 13.5px; }
+.point strong { color: var(--accent); }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: 700; }
+.badge.red   { background: var(--red-lt);   color: var(--red); }
+.badge.green { background: var(--green-lt); color: var(--green); }
+.badge.amber { background: var(--accent-lt); color: #92400e; }
+.badge.blue  { background: var(--blue-light); color: var(--blue); }
+.step-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; margin-bottom: 12px; }
+.step-card { background: var(--gray-lt); border-radius: var(--r-sm); padding: 12px 14px; border-top: 3px solid var(--accent); }
+.step-card .step-no { font-size: 11px; font-weight: 700; color: var(--accent); margin-bottom: 4px; }
+.step-card p { font-size: 13px; line-height: 1.6; }
+.vital-ok    { color: var(--green); font-weight: 700; }
+.vital-warn  { color: var(--accent); font-weight: 700; }
+.vital-stop  { color: var(--red);   font-weight: 700; }
+.site-footer { text-align: center; padding: 20px; font-size: 11px; color: var(--text-sub); border-top: 1px solid var(--gray-mid); background: var(--white); }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .topbar { display: flex; }
+  .sidebar { transform: translateX(-100%); transition: transform .25s ease; }
+  .sidebar.open { transform: translateX(0); }
+  .content { margin-left: 0; }
+  .content-header { display: none; }
+  .main { padding: 16px 14px 60px; }
+  .step-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- Topbar (mobile) -->
+<div class="topbar">
+  <button class="topbar-menu" onclick="toggleSidebar()" aria-label="メニュー">☰</button>
+  <span class="topbar-title">💪 機能訓練マニュアル</span>
+  <a href="000_デイサービス業務マニュアル.html" class="topbar-back">← 戻る</a>
+</div>
+
+<div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+<div class="layout">
+
+<!-- Sidebar -->
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <h1>💪 機能訓練マニュアル</h1>
+    <p>デイサービス看護師向け</p>
+  </div>
+  <a href="000_デイサービス業務マニュアル.html" class="sidebar-back">← デイマニュアルに戻る</a>
+  <div class="sidebar-nav">
+    <div class="nav-group">基本</div>
+    <button class="nav-item active" onclick="showPage('intro')" data-page="intro"><span class="nav-icon">🏠</span>はじめに・前提</button>
+    <button class="nav-item" onclick="showPage('flow')" data-page="flow"><span class="nav-icon">🔁</span>業務フロー・評価測定</button>
+    <button class="nav-item" onclick="showPage('addition')" data-page="addition"><span class="nav-icon">📋</span>加算・算定要件</button>
+
+    <div class="nav-group">訓練メニュー</div>
+    <button class="nav-item" onclick="showPage('rom')" data-page="rom"><span class="nav-icon">🔄</span>ROM（関節可動域）</button>
+    <button class="nav-item" onclick="showPage('strength')" data-page="strength"><span class="nav-icon">💪</span>筋力強化</button>
+    <button class="nav-item" onclick="showPage('balance')" data-page="balance"><span class="nav-icon">⚖️</span>バランス訓練</button>
+    <button class="nav-item" onclick="showPage('gait')" data-page="gait"><span class="nav-icon">👣</span>歩行訓練</button>
+    <button class="nav-item" onclick="showPage('adl')" data-page="adl"><span class="nav-icon">🛁</span>ADL訓練</button>
+    <button class="nav-item" onclick="showPage('breath')" data-page="breath"><span class="nav-icon">🌬️</span>呼吸訓練</button>
+    <button class="nav-item" onclick="showPage('oral')" data-page="oral"><span class="nav-icon">👄</span>口腔・嚥下訓練</button>
+
+    <div class="nav-group">運用</div>
+    <button class="nav-item" onclick="showPage('assess')" data-page="assess"><span class="nav-icon">📊</span>評価・個別計画</button>
+    <button class="nav-item" onclick="showPage('record')" data-page="record"><span class="nav-icon">📝</span>記録・書類</button>
+    <button class="nav-item" onclick="showPage('safety')" data-page="safety"><span class="nav-icon">🛡️</span>安全管理</button>
+    <button class="nav-item" onclick="showPage('ref')" data-page="ref"><span class="nav-icon">📚</span>参考資料</button>
+  </div>
+</nav>
+
+<!-- Content -->
+<div class="content">
+  <div class="content-header">
+    <h2 id="page-title">はじめに・前提</h2>
+    <p>デイサービス機能訓練マニュアル｜看護師（機能訓練指導員）向け</p>
+  </div>
+  <div class="main">
+
+  <!-- ============================================================ -->
+  <!-- PAGE: intro                                                   -->
+  <!-- ============================================================ -->
+  <div class="page active" id="page-intro">
+    <div class="sec-head"><div class="sec-icon">🏠</div><div><h2>はじめに・前提</h2><p>このマニュアルの使い方と対象</p></div></div>
+
+    <div class="alert amber">⚠️ 看護職員による機能訓練には、医師からの指示や対象者の病状把握が必須です。訓練中止基準・緊急時対応は必ず事前に確認してください。</div>
+
+    <div class="card">
+      <h3>📌 対象・目的</h3>
+      <ul class="list">
+        <li>対象：当デイサービスで機能訓練指導員として配置される<strong>看護師・准看護師</strong></li>
+        <li>目的：このマニュアルを見ながら安全に加算算定と機能訓練の運用ができる体制を構築する</li>
+        <li>PT・OT・STは不在のため、Nsの職務範囲で実施できる訓練に特化して記載</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>⚠️ 看護師ができること・できないこと</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>区分</th><th>看護師</th><th>PT・OT・ST</th></tr></thead>
+          <tbody>
+            <tr><td>機能訓練（生活行為向上のための訓練）</td><td><span class="badge green">○ 実施可</span></td><td><span class="badge green">○ 実施可</span></td></tr>
+            <tr><td>リハビリテーション（医師指示に基づく医療行為）</td><td><span class="badge red">× 不可</span></td><td><span class="badge green">○ 実施可</span></td></tr>
+            <tr><td>個別機能訓練計画書の作成</td><td><span class="badge green">○ 実施可</span></td><td><span class="badge green">○ 実施可</span></td></tr>
+            <tr><td>嚥下機能訓練（間接訓練）</td><td><span class="badge amber">△ リスク評価まで</span></td><td>ST が専門</td></tr>
+            <tr><td>嚥下機能訓練（直接訓練・食物使用）</td><td><span class="badge red">× 医師・ST指示下のみ</span></td><td>ST が専門</td></tr>
+            <tr><td>ADL訓練</td><td><span class="badge green">○ 実施可</span></td><td>OT が専門</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>📋 訓練開始前の必須確認事項</h3>
+      <ol class="list-num">
+        <li>利用者の主治医・配置医からの情報収集（禁忌・注意事項）</li>
+        <li>最新のバイタルサインの確認（血圧・心拍・SpO2・体温）</li>
+        <li>当日の体調・主訴の聴取</li>
+        <li>服薬状況の確認（降圧薬・抗凝固薬・利尿薬等）</li>
+        <li>個別機能訓練計画書の内容確認</li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <h3>🗂️ マニュアルの構成</h3>
+      <ul class="list">
+        <li><strong>加算・算定要件</strong>：算定できる加算の種類と書類の全体像</li>
+        <li><strong>訓練メニュー7種</strong>：ROM・筋力・バランス・歩行・ADL・呼吸・口腔嚥下</li>
+        <li><strong>評価・個別計画</strong>：アセスメントツールと計画書の作り方</li>
+        <li><strong>記録・書類</strong>：加算算定に必要な書類一覧と書き方</li>
+        <li><strong>安全管理</strong>：中止基準・転倒対応・緊急時フロー</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- PAGE: flow                                                    -->
+  <!-- ============================================================ -->
+  <div class="page" id="page-flow">
+    <div class="sec-head"><div class="sec-icon">🔁</div><div><h2>業務フロー・評価測定</h2><p>計画書作成から記録まで ／ 評価ツール簡易手順</p></div></div>
+
+    <style>
+    .flow-block{margin-bottom:28px}
+    .flow-block-title{font-size:13px;font-weight:800;color:var(--accent);letter-spacing:.04em;
+      border-left:4px solid var(--accent);padding-left:10px;margin-bottom:12px}
+    .flow-steps{display:flex;flex-direction:column;gap:0}
+    .flow-step{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;
+      background:#fff;border:1px solid var(--border);border-bottom:none}
+    .flow-step:first-child{border-radius:10px 10px 0 0}
+    .flow-step:last-child{border-bottom:1px solid var(--border);border-radius:0 0 10px 10px}
+    .flow-num{width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;
+      font-size:13px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+    .flow-num.blue{background:#1558a0}
+    .flow-num.teal{background:#0d9488}
+    .flow-body{flex:1}
+    .flow-name{font-size:14px;font-weight:800;color:#1e293b}
+    .flow-detail{font-size:12.5px;color:#475569;line-height:1.7;margin-top:3px}
+    .flow-stop{font-size:12px;color:#7f1d1d;background:#fee2e2;border-left:3px solid #dc2626;
+      padding:5px 9px;border-radius:5px;margin-top:6px}
+    .flow-arrow{text-align:center;padding:4px 0;font-size:18px;color:#94a3b8}
+    .assess-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+    .assess-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:14px 16px}
+    .ac-head{display:flex;align-items:center;gap:9px;margin-bottom:8px}
+    .ac-icon{font-size:20px}
+    .ac-name{font-size:13px;font-weight:800;color:#1e293b}
+    .ac-steps{list-style:none;padding:0;margin:0}
+    .ac-steps li{padding:4px 0 4px 16px;position:relative;font-size:12.5px;color:#334155;
+      border-bottom:1px solid #f1f5f9;line-height:1.6}
+    .ac-steps li:last-child{border-bottom:none}
+    .ac-steps li::before{content:"▶";position:absolute;left:2px;font-size:9px;color:var(--accent);top:7px}
+    .ac-cut{display:inline-block;margin-top:6px;font-size:11px;font-weight:700;
+      padding:3px 10px;border-radius:10px}
+    .cut-red{background:#fee2e2;color:#7f1d1d}
+    .cut-amb{background:#fef3c7;color:#78350f}
+    .cut-grn{background:#dcfce7;color:#14532d}
+    </style>
+
+    <!-- フロー：初回・月1回 -->
+    <div class="flow-block">
+      <div class="flow-block-title">① 計画書作成（初回 ／ 月1回更新）</div>
+      <div class="flow-steps">
+        <div class="flow-step"><div class="flow-num blue">1</div><div class="flow-body"><div class="flow-name">アセスメント測定</div><div class="flow-detail">TUG・BI・RSST・握力・5m歩行などを測定（下記「評価測定」参照）</div></div></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step"><div class="flow-num blue">2</div><div class="flow-body"><div class="flow-name">パターン選択</div><div class="flow-detail">測定値・状態を「004_プログラム作成フォーム」に入力 → A〜Eパターンを選択</div></div></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step"><div class="flow-num blue">3</div><div class="flow-body"><div class="flow-name">個別機能訓練計画書を作成</div><div class="flow-detail">目標（短期・長期）・訓練内容・禁忌事項・実施頻度を記載</div></div></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step"><div class="flow-num blue">4</div><div class="flow-body"><div class="flow-name">本人・家族へ説明・同意取得</div><div class="flow-detail">計画書を読み合わせ、同意署名をもらう</div></div></div>
+      </div>
+    </div>
+
+    <!-- フロー：毎回の訓練 -->
+    <div class="flow-block">
+      <div class="flow-block-title">② 毎回の訓練</div>
+      <div class="flow-steps">
+        <div class="flow-step"><div class="flow-num">1</div><div class="flow-body"><div class="flow-name">訓練前バイタル測定</div><div class="flow-detail">BP・脈拍・SpO2（呼吸器系はSpO2必須）</div><div class="flow-stop">🛑 中止基準：BP180↑ / 90↓・SpO2 91%以下・脈120↑ or 40↓・体温38℃↑・胸痛・強い動悸</div></div></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step"><div class="flow-num">2</div><div class="flow-body"><div class="flow-name">主訴確認・今日の体調確認</div><div class="flow-detail">「今日の体調は？どこか痛いところは？」。本日の訓練内容を説明して同意確認</div></div></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step"><div class="flow-num">3</div><div class="flow-body"><div class="flow-name">ウォームアップ（3〜4分）</div><div class="flow-detail">肩回し・足首回し・深呼吸</div></div></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step"><div class="flow-num">4</div><div class="flow-body"><div class="flow-name">訓練実施（20分以上）</div><div class="flow-detail">計画書のパターンに沿って実施（「003_個別プログラム手順」を参照）</div></div></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step"><div class="flow-num">5</div><div class="flow-body"><div class="flow-name">クールダウン（3〜4分）</div><div class="flow-detail">安静座位・深呼吸・軽いストレッチ</div></div></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step"><div class="flow-num">6</div><div class="flow-body"><div class="flow-name">訓練後バイタル・主訴確認</div><div class="flow-detail">BP・脈拍・SpO2を再測定。「気分はいかがですか？」と声かけ</div></div></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step"><div class="flow-num">7</div><div class="flow-body"><div class="flow-name">SOAP記録</div><div class="flow-detail"><strong>S</strong>：主訴 ／ <strong>O</strong>：バイタル・実施内容・達成度 ／ <strong>A</strong>：評価 ／ <strong>P</strong>：次回計画</div></div></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step"><div class="flow-num">8</div><div class="flow-body"><div class="flow-name">介護職員へ申し送り</div><div class="flow-detail">良肢位・注意点・当日の様子を口頭または記録で伝える</div></div></div>
+      </div>
+    </div>
+
+    <!-- フロー：月1回評価 -->
+    <div class="flow-block">
+      <div class="flow-block-title">③ 月1回評価・更新</div>
+      <div class="flow-steps">
+        <div class="flow-step"><div class="flow-num teal">1</div><div class="flow-body"><div class="flow-name">再評価測定</div><div class="flow-detail">TUG・BI・RSSTなどを再測定して初回値と比較</div></div></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step"><div class="flow-num teal">2</div><div class="flow-body"><div class="flow-name">計画書更新</div><div class="flow-detail">目標達成状況・訓練内容を見直し。達成したら目標を一段引き上げる</div></div></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step"><div class="flow-num teal">3</div><div class="flow-body"><div class="flow-name">LIFEへデータ提出</div><div class="flow-detail">個別機能訓練加算（Ⅱ）算定の場合。提出期限を管理者と確認</div></div></div>
+      </div>
+    </div>
+
+    <!-- 評価ツール -->
+    <div class="flow-block">
+      <div class="flow-block-title">評価ツール 簡易手順</div>
+      <div class="assess-cards">
+
+        <div class="assess-card">
+          <div class="ac-head"><span class="ac-icon">⏱️</span><span class="ac-name">TUG（Timed Up and Go）</span></div>
+          <ul class="ac-steps">
+            <li>椅子（背もたれあり・肘掛けなし）に深く腰掛けさせる</li>
+            <li>前方3mの目印（コーン等）を置く</li>
+            <li>「立って3mまで歩き、戻って座ってください」と説明</li>
+            <li>「スタート」の合図でストップウォッチを開始</li>
+            <li>椅子に完全に座り直した瞬間に計測終了</li>
+          </ul>
+          <span class="ac-cut cut-red">12秒以上：転倒リスク高</span>
+          <span class="ac-cut cut-amb">10〜12秒：注意</span>
+          <span class="ac-cut cut-grn">10秒未満：良好</span>
+        </div>
+
+        <div class="assess-card">
+          <div class="ac-head"><span class="ac-icon">📊</span><span class="ac-name">BI（Barthel Index）</span></div>
+          <ul class="ac-steps">
+            <li>10項目を問診または観察で評価（食事・移乗・整容・トイレ・入浴・移動・階段・更衣・排便・排尿）</li>
+            <li>各項目を自立/部分介助/全介助の3〜4段階で点数化</li>
+            <li>100点満点（完全自立）</li>
+          </ul>
+          <span class="ac-cut cut-red">40点未満：高度依存</span>
+          <span class="ac-cut cut-amb">40〜80点：部分介助</span>
+          <span class="ac-cut cut-grn">85点以上：ほぼ自立</span>
+        </div>
+
+        <div class="assess-card">
+          <div class="ac-head"><span class="ac-icon">💧</span><span class="ac-name">RSST（反復唾液嚥下テスト）</span></div>
+          <ul class="ac-steps">
+            <li>座位姿勢を整える（頸部前傾位は避ける）</li>
+            <li>喉頭（のどぼとけ）に指を当てて確認の準備</li>
+            <li>「30秒間、唾を飲み込んでください」と指示</li>
+            <li>30秒間でゴクンと飲み込んだ回数をカウント（指で喉頭挙上を確認）</li>
+          </ul>
+          <span class="ac-cut cut-red">2回以下：嚥下障害疑い→医師報告</span>
+          <span class="ac-cut cut-grn">3回以上：正常範囲</span>
+        </div>
+
+        <div class="assess-card">
+          <div class="ac-head"><span class="ac-icon">✊</span><span class="ac-name">握力</span></div>
+          <ul class="ac-steps">
+            <li>立位または座位で腕を体側に自然に下ろす</li>
+            <li>握力計を「2」の目盛りに合わせて持たせる</li>
+            <li>「はい、思い切り握ってください」と合図</li>
+            <li>左右それぞれ2回ずつ測定し、最大値を採用</li>
+          </ul>
+          <span class="ac-cut cut-red">男性28kg未満・女性18kg未満：サルコペニア疑い</span>
+        </div>
+
+        <div class="assess-card">
+          <div class="ac-head"><span class="ac-icon">🏃</span><span class="ac-name">5m歩行テスト</span></div>
+          <ul class="ac-steps">
+            <li>10mのコースを用意（前後2.5mは加速・減速区間）</li>
+            <li>中央5mにスタートとゴールのラインをテープで貼る</li>
+            <li>「いつもどおりのペースで歩いてください」と指示</li>
+            <li>スタートラインを過ぎた瞬間〜ゴールラインを過ぎた瞬間を計測</li>
+          </ul>
+          <span class="ac-cut cut-red">8.3秒以上（0.6m/s未満）：転倒リスク高</span>
+          <span class="ac-cut cut-grn">6.25秒未満（0.8m/s超）：屋外活動可能</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- PAGE: addition                                                -->
+  <!-- ============================================================ -->
+  <div class="page" id="page-addition">
+    <div class="sec-head"><div class="sec-icon">📋</div><div><h2>加算・算定要件</h2><p>看護師が算定できる加算と必要な体制</p></div></div>
+
+    <div class="alert blue">📌 機能訓練指導員になれる職種に<strong>看護師・准看護師</strong>は明確に含まれます（介護保険法施行規則に規定）。</div>
+
+    <div class="card">
+      <h3>📊 算定できる主な加算（令和6年度改定後）</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>加算名</th><th>単位数</th><th>Ns単独</th><th>LIFE提出</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>個別機能訓練加算（Ⅰ）イ</strong></td>
+              <td>56単位/日</td>
+              <td><span class="badge green">○</span></td>
+              <td><span class="badge blue">不要</span></td>
+            </tr>
+            <tr>
+              <td><strong>個別機能訓練加算（Ⅰ）ロ</strong></td>
+              <td>76単位/日</td>
+              <td><span class="badge green">○</span></td>
+              <td><span class="badge red">必要</span></td>
+            </tr>
+            <tr>
+              <td><strong>個別機能訓練加算（Ⅱ）</strong></td>
+              <td>20単位/月</td>
+              <td><span class="badge green">○</span></td>
+              <td><span class="badge red">必要</span></td>
+            </tr>
+            <tr>
+              <td><strong>ADL維持等加算（Ⅰ）</strong></td>
+              <td>30単位/月</td>
+              <td><span class="badge green">○</span></td>
+              <td><span class="badge red">必要</span></td>
+            </tr>
+            <tr>
+              <td><strong>ADL維持等加算（Ⅱ）</strong></td>
+              <td>60単位/月</td>
+              <td><span class="badge green">○</span></td>
+              <td><span class="badge red">必要</span></td>
+            </tr>
+            <tr>
+              <td><strong>口腔機能向上加算（Ⅰ）</strong></td>
+              <td>150単位/回（月2回まで）</td>
+              <td><span class="badge green">○</span></td>
+              <td><span class="badge blue">不要</span></td>
+            </tr>
+            <tr>
+              <td><strong>生活機能向上連携加算（Ⅰ/Ⅱ）</strong></td>
+              <td>100/200単位/月</td>
+              <td><span class="badge amber">△ 外部PT等が必須</span></td>
+              <td><span class="badge blue">不要</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>🔑 個別機能訓練加算（Ⅰ）イ ― 56単位/日</h3>
+      <ul class="list">
+        <li>機能訓練指導員を<strong>1名以上</strong>、サービス提供時間を通じて<strong>専従</strong>で配置</li>
+        <li>個別機能訓練計画書を作成し、それに基づく個別訓練を実施</li>
+        <li>LIFE提出不要。最も導入しやすい加算</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>🔑 個別機能訓練加算（Ⅰ）ロ ― 76単位/日</h3>
+      <ul class="list">
+        <li>機能訓練指導員を<strong>2名以上</strong>配置し、合計でサービス提供時間を専従（令和6年改定で緩和）</li>
+        <li><strong>LIFEへのデータ提出が必須</strong>（提出なしは算定不可）</li>
+        <li>提出データ：生活機能チェックシート・個別機能訓練計画書</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>🔑 個別機能訓練加算（Ⅱ） ― 20単位/月</h3>
+      <ul class="list">
+        <li>（Ⅰ）に加えてLIFE提出要件を満たすこと</li>
+        <li>提出書類：<strong>興味関心チェックシート・生活機能チェックシート・個別機能訓練計画書・訓練記録</strong></li>
+        <li>（Ⅰ）と（Ⅱ）は併算定可能</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>🔑 ADL維持等加算</h3>
+      <ul class="list">
+        <li>利用開始月と<strong>7ヶ月目にBarthel Indexを測定</strong>してLIFEに提出</li>
+        <li>Ⅰ：30単位/月、Ⅱ：60単位/月（維持改善率等の要件あり）</li>
+        <li>個別機能訓練加算との併算定が可能</li>
+      </ul>
+    </div>
+
+    <div class="alert green">✅ <strong>まず目指す体制</strong>：個別機能訓練加算（Ⅰ）イ から開始 → LIFE整備後に（Ⅰ）ロ・（Ⅱ）へ移行が現実的</div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- PAGE: rom                                                     -->
+  <!-- ============================================================ -->
+  <div class="page" id="page-rom">
+    <div class="sec-head"><div class="sec-icon">🔄</div><div><h2>ROM（関節可動域）訓練</h2><p>拘縮予防・関節可動域の維持・改善</p></div></div>
+
+    <div class="card">
+      <h3>🎯 目的・対象</h3>
+      <ul class="list">
+        <li><strong>目的</strong>：拘縮予防、関節可動域の維持・改善、痛みや血流障害の予防</li>
+        <li><strong>対象</strong>：変形性関節症、脳卒中後遺症、廃用症候群（要支援〜要介護3程度）</li>
+        <li><strong>基本原則</strong>：他動 → 自動介助 → 自動（active）の順で段階的に</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>🦾 上肢の訓練</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>関節</th><th>動作</th><th>回数・角度</th><th>注意点</th></tr></thead>
+          <tbody>
+            <tr><td>肩関節</td><td>屈伸・内外旋・外転</td><td>5〜10回×2セット、90°未満から開始</td><td>痛みがある場合は無理に可動域拡大しない</td></tr>
+            <tr><td>肘関節</td><td>屈伸</td><td>5〜10回×2セット</td><td>骨折後は医師確認必須</td></tr>
+            <tr><td>前腕</td><td>回内・回外</td><td>5〜10回×2セット</td><td>肘を固定して実施</td></tr>
+            <tr><td>手関節</td><td>背屈・掌屈・橈尺屈</td><td>5〜10回×2セット</td><td>手根管症候群の場合は手技を調整</td></tr>
+            <tr><td>手指</td><td>MP/PIP/DIPの屈伸、開閉</td><td>5〜10回×2セット</td><td>関節リウマチは炎症期に実施しない</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>🦵 下肢の訓練</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>関節</th><th>動作</th><th>回数・角度</th><th>注意点</th></tr></thead>
+          <tbody>
+            <tr><td>股関節</td><td>屈伸・内外転</td><td>5〜10回×2セット、疼痛回避</td><td>人工関節置換術後4週以内は医師確認</td></tr>
+            <tr><td>膝関節</td><td>屈伸</td><td>5〜10回×2セット</td><td>膝OAは伸展可動域の維持を優先</td></tr>
+            <tr><td>足関節</td><td>背屈・底屈</td><td>5〜10回×2セット、背屈5°以上を目標</td><td>下肢静脈血栓症の既往に注意</td></tr>
+            <tr><td>足趾</td><td>屈伸・開閉</td><td>5〜10回×2セット</td><td>むくみ確認後に実施</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>🏋️ 体幹の訓練</h3>
+      <ul class="list">
+        <li>座位での<strong>体幹回旋</strong>：両手を胸の前で組み、左右に15〜20°ずつ回旋（5〜10回）</li>
+        <li>座位での<strong>体幹側屈</strong>：体幹を左右に傾ける（5〜10回）</li>
+        <li>立位保持での<strong>軽い前屈</strong>：手すり把持で骨盤を前傾（5〜10回）</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>⏱️ 実施要領</h3>
+      <ul class="list">
+        <li>所要時間：<strong>1人あたり15〜20分</strong></li>
+        <li>痛み（NRS）が増強しない範囲で実施</li>
+        <li>炎症所見（熱感・発赤・腫脹）がある関節は<strong>中止</strong></li>
+        <li>人工関節置換術後4週間以内は必ず医師確認</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- PAGE: strength                                                -->
+  <!-- ============================================================ -->
+  <div class="page" id="page-strength">
+    <div class="sec-head"><div class="sec-icon">💪</div><div><h2>筋力強化訓練</h2><p>下肢・体幹筋力の維持・向上・転倒予防</p></div></div>
+
+    <div class="card">
+      <h3>🎯 目的・対象</h3>
+      <ul class="list">
+        <li><strong>目的</strong>：下肢・体幹筋力の維持・向上、転倒予防、起居動作の自立支援</li>
+        <li><strong>対象</strong>：起立・移乗に介助が必要な方、サルコペニアが疑われる方</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>🪑 座位での下肢運動</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>種目</th><th>回数</th><th>ポイント</th></tr></thead>
+          <tbody>
+            <tr><td><strong>膝伸展（5秒保持）</strong></td><td>10回×2セット</td><td>椅子に深く座り、膝をゆっくり伸ばして5秒保持してから戻す</td></tr>
+            <tr><td><strong>踵上げ（カーフレイズ）</strong></td><td>10〜20回×2セット</td><td>座位でつま先立ち。腓腹筋強化</td></tr>
+            <tr><td><strong>つま先上げ</strong></td><td>10〜20回×2セット</td><td>踵を床に付けたまま足先を上げる。前脛骨筋強化</td></tr>
+            <tr><td><strong>股関節屈曲（膝を上げる）</strong></td><td>10回×2セット</td><td>ゆっくり太ももを上げて3秒保持</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>🧍 立ち上がり練習</h3>
+      <ul class="list">
+        <li>椅子からの<strong>立ち座り（5〜10回）</strong>：椅子は膝関節90°になる高さに調整</li>
+        <li>必要に応じて肘掛け使用・介助者を前方に配置</li>
+        <li>「足を引いてから前傾して立つ」の動作手順を毎回声かけで確認</li>
+        <li>目標：30秒で5回以上（5回椅子立ち上がりテスト標準値）</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>⚙️ 体幹・その他</h3>
+      <ul class="list">
+        <li><strong>骨盤前後傾運動</strong>：座位で骨盤を前後に傾ける（体幹深部筋）</li>
+        <li><strong>ゴムバンド使用</strong>（Thera-band等）：Ns判断で実施可。強度は「ちょうどきつい」程度</li>
+        <li><strong>壁スクワット</strong>：壁に背中を付けて膝を90°まで曲げる（5〜10秒保持×5回）</li>
+      </ul>
+    </div>
+
+    <div class="alert red">🛑 <strong>中止基準</strong>：収縮期血圧 160mmHg以上 または 100mmHg未満 ／ 心拍数が安静時+30bpm超 ／ 不整脈出現 ／ 胸痛・強い動悸</div>
+
+    <div class="point"><strong>所要時間：1人あたり15〜20分</strong>。立ち上がり練習は椅子の高さ・手すりの有無を毎回確認してから開始すること。</div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- PAGE: balance                                                 -->
+  <!-- ============================================================ -->
+  <div class="page" id="page-balance">
+    <div class="sec-head"><div class="sec-icon">⚖️</div><div><h2>バランス訓練</h2><p>立位バランス改善・転倒予防</p></div></div>
+
+    <div class="card">
+      <h3>🎯 目的・対象</h3>
+      <ul class="list">
+        <li><strong>目的</strong>：立位バランス改善、転倒予防、重心移動能力の向上</li>
+        <li><strong>対象</strong>：TUG ≧14秒 ／ 片脚立位保持困難 ／ 転倒既往のある方</li>
+      </ul>
+    </div>
+
+    <div class="alert red">⚠️ <strong>必ず安全確保をしてから実施</strong>：平行棒内 ／ 手すり前方 ／ 介助者近接のいずれかで対応</div>
+
+    <div class="card">
+      <h3>🧍 立位バランス訓練（段階的に）</h3>
+      <div class="step-grid">
+        <div class="step-card"><div class="step-no">STEP 1</div><p><strong>両脚立位</strong><br>足幅を肩幅に開き、30秒〜1分保持</p></div>
+        <div class="step-card"><div class="step-no">STEP 2</div><p><strong>半歩幅立位</strong><br>足を半歩前後にずらして保持</p></div>
+        <div class="step-card"><div class="step-no">STEP 3</div><p><strong>タンデム立位</strong><br>一直線に前後に並べて保持（難易度高）</p></div>
+        <div class="step-card"><div class="step-no">STEP 4</div><p><strong>片脚立位</strong><br>5秒以上を目標。最初は手すり保持</p></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>↔️ 重心移動訓練</h3>
+      <ul class="list">
+        <li>支持基底面の内で<strong>前後左右への重心移動</strong>（声かけで誘導）</li>
+        <li>両手を前に出す・横に出す等の<strong>上肢リーチ</strong>（Functional Reach Test動作）</li>
+        <li>目標：前方リーチ距離が25cm以上（転倒リスク低減の目安）</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>🦶 足底感覚訓練</h3>
+      <ul class="list">
+        <li><strong>タオルギャザー</strong>：足趾でタオルを手繰り寄せる（各足10回）</li>
+        <li><strong>ボール足裏転がし</strong>：テニスボール等を足裏で転がす（各足30秒）</li>
+        <li>立位で実施する場合は必ず手すり把持</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>🪑 座位バランス訓練</h3>
+      <ul class="list">
+        <li>座位での<strong>上肢リーチ動作</strong>：手を前・横・斜め方向に伸ばす</li>
+        <li>座位での<strong>体幹傾斜</strong>：反対側へ体幹を傾けてから戻す</li>
+        <li>手を膝に置いた状態で<strong>背もたれなし座位保持</strong>（30秒〜）</li>
+      </ul>
+    </div>
+
+    <div class="point"><strong>所要時間：1人あたり10〜15分</strong>。起立性低血圧の既往がある方は、起立前後に血圧測定を実施すること。</div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- PAGE: gait                                                    -->
+  <!-- ============================================================ -->
+  <div class="page" id="page-gait">
+    <div class="sec-head"><div class="sec-icon">👣</div><div><h2>歩行訓練</h2><p>歩行能力の維持・改善・屋内外自立歩行の獲得</p></div></div>
+
+    <div class="card">
+      <h3>🎯 目的・対象</h3>
+      <ul class="list">
+        <li><strong>目的</strong>：歩行能力の維持・改善。屋内自立歩行・買物等の屋外歩行獲得</li>
+        <li><strong>対象</strong>：独歩可能〜歩行器使用の方、FIM歩行項目5〜6相当</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>📶 歩行訓練の段階（難易度順）</h3>
+      <div class="step-grid">
+        <div class="step-card"><div class="step-no">STEP 1</div><p><strong>平行棒内</strong><br>ステップ練習・方向転換・つまずき防止練習</p></div>
+        <div class="step-card"><div class="step-no">STEP 2</div><p><strong>歩行器使用</strong><br>ピックアップ→四輪型→シルバーカーへ段階的に移行</p></div>
+        <div class="step-card"><div class="step-no">STEP 3</div><p><strong>四点杖・T字杖</strong><br>基本動作を確認後に移行</p></div>
+        <div class="step-card"><div class="step-no">STEP 4</div><p><strong>独歩</strong><br>平地→障害物回避→段差→階段の順で</p></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>📏 歩行補助具の選定基準</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>補助具</th><th>適応目安</th></tr></thead>
+          <tbody>
+            <tr><td>ピックアップウォーカー（前腕支持型）</td><td>立位バランスが不安定、上肢支持が必要な場合</td></tr>
+            <tr><td>四輪歩行器（シルバーカー）</td><td>比較的バランスが良く長距離歩行が目標</td></tr>
+            <tr><td>四点杖</td><td>片麻痺等で片側のサポートが必要</td></tr>
+            <tr><td>T字杖</td><td>バランスが改善し軽度のサポートで足りる段階</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="alert amber">⚠️ 装具がある場合は医師・義肢装具士の指示内容を必ず確認してから使用</div>
+    </div>
+
+    <div class="card">
+      <h3>⏱️ 実施要領・安全確認</h3>
+      <ul class="list">
+        <li>所要時間：<strong>1人あたり15〜20分</strong></li>
+        <li>訓練前後のバイタルチェック（BP・HR・SpO2）</li>
+        <li>靴は<strong>滑り止め付き・足に合ったもの</strong>を着用確認</li>
+        <li>FRT（機能的リーチテスト）が<strong>15cm未満の方は常時見守り</strong></li>
+        <li>5m歩行テストで進捗管理（歩行速度の変化を記録）</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- PAGE: adl                                                     -->
+  <!-- ============================================================ -->
+  <div class="page" id="page-adl">
+    <div class="sec-head"><div class="sec-icon">🛁</div><div><h2>ADL訓練</h2><p>日常生活動作の自立支援・介護負担軽減</p></div></div>
+
+    <div class="card">
+      <h3>🎯 目的・対象</h3>
+      <ul class="list">
+        <li><strong>目的</strong>：日常生活動作（ADL）の自立支援、QOL・自己尊厳の維持、介護負担軽減</li>
+        <li><strong>対象</strong>：FIMやBarthel IndexでADL低下が認められる方</li>
+        <li>所要時間：<strong>1人あたり20〜30分</strong>（生活場面に近い形で実施）</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>👕 更衣訓練</h3>
+      <ul class="list">
+        <li><strong>上衣</strong>：前開きシャツから練習。動作を「手を通す→掴む→引き上げる」と分割して声かけ</li>
+        <li><strong>ズボン</strong>：座位でズボンを引き上げる動作。立位での引き上げは転倒に注意</li>
+        <li><strong>かぶりシャツ</strong>：肩関節ROM改善後に移行</li>
+        <li>片麻痺の方：患側から着て、健側から脱ぐ（更衣の基本原則）</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>🍽️ 食事動作訓練</h3>
+      <ul class="list">
+        <li><strong>自助具の選定</strong>：太柄スプーン・フォーク、吸盤マット、ストロー、コップ補助具等</li>
+        <li>握力低下→太柄・グリップ付き ／ 振戦→重みのある食器 ／ 片麻痺→吸盤マット</li>
+        <li>姿勢：体幹をやや前傾し、肘をテーブルに乗せて安定させる</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>🚽 排泄動作訓練</h3>
+      <ul class="list">
+        <li><strong>下身衣の上げ下ろし</strong>：立位・座位での動作練習（安全バーを活用）</li>
+        <li><strong>洋式トイレでの立ち座り</strong>：便座高さの確認（膝90°が目安）</li>
+        <li><strong>ポータブルトイレへの移乗</strong>：車椅子→ポータブルトイレの動作分割練習</li>
+        <li>転倒リスクが高い方は動線上の手すり・床材を事前確認</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>🧼 整容・その他</h3>
+      <ul class="list">
+        <li><strong>歯磨き動作</strong>：把持力低下→電動歯ブラシの導入検討</li>
+        <li><strong>整髪動作</strong>：肩関節ROMと連携した上肢リーチ練習</li>
+        <li><strong>入浴動作</strong>：洗体動作の工程分割（洗う→すすぐ→拭く）、シャワーチェア使用の確認</li>
+      </ul>
+    </div>
+
+    <div class="alert amber">⚠️ 嚥下機能が低下している方が食事訓練を行う場合は、誤嚥リスクを事前評価し医師・管理者に相談のこと</div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- PAGE: breath                                                  -->
+  <!-- ============================================================ -->
+  <div class="page" id="page-breath">
+    <div class="sec-head"><div class="sec-icon">🌬️</div><div><h2>呼吸訓練</h2><p>呼吸効率改善・誤嚥性肺炎予防</p></div></div>
+
+    <div class="card">
+      <h3>🎯 目的・対象</h3>
+      <ul class="list">
+        <li><strong>目的</strong>：呼吸効率改善、誤嚥性肺炎予防、慢性呼吸器疾患の進行抑制</li>
+        <li><strong>対象</strong>：COPD・慢性心不全・誤嚥性肺炎既往・座位で呼吸が浅くなる方</li>
+        <li>所要時間：<strong>1人あたり10〜15分</strong></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>😮 口すぼめ呼吸</h3>
+      <ul class="list">
+        <li>鼻から<strong>ゆっくり吸い</strong>、口をすぼめて（「フー」と吹くように）<strong>ゆっくり吐く</strong></li>
+        <li>呼気は吸気の<strong>2〜3倍</strong>の時間をかけて吐く（例：吸気2秒→呼気4〜6秒）</li>
+        <li>効果：気道内圧が高まり、気道虚脱を防ぐ。COPD患者に特に有効</li>
+        <li>10回×2〜3セットを目安に</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>🫁 腹式呼吸</h3>
+      <ul class="list">
+        <li>仰臥位または座位で、<strong>お腹に手を当てて</strong>呼吸を意識化する</li>
+        <li>吸気でお腹が膨らむ・呼気でお腹がへこむことを確認しながら実施</li>
+        <li>10回×2セットを目安に。ゆっくりリズムよく行う</li>
+        <li>座位で行う場合は体幹をやや前傾して横隔膜の動きを助ける</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>💨 口唇・舌・頬の準備運動</h3>
+      <ul class="list">
+        <li><strong>口唇体操</strong>：口を大きく開ける→閉じる（10回）、横に広げる→すぼめる（10回）</li>
+        <li><strong>舌運動</strong>：舌を前・後・左右に動かす（各5回）</li>
+        <li><strong>頬の運動</strong>：頬をふくらませる→すぼめる（10回）</li>
+        <li>嚥下関連筋群への間接的アプローチとしても有効</li>
+      </ul>
+    </div>
+
+    <div class="alert red">🛑 <strong>中止基準</strong>：SpO2 90%未満 ／ 胸部不快感・呼吸困難感 ／ 喘息・心疾患の増悪期は実施しない</div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- PAGE: oral                                                    -->
+  <!-- ============================================================ -->
+  <div class="page" id="page-oral">
+    <div class="sec-head"><div class="sec-icon">👄</div><div><h2>口腔・嚥下機能訓練</h2><p>嚥下機能の維持・改善・誤嚥性肺炎予防</p></div></div>
+
+    <div class="alert amber">⚠️ 看護師が行える口腔機能訓練は<strong>間接訓練</strong>が主体です。食物を使った<strong>直接訓練</strong>はST・医師の指示下で行うことが原則です。</div>
+
+    <div class="card">
+      <h3>🎯 目的・対象</h3>
+      <ul class="list">
+        <li><strong>目的</strong>：嚥下機能の維持・改善、口腔清潔の維持、誤嚥性肺炎予防</li>
+        <li><strong>対象</strong>：嚥下障害が疑われる方、低栄養・脱水傾向、反復性肺炎の方</li>
+        <li>所要時間：<strong>1人あたり10〜15分</strong></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>🗣️ パタカラ体操</h3>
+      <ul class="list">
+        <li><strong>「パ」</strong>：口唇の筋肉を鍛える。食べ物が口からこぼれる予防</li>
+        <li><strong>「タ」</strong>：舌先の動きを鍛える。食べ物を押しつぶす動作</li>
+        <li><strong>「カ」</strong>：舌の奥の動きを鍛える。食べ物を飲み込む動作</li>
+        <li><strong>「ラ」</strong>：舌を巻く動き。食べ物をまとめる動作</li>
+        <li>各音を<strong>はっきり大きく5〜10回ずつ</strong>。声に出せる方は音読、難しい方は口の動きだけでも可</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>👅 舌・口腔機能訓練</h3>
+      <ul class="list">
+        <li><strong>舌の突き出し・引っ込め</strong>：各5回、ゆっくり大きく動かす</li>
+        <li><strong>舌の左右移動</strong>：舌先で左右の口角を交互に触れる（5回）</li>
+        <li><strong>舌尖で口唇をなめる</strong>：時計回り・反時計回り各5回</li>
+        <li><strong>舌を上あごに押し付ける</strong>：3〜5秒保持×5回（喉頭挙上筋の強化）</li>
+        <li><strong>頬をふくらませる・すぼめる</strong>：各5〜10回</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>💧 間接嚥下訓練</h3>
+      <ul class="list">
+        <li><strong>唾液嚥下の促し</strong>：「唾を飲み込んでください」と声かけ（反復唾液嚥下テスト：RSST）</li>
+        <li><strong>喉頭挙上訓練</strong>：「ゴクン」と意識的に飲み込む動作を繰り返す</li>
+        <li><strong>アイスマッサージ</strong>：綿棒を冷水・氷水に浸して軟口蓋・舌根を軽く刺激（医師確認後に実施）</li>
+      </ul>
+      <div class="alert red">⚠️ 頸部聴診・嚥下造影等の精密評価が必要な場合はST・医師へ紹介</div>
+    </div>
+
+    <div class="card">
+      <h3>👁️ 訓練前後の確認事項</h3>
+      <ul class="list">
+        <li>訓練前後の<strong>口腔内状態</strong>（義歯の適合・口腔内残渣・乾燥）を確認</li>
+        <li>むせ込みが出現したら<strong>姿勢調整（頸部前屈）</strong>を試み、続く場合は中止</li>
+        <li>発熱・咳嗽・痰の性状変化があれば医療連携</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- PAGE: assess                                                  -->
+  <!-- ============================================================ -->
+  <div class="page" id="page-assess">
+    <div class="sec-head"><div class="sec-icon">📊</div><div><h2>評価・個別計画</h2><p>アセスメントツールと計画書の作り方</p></div></div>
+
+    <div class="card">
+      <h3>📋 評価ツール一覧</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>ツール</th><th>評価内容</th><th>カットオフ目安</th><th>所要時間</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Barthel Index（BI）</strong></td><td>ADL 10項目</td><td>60点以下：中等度依存<br><small>※ADL維持等加算で必須</small></td><td>5〜10分</td></tr>
+            <tr><td><strong>MMSE / HDS-R</strong></td><td>認知機能スクリーニング</td><td>MMSE 23点以下：要精査</td><td>10〜15分</td></tr>
+            <tr><td><strong>TUG（Timed Up & Go）</strong></td><td>動的バランス・転倒リスク</td><td>14秒以上：転倒リスク高</td><td>3〜5分</td></tr>
+            <tr><td><strong>片脚立位時間</strong></td><td>静的バランス</td><td>5秒未満：転倒リスク高</td><td>2〜3分</td></tr>
+            <tr><td><strong>FRT（機能的リーチテスト）</strong></td><td>動的バランス</td><td>15cm未満：高リスク</td><td>3〜5分</td></tr>
+            <tr><td><strong>RSST（反復唾液嚥下）</strong></td><td>嚥下機能</td><td>3回未満/30秒：要精査</td><td>5分</td></tr>
+            <tr><td><strong>Vitality Index</strong></td><td>活力・意欲評価</td><td>7点以下：意欲低下</td><td>5分</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>🎯 目標設定（SMART原則）</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>種類</th><th>期間</th><th>記述例</th></tr></thead>
+          <tbody>
+            <tr><td><strong>長期目標</strong></td><td>6〜12か月</td><td>「自宅の廊下を伝い歩きで自立移動できる」<br>「夜間も排泄動作を自立して行える」</td></tr>
+            <tr><td><strong>短期目標</strong></td><td>1〜3か月</td><td>「椅子から手すりを使って5回連続立てる（3か月以内）」<br>「5m歩行時間を15秒→12秒に短縮」</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="alert green">✅ <strong>目標記述のコツ</strong>：「〜できるようになる」と肯定文・定量化・期限付きで記載。本人・家族の意向に沿った内容にする。</div>
+    </div>
+
+    <div class="card">
+      <h3>🔄 3か月ごとの評価・見直し手順</h3>
+      <ol class="list-num">
+        <li>評価項目の再測定（BI・TUG・MMSE等）</li>
+        <li>本人・家族への説明（口頭＋書面で記録）</li>
+        <li>達成・未達成・新課題に応じて短期目標を更新</li>
+        <li>個別機能訓練計画書の改訂・本人署名</li>
+        <li>介護職員・相談員・管理者との多職種共有</li>
+      </ol>
+      <div class="point"><strong>⚠️ 計画書は「概ね3か月ごとに効果を評価し、必要に応じて見直す」ことが老企第36号で義務付けられています。</strong></div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- PAGE: record                                                  -->
+  <!-- ============================================================ -->
+  <div class="page" id="page-record">
+    <div class="sec-head"><div class="sec-icon">📝</div><div><h2>記録・書類</h2><p>加算算定に必要な書類と記録の書き方</p></div></div>
+
+    <div class="card">
+      <h3>📄 個別機能訓練計画書の必須記載項目</h3>
+      <ol class="list-num">
+        <li>利用者の基本情報（氏名・要介護度・認定有効期間）</li>
+        <li><strong>本人の希望・家族の希望</strong>（必ず聴取・記載）</li>
+        <li>病名、合併疾患リスク、<strong>禁忌事項</strong></li>
+        <li><strong>医師からの指示事項</strong>（配置医・主治医からの情報）</li>
+        <li>生活機能評価の結果（興味関心チェックシート等）</li>
+        <li><strong>長期目標・短期目標</strong>（明示して区別する）</li>
+        <li>具体的訓練内容（メニュー・頻度・所要時間・個別/集団の区別）</li>
+        <li>評価計画と評価時期（概ね3か月ごと）</li>
+        <li><strong>同意署名</strong>（本人または家族）</li>
+        <li>作成者氏名・作成日</li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <h3>📋 毎回の訓練記録（SOAP形式）</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>項目</th><th>記載内容</th></tr></thead>
+          <tbody>
+            <tr><td><strong>S（主観）</strong></td><td>利用者の主訴・体調訴え・当日の気分や意欲</td></tr>
+            <tr><td><strong>O（客観）</strong></td><td>バイタル（BP・HR・SpO2・体温）、訓練実施項目と回数、実施中の様子</td></tr>
+            <tr><td><strong>A（評価）</strong></td><td>訓練中の反応、計画達成度、リスクの気づき</td></tr>
+            <tr><td><strong>P（計画）</strong></td><td>次回に向けての調整事項、目標達成見込みの記載</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="alert blue">📌 最低限の記載：<strong>日付・開始時間・訓練内容（種目と回数）・バイタル・特記事項・実施者署名</strong></div>
+    </div>
+
+    <div class="card">
+      <h3>🗂️ 加算別 必要書類一覧</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>加算</th><th>必要書類</th></tr></thead>
+          <tbody>
+            <tr><td>個別機能訓練加算（Ⅰ）イ</td><td>個別機能訓練計画書 ＋ 訓練実施記録</td></tr>
+            <tr><td>個別機能訓練加算（Ⅰ）ロ</td><td>上記 ＋ LIFEへのデータ提出一式</td></tr>
+            <tr><td>個別機能訓練加算（Ⅱ）</td><td>上記 ＋ 興味関心チェックシート・生活機能チェックシート</td></tr>
+            <tr><td>ADL維持等加算</td><td>Barthel Index記録（開始月・7か月目）＋ LIFE提出</td></tr>
+            <tr><td>口腔機能向上加算</td><td>口腔機能向上計画書・スクリーニング・アセスメント記録</td></tr>
+            <tr><td>全加算共通</td><td><strong>本人同意書</strong>（個別機能訓練計画書への署名）</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- PAGE: safety                                                  -->
+  <!-- ============================================================ -->
+  <div class="page" id="page-safety">
+    <div class="sec-head"><div class="sec-icon">🛡️</div><div><h2>安全管理</h2><p>訓練中止基準・転倒対応・緊急時フロー</p></div></div>
+
+    <div class="alert red">🛑 <strong>安全最優先</strong>：中止基準に達したら迷わず訓練を止め、利用者を安全な姿勢に保護してください。</div>
+
+    <div class="card">
+      <h3>📊 バイタル訓練中止基準</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>項目</th><th class="vital-ok">◯ 実施OK</th><th class="vital-warn">△ 慎重に実施</th><th class="vital-stop">✕ 中止・連絡</th></tr></thead>
+          <tbody>
+            <tr><td>収縮期血圧</td><td class="vital-ok">100〜159 mmHg</td><td class="vital-warn">160〜179 / 90〜99</td><td class="vital-stop">180以上 / 90未満</td></tr>
+            <tr><td>拡張期血圧</td><td class="vital-ok">60〜99 mmHg</td><td class="vital-warn">100〜109</td><td class="vital-stop">110以上</td></tr>
+            <tr><td>安静時心拍数</td><td class="vital-ok">50〜100 bpm</td><td class="vital-warn">101〜119</td><td class="vital-stop">120以上 / 40未満</td></tr>
+            <tr><td>SpO2</td><td class="vital-ok">95%以上</td><td class="vital-warn">92〜94%</td><td class="vital-stop">91%以下</td></tr>
+            <tr><td>体温</td><td class="vital-ok">36.0〜37.5℃</td><td class="vital-warn">37.6〜37.9℃</td><td class="vital-stop">38.0℃以上</td></tr>
+            <tr><td>Borg指数（自覚的運動強度）</td><td class="vital-ok">11以下（楽）</td><td class="vital-warn">13（ややきつい）</td><td class="vital-stop">15以上（きつい）</td></tr>
+            <tr><td>症状</td><td class="vital-ok">なし</td><td class="vital-warn">軽度の息切れ・発汗</td><td class="vital-stop">胸痛・強い動悸・意識変容・めまい・嘔気</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:12px;color:var(--text-sub);margin-top:6px">※ アンダーソン基準・土肥の基準に準拠。最新の学会ガイドラインで随時確認すること。</p>
+    </div>
+
+    <div class="card">
+      <h3>⚠️ 転倒リスク評価と対応</h3>
+      <h4>高リスク判定基準</h4>
+      <ul class="list">
+        <li>TUG ≧14秒</li>
+        <li>FRT（機能的リーチテスト）15cm未満</li>
+        <li>Berg Balance Scale 45点以下</li>
+        <li>直近6か月の転倒既往あり</li>
+      </ul>
+      <h4 style="margin-top:14px">転倒予防対応</h4>
+      <ul class="list">
+        <li>環境：手すり設置、床材（滑り止め）、段差解消、照明確保</li>
+        <li>靴：滑り止め付きシューズ、足に合ったもの</li>
+        <li>声かけ：起立時「めまいはないですか」を毎回確認</li>
+        <li>高リスク者は人員が厚い時間帯に訓練を設定</li>
+        <li>ヒヤリハット・転倒報告書：発生時は速やかに記録・多職種共有</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>🆘 緊急時対応フロー</h3>
+      <ol class="list-num">
+        <li><strong>安全確保</strong>：利用者を安全な姿勢に保護。転倒時は無理に起こさない</li>
+        <li><strong>意識・呼吸・循環の確認</strong>：JCS・呼吸・頸動脈拍動・SpO2を確認</li>
+        <li><strong>119番通報</strong>：意識消失・呼吸停止・胸痛・大出血等があれば即時</li>
+        <li><strong>配置医・協力医療機関への連絡</strong>：状態報告、応急処置の指示を受ける</li>
+        <li><strong>家族への連絡</strong>：速やかに電話で第一報・状況説明</li>
+        <li><strong>記録・管理者報告</strong>：事故報告書を作成し所定期日までに行政報告</li>
+      </ol>
+      <div class="alert teal">📞 緊急連絡先リスト（配置医・協力医療機関・管理者）は事務所に掲示し、Nsが常に確認できる状態にしておくこと</div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- PAGE: ref                                                     -->
+  <!-- ============================================================ -->
+  <div class="page" id="page-ref">
+    <div class="sec-head"><div class="sec-icon">📚</div><div><h2>参考資料</h2><p>法令・様式・公式資料へのリンク集</p></div></div>
+
+    <div class="card">
+      <h3>📜 厚生労働省 公式資料</h3>
+      <ul class="list">
+        <li><a href="https://www.mhlw.go.jp/stf/newpage_38790.html" target="_blank">令和6年度介護報酬改定について</a></li>
+        <li><a href="https://www.mhlw.go.jp/stf/shingi2/0000198094_00037.html" target="_blank">科学的介護情報システム（LIFE）について</a></li>
+        <li><a href="https://www.mhlw.go.jp/shingi/2009/02/dl/s0219-2z.pdf" target="_blank">老企第36号（解釈通知・個別機能訓練計画書関連）[PDF]</a></li>
+        <li><a href="https://www.mhlw.go.jp/content/12404000/000755018.pdf" target="_blank">老認発0316第3号（医師指示情報）[PDF]</a></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>📄 無料 様式・テンプレート</h3>
+      <ul class="list">
+        <li><a href="https://www.city.kanoya.lg.jp/documents/5813/koukuukinou.xls" target="_blank">口腔機能向上計画書様式（鹿屋市公式・Excel）</a></li>
+        <li><a href="https://rehab.cloud/mag/2287/" target="_blank">個別機能訓練計画書 記載例（rehab cloud）</a></li>
+        <li><a href="https://www.qlc-sys.jp/article/life/a_190904/" target="_blank">ADL維持等加算 解説・Barthel計算例（QLC）</a></li>
+        <li><a href="https://www.qlc-sys.jp/article/life/a_210526-2/" target="_blank">LIFE提出データ項目解説（QLC）</a></li>
+        <li><a href="https://rehab.cloud/mag/8460/" target="_blank">個別機能訓練加算（Ⅰ）イ・ロ算定要件詳細（rehab cloud）</a></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>⚠️ 要確認事項</h3>
+      <div class="alert amber">以下の項目は自治体ごとに解釈が異なる場合があります。所管の市区町村・地域包括支援センターへ必ず確認してください。</div>
+      <ul class="list">
+        <li>生活機能向上連携加算のNs算定取扱い細目（地域差あり）</li>
+        <li>兼務不可の細則（都道府県・市区町村単位で異なる）</li>
+        <li>アンダーソン基準・土肥の基準の最新版（学会ごとに改訂されることあり）</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>📅 改訂履歴</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>日付</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>令和8年7月31日</td><td>初版作成（令和6年度介護報酬改定に対応）</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  </div><!-- /.main -->
+
+  <footer class="site-footer">機能訓練マニュアル｜デイサービス看護師向け｜令和8年7月作成</footer>
+</div><!-- /.content -->
+</div><!-- /.layout -->
+
+<script>
+const pages = {
+  intro:    'はじめに・前提',
+  flow:     '業務フロー・評価測定',
+  addition: '加算・算定要件',
+  rom:      'ROM（関節可動域）訓練',
+  strength: '筋力強化訓練',
+  balance:  'バランス訓練',
+  gait:     '歩行訓練',
+  adl:      'ADL訓練',
+  breath:   '呼吸訓練',
+  oral:     '口腔・嚥下機能訓練',
+  assess:   '評価・個別計画',
+  record:   '記録・書類',
+  safety:   '安全管理',
+  ref:      '参考資料'
+};
+
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  document.querySelector(`[data-page="${id}"]`).classList.add('active');
+  document.getElementById('page-title').textContent = pages[id] || '';
+  closeSidebar();
+  window.scrollTo(0, 0);
+}
+
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('show');
+}
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('overlay').classList.remove('show');
+}
+</script>
+</body>
+</html>

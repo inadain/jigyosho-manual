@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>個別プログラム作成フォーム｜機能訓練</title>
+<style>
+:root{
+  --amber:#d97706;--amber-mid:#f59e0b;--amber-lt:#fef3c7;--amber-xl:#fffbeb;
+  --grad:#78350f;
+  --blue:#1558a0;--blue-lt:#dbeafe;
+  --green:#16a34a;--green-lt:#dcfce7;
+  --red:#dc2626;--red-lt:#fee2e2;
+  --teal:#0d9488;--teal-lt:#ccfbf1;
+  --purple:#7c3aed;--purple-lt:#ede9fe;
+  --gray:#64748b;--gray-lt:#f1f5f9;--gray-mid:#e2e8f0;
+  --text:#0f172a;--sub:#475569;--bg:#f0f4f8;--white:#fff;
+  --r:12px;--r-sm:8px;
+  --sidebar-w:220px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Noto Sans JP",sans-serif;
+     font-size:15px;line-height:1.6;color:var(--text);background:var(--bg)}
+
+/* TOPBAR */
+.topbar{display:none;background:linear-gradient(135deg,var(--grad),var(--amber));
+  padding:12px 16px;position:sticky;top:0;z-index:100;
+  box-shadow:0 2px 10px rgba(120,53,15,.4);align-items:center;gap:12px}
+.tb-menu{background:rgba(255,255,255,.2);border:none;color:#fff;
+  width:36px;height:36px;border-radius:8px;font-size:18px;
+  cursor:pointer;display:flex;align-items:center;justify-content:center}
+.tb-title{color:#fff;font-size:14px;font-weight:800;flex:1}
+.tb-back{color:rgba(255,255,255,.85);font-size:12px;text-decoration:none;
+  background:rgba(255,255,255,.15);padding:5px 12px;border-radius:20px}
+
+/* LAYOUT */
+.layout{display:flex;min-height:100vh}
+.sidebar{width:var(--sidebar-w);
+  background:linear-gradient(180deg,var(--grad),var(--amber));
+  position:fixed;top:0;left:0;height:100vh;
+  display:flex;flex-direction:column;z-index:90;overflow-y:auto}
+.sb-logo{padding:20px 16px 14px;border-bottom:1px solid rgba(255,255,255,.15)}
+.sb-logo h1{font-size:13px;font-weight:800;color:#fff;line-height:1.4}
+.sb-logo p{font-size:10px;color:rgba(255,255,255,.6);margin-top:2px}
+.sb-back{display:block;margin:10px 12px 0;color:rgba(255,255,255,.8);font-size:11px;
+  text-decoration:none;background:rgba(255,255,255,.15);padding:5px 10px;
+  border-radius:16px;text-align:center}
+.sb-nav{padding:10px 0;flex:1}
+.sb-group{padding:8px 16px 3px;font-size:10px;font-weight:700;
+  color:rgba(255,255,255,.4);letter-spacing:.06em}
+.nav-btn{display:flex;align-items:center;gap:9px;padding:10px 14px;cursor:pointer;
+  color:rgba(255,255,255,.75);font-size:13px;font-weight:600;
+  border:none;background:none;width:100%;text-align:left;
+  border-left:3px solid transparent;transition:.15s}
+.nav-btn:hover{background:rgba(255,255,255,.1);color:#fff}
+.nav-btn.active{background:rgba(255,255,255,.18);color:#fff;border-left-color:#fff}
+.nav-icon{font-size:16px;flex-shrink:0}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:85}
+.overlay.show{display:block}
+
+/* CONTENT */
+.content{margin-left:var(--sidebar-w);flex:1;min-width:0}
+.ch{background:linear-gradient(135deg,var(--amber),var(--amber-mid));
+  padding:22px 24px 24px;text-align:center;color:#fff}
+.ch h2{font-size:18px;font-weight:800;margin-bottom:4px}
+.ch p{font-size:12px;color:rgba(255,255,255,.72)}
+.main{max-width:960px;margin:0 auto;padding:24px 20px 60px;width:100%}
+.page{display:none}
+.page.active{display:block}
+
+/* COMPONENTS */
+.sec-head{display:flex;align-items:center;gap:10px;margin:0 0 18px}
+.sec-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;font-size:20px;flex-shrink:0;background:var(--amber-lt)}
+.sec-head h2{font-size:17px;font-weight:800;color:var(--amber)}
+.sec-head p{font-size:12px;color:var(--sub);margin-top:2px}
+
+/* MENU TABLE */
+.menu-tbl-wrap{overflow-x:auto;margin-bottom:28px;
+  box-shadow:0 2px 12px rgba(0,0,0,.08);border-radius:var(--r)}
+.menu-tbl{width:100%;border-collapse:collapse;font-size:13px;min-width:720px}
+.menu-tbl th{padding:10px 12px;font-weight:700;text-align:left;font-size:12px}
+.menu-tbl td{padding:9px 12px;border-bottom:1px solid var(--gray-mid);vertical-align:top;line-height:1.6}
+.menu-tbl tr:last-child td{border-bottom:none}
+.th-pat{background:var(--text);color:#fff;width:100px}
+.th-target{background:#334155;color:#fff;width:140px}
+.th-goal{background:#475569;color:#fff}
+.th-menu{background:#1e3a5f;color:#fff;width:220px}
+.th-note{background:#1558a0;color:#fff;width:120px}
+.td-a{background:#fffbeb}
+.td-b{background:#eff6ff}
+.td-c{background:#f0fdf4}
+.td-d{background:#f0fdfa}
+.td-e{background:#fff1f2}
+.pat-badge{display:inline-block;padding:3px 10px;border-radius:12px;
+  font-size:11px;font-weight:700;white-space:nowrap}
+.pa{background:#fef3c7;color:#92400e}
+.pb{background:#dbeafe;color:#1e3a5f}
+.pc{background:#dcfce7;color:#14532d}
+.pd{background:#ccfbf1;color:#0d4034}
+.pe{background:#fee2e2;color:#7f1d1d}
+.menu-items{list-style:none;padding:0}
+.menu-items li{padding:2px 0 2px 14px;position:relative;font-size:12.5px;color:var(--text)}
+.menu-items li::before{content:"▶";position:absolute;left:0;color:var(--amber);font-size:9px;top:5px}
+.sub-badge{font-size:10px;padding:1px 7px;border-radius:8px;
+  background:var(--amber-lt);color:var(--amber);font-weight:700;margin-left:4px}
+.caution{border-radius:var(--r-sm);padding:9px 12px;margin-bottom:16px;
+  font-size:12.5px;display:flex;align-items:flex-start;gap:7px;line-height:1.6}
+.caution.amber{background:var(--amber-lt);border-left:4px solid var(--amber);color:#78350f}
+.caution.blue{background:var(--blue-lt);border-left:4px solid var(--blue);color:#1e3a5f}
+.caution.green{background:var(--green-lt);border-left:4px solid var(--green);color:#14532d}
+
+/* FORM */
+.form-card{background:var(--white);border-radius:var(--r);border:1px solid var(--gray-mid);
+  padding:24px;margin-bottom:20px}
+.form-ttl{font-size:14px;font-weight:800;color:var(--amber);margin-bottom:16px;
+  display:flex;align-items:center;gap:8px;padding-bottom:10px;
+  border-bottom:2px solid var(--amber-lt)}
+.form-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin-bottom:16px}
+.form-group{display:flex;flex-direction:column;gap:5px}
+.form-label{font-size:12px;font-weight:700;color:var(--sub)}
+.form-input{width:100%;border:1.5px solid var(--gray-mid);border-radius:var(--r-sm);
+  padding:8px 10px;font-size:14px;outline:none;background:#fff;transition:.15s}
+.form-input:focus{border-color:var(--amber);box-shadow:0 0 0 3px rgba(217,119,6,.12)}
+.form-input.wide{grid-column:1/-1}
+select.form-input{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2364748b' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 10px center}
+
+/* ASSESSMENT */
+.assess-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-bottom:16px}
+.assess-box{background:var(--gray-lt);border-radius:var(--r-sm);padding:10px 12px}
+.assess-name{font-size:11px;font-weight:700;color:var(--sub);margin-bottom:5px}
+.assess-row{display:flex;align-items:center;gap:8px}
+.assess-input{width:70px;border:1.5px solid var(--gray-mid);border-radius:6px;
+  padding:5px 8px;font-size:14px;font-weight:700;text-align:center;outline:none}
+.assess-input:focus{border-color:var(--amber)}
+.assess-unit{font-size:12px;color:var(--sub);white-space:nowrap}
+.assess-ref{font-size:10px;color:var(--sub);margin-top:4px}
+
+/* CHECKBOXES */
+.check-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px}
+.check-item{display:flex;align-items:center;gap:8px;padding:7px 10px;
+  border-radius:var(--r-sm);border:1.5px solid var(--gray-mid);
+  cursor:pointer;font-size:13px;transition:.15s}
+.check-item:hover{border-color:var(--amber);background:var(--amber-xl)}
+.check-item input[type=checkbox]{width:16px;height:16px;accent-color:var(--amber);flex-shrink:0}
+.check-item.checked{border-color:var(--amber);background:var(--amber-lt)}
+
+/* RESULT */
+.result-card{background:var(--white);border-radius:var(--r);border:2px solid var(--amber);
+  padding:20px;margin-bottom:20px;display:none}
+.result-card.show{display:block}
+.result-hd{font-size:15px;font-weight:800;color:var(--amber);margin-bottom:14px;
+  display:flex;align-items:center;gap:8px}
+.rec-list{list-style:none;padding:0;display:flex;flex-direction:column;gap:10px}
+.rec-item{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;
+  border-radius:var(--r-sm);border:1.5px solid var(--gray-mid)}
+.rec-rank{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;
+  justify-content:center;font-size:13px;font-weight:900;color:#fff;flex-shrink:0}
+.r1{background:var(--amber)}
+.r2{background:var(--gray)}
+.r3{background:#94a3b8}
+.rec-body{flex:1}
+.rec-name{font-size:14px;font-weight:800;color:var(--text);margin-bottom:3px}
+.rec-reason{font-size:12.5px;color:var(--sub);line-height:1.6}
+.rec-link{display:inline-block;margin-top:6px;font-size:12px;font-weight:700;
+  color:var(--amber);text-decoration:none;padding:3px 10px;
+  background:var(--amber-lt);border-radius:12px}
+.rec-link:hover{background:var(--amber);color:#fff}
+
+/* PLAN PRINT */
+.plan-area{background:var(--white);border-radius:var(--r);border:1px solid var(--gray-mid);
+  padding:20px;margin-bottom:20px;display:none}
+.plan-area.show{display:block}
+.plan-hd{font-size:14px;font-weight:800;color:var(--text);padding-bottom:10px;
+  border-bottom:2px solid var(--amber);margin-bottom:14px}
+.plan-meta{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.plan-meta-item{font-size:12.5px;color:var(--sub)}
+.plan-meta-item strong{color:var(--text)}
+.plan-table{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:12px}
+.plan-table th{background:var(--amber);color:#fff;padding:8px 10px;text-align:left;font-size:12px}
+.plan-table td{padding:8px 10px;border-bottom:1px solid var(--gray-mid);vertical-align:top}
+.plan-table tr:last-child td{border-bottom:none}
+.plan-table tr:nth-child(even) td{background:var(--gray-lt)}
+.btn-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.btn{padding:10px 20px;border:none;border-radius:20px;font-size:13px;font-weight:700;cursor:pointer;transition:.15s}
+.btn-primary{background:var(--amber);color:#fff}
+.btn-primary:hover{background:var(--amber-mid)}
+.btn-outline{background:#fff;color:var(--amber);border:2px solid var(--amber)}
+.btn-outline:hover{background:var(--amber-lt)}
+.btn-gray{background:var(--gray-lt);color:var(--sub)}
+.btn-gray:hover{background:var(--gray-mid)}
+.notice-box{background:var(--blue-lt);border:1px solid #93c5fd;border-radius:var(--r-sm);
+  padding:10px 14px;font-size:12.5px;color:#1e3a5f;line-height:1.7;margin-bottom:16px}
+
+@media print{
+  .sidebar,.topbar,.ch,.btn-row,.form-card,.notice-box{display:none!important}
+  .content{margin-left:0}
+  .plan-area{display:block!important;border:none;padding:0}
+  .plan-table th{background:#333!important;color:#fff!important;-webkit-print-color-adjust:exact}
+  .plan-table tr:nth-child(even) td{background:#f9f9f9!important;-webkit-print-color-adjust:exact}
+  body{font-size:12px}
+}
+@media(max-width:768px){
+  .topbar{display:flex}
+  .sidebar{transform:translateX(-100%);transition:transform .25s}
+  .sidebar.open{transform:translateX(0)}
+  .content{margin-left:0}
+  .ch{display:none}
+  .main{padding:14px 12px 60px}
+  .form-grid,.assess-grid,.check-grid{grid-template-columns:1fr 1fr}
+  .menu-tbl{min-width:600px}
+}
+</style>
+</head>
+<body>
+<div class="topbar" id="topbar">
+  <button class="tb-menu" onclick="toggleSB()">☰</button>
+  <span class="tb-title" id="tb-title">📋 個別プログラム作成</span>
+  <a href="003_機能訓練_個別プログラム.html" class="tb-back">← 手順表</a>
+</div>
+<div class="overlay" id="overlay" onclick="closeSB()"></div>
+<div class="layout">
+<nav class="sidebar" id="sidebar">
+  <div class="sb-logo">
+    <h1>📋 個別プログラム<br>作成フォーム</h1>
+    <p>デイサービス看護師用</p>
+  </div>
+  <a href="002_機能訓練マニュアル.html" class="sb-back">← マニュアルに戻る</a>
+  <div class="sb-nav">
+    <div class="sb-group">メニュー</div>
+    <button class="nav-btn active" onclick="showPage('menu')" data-p="menu"><span class="nav-icon">📊</span>対象別メニュー表</button>
+    <button class="nav-btn" onclick="showPage('form')" data-p="form"><span class="nav-icon">✏️</span>個別プログラム作成</button>
+  </div>
+</nav>
+
+<div class="content">
+<div class="ch"><h2 id="page-title">対象別メニュー表</h2><p>訓練パターン比較 ／ 個別プログラム作成フォーム</p></div>
+<div class="main">
+
+<!-- ===== MENU TABLE ===== -->
+<div class="page active" id="page-menu">
+  <div class="sec-head"><div class="sec-icon">📊</div><div><h2>対象別メニュー表</h2><p>5パターンの対象・目標・訓練内容・注意事項を一覧で比較</p></div></div>
+
+  <div class="caution amber">💡 パターンは重複して組み合わせ可。例：廃用症候群＋認知症 → <strong>A+C</strong>で調整して実施。</div>
+
+  <div class="menu-tbl-wrap">
+    <table class="menu-tbl">
+      <thead>
+        <tr>
+          <th class="th-pat">パターン</th>
+          <th class="th-target">対象者</th>
+          <th class="th-goal">訓練目標</th>
+          <th class="th-menu">主な訓練メニュー</th>
+          <th class="th-note">実施上の注意</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="td-a">
+          <td><span class="pat-badge pa">🚶 A</span><br><small style="font-size:11px;color:#92400e">転倒予防<br>歩行改善</small></td>
+          <td style="font-size:12.5px">
+            ・廃用症候群<br>
+            ・筋力低下が著明<br>
+            ・転倒歴あり<br>
+            ・TUG 12秒以上<br>
+            ・BI 80点以下
+          </td>
+          <td style="font-size:12.5px">
+            ・歩行能力の維持・改善<br>
+            ・転倒リスクの軽減<br>
+            ・下肢筋力の強化<br>
+            ・立位バランスの改善
+          </td>
+          <td>
+            <ul class="menu-items">
+              <li>下肢ROM（膝伸展・足背屈）<span class="sub-badge">10回×2</span></li>
+              <li>椅子立ち座り<span class="sub-badge">5〜10回×2</span></li>
+              <li>踵上げ・つま先上げ<span class="sub-badge">20回×2</span></li>
+              <li>立位バランス・重心移動</li>
+              <li>歩行練習（補助具使用）</li>
+            </ul>
+          </td>
+          <td style="font-size:12px">
+            ・BP 180↑で中止<br>
+            ・人工関節の禁忌角度<br>
+            ・歩行時は患側後方に立つ<br>
+            ・5m歩行テスト月1回記録
+          </td>
+        </tr>
+        <tr class="td-b">
+          <td><span class="pat-badge pb">🤝 B</span><br><small style="font-size:11px;color:#1e3a5f">片麻痺<br>ADL向上</small></td>
+          <td style="font-size:12.5px">
+            ・脳血管疾患後遺症<br>
+            ・片麻痺（上・下肢）<br>
+            ・更衣・食事に介助要<br>
+            ・BI 40〜80点
+          </td>
+          <td style="font-size:12.5px">
+            ・患側上下肢の廃用防止<br>
+            ・更衣・食事動作の自立<br>
+            ・麻痺側の筋緊張管理<br>
+            ・良肢位保持の習慣化
+          </td>
+          <td>
+            <ul class="menu-items">
+              <li>患側上肢ROM（他動→自動介助）</li>
+              <li>患側下肢ROM</li>
+              <li>足関節背屈（尖足予防）<span class="sub-badge">10秒×5</span></li>
+              <li>更衣動作練習（患→健の順）</li>
+              <li>座位バランス訓練</li>
+            </ul>
+          </td>
+          <td style="font-size:12px">
+            ・亜脱臼・痛みに注意<br>
+            ・痙縮の状態を確認してから<br>
+            ・患側皮膚観察を必ず実施<br>
+            ・良肢位保持を介護職に申し送り
+          </td>
+        </tr>
+        <tr class="td-c">
+          <td><span class="pat-badge pc">🧠 C</span><br><small style="font-size:11px;color:#14532d">認知症<br>対応</small></td>
+          <td style="font-size:12.5px">
+            ・認知症（MMSE 20未満）<br>
+            ・HDS-R 20点以下<br>
+            ・指示理解が困難<br>
+            ・BPSD（徘徊・拒否）あり
+          </td>
+          <td style="font-size:12.5px">
+            ・身体機能の維持<br>
+            ・口腔・嚥下機能の保持<br>
+            ・生活リズムの維持<br>
+            ・社会参加の促進
+          </td>
+          <td>
+            <ul class="menu-items">
+              <li>口腔体操・パタカラ<span class="sub-badge">各10回</span></li>
+              <li>上肢ROM（声かけ・真似て）</li>
+              <li>下肢ROM・踵上げ</li>
+              <li>歌・手拍子に合わせた体操</li>
+            </ul>
+          </td>
+          <td style="font-size:12px">
+            ・急がせず・否定しない<br>
+            ・1動作ずつシンプルに<br>
+            ・拒否は無理強いしない<br>
+            ・当日の意欲を記録
+          </td>
+        </tr>
+        <tr class="td-d">
+          <td><span class="pat-badge pd">🌬️ D</span><br><small style="font-size:11px;color:#0d4034">呼吸器<br>軽負荷</small></td>
+          <td style="font-size:12.5px">
+            ・COPD・慢性心不全<br>
+            ・安静時SpO2 94〜96%<br>
+            ・労作時息切れ（Hugh-Jones Ⅱ〜Ⅲ）<br>
+            ・HOT使用者
+          </td>
+          <td style="font-size:12.5px">
+            ・呼吸機能の維持<br>
+            ・低負荷での筋力保持<br>
+            ・ADL活動性の向上<br>
+            ・息切れの自己管理
+          </td>
+          <td>
+            <ul class="menu-items">
+              <li>口すぼめ呼吸<span class="sub-badge">10回×2</span></li>
+              <li>腹式呼吸</li>
+              <li>軽度上肢ROM（Borg 11以下）</li>
+              <li>座位下肢運動（足背屈・踵上げ）</li>
+            </ul>
+          </td>
+          <td style="font-size:12px">
+            ・SpO2 91%以下で即中止<br>
+            ・常時パルスオキシメーター<br>
+            ・運動処方（主治医）を必ず確認<br>
+            ・息止め禁止
+          </td>
+        </tr>
+        <tr class="td-e">
+          <td><span class="pat-badge pe">👄 E</span><br><small style="font-size:11px;color:#7f1d1d">口腔・<br>嚥下機能</small></td>
+          <td style="font-size:12.5px">
+            ・嚥下障害・むせあり<br>
+            ・RSST 2回以下/30秒<br>
+            ・誤嚥性肺炎既往<br>
+            ・体重減少・低栄養
+          </td>
+          <td style="font-size:12.5px">
+            ・嚥下機能の維持・改善<br>
+            ・誤嚥性肺炎の予防<br>
+            ・口腔清潔の維持<br>
+            ・栄養状態の改善
+          </td>
+          <td>
+            <ul class="menu-items">
+              <li>口腔スクリーニング（RSST）</li>
+              <li>パタカラ体操<span class="sub-badge">各10回</span></li>
+              <li>舌・頬・口唇運動</li>
+              <li>間接嚥下訓練（唾液嚥下）</li>
+              <li>頸部ROM・発声練習</li>
+            </ul>
+          </td>
+          <td style="font-size:12px">
+            ・直接訓練は医師・ST判断<br>
+            ・むせ時は頸部前屈を促す<br>
+            ・食事担当者へ必ず申し送り<br>
+            ・体重・摂取量を月1記録
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="caution blue">📋 <strong>加算算定の目安（25名事業所・週5日稼働・看護師1名）：</strong>1日あたり4〜5名（20〜25%）を実施することで、全利用者週1回要件を達成できます。Aパターンを1日最多に組み、D・Eは時間がかかるため午前中に優先配置するのが効率的です。</div>
+
+  <div style="margin-top:8px">
+    <button class="btn btn-primary" onclick="showPage('form')">✏️ 個別プログラム作成フォームへ →</button>
+  </div>
+</div><!-- /page-menu -->
+
+<!-- ===== FORM ===== -->
+<div class="page" id="page-form">
+  <div class="sec-head"><div class="sec-icon">✏️</div><div><h2>個別プログラム作成フォーム</h2><p>利用者情報を入力して適切なパターンを自動提案</p></div></div>
+  <div class="notice-box">📌 入力した内容をもとにパターンを推奨します。最終判断は個別機能訓練計画書の目標・禁忌事項に基づいてください。</div>
+
+  <!-- 利用者基本情報 -->
+  <div class="form-card">
+    <div class="form-ttl">👤 利用者基本情報</div>
+    <div class="form-grid">
+      <div class="form-group" style="grid-column:1/-1">
+        <label class="form-label">利用者氏名</label>
+        <input class="form-input" id="f-name" type="text" placeholder="例：山田 花子">
+      </div>
+      <div class="form-group">
+        <label class="form-label">年齢</label>
+        <input class="form-input" id="f-age" type="number" placeholder="例：82" min="0" max="120">
+      </div>
+      <div class="form-group">
+        <label class="form-label">性別</label>
+        <select class="form-input" id="f-sex">
+          <option value="">選択</option>
+          <option value="F">女性</option>
+          <option value="M">男性</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">要介護度</label>
+        <select class="form-input" id="f-care">
+          <option value="">選択</option>
+          <option value="1">要介護1</option>
+          <option value="2">要介護2</option>
+          <option value="3">要介護3</option>
+          <option value="4">要介護4</option>
+          <option value="5">要介護5</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">主病名（最重要）</label>
+        <input class="form-input" id="f-dx1" type="text" placeholder="例：廃用症候群、脳梗塞後遺症">
+      </div>
+      <div class="form-group">
+        <label class="form-label">副病名</label>
+        <input class="form-input" id="f-dx2" type="text" placeholder="例：高血圧、糖尿病">
+      </div>
+      <div class="form-group" style="grid-column:1/-1">
+        <label class="form-label">本人・家族の希望（短期目標の参考）</label>
+        <input class="form-input" id="f-hope" type="text" placeholder="例：一人で歩けるようになりたい、転ばないようになってほしい">
+      </div>
+    </div>
+  </div>
+
+  <!-- アセスメント値 -->
+  <div class="form-card">
+    <div class="form-ttl">📊 アセスメント値（わかる範囲で入力）</div>
+    <div class="assess-grid">
+      <div class="assess-box">
+        <div class="assess-name">TUG（timed up and go）</div>
+        <div class="assess-row">
+          <input class="assess-input" id="a-tug" type="number" min="0" step="0.1" placeholder="—">
+          <span class="assess-unit">秒</span>
+        </div>
+        <div class="assess-ref">12秒以上で転倒リスク高</div>
+      </div>
+      <div class="assess-box">
+        <div class="assess-name">BI（Barthel Index）</div>
+        <div class="assess-row">
+          <input class="assess-input" id="a-bi" type="number" min="0" max="100" placeholder="—">
+          <span class="assess-unit">点</span>
+        </div>
+        <div class="assess-ref">100点満点。60未満で要介助</div>
+      </div>
+      <div class="assess-box">
+        <div class="assess-name">RSST（反復唾液嚥下）</div>
+        <div class="assess-row">
+          <input class="assess-input" id="a-rsst" type="number" min="0" max="10" placeholder="—">
+          <span class="assess-unit">回/30秒</span>
+        </div>
+        <div class="assess-ref">3回未満で嚥下障害疑い</div>
+      </div>
+      <div class="assess-box">
+        <div class="assess-name">SpO2（安静時）</div>
+        <div class="assess-row">
+          <input class="assess-input" id="a-spo2" type="number" min="80" max="100" placeholder="—">
+          <span class="assess-unit">%</span>
+        </div>
+        <div class="assess-ref">92%以下で運動制限要検討</div>
+      </div>
+      <div class="assess-box">
+        <div class="assess-name">握力（利き手）</div>
+        <div class="assess-row">
+          <input class="assess-input" id="a-grip" type="number" min="0" step="0.1" placeholder="—">
+          <span class="assess-unit">kg</span>
+        </div>
+        <div class="assess-ref">男性28未満・女性18未満でサルコペニア</div>
+      </div>
+      <div class="assess-box">
+        <div class="assess-name">5m歩行テスト</div>
+        <div class="assess-row">
+          <input class="assess-input" id="a-walk" type="number" min="0" step="0.1" placeholder="—">
+          <span class="assess-unit">秒</span>
+        </div>
+        <div class="assess-ref">8.3秒以上（0.6m/s未満）で転倒リスク</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 疾患・状態チェック -->
+  <div class="form-card">
+    <div class="form-ttl">☑️ 対象状態（該当するものすべて選択）</div>
+    <div class="check-grid" id="cond-grid">
+      <label class="check-item" onclick="this.classList.toggle('checked')"><input type="checkbox" value="a1"> 廃用症候群・筋力低下</label>
+      <label class="check-item" onclick="this.classList.toggle('checked')"><input type="checkbox" value="a2"> 転倒歴あり（直近1年）</label>
+      <label class="check-item" onclick="this.classList.toggle('checked')"><input type="checkbox" value="a3"> 歩行能力低下</label>
+      <label class="check-item" onclick="this.classList.toggle('checked')"><input type="checkbox" value="b1"> 片麻痺（上肢）</label>
+      <label class="check-item" onclick="this.classList.toggle('checked')"><input type="checkbox" value="b2"> 片麻痺（下肢）</label>
+      <label class="check-item" onclick="this.classList.toggle('checked')"><input type="checkbox" value="b3"> 更衣・食事に介助が必要</label>
+      <label class="check-item" onclick="this.classList.toggle('checked')"><input type="checkbox" value="c1"> 認知症診断あり</label>
+      <label class="check-item" onclick="this.classList.toggle('checked')"><input type="checkbox" value="c2"> 指示理解が困難</label>
+      <label class="check-item" onclick="this.classList.toggle('checked')"><input type="checkbox" value="c3"> BPSD（徘徊・拒否）あり</label>
+      <label class="check-item" onclick="this.classList.toggle('checked')"><input type="checkbox" value="d1"> COPD・肺気腫</label>
+      <label class="check-item" onclick="this.classList.toggle('checked')"><input type="checkbox" value="d2"> 慢性心不全</label>
+      <label class="check-item" onclick="this.classList.toggle('checked')"><input type="checkbox" value="d3"> 在宅酸素療法（HOT）</label>
+      <label class="check-item" onclick="this.classList.toggle('checked')"><input type="checkbox" value="e1"> 嚥下障害・むせあり</label>
+      <label class="check-item" onclick="this.classList.toggle('checked')"><input type="checkbox" value="e2"> 誤嚥性肺炎既往</label>
+      <label class="check-item" onclick="this.classList.toggle('checked')"><input type="checkbox" value="e3"> 体重減少・低栄養</label>
+    </div>
+    <div class="form-group" style="margin-top:14px">
+      <label class="form-label">禁忌事項・注意事項（医師指示・術後制限等）</label>
+      <input class="form-input" id="f-contraindication" type="text" placeholder="例：人工膝関節（屈曲130°制限）、直近3か月骨折歴">
+    </div>
+    <div class="btn-row" style="margin-top:16px">
+      <button class="btn btn-primary" onclick="recommend()">💡 パターンを提案する</button>
+      <button class="btn btn-gray" onclick="clearAll()">リセット</button>
+    </div>
+  </div>
+
+  <!-- 推奨結果 -->
+  <div class="result-card" id="result-area">
+    <div class="result-hd">💡 推奨パターン</div>
+    <ul class="rec-list" id="rec-list"></ul>
+    <div class="btn-row" style="margin-top:16px">
+      <button class="btn btn-primary" onclick="generatePlan()">📄 訓練計画書を作成</button>
+    </div>
+  </div>
+
+  <!-- 訓練計画書プレビュー -->
+  <div class="plan-area" id="plan-area">
+    <div class="plan-hd">🗒️ 個別機能訓練計画書（プレビュー）</div>
+    <div class="plan-meta" id="plan-meta"></div>
+    <table class="plan-table">
+      <thead>
+        <tr><th>項目</th><th>内容</th></tr>
+      </thead>
+      <tbody id="plan-tbody"></tbody>
+    </table>
+    <div class="caution amber" id="plan-caution" style="margin-top:0"></div>
+    <div class="btn-row">
+      <button class="btn btn-outline" onclick="window.print()">🖨️ 印刷</button>
+    </div>
+  </div>
+</div><!-- /page-form -->
+
+</div><!-- /.main -->
+<footer style="text-align:center;padding:20px;font-size:11px;color:var(--sub);border-top:1px solid var(--gray-mid);background:var(--white)">個別プログラム作成フォーム｜デイサービス機能訓練｜令和8年7月作成</footer>
+</div><!-- /.content -->
+</div><!-- /.layout -->
+
+<script>
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(n=>n.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  const nb=document.querySelector('[data-p="'+id+'"]');
+  if(nb)nb.classList.add('active');
+  const titles={menu:'対象別メニュー表',form:'個別プログラム作成フォーム'};
+  document.getElementById('page-title').textContent=titles[id]||'';
+  closeSB();window.scrollTo(0,0);
+}
+function toggleSB(){
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('show');
+}
+function closeSB(){
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('overlay').classList.remove('show');
+}
+function getChecked(){
+  return Array.from(document.querySelectorAll('#cond-grid input[type=checkbox]:checked')).map(c=>c.value);
+}
+function clearAll(){
+  document.querySelectorAll('#cond-grid input[type=checkbox]').forEach(c=>c.checked=false);
+  document.querySelectorAll('.check-item').forEach(c=>c.classList.remove('checked'));
+  ['f-name','f-age','f-sex','f-care','f-dx1','f-dx2','f-hope','f-contraindication',
+   'a-tug','a-bi','a-rsst','a-spo2','a-grip','a-walk'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el)el.value='';
+  });
+  document.getElementById('result-area').classList.remove('show');
+  document.getElementById('plan-area').classList.remove('show');
+}
+
+const PATTERNS={
+  a:{name:'パターンA：転倒予防・歩行改善コース',emoji:'🚶',
+     menus:['下肢ROM（膝伸展・足関節背屈）10回×2セット',
+             '椅子立ち座り練習5〜10回×2セット',
+             '踵上げ・つま先上げ20回×2セット',
+             '立位バランス（手すり使用）・重心移動',
+             '歩行練習10〜20m（補助具使用）'],
+     time:'25〜30分',link:'003_機能訓練_個別プログラム.html#page-a'},
+  b:{name:'パターンB：片麻痺ADL向上コース',emoji:'🤝',
+     menus:['患側上肢ROM（他動→自動介助）',
+             '患側下肢ROM・足関節背屈（尖足予防）',
+             '更衣動作練習（患側から着る）',
+             '座位バランス訓練'],
+     time:'25〜30分',link:'003_機能訓練_個別プログラム.html#page-b'},
+  c:{name:'パターンC：認知症対応コース',emoji:'🧠',
+     menus:['口腔体操・パタカラ（各10回）',
+             '上肢ROM（声かけ・Nsが見本を見せながら）',
+             '下肢ROM・踵上げ（座位）',
+             '歌・手拍子に合わせた体操'],
+     time:'20〜25分',link:'003_機能訓練_個別プログラム.html#page-c'},
+  d:{name:'パターンD：呼吸器・軽負荷コース',emoji:'🌬️',
+     menus:['口すぼめ呼吸10回×2セット',
+             '腹式呼吸（5〜10回）',
+             '軽度上肢ROM（Borg 11以下）',
+             '座位下肢運動（足背屈・踵上げ）'],
+     time:'20〜25分',link:'003_機能訓練_個別プログラム.html#page-d'},
+  e:{name:'パターンE：口腔・嚥下機能コース',emoji:'👄',
+     menus:['嚥下スクリーニング（RSST）',
+             'パタカラ体操（各10回）',
+             '舌・頬・口唇運動',
+             '間接嚥下訓練（唾液嚥下・発声）'],
+     time:'20〜25分',link:'003_機能訓練_個別プログラム.html#page-e'}
+};
+
+function recommend(){
+  const conds=getChecked();
+  const tug=parseFloat(document.getElementById('a-tug').value)||null;
+  const bi=parseFloat(document.getElementById('a-bi').value)||null;
+  const rsst=parseFloat(document.getElementById('a-rsst').value)||null;
+  const spo2=parseFloat(document.getElementById('a-spo2').value)||null;
+
+  let scores={a:0,b:0,c:0,d:0,e:0};
+  conds.forEach(v=>{if(v.startsWith('a'))scores.a+=2;else if(v.startsWith('b'))scores.b+=2;else if(v.startsWith('c'))scores.c+=2;else if(v.startsWith('d'))scores.d+=2;else if(v.startsWith('e'))scores.e+=2;});
+  if(tug!==null&&tug>=12)scores.a+=3;
+  if(bi!==null&&bi<=80)scores.a+=2;
+  if(rsst!==null&&rsst<=2)scores.e+=4;
+  if(spo2!==null&&spo2<=96)scores.d+=3;
+  if(spo2!==null&&spo2<=92)scores.d+=3;
+
+  const ranked=Object.entries(scores).filter(([_,s])=>s>0).sort((a,b)=>b[1]-a[1]);
+  const area=document.getElementById('result-area');
+  const list=document.getElementById('rec-list');
+  list.innerHTML='';
+  if(!ranked.length){
+    list.innerHTML='<li style="padding:10px;color:var(--sub)">該当なし：状態・アセスメントを入力してください。</li>';
+  }else{
+    ranked.slice(0,3).forEach(([k,s],i)=>{
+      const p=PATTERNS[k];
+      const ranks=['r1','r2','r3'];
+      const li=document.createElement('li');
+      li.className='rec-item';
+      const reasons=[];
+      if(k==='a'){if(tug>=12)reasons.push('TUG '+tug+'秒（12秒以上）');if(bi<=80)reasons.push('BI '+bi+'点');if(conds.some(c=>c.startsWith('a')))reasons.push('廃用・転倒リスクの状態チェックあり');}
+      if(k==='b'){if(conds.some(c=>c.startsWith('b')))reasons.push('片麻痺・ADL介助の状態チェックあり');}
+      if(k==='c'){if(conds.some(c=>c.startsWith('c')))reasons.push('認知症関連の状態チェックあり');}
+      if(k==='d'){if(spo2!==null&&spo2<=96)reasons.push('SpO2 '+spo2+'%');if(conds.some(c=>c.startsWith('d')))reasons.push('呼吸器疾患の状態チェックあり');}
+      if(k==='e'){if(rsst!==null&&rsst<=2)reasons.push('RSST '+rsst+'回/30秒');if(conds.some(c=>c.startsWith('e')))reasons.push('嚥下障害関連の状態チェックあり');}
+      li.innerHTML=`<div class="rec-rank ${ranks[i]}">${i+1}</div><div class="rec-body"><div class="rec-name">${p.emoji} ${p.name}</div><div class="rec-reason">適合理由：${reasons.length?reasons.join('・'):'状態チェックに基づく推奨'} ／ 所要時間：${p.time}</div><a href="${p.link}" class="rec-link">→ 手順表を開く</a></div>`;
+      list.appendChild(li);
+    });
+  }
+  area.classList.add('show');
+  document.getElementById('plan-area').classList.remove('show');
+  area.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function generatePlan(){
+  const name=document.getElementById('f-name').value||'（未入力）';
+  const age=document.getElementById('f-age').value;
+  const sex={F:'女性',M:'男性','':''}[document.getElementById('f-sex').value]||'';
+  const care=document.getElementById('f-care').value;
+  const dx1=document.getElementById('f-dx1').value||'—';
+  const dx2=document.getElementById('f-dx2').value||'—';
+  const hope=document.getElementById('f-hope').value||'—';
+  const contra=document.getElementById('f-contraindication').value||'なし';
+  const tug=document.getElementById('a-tug').value;
+  const bi=document.getElementById('a-bi').value;
+  const rsst=document.getElementById('a-rsst').value;
+  const spo2=document.getElementById('a-spo2').value;
+  const grip=document.getElementById('a-grip').value;
+  const walk=document.getElementById('a-walk').value;
+
+  const recs=Array.from(document.querySelectorAll('#rec-list .rec-name')).map(el=>el.textContent.trim());
+  const topKey=recs.length?Object.keys(PATTERNS).find(k=>recs[0].includes(PATTERNS[k].name.slice(0,4)))||null:null;
+  const menus=topKey?PATTERNS[topKey].menus:['（パターンを選択して再実行してください）'];
+
+  const now=new Date();
+  const dateStr=`${now.getFullYear()}年${now.getMonth()+1}月${now.getDate()}日`;
+
+  const meta=document.getElementById('plan-meta');
+  meta.innerHTML=`<span class="plan-meta-item">作成日：<strong>${dateStr}</strong></span><span class="plan-meta-item">氏名：<strong>${name}</strong></span>${age?`<span class="plan-meta-item">年齢：<strong>${age}歳 ${sex}</strong></span>`:''}${care?`<span class="plan-meta-item">要介護度：<strong>要介護${care}</strong></span>`:''}`;
+
+  const rows=[
+    ['主病名',dx1],
+    ['副病名',dx2],
+    ['本人・家族の希望',hope],
+    ['禁忌・注意事項',contra],
+    ['アセスメント',`TUG：${tug||'—'}秒 ／ BI：${bi||'—'}点 ／ RSST：${rsst||'—'}回/30秒 ／ SpO2：${spo2||'—'}% ／ 握力：${grip||'—'}kg ／ 5m歩行：${walk||'—'}秒`],
+    ['推奨パターン',recs.join(' ／ ')||'—'],
+    ['訓練メニュー（週1回・20分以上）',menus.map((m,i)=>`<b>${i+1}.</b> ${m}`).join('<br>')],
+    ['担当機能訓練指導員','（記入）'],
+    ['次回評価予定','毎月1回（訓練開始から1か月後）'],
+    ['特記事項',''],
+  ];
+  const tbody=document.getElementById('plan-tbody');
+  tbody.innerHTML=rows.map(([k,v])=>`<tr><td style="width:180px;font-weight:700;color:var(--sub)">${k}</td><td>${v}</td></tr>`).join('');
+
+  const pc=document.getElementById('plan-caution');
+  if(contra&&contra!=='なし'){
+    pc.innerHTML=`⚠️ <strong>禁忌・注意事項：${contra}</strong>　訓練前に必ず確認してください。`;
+    pc.style.display='flex';
+  }else{pc.style.display='none';}
+
+  const plan=document.getElementById('plan-area');
+  plan.classList.add('show');
+  plan.scrollIntoView({behavior:'smooth',block:'start'});
+}
+</script>
+</body>
+</html>

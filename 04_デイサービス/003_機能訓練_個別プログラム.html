@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>機能訓練 個別プログラム｜デイサービス</title>
+<meta name="theme-color" content="#d97706">
+<style>
+:root{
+  --amber:#d97706;--amber-mid:#f59e0b;--amber-lt:#fef3c7;--amber-xl:#fffbeb;
+  --grad:#78350f;
+  --blue:#1558a0;--blue-lt:#dbeafe;
+  --green:#16a34a;--green-lt:#dcfce7;
+  --red:#dc2626;--red-lt:#fee2e2;
+  --teal:#0d9488;--teal-lt:#ccfbf1;
+  --gray:#64748b;--gray-lt:#f1f5f9;--gray-mid:#e2e8f0;
+  --text:#0f172a;--sub:#475569;--bg:#f0f4f8;--white:#fff;
+  --r:12px;--r-sm:8px;
+  --sidebar-w:220px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Noto Sans JP",sans-serif;
+     font-size:15px;line-height:1.6;color:var(--text);background:var(--bg)}
+
+/* ── TOPBAR ── */
+.topbar{display:none;background:linear-gradient(135deg,var(--grad),var(--amber) 55%,var(--amber-mid));
+  padding:12px 16px;position:sticky;top:0;z-index:100;
+  box-shadow:0 2px 10px rgba(120,53,15,.4);align-items:center;gap:12px}
+.tb-menu{background:rgba(255,255,255,.2);border:none;color:#fff;
+  width:36px;height:36px;border-radius:8px;font-size:18px;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.tb-title{color:#fff;font-size:14px;font-weight:800;flex:1}
+.tb-back{color:rgba(255,255,255,.85);font-size:12px;text-decoration:none;
+  background:rgba(255,255,255,.15);padding:5px 12px;border-radius:20px;white-space:nowrap}
+
+/* ── LAYOUT ── */
+.layout{display:flex;min-height:100vh}
+
+/* ── SIDEBAR ── */
+.sidebar{width:var(--sidebar-w);
+  background:linear-gradient(180deg,var(--grad),var(--amber));
+  position:fixed;top:0;left:0;height:100vh;
+  display:flex;flex-direction:column;z-index:90;overflow-y:auto;
+  box-shadow:2px 0 12px rgba(0,0,0,.15)}
+.sb-logo{padding:20px 16px 14px;border-bottom:1px solid rgba(255,255,255,.15)}
+.sb-logo h1{font-size:13px;font-weight:800;color:#fff;line-height:1.4}
+.sb-logo p{font-size:10px;color:rgba(255,255,255,.6);margin-top:2px}
+.sb-back{display:block;margin:10px 12px 0;color:rgba(255,255,255,.8);font-size:11px;
+  text-decoration:none;background:rgba(255,255,255,.15);padding:5px 10px;
+  border-radius:16px;text-align:center}
+.sb-back:hover{background:rgba(255,255,255,.25)}
+.sb-nav{padding:10px 0;flex:1}
+.sb-group{padding:8px 16px 3px;font-size:10px;font-weight:700;
+  color:rgba(255,255,255,.4);letter-spacing:.06em}
+.nav-btn{display:flex;align-items:center;gap:9px;padding:10px 14px;cursor:pointer;
+  color:rgba(255,255,255,.75);font-size:13px;font-weight:600;
+  border:none;background:none;width:100%;text-align:left;
+  border-left:3px solid transparent;transition:.15s}
+.nav-btn:hover{background:rgba(255,255,255,.1);color:#fff}
+.nav-btn.active{background:rgba(255,255,255,.18);color:#fff;border-left-color:#fff}
+.nav-icon{font-size:16px;flex-shrink:0}
+
+/* ── OVERLAY ── */
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:85}
+.overlay.show{display:block}
+
+/* ── CONTENT ── */
+.content{margin-left:var(--sidebar-w);flex:1;min-width:0;display:flex;flex-direction:column}
+.ch{background:linear-gradient(135deg,var(--amber),var(--amber-mid));
+  padding:22px 24px 24px;text-align:center;color:#fff}
+.ch h2{font-size:18px;font-weight:800;margin-bottom:4px}
+.ch p{font-size:12px;color:rgba(255,255,255,.72);line-height:1.7}
+.main{max-width:900px;margin:0 auto;padding:24px 20px 60px;width:100%}
+
+/* ── PAGES ── */
+.page{display:none}
+.page.active{display:block}
+
+/* ── COMPONENTS ── */
+.sec-head{display:flex;align-items:center;gap:10px;margin:0 0 18px}
+.sec-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;font-size:20px;flex-shrink:0;background:var(--amber-lt)}
+.sec-head h2{font-size:17px;font-weight:800;color:var(--amber)}
+.sec-head p{font-size:12px;color:var(--sub);margin-top:2px}
+
+/* ── PATTERN CARDS (top) ── */
+.pattern-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px;margin-bottom:24px}
+.pat-card{background:var(--white);border-radius:var(--r);border:2px solid var(--gray-mid);
+  padding:20px;cursor:pointer;transition:.2s;text-decoration:none;color:inherit}
+.pat-card:hover{border-color:var(--amber);box-shadow:0 4px 16px rgba(217,119,6,.18);transform:translateY(-2px)}
+.pat-hd{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.pat-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;font-size:22px;flex-shrink:0}
+.pat-icon.a{background:#fef3c7}
+.pat-icon.b{background:#dbeafe}
+.pat-icon.c{background:#dcfce7}
+.pat-icon.d{background:#ccfbf1}
+.pat-icon.e{background:#fee2e2}
+.pat-label{font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.pat-label.a{color:#92400e}
+.pat-label.b{color:var(--blue)}
+.pat-label.c{color:var(--green)}
+.pat-label.d{color:var(--teal)}
+.pat-label.e{color:var(--red)}
+.pat-name{font-size:15px;font-weight:800;color:var(--text);margin-bottom:6px}
+.pat-desc{font-size:12.5px;color:var(--sub);line-height:1.6}
+.pat-meta{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.tag{font-size:11px;font-weight:700;padding:3px 9px;border-radius:12px;white-space:nowrap}
+.tag.time{background:var(--amber-lt);color:#92400e}
+.tag.level{background:var(--blue-lt);color:var(--blue)}
+
+/* ── STEP CARDS ── */
+.step-card{background:var(--white);border-radius:var(--r);border:1px solid var(--gray-mid);
+  margin-bottom:20px;overflow:hidden}
+.step-hd{display:flex;align-items:center;gap:12px;padding:14px 18px;
+  border-bottom:1px solid var(--gray-mid);background:var(--gray-lt)}
+.step-num{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;
+  justify-content:center;font-size:14px;font-weight:900;flex-shrink:0;color:#fff;background:var(--amber)}
+.step-num.prep{background:var(--blue)}
+.step-num.warm{background:var(--green)}
+.step-num.cool{background:var(--teal)}
+.step-num.end{background:var(--gray)}
+.step-ttl{font-size:14px;font-weight:800;color:var(--text)}
+.step-time{margin-left:auto;font-size:11px;font-weight:700;color:var(--amber);
+  background:var(--amber-lt);padding:3px 10px;border-radius:12px;white-space:nowrap}
+.step-body{padding:16px 18px;display:flex;gap:18px;align-items:flex-start}
+.step-illus{flex-shrink:0;width:130px}
+.step-illus svg{width:130px;height:130px;display:block}
+.illus-cap{font-size:10px;color:var(--sub);text-align:center;margin-top:4px;line-height:1.4}
+.step-content{flex:1;min-width:0}
+.step-note{font-size:13px;color:var(--sub);line-height:1.7;margin-bottom:10px}
+.inst-list{list-style:none;padding:0}
+.inst-list li{padding:6px 0 6px 22px;position:relative;font-size:13.5px;
+  border-bottom:1px solid var(--gray-mid);line-height:1.6}
+.inst-list li:last-child{border-bottom:none}
+.inst-list li::before{content:"▶";position:absolute;left:2px;color:var(--amber);font-size:10px;top:9px}
+.inst-list li strong{color:var(--text)}
+.caution{border-radius:var(--r-sm);padding:9px 12px;margin-top:10px;
+  font-size:12.5px;display:flex;align-items:flex-start;gap:7px;line-height:1.6}
+.caution.red{background:var(--red-lt);border-left:4px solid var(--red);color:#7f1d1d}
+.caution.amber{background:var(--amber-lt);border-left:4px solid var(--amber);color:#78350f}
+.caution.green{background:var(--green-lt);border-left:4px solid var(--green);color:#14532d}
+.caution.blue{background:var(--blue-lt);border-left:4px solid var(--blue);color:#1e3a5f}
+.vital-row{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0}
+.vital-box{flex:1;min-width:90px;background:var(--gray-lt);border-radius:var(--r-sm);
+  padding:8px 10px;text-align:center}
+.vital-box .vb-label{font-size:10px;color:var(--sub);font-weight:700;margin-bottom:4px}
+.vital-box .vb-input{width:100%;border:1.5px solid var(--gray-mid);border-radius:6px;
+  padding:5px 6px;font-size:14px;font-weight:700;text-align:center;background:#fff;outline:none}
+.vital-box .vb-input:focus{border-color:var(--amber)}
+.vital-stop{background:var(--red-lt);border-radius:var(--r-sm);padding:8px 12px;
+  font-size:12.5px;color:#7f1d1d;line-height:1.6}
+.sub-hd{font-size:13px;font-weight:800;color:var(--text);margin:12px 0 6px;padding-left:8px;
+  border-left:3px solid var(--amber)}
+.photo-slot{width:130px;height:130px;border:2px dashed var(--gray-mid);border-radius:var(--r-sm);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:var(--gray-lt);font-size:11px;color:var(--sub);text-align:center;padding:8px;gap:6px}
+.photo-slot .ps-icon{font-size:28px}
+.prog-bar{height:6px;background:var(--gray-mid);border-radius:3px;margin-bottom:20px;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--amber),var(--amber-mid));
+  border-radius:3px;transition:.4s}
+.nav-btns{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap}
+.btn{padding:9px 18px;border:none;border-radius:20px;font-size:13px;font-weight:700;
+  cursor:pointer;transition:.15s}
+.btn-top{background:var(--gray-lt);color:var(--sub)}
+.btn-top:hover{background:var(--gray-mid)}
+.tbl-wrap{overflow-x:auto;margin:8px 0}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{background:var(--amber);color:#fff;padding:8px 10px;text-align:left;font-weight:700}
+td{padding:8px 10px;border-bottom:1px solid var(--gray-mid);vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr:nth-child(even) td{background:var(--gray-lt)}
+.ft{text-align:center;padding:20px;font-size:11px;color:var(--sub);
+  border-top:1px solid var(--gray-mid);background:var(--white)}
+@media(max-width:768px){
+  .topbar{display:flex}
+  .sidebar{transform:translateX(-100%);transition:transform .25s}
+  .sidebar.open{transform:translateX(0)}
+  .content{margin-left:0}
+  .ch{display:none}
+  .main{padding:14px 12px 60px}
+  .step-body{flex-direction:column}
+  .step-illus{width:100%;display:flex;justify-content:center;gap:12px}
+  .step-illus svg{width:100px;height:100px}
+  .pattern-grid{grid-template-columns:1fr}
+  .vital-row{gap:6px}
+}
+</style>
+</head>
+<body>
+<div class="topbar" id="topbar">
+  <button class="tb-menu" onclick="toggleSB()">☰</button>
+  <span class="tb-title" id="tb-title">💪 機能訓練 個別プログラム</span>
+  <a href="002_機能訓練マニュアル.html" class="tb-back">← 戻る</a>
+</div>
+<div class="overlay" id="overlay" onclick="closeSB()"></div>
+<div class="layout">
+<!-- SIDEBAR -->
+<nav class="sidebar" id="sidebar">
+  <div class="sb-logo">
+    <h1>💪 機能訓練<br>個別プログラム</h1>
+    <p>看護師（機能訓練指導員）用</p>
+  </div>
+  <a href="002_機能訓練マニュアル.html" class="sb-back">← マニュアルに戻る</a>
+  <div class="sb-nav">
+    <div class="sb-group">メニュー</div>
+    <button class="nav-btn active" onclick="showPage('top')" data-p="top"><span class="nav-icon">🏠</span>パターン選択</button>
+    <div class="sb-group">訓練パターン</div>
+    <button class="nav-btn" onclick="showPage('a')" data-p="a"><span class="nav-icon">🟡</span>A：転倒予防・歩行</button>
+    <button class="nav-btn" onclick="showPage('b')" data-p="b"><span class="nav-icon">🔵</span>B：片麻痺ADL向上</button>
+    <button class="nav-btn" onclick="showPage('c')" data-p="c"><span class="nav-icon">🟢</span>C：認知症対応</button>
+    <button class="nav-btn" onclick="showPage('d')" data-p="d"><span class="nav-icon">🩵</span>D：呼吸器・軽負荷</button>
+    <button class="nav-btn" onclick="showPage('e')" data-p="e"><span class="nav-icon">🔴</span>E：口腔・嚥下機能</button>
+  </div>
+</nav>
+
+<div class="content">
+<div class="ch"><h2 id="page-title">パターン選択</h2><p>利用者の状態に合ったパターンを選んでください</p></div>
+<div class="main">
+
+<!-- ===== TOP ===== -->
+<div class="page active" id="page-top">
+  <div class="sec-head"><div class="sec-icon">🏠</div><div><h2>訓練パターン一覧</h2><p>利用者の状態・目標に合わせてパターンを選択</p></div></div>
+  <div class="pattern-grid">
+    <div class="pat-card" onclick="showPage('a')">
+      <div class="pat-hd"><div class="pat-icon a">🚶</div><div><div class="pat-label a">Pattern A</div><div class="pat-name">転倒予防・歩行改善</div></div></div>
+      <div class="pat-desc">廃用症候群・足腰の筋力低下・転倒リスクの高い方。ROM訓練から始めて筋力強化・バランス・歩行まで一貫して実施。</div>
+      <div class="pat-meta"><span class="tag time">⏱ 25〜30分</span><span class="tag level">要介護1〜3</span></div>
+    </div>
+    <div class="pat-card" onclick="showPage('b')">
+      <div class="pat-hd"><div class="pat-icon b">🤝</div><div><div class="pat-label b">Pattern B</div><div class="pat-name">片麻痺ADL向上</div></div></div>
+      <div class="pat-desc">脳血管疾患後遺症による片麻痺の方。患側ROMを重点的に実施し、更衣・食事・排泄動作の自立支援を行う。</div>
+      <div class="pat-meta"><span class="tag time">⏱ 25〜30分</span><span class="tag level">要介護2〜4</span></div>
+    </div>
+    <div class="pat-card" onclick="showPage('c')">
+      <div class="pat-hd"><div class="pat-icon c">🧠</div><div><div class="pat-label c">Pattern C</div><div class="pat-name">認知症対応</div></div></div>
+      <div class="pat-desc">認知症を併存する方。シンプルな動作・声かけ・歌に合わせた運動を中心に。口腔機能訓練も組み込む。</div>
+      <div class="pat-meta"><span class="tag time">⏱ 20〜25分</span><span class="tag level">要介護1〜3</span></div>
+    </div>
+    <div class="pat-card" onclick="showPage('d')">
+      <div class="pat-hd"><div class="pat-icon d">🌬️</div><div><div class="pat-label d">Pattern D</div><div class="pat-name">呼吸器・軽負荷</div></div></div>
+      <div class="pat-desc">COPD・慢性心不全・呼吸苦がある方。SpO2を常時モニタリングしながら、低負荷の呼吸訓練と座位運動を実施。</div>
+      <div class="pat-meta"><span class="tag time">⏱ 20〜25分</span><span class="tag level">要介護1〜3</span></div>
+    </div>
+    <div class="pat-card" onclick="showPage('e')">
+      <div class="pat-hd"><div class="pat-icon e">👄</div><div><div class="pat-label e">Pattern E</div><div class="pat-name">口腔・嚥下機能</div></div></div>
+      <div class="pat-desc">嚥下障害・誤嚥リスク・低栄養が懸念される方。口腔体操・パタカラ・間接嚥下訓練を中心に構成。</div>
+      <div class="pat-meta"><span class="tag time">⏱ 20〜25分</span><span class="tag level">要介護1〜4</span></div>
+    </div>
+  </div>
+  <div class="caution amber">💡 <strong>使い方：</strong>利用者の個別機能訓練計画書の目標・禁忌事項と照合してからパターンを選択してください。複数パターンの組み合わせも可能です。</div>
+</div>
+
+<!-- ===== PATTERN A ===== -->
+<div class="page" id="page-a">
+  <div class="sec-head"><div class="sec-icon">🚶</div><div><h2>パターンA：転倒予防・歩行改善コース</h2><p>廃用症候群・筋力低下・転倒リスクの高い方 ／ 所要時間：25〜30分</p></div></div>
+  <div class="nav-btns"><button class="btn btn-top" onclick="showPage('top')">← パターン選択に戻る</button></div>
+
+  <!-- STEP 0 -->
+  <div class="step-card">
+    <div class="step-hd">
+      <div class="step-num prep">0</div>
+      <div class="step-ttl">開始前確認</div>
+      <div class="step-time">⏱ 5分</div>
+    </div>
+    <div class="step-body">
+      <div class="step-illus">
+        <svg viewBox="0 0 130 130" xmlns="http://www.w3.org/2000/svg">
+          <!-- 血圧計イメージ -->
+          <rect x="20" y="50" width="90" height="60" rx="10" fill="#dbeafe" stroke="#1558a0" stroke-width="2"/>
+          <rect x="30" y="60" width="70" height="20" rx="4" fill="#1558a0"/>
+          <text x="65" y="75" font-size="11" fill="white" text-anchor="middle" font-weight="bold">125/75</text>
+          <text x="65" y="92" font-size="9" fill="#1e40af" text-anchor="middle">mmHg</text>
+          <circle cx="65" cy="35" r="16" fill="#fde68a" stroke="#d97706" stroke-width="2"/>
+          <text x="65" y="40" font-size="14" text-anchor="middle">😊</text>
+          <!-- カフ -->
+          <ellipse cx="30" cy="50" rx="12" ry="8" fill="#93c5fd" stroke="#1558a0" stroke-width="1.5"/>
+          <line x1="30" y1="50" x2="30" y2="35" stroke="#64748b" stroke-width="2" stroke-dasharray="3"/>
+        </svg>
+        <div class="illus-cap">バイタルサイン測定<br>※写真に差し替え可</div>
+      </div>
+      <div class="step-content">
+        <div class="sub-hd">バイタルサイン測定</div>
+        <div class="vital-row">
+          <div class="vital-box"><div class="vb-label">収縮期BP</div><input class="vb-input" placeholder="___" type="text"> mmHg</div>
+          <div class="vital-box"><div class="vb-label">拡張期BP</div><input class="vb-input" placeholder="___" type="text"> mmHg</div>
+          <div class="vital-box"><div class="vb-label">脈拍</div><input class="vb-input" placeholder="___" type="text"> bpm</div>
+          <div class="vital-box"><div class="vb-label">SpO2</div><input class="vb-input" placeholder="___" type="text"> %</div>
+          <div class="vital-box"><div class="vb-label">体温</div><input class="vb-input" placeholder="___" type="text"> ℃</div>
+        </div>
+        <div class="vital-stop">🛑 <strong>中止基準</strong>：収縮期BP 180以上 / 90未満 ／ SpO2 91%以下 ／ 脈拍 120以上 or 40未満 ／ 体温 38℃以上 ／ 胸痛・強い動悸</div>
+        <div class="sub-hd" style="margin-top:12px">主訴・問診（声かけ例）</div>
+        <ul class="inst-list">
+          <li>「今日の体調はいかがですか？」</li>
+          <li>「昨日転ばれましたか？どこか痛いところはありませんか？」</li>
+          <li>「今日は〇〇（訓練内容）をしましょう」と内容を説明し同意を確認</li>
+          <li>禁忌事項（当日の服薬・直近の受診内容）を確認</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 1 -->
+  <div class="step-card">
+    <div class="step-hd">
+      <div class="step-num warm">1</div>
+      <div class="step-ttl">ウォームアップ</div>
+      <div class="step-time">⏱ 3〜4分</div>
+    </div>
+    <div class="step-body">
+      <div class="step-illus">
+        <svg viewBox="0 0 130 130" xmlns="http://www.w3.org/2000/svg">
+          <!-- 椅子 -->
+          <rect x="20" y="85" width="90" height="7" rx="3" fill="#d97706"/>
+          <rect x="20" y="92" width="7" height="32" rx="3" fill="#d97706"/>
+          <rect x="103" y="92" width="7" height="32" rx="3" fill="#d97706"/>
+          <!-- 人物 -->
+          <circle cx="65" cy="22" r="14" fill="#fde68a" stroke="#d97706" stroke-width="2"/>
+          <rect x="53" y="36" width="24" height="34" rx="4" fill="#93c5fd"/>
+          <!-- 腕を横に開いてストレッチ -->
+          <line x1="53" y1="44" x2="25" y2="54" stroke="#93c5fd" stroke-width="7" stroke-linecap="round"/>
+          <line x1="77" y1="44" x2="105" y2="54" stroke="#93c5fd" stroke-width="7" stroke-linecap="round"/>
+          <!-- 座位の脚 -->
+          <rect x="46" y="70" width="13" height="18" rx="3" fill="#475569"/>
+          <rect x="71" y="70" width="13" height="18" rx="3" fill="#475569"/>
+          <line x1="50" y1="88" x2="50" y2="122" stroke="#475569" stroke-width="9" stroke-linecap="round"/>
+          <line x1="80" y1="88" x2="80" y2="122" stroke="#475569" stroke-width="9" stroke-linecap="round"/>
+        </svg>
+        <div class="illus-cap">座位での<br>肩・体幹ほぐし</div>
+      </div>
+      <div class="step-content">
+        <ul class="inst-list">
+          <li><strong>肩回し</strong>：両肩を前→上→後→下に大きく回す（前回し5回・後ろ回し5回）</li>
+          <li><strong>首のストレッチ</strong>：ゆっくり右・左・前・後ろへ傾ける（各3〜5秒、痛みがある場合は中止）</li>
+          <li><strong>体幹回旋</strong>：両手を胸の前で組み、左右にゆっくり体をひねる（各5回）</li>
+          <li><strong>足首回し</strong>：左右の足首を内回し・外回しそれぞれ5回ずつ</li>
+          <li><strong>深呼吸</strong>：鼻から吸って口から吐く（3回）。訓練への切り替えを促す</li>
+        </ul>
+        <div class="caution green">✅ 動きながら声かけを続け、利用者のペースを確認してください</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="step-card">
+    <div class="step-hd">
+      <div class="step-num">2</div>
+      <div class="step-ttl">ROM訓練（下肢）</div>
+      <div class="step-time">⏱ 7〜8分</div>
+    </div>
+    <div class="step-body">
+      <div class="step-illus">
+        <svg viewBox="0 0 130 130" xmlns="http://www.w3.org/2000/svg">
+          <!-- 椅子 -->
+          <rect x="15" y="82" width="90" height="7" rx="3" fill="#d97706"/>
+          <rect x="15" y="89" width="7" height="34" rx="3" fill="#d97706"/>
+          <rect x="98" y="89" width="7" height="34" rx="3" fill="#d97706"/>
+          <!-- 人物 -->
+          <circle cx="60" cy="20" r="13" fill="#fde68a" stroke="#d97706" stroke-width="2"/>
+          <rect x="48" y="33" width="24" height="32" rx="4" fill="#93c5fd"/>
+          <!-- 腕 -->
+          <line x1="48" y1="40" x2="30" y2="56" stroke="#93c5fd" stroke-width="6" stroke-linecap="round"/>
+          <line x1="72" y1="40" x2="90" y2="56" stroke="#93c5fd" stroke-width="6" stroke-linecap="round"/>
+          <!-- 左脚（曲げた状態）-->
+          <rect x="42" y="65" width="12" height="18" rx="3" fill="#475569"/>
+          <line x1="47" y1="83" x2="47" y2="120" stroke="#475569" stroke-width="8" stroke-linecap="round"/>
+          <!-- 右脚（伸ばした状態）-->
+          <rect x="66" y="65" width="12" height="18" rx="3" fill="#1558a0"/>
+          <line x1="72" y1="70" x2="112" y2="70" stroke="#1558a0" stroke-width="8" stroke-linecap="round"/>
+          <!-- 矢印 -->
+          <path d="M95 58 L115 68 L100 78" fill="none" stroke="#dc2626" stroke-width="2" stroke-linejoin="round"/>
+        </svg>
+        <div class="illus-cap">座位での<br>膝伸展訓練</div>
+      </div>
+      <div class="step-content">
+        <div class="step-note">座位姿勢を整え（深く腰掛け、背筋を伸ばす）から開始します。</div>
+        <ul class="inst-list">
+          <li><strong>膝伸展（5秒保持）</strong>：ゆっくり膝を伸ばして5秒保持→ゆっくり戻す。左右各10回×2セット</li>
+          <li><strong>股関節屈曲</strong>：太ももをゆっくり上げて3秒保持→戻す。左右各10回</li>
+          <li><strong>足関節背屈・底屈</strong>：つま先を上→下に動かす（各方向10回×2セット）。背屈5°以上を目標</li>
+          <li><strong>踵上げ（カーフレイズ）</strong>：座位でかかとを上げる（10〜20回×2セット）</li>
+          <li><strong>つま先上げ</strong>：かかとを床につけたまま足先を上げる（10〜20回×2セット）</li>
+        </ul>
+        <div class="caution amber">⚠️ 膝に痛みが出た場合は可動域を制限して実施。人工関節置換術後の場合は禁忌角度を必ず確認</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="step-card">
+    <div class="step-hd">
+      <div class="step-num">3</div>
+      <div class="step-ttl">筋力強化（立ち上がり練習）</div>
+      <div class="step-time">⏱ 6〜7分</div>
+    </div>
+    <div class="step-body">
+      <div class="step-illus">
+        <svg viewBox="0 0 130 130" xmlns="http://www.w3.org/2000/svg">
+          <!-- 椅子 -->
+          <rect x="15" y="90" width="65" height="7" rx="3" fill="#d97706"/>
+          <rect x="15" y="97" width="7" height="26" rx="3" fill="#d97706"/>
+          <rect x="73" y="97" width="7" height="26" rx="3" fill="#d97706"/>
+          <!-- 立ち上がる人物 -->
+          <circle cx="65" cy="22" r="13" fill="#fde68a" stroke="#d97706" stroke-width="2"/>
+          <!-- 前傾した体幹 -->
+          <line x1="65" y1="35" x2="55" y2="75" stroke="#93c5fd" stroke-width="16" stroke-linecap="round"/>
+          <!-- 腕（前に出す） -->
+          <line x1="60" y1="45" x2="35" y2="70" stroke="#93c5fd" stroke-width="7" stroke-linecap="round"/>
+          <line x1="60" y1="45" x2="80" y2="65" stroke="#93c5fd" stroke-width="7" stroke-linecap="round"/>
+          <!-- 脚（立ち上がり途中） -->
+          <line x1="55" y1="75" x2="45" y2="110" stroke="#475569" stroke-width="9" stroke-linecap="round"/>
+          <line x1="55" y1="75" x2="70" y2="110" stroke="#475569" stroke-width="9" stroke-linecap="round"/>
+          <!-- 矢印（上方向） -->
+          <path d="M100 80 L110 55 L120 80" fill="none" stroke="#dc2626" stroke-width="2.5" stroke-linejoin="round"/>
+          <line x1="110" y1="55" x2="110" y2="100" stroke="#dc2626" stroke-width="2" stroke-dasharray="4"/>
+        </svg>
+        <div class="illus-cap">椅子からの<br>立ち上がり練習</div>
+      </div>
+      <div class="step-content">
+        <div class="step-note">椅子の高さを膝が90°になる高さに調整。必要に応じて肘掛け・介助を使用。</div>
+        <ul class="inst-list">
+          <li><strong>準備</strong>：「足を引いて、体を前に傾けてから立ちましょう」と毎回声かけ</li>
+          <li><strong>立ち座り</strong>：ゆっくり立つ→3秒保持→ゆっくり座る。5〜10回×2セット</li>
+          <li><strong>Ns の位置</strong>：利用者の斜め前（利き手側）に立ち、倒れた際にすぐ支えられる位置</li>
+          <li><strong>休憩</strong>：2セット目の前に30秒〜1分の休憩を入れる</li>
+          <li><strong>目標設定の目安</strong>：30秒間で5回以上立ち上がれれば良好</li>
+        </ul>
+        <div class="caution red">🛑 ふらつきや息切れが出たら即座に座らせて休憩。バイタル再測定を実施</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 4 -->
+  <div class="step-card">
+    <div class="step-hd">
+      <div class="step-num">4</div>
+      <div class="step-ttl">バランス訓練</div>
+      <div class="step-time">⏱ 5〜6分</div>
+    </div>
+    <div class="step-body">
+      <div class="step-illus">
+        <svg viewBox="0 0 130 130" xmlns="http://www.w3.org/2000/svg">
+          <!-- 手すり -->
+          <rect x="5" y="60" width="8" height="65" rx="4" fill="#94a3b8"/>
+          <rect x="5" y="60" width="30" height="8" rx="4" fill="#94a3b8"/>
+          <!-- 立位の人物 -->
+          <circle cx="75" cy="18" r="13" fill="#fde68a" stroke="#d97706" stroke-width="2"/>
+          <line x1="75" y1="31" x2="75" y2="78" stroke="#93c5fd" stroke-width="14" stroke-linecap="round"/>
+          <!-- 腕（手すりを持つ） -->
+          <line x1="68" y1="45" x2="35" y2="65" stroke="#93c5fd" stroke-width="6" stroke-linecap="round"/>
+          <line x1="82" y1="45" x2="105" y2="58" stroke="#93c5fd" stroke-width="6" stroke-linecap="round"/>
+          <!-- 脚 -->
+          <line x1="68" y1="78" x2="62" y2="125" stroke="#475569" stroke-width="9" stroke-linecap="round"/>
+          <line x1="82" y1="78" x2="88" y2="125" stroke="#475569" stroke-width="9" stroke-linecap="round"/>
+          <!-- 片足強調 -->
+          <circle cx="88" cy="125" r="7" fill="none" stroke="#dc2626" stroke-width="2"/>
+        </svg>
+        <div class="illus-cap">手すり使用での<br>立位バランス</div>
+      </div>
+      <div class="step-content">
+        <div class="step-note">必ず手すり・平行棒前方または介助者近接で実施。転倒リスク高の方は常に介助者が手を添える。</div>
+        <ul class="inst-list">
+          <li><strong>両脚立位</strong>：足幅を肩幅に開き、30秒〜1分保持。Nsは側方で見守り</li>
+          <li><strong>重心移動</strong>：前→後→左→右と声かけしながら重心を移動（各方向5回）</li>
+          <li><strong>前方リーチ</strong>：片手で前方に手を伸ばす（FRT動作）。目標25cm以上</li>
+          <li><strong>タンデム立位（可能なら）</strong>：一直線に前後に脚を並べて10秒保持</li>
+          <li><strong>起立性低血圧の確認</strong>：立位後30秒でBP再測定（変動>20mmHgで中止）</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 5 -->
+  <div class="step-card">
+    <div class="step-hd">
+      <div class="step-num">5</div>
+      <div class="step-ttl">歩行練習</div>
+      <div class="step-time">⏱ 4〜5分</div>
+    </div>
+    <div class="step-body">
+      <div class="step-illus">
+        <svg viewBox="0 0 130 130" xmlns="http://www.w3.org/2000/svg">
+          <!-- 歩行器 -->
+          <rect x="30" y="70" width="70" height="5" rx="2.5" fill="#94a3b8"/>
+          <line x1="35" y1="75" x2="35" y2="118" stroke="#94a3b8" stroke-width="5" stroke-linecap="round"/>
+          <line x1="95" y1="75" x2="95" y2="118" stroke="#94a3b8" stroke-width="5" stroke-linecap="round"/>
+          <line x1="35" y1="118" x2="95" y2="118" stroke="#94a3b8" stroke-width="5" stroke-linecap="round"/>
+          <!-- 人物（歩行） -->
+          <circle cx="65" cy="20" r="13" fill="#fde68a" stroke="#d97706" stroke-width="2"/>
+          <line x1="65" y1="33" x2="65" y2="78" stroke="#93c5fd" stroke-width="14" stroke-linecap="round"/>
+          <!-- 腕（歩行器を押す） -->
+          <line x1="58" y1="48" x2="38" y2="70" stroke="#93c5fd" stroke-width="6" stroke-linecap="round"/>
+          <line x1="72" y1="48" x2="92" y2="70" stroke="#93c5fd" stroke-width="6" stroke-linecap="round"/>
+          <!-- 脚（歩行） -->
+          <line x1="60" y1="78" x2="50" y2="120" stroke="#475569" stroke-width="9" stroke-linecap="round"/>
+          <line x1="70" y1="78" x2="80" y2="105" stroke="#475569" stroke-width="9" stroke-linecap="round"/>
+        </svg>
+        <div class="illus-cap">歩行補助具を<br>使った歩行練習</div>
+      </div>
+      <div class="step-content">
+        <div class="step-note">個別機能訓練計画書の補助具・介助量を確認してから開始。</div>
+        <ul class="inst-list">
+          <li><strong>靴の確認</strong>：滑り止め付き・足に合ったものを確認</li>
+          <li><strong>補助具の準備</strong>：歩行器・四点杖・T字杖など計画書記載のものを用意</li>
+          <li><strong>歩行開始</strong>：10〜20m程度の平地歩行を2〜3往復</li>
+          <li><strong>Nsの位置</strong>：利用者の患側（または転倒しやすい側）の斜め後方に位置</li>
+          <li><strong>進捗確認</strong>：5m歩行テストを月1回実施して記録（秒数）</li>
+        </ul>
+        <div class="caution blue">📊 歩行速度の目安：0.8m/秒以上で屋外活動が可能レベル。0.6m/秒未満は転倒リスク高</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 6 クールダウン -->
+  <div class="step-card">
+    <div class="step-hd">
+      <div class="step-num cool">6</div>
+      <div class="step-ttl">クールダウン</div>
+      <div class="step-time">⏱ 3〜4分</div>
+    </div>
+    <div class="step-body">
+      <div class="step-illus">
+        <svg viewBox="0 0 130 130" xmlns="http://www.w3.org/2000/svg">
+          <!-- 椅子 -->
+          <rect x="18" y="85" width="88" height="7" rx="3" fill="#d97706"/>
+          <rect x="18" y="92" width="7" height="30" rx="3" fill="#d97706"/>
+          <rect x="99" y="92" width="7" height="30" rx="3" fill="#d97706"/>
+          <!-- 安静座位の人物 -->
+          <circle cx="62" cy="20" r="13" fill="#fde68a" stroke="#d97706" stroke-width="2"/>
+          <!-- 閉じた目 -->
+          <path d="M 56 18 Q 58.5 16 61 18" stroke="#475569" stroke-width="1.5" fill="none"/>
+          <path d="M 63 18 Q 65.5 16 68 18" stroke="#475569" stroke-width="1.5" fill="none"/>
+          <!-- 口（ふーっ） -->
+          <path d="M 57 24 Q 62 27 67 24" stroke="#475569" stroke-width="1.5" fill="none"/>
+          <rect x="50" y="33" width="24" height="34" rx="4" fill="#a5f3fc"/>
+          <!-- 腕（膝の上） -->
+          <line x1="50" y1="50" x2="36" y2="62" stroke="#a5f3fc" stroke-width="7" stroke-linecap="round"/>
+          <line x1="74" y1="50" x2="88" y2="62" stroke="#a5f3fc" stroke-width="7" stroke-linecap="round"/>
+          <!-- 脚 -->
+          <rect x="44" y="67" width="13" height="18" rx="3" fill="#475569"/>
+          <rect x="69" y="67" width="13" height="18" rx="3" fill="#475569"/>
+          <line x1="49" y1="85" x2="49" y2="118" stroke="#475569" stroke-width="8" stroke-linecap="round"/>
+          <line x1="77" y1="85" x2="77" y2="118" stroke="#475569" stroke-width="8" stroke-linecap="round"/>
+        </svg>
+        <div class="illus-cap">安静座位での<br>クールダウン</div>
+      </div>
+      <div class="step-content">
+        <ul class="inst-list">
+          <li><strong>安静座位</strong>：椅子に深く腰掛け、2〜3分間安静にする</li>
+          <li><strong>深呼吸</strong>：鼻から吸って口からゆっくり吐く（5〜10回）</li>
+          <li><strong>上肢の軽いストレッチ</strong>：肩の前後ストレッチを左右各5秒×2回</li>
+          <li><strong>体調確認</strong>：「気分はいかがですか？」「疲れましたか？」と声かけ</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 7 終了 -->
+  <div class="step-card">
+    <div class="step-hd">
+      <div class="step-num end">7</div>
+      <div class="step-ttl">終了後確認・記録</div>
+      <div class="step-time">⏱ 3〜5分</div>
+    </div>
+    <div class="step-body">
+      <div class="step-illus">
+        <div class="photo-slot"><div class="ps-icon">📝</div>記録用紙<br>または端末</div>
+      </div>
+      <div class="step-content">
+        <div class="vital-row">
+          <div class="vital-box"><div class="vb-label">訓練後BP</div><input class="vb-input" placeholder="___" type="text"></div>
+          <div class="vital-box"><div class="vb-label">訓練後脈拍</div><input class="vb-input" placeholder="___" type="text"></div>
+          <div class="vital-box"><div class="vb-label">訓練後SpO2</div><input class="vb-input" placeholder="___" type="text"></div>
+        </div>
+        <ul class="inst-list">
+          <li><strong>バイタル再測定</strong>：開始前との変動を確認・記録</li>
+          <li><strong>主訴確認</strong>：「体はいかがですか？どこか痛みはありますか？」</li>
+          <li><strong>本日の達成度</strong>：計画の何%を実施できたか記録</li>
+          <li><strong>SOAP記録</strong>：S（訴え）O（バイタル・実施内容）A（評価）P（次回計画）</li>
+          <li><strong>多職種への申し送り</strong>：気になる点があれば介護職員・管理者に伝達</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div><!-- /page-a -->
+
+<!-- ===== PATTERN B ===== -->
+<div class="page" id="page-b">
+  <div class="sec-head"><div class="sec-icon">🤝</div><div><h2>パターンB：片麻痺ADL向上コース</h2><p>脳血管疾患後遺症・片麻痺の方 ／ 所要時間：25〜30分</p></div></div>
+  <div class="nav-btns"><button class="btn btn-top" onclick="showPage('top')">← パターン選択に戻る</button></div>
+  <div class="caution blue">📌 <strong>片麻痺の基本原則</strong>：更衣は「患側から着て、健側から脱ぐ」。ROM は患側を重点的に、自動介助運動から始める。</div>
+
+  <div class="step-card">
+    <div class="step-hd"><div class="step-num prep">0</div><div class="step-ttl">開始前確認</div><div class="step-time">⏱ 5分</div></div>
+    <div class="step-body">
+      <div class="step-illus"><div class="photo-slot"><div class="ps-icon">🩺</div>バイタル<br>確認</div></div>
+      <div class="step-content">
+        <div class="vital-row">
+          <div class="vital-box"><div class="vb-label">収縮期BP</div><input class="vb-input" placeholder="___" type="text"></div>
+          <div class="vital-box"><div class="vb-label">脈拍</div><input class="vb-input" placeholder="___" type="text"></div>
+          <div class="vital-box"><div class="vb-label">SpO2</div><input class="vb-input" placeholder="___" type="text"></div>
+        </div>
+        <ul class="inst-list">
+          <li>麻痺側の<strong>皮膚状態</strong>を確認（発赤・浮腫・傷の有無）</li>
+          <li>肩関節の亜脱臼・痛みの有無を確認（ROM訓練の範囲を決定）</li>
+          <li>装具（短下肢装具等）の使用状況を確認</li>
+          <li>当日の<strong>痙縮の状態</strong>（硬さ）を確認してから介入量を決める</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-hd"><div class="step-num warm">1</div><div class="step-ttl">ウォームアップ・患側上肢ROM</div><div class="step-time">⏱ 7〜8分</div></div>
+    <div class="step-body">
+      <div class="step-illus">
+        <svg viewBox="0 0 130 130" xmlns="http://www.w3.org/2000/svg">
+          <!-- 椅子 -->
+          <rect x="15" y="85" width="90" height="7" rx="3" fill="#d97706"/>
+          <rect x="15" y="92" width="7" height="30" rx="3" fill="#d97706"/>
+          <rect x="98" y="92" width="7" height="30" rx="3" fill="#d97706"/>
+          <!-- 人物 -->
+          <circle cx="60" cy="20" r="13" fill="#fde68a" stroke="#d97706" stroke-width="2"/>
+          <rect x="48" y="33" width="24" height="34" rx="4" fill="#93c5fd"/>
+          <!-- 健側腕（自然）-->
+          <line x1="72" y1="42" x2="95" y2="60" stroke="#93c5fd" stroke-width="7" stroke-linecap="round"/>
+          <!-- 患側腕（他動的に上げる） -->
+          <line x1="48" y1="40" x2="20" y2="20" stroke="#fca5a5" stroke-width="7" stroke-linecap="round"/>
+          <!-- Ns の手 -->
+          <circle cx="14" cy="20" r="6" fill="#0d9488"/>
+          <!-- 矢印 -->
+          <path d="M 25 10 L 18 18 L 30 22" fill="none" stroke="#dc2626" stroke-width="2" stroke-linejoin="round"/>
+          <!-- 脚 -->
+          <rect x="44" y="67" width="12" height="18" rx="3" fill="#475569"/>
+          <rect x="68" y="67" width="12" height="18" rx="3" fill="#475569"/>
+          <line x1="49" y1="85" x2="49" y2="122" stroke="#475569" stroke-width="8" stroke-linecap="round"/>
+          <line x1="74" y1="85" x2="74" y2="122" stroke="#475569" stroke-width="8" stroke-linecap="round"/>
+        </svg>
+        <div class="illus-cap">患側上肢の<br>他動ROM</div>
+      </div>
+      <div class="step-content">
+        <ul class="inst-list">
+          <li><strong>肩関節ROM（他動）</strong>：屈曲0〜90°、外転0〜90°まで（亜脱臼・痛みに注意）</li>
+          <li><strong>肘関節屈伸（他動→自動介助）</strong>：各10回</li>
+          <li><strong>前腕回内外（他動→自動介助）</strong>：各10回</li>
+          <li><strong>手関節・手指ROM</strong>：背屈・掌屈・手指伸展（拘縮予防）各10回</li>
+          <li><strong>良肢位の確認</strong>：肩が内旋・下垂しないよう、座位時の腕の置き場所を介護職に伝達</li>
+        </ul>
+        <div class="caution red">🛑 肩関節の可動域制限がある場合は決して無理に動かさない。痛みを訴えたら直ちに中止</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-hd"><div class="step-num">2</div><div class="step-ttl">患側下肢ROM・筋力</div><div class="step-time">⏱ 6〜7分</div></div>
+    <div class="step-body">
+      <div class="step-illus"><div class="photo-slot"><div class="ps-icon">🦵</div>患側下肢<br>ROM</div></div>
+      <div class="step-content">
+        <ul class="inst-list">
+          <li><strong>股関節・膝関節ROM（他動）</strong>：屈伸・内外転 各10回</li>
+          <li><strong>足関節背屈ROM</strong>：尖足予防のため背屈方向に十分伸ばす（10秒保持×5回）</li>
+          <li><strong>座位での患側下肢自動介助運動</strong>：「自分で上げてみましょう」と声かけ</li>
+          <li><strong>SLR（straight leg raise）</strong>：麻痺側の膝伸展位での下肢挙上（可能な場合のみ）</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-hd"><div class="step-num">3</div><div class="step-ttl">ADL訓練（更衣動作）</div><div class="step-time">⏱ 8〜10分</div></div>
+    <div class="step-body">
+      <div class="step-illus"><div class="photo-slot"><div class="ps-icon">👕</div>更衣動作<br>練習</div></div>
+      <div class="step-content">
+        <ul class="inst-list">
+          <li><strong>前開き上衣</strong>：患側の腕から袖を通す→健側→前を留める</li>
+          <li><strong>ズボン</strong>：座位で患側を先に通す→健側→立ち上がって引き上げる</li>
+          <li><strong>動作の工程分割</strong>：「手を通す」「掴む」「引き上げる」を1ステップずつ練習</li>
+          <li><strong>自助具の確認</strong>：ボタンエイド・ドレッシングスティック等が必要か評価</li>
+          <li><strong>出来た部分は必ず褒める</strong>：「上手にできましたね」と肯定的な声かけを継続</li>
+        </ul>
+        <div class="caution green">✅ 本人ができる部分はあえて手を出さない。「できた」体験を積み重ねることが目標</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-hd"><div class="step-num cool">4</div><div class="step-ttl">クールダウン・終了確認</div><div class="step-time">⏱ 4〜5分</div></div>
+    <div class="step-body">
+      <div class="step-illus"><div class="photo-slot"><div class="ps-icon">😊</div>体調確認<br>声かけ</div></div>
+      <div class="step-content">
+        <ul class="inst-list">
+          <li>患側上肢の良肢位保持を確認（肩・肘・手首の位置）</li>
+          <li>バイタル再測定・主訴確認</li>
+          <li>「今日の〇〇はとても上手でした」と具体的に褒める</li>
+          <li>介護職員に良肢位保持の注意点を申し送り</li>
+          <li>SOAP記録：麻痺側の変化・ADL達成度を詳細に記録</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div><!-- /page-b -->
+
+<!-- ===== PATTERN C ===== -->
+<div class="page" id="page-c">
+  <div class="sec-head"><div class="sec-icon">🧠</div><div><h2>パターンC：認知症対応コース</h2><p>認知症を併存する方 ／ 所要時間：20〜25分</p></div></div>
+  <div class="nav-btns"><button class="btn btn-top" onclick="showPage('top')">← パターン選択に戻る</button></div>
+  <div class="caution green">💚 <strong>認知症対応の基本姿勢</strong>：否定せず、急かさず、シンプルに。「できない」ではなく「今日も来てくださってありがとうございます」から始める。</div>
+
+  <div class="step-card">
+    <div class="step-hd"><div class="step-num prep">0</div><div class="step-ttl">開始前確認・関係づくり</div><div class="step-time">⏱ 5分</div></div>
+    <div class="step-body">
+      <div class="step-illus"><div class="photo-slot"><div class="ps-icon">🤝</div>ラポール<br>形成</div></div>
+      <div class="step-content">
+        <ul class="inst-list">
+          <li>バイタル測定（柔らかい声かけで）：「今日も元気そうですね」と共感から入る</li>
+          <li>認知機能の当日状態（HDS-R等の簡易確認は月1回程度）</li>
+          <li>当日の<strong>意欲・気分の確認</strong>（「今日は体操しましょうか？」と提案形式で）</li>
+          <li>環境調整：静かな場所・Nsと1対1の空間を確保</li>
+        </ul>
+        <div class="vital-row">
+          <div class="vital-box"><div class="vb-label">BP</div><input class="vb-input" placeholder="___"></div>
+          <div class="vital-box"><div class="vb-label">脈拍</div><input class="vb-input" placeholder="___"></div>
+          <div class="vital-box"><div class="vb-label">当日の意欲</div><input class="vb-input" placeholder="良/可/不可"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-hd"><div class="step-num warm">1</div><div class="step-ttl">口腔体操（パタカラ）</div><div class="step-time">⏱ 4〜5分</div></div>
+    <div class="step-body">
+      <div class="step-illus">
+        <svg viewBox="0 0 130 130" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="65" cy="50" r="45" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+          <circle cx="48" cy="42" r="5" fill="#475569"/>
+          <circle cx="82" cy="42" r="5" fill="#475569"/>
+          <!-- 大きく開いた口 -->
+          <path d="M 45 65 Q 65 85 85 65" fill="#dc2626" stroke="#475569" stroke-width="2"/>
+          <path d="M 45 65 Q 65 72 85 65" fill="#fde68a"/>
+          <!-- 舌 -->
+          <ellipse cx="65" cy="72" rx="12" ry="6" fill="#f87171"/>
+          <!-- 音符 -->
+          <text x="95" y="30" font-size="22" fill="#d97706">♪</text>
+          <text x="18" y="28" font-size="16" fill="#0d9488">♫</text>
+        </svg>
+        <div class="illus-cap">パタカラ体操<br>「パ・タ・カ・ラ」</div>
+      </div>
+      <div class="step-content">
+        <div class="step-note">シンプルな動作で集中を引き出す。Ns が見本を見せながら一緒に行う。</div>
+        <ul class="inst-list">
+          <li><strong>「パ」</strong>を5回（口唇をしっかり閉じてから開く）</li>
+          <li><strong>「タ」</strong>を5回（舌先を上の歯の裏につける）</li>
+          <li><strong>「カ」</strong>を5回（舌の奥を使う）</li>
+          <li><strong>「ラ」</strong>を5回（舌を巻く）</li>
+          <li>「パタカラ」を続けて5〜10回（最終的に）</li>
+          <li>うまくできたら<strong>「上手ですね！」</strong>と必ず声かけ</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-hd"><div class="step-num">2</div><div class="step-ttl">上肢ROM・軽い体操</div><div class="step-time">⏱ 6〜7分</div></div>
+    <div class="step-body">
+      <div class="step-illus"><div class="photo-slot"><div class="ps-icon">🙌</div>一緒に<br>体操</div></div>
+      <div class="step-content">
+        <ul class="inst-list">
+          <li><strong>Ns が見本を見せながら</strong>行う（真似しやすい動作を選ぶ）</li>
+          <li>「バンザイ」（両手を上げる）→「横に広げる」→「胸の前で合わせる」</li>
+          <li>肩回し・首ゆっくり傾ける（各5回）</li>
+          <li>手拍子や歌（知っている童謡・民謡）に合わせると参加しやすい</li>
+          <li>複雑な指示は避け、1動作ずつシンプルに</li>
+        </ul>
+        <div class="caution amber">💡 興味を失ったら中断せず「少し休みましょうか」と切り替えを提案</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-hd"><div class="step-num">3</div><div class="step-ttl">下肢ROM・座位での運動</div><div class="step-time">⏱ 5〜6分</div></div>
+    <div class="step-body">
+      <div class="step-illus"><div class="photo-slot"><div class="ps-icon">🦵</div>座位での<br>足の体操</div></div>
+      <div class="step-content">
+        <ul class="inst-list">
+          <li>「足首をくるくる回しましょう」（内回し・外回し各5回）</li>
+          <li>「かかとを上げましょう」（踵上げ10回）</li>
+          <li>「足先を上げましょう」（つま先上げ10回）</li>
+          <li>「膝を上げましょう」（股関節屈曲 左右各5回）</li>
+          <li>難しい場合は他動的に介助しながら実施（Ns が足首を持って一緒に動かす）</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-hd"><div class="step-num end">4</div><div class="step-ttl">終了・記録</div><div class="step-time">⏱ 3〜4分</div></div>
+    <div class="step-body">
+      <div class="step-illus"><div class="photo-slot"><div class="ps-icon">😊</div>笑顔で<br>締めくくり</div></div>
+      <div class="step-content">
+        <ul class="inst-list">
+          <li>「今日もよく頑張りましたね」「ありがとうございました」と温かく締める</li>
+          <li>バイタル再測定・表情・意欲の変化を記録</li>
+          <li>当日の参加度（積極的・受動的・拒否傾向）を記録</li>
+          <li>介護職員へ：当日の様子・注意点を申し送り</li>
+        </ul>
+        <div class="caution green">✅ 「本日の訓練での笑顔」「発語」「自ら動いた場面」を具体的に記録する</div>
+      </div>
+    </div>
+  </div>
+</div><!-- /page-c -->
+
+<!-- ===== PATTERN D ===== -->
+<div class="page" id="page-d">
+  <div class="sec-head"><div class="sec-icon">🌬️</div><div><h2>パターンD：呼吸器・軽負荷コース</h2><p>COPD・慢性心不全・呼吸苦のある方 ／ 所要時間：20〜25分</p></div></div>
+  <div class="nav-btns"><button class="btn btn-top" onclick="showPage('top')">← パターン選択に戻る</button></div>
+  <div class="caution red">⚠️ SpO2 を<strong>訓練中も常時モニタリング</strong>。91%以下で即時中止。主治医からの運動制限指示を必ず事前確認。</div>
+
+  <div class="step-card">
+    <div class="step-hd"><div class="step-num prep">0</div><div class="step-ttl">開始前確認（SpO2・バイタル必須）</div><div class="step-time">⏱ 5分</div></div>
+    <div class="step-body">
+      <div class="step-illus"><div class="photo-slot"><div class="ps-icon">💊</div>SpO2<br>確認</div></div>
+      <div class="step-content">
+        <div class="vital-row">
+          <div class="vital-box"><div class="vb-label">BP</div><input class="vb-input" placeholder="___"></div>
+          <div class="vital-box"><div class="vb-label">脈拍</div><input class="vb-input" placeholder="___"></div>
+          <div class="vital-box"><div class="vb-label">SpO2</div><input class="vb-input" placeholder="___ %"></div>
+          <div class="vital-box"><div class="vb-label">呼吸数</div><input class="vb-input" placeholder="___ 回/分"></div>
+        </div>
+        <ul class="inst-list">
+          <li>開始時SpO2が<strong>92%未満の場合は医師・管理者へ相談</strong>の上、訓練実施を判断</li>
+          <li>主治医の運動処方（METs・歩行距離・禁忌事項）を確認</li>
+          <li>前日・当日の呼吸苦・浮腫の増悪がないか確認</li>
+          <li>在宅酸素療法（HOT）使用者は流量設定を確認</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-hd"><div class="step-num warm">1</div><div class="step-ttl">体位調整・呼吸訓練（口すぼめ）</div><div class="step-time">⏱ 6〜7分</div></div>
+    <div class="step-body">
+      <div class="step-illus">
+        <svg viewBox="0 0 130 130" xmlns="http://www.w3.org/2000/svg">
+          <!-- 椅子 -->
+          <rect x="15" y="88" width="90" height="7" rx="3" fill="#d97706"/>
+          <rect x="15" y="95" width="7" height="28" rx="3" fill="#d97706"/>
+          <rect x="98" y="95" width="7" height="28" rx="3" fill="#d97706"/>
+          <!-- 人物（少し前傾） -->
+          <circle cx="60" cy="20" r="13" fill="#fde68a" stroke="#d97706" stroke-width="2"/>
+          <!-- 口すぼめ -->
+          <circle cx="60" cy="27" r="4" fill="none" stroke="#475569" stroke-width="2"/>
+          <!-- 体幹やや前傾 -->
+          <line x1="60" y1="33" x2="56" y2="74" stroke="#a5f3fc" stroke-width="14" stroke-linecap="round"/>
+          <!-- 腕（膝に置く） -->
+          <line x1="54" y1="46" x2="44" y2="68" stroke="#a5f3fc" stroke-width="6" stroke-linecap="round"/>
+          <line x1="62" y1="46" x2="74" y2="68" stroke="#a5f3fc" stroke-width="6" stroke-linecap="round"/>
+          <!-- 脚 -->
+          <rect x="42" y="74" width="12" height="16" rx="3" fill="#475569"/>
+          <rect x="66" y="74" width="12" height="16" rx="3" fill="#475569"/>
+          <line x1="47" y1="90" x2="47" y2="120" stroke="#475569" stroke-width="8" stroke-linecap="round"/>
+          <line x1="73" y1="90" x2="73" y2="120" stroke="#475569" stroke-width="8" stroke-linecap="round"/>
+          <!-- 呼気の矢印 -->
+          <path d="M 66 27 L 100 20 L 100 34" fill="none" stroke="#0d9488" stroke-width="2" stroke-linejoin="round"/>
+        </svg>
+        <div class="illus-cap">口すぼめ呼吸<br>ゆっくり吐く</div>
+      </div>
+      <div class="step-content">
+        <ul class="inst-list">
+          <li><strong>体位調整</strong>：椅子に深く腰掛け、体幹を少し前傾（横隔膜の動きを助ける）</li>
+          <li><strong>口すぼめ呼吸</strong>：「鼻から2秒吸って、口をすぼめてゆっくり4〜6秒かけて吐く」を10回×2セット</li>
+          <li><strong>腹式呼吸</strong>：お腹に手を当てて、吸気でお腹が膨らむことを確認（5〜10回）</li>
+          <li>「吐くときに焦らなくていいですよ、ゆっくりです」と声かけを継続</li>
+        </ul>
+        <div class="caution red">🛑 呼吸困難感・胸部不快感が出たら即座に中止</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-hd"><div class="step-num">2</div><div class="step-ttl">座位での軽負荷ROM・筋力（上肢）</div><div class="step-time">⏱ 5〜6分</div></div>
+    <div class="step-body">
+      <div class="step-illus"><div class="photo-slot"><div class="ps-icon">💪</div>軽い<br>上肢運動</div></div>
+      <div class="step-content">
+        <ul class="inst-list">
+          <li>肩・肘・手首のROM（他動または自動で5〜10回ずつ）</li>
+          <li><strong>運動強度はBorg指数 11（楽である）以下</strong>を目標に</li>
+          <li>1セット実施後にSpO2・脈拍を確認してから次に進む</li>
+          <li>「息を止めないで、呼吸を続けながらやりましょう」と声かけ</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-hd"><div class="step-num">3</div><div class="step-ttl">座位での軽負荷ROM（下肢）</div><div class="step-time">⏱ 4〜5分</div></div>
+    <div class="step-body">
+      <div class="step-illus"><div class="photo-slot"><div class="ps-icon">🦵</div>座位での<br>下肢運動</div></div>
+      <div class="step-content">
+        <ul class="inst-list">
+          <li>足首背屈・底屈（10〜20回）</li>
+          <li>踵上げ（10回）</li>
+          <li>膝伸展（5〜10回）：息を止めないよう注意</li>
+          <li>全て座位で実施。立位訓練は主治医の許可を確認してから</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-hd"><div class="step-num end">4</div><div class="step-ttl">終了後確認・記録</div><div class="step-time">⏱ 3〜4分</div></div>
+    <div class="step-body">
+      <div class="step-illus"><div class="photo-slot"><div class="ps-icon">📋</div>SpO2<br>再測定</div></div>
+      <div class="step-content">
+        <div class="vital-row">
+          <div class="vital-box"><div class="vb-label">終了後SpO2</div><input class="vb-input" placeholder="___ %"></div>
+          <div class="vital-box"><div class="vb-label">終了後脈拍</div><input class="vb-input" placeholder="___"></div>
+          <div class="vital-box"><div class="vb-label">呼吸困難感</div><input class="vb-input" placeholder="なし/軽/中"></div>
+        </div>
+        <ul class="inst-list">
+          <li>SpO2が開始前より2%以上低下した場合は主治医・管理者に報告</li>
+          <li>「今日のご気分はいかがでしたか」と体調を丁寧に確認</li>
+          <li>SOAP記録：SpO2の推移・Borg指数・中止の有無を必ず記録</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div><!-- /page-d -->
+
+<!-- ===== PATTERN E ===== -->
+<div class="page" id="page-e">
+  <div class="sec-head"><div class="sec-icon">👄</div><div><h2>パターンE：口腔・嚥下機能コース</h2><p>嚥下障害・誤嚥リスクのある方 ／ 所要時間：20〜25分</p></div></div>
+  <div class="nav-btns"><button class="btn btn-top" onclick="showPage('top')">← パターン選択に戻る</button></div>
+  <div class="caution red">⚠️ <strong>直接訓練（食物を使った嚥下訓練）はNsの単独判断では実施しない。</strong>間接訓練に特化し、疑わしい場合はST・医師へ紹介。</div>
+
+  <div class="step-card">
+    <div class="step-hd"><div class="step-num prep">0</div><div class="step-ttl">開始前確認・口腔内観察</div><div class="step-time">⏱ 5分</div></div>
+    <div class="step-body">
+      <div class="step-illus"><div class="photo-slot"><div class="ps-icon">🦷</div>口腔内<br>観察</div></div>
+      <div class="step-content">
+        <ul class="inst-list">
+          <li>口腔内状態の確認（口腔乾燥・残渣・義歯の適合・口腔粘膜の傷）</li>
+          <li>嚥下スクリーニング：<strong>RSST（反復唾液嚥下）</strong>「唾を飲み込んでください」を30秒計測（3回未満で要精査）</li>
+          <li>前回の食事でのむせ・咳込みの有無を確認</li>
+          <li>バイタル（BP・脈拍・体温）を測定</li>
+        </ul>
+        <div class="vital-row">
+          <div class="vital-box"><div class="vb-label">RSST</div><input class="vb-input" placeholder="___回/30秒"></div>
+          <div class="vital-box"><div class="vb-label">BP</div><input class="vb-input" placeholder="___"></div>
+          <div class="vital-box"><div class="vb-label">むせの有無</div><input class="vb-input" placeholder="有/無"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-hd"><div class="step-num warm">1</div><div class="step-ttl">口腔体操・パタカラ</div><div class="step-time">⏱ 6〜7分</div></div>
+    <div class="step-body">
+      <div class="step-illus">
+        <svg viewBox="0 0 130 130" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="65" cy="55" r="50" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+          <circle cx="48" cy="45" r="5" fill="#475569"/>
+          <circle cx="82" cy="45" r="5" fill="#475569"/>
+          <path d="M 45 70 Q 65 92 85 70" fill="#dc2626" stroke="#7f1d1d" stroke-width="2"/>
+          <path d="M 45 70 Q 65 78 85 70" fill="#fca5a5"/>
+          <ellipse cx="65" cy="78" rx="14" ry="7" fill="#f87171"/>
+          <text x="35" y="22" font-size="11" fill="#dc2626" font-weight="bold">パ！</text>
+          <text x="78" y="22" font-size="11" fill="#dc2626" font-weight="bold">タ！</text>
+          <text x="35" y="100" font-size="11" fill="#dc2626" font-weight="bold">カ！</text>
+          <text x="78" y="100" font-size="11" fill="#dc2626" font-weight="bold">ラ！</text>
+        </svg>
+        <div class="illus-cap">パタカラ体操<br>口を大きく動かす</div>
+      </div>
+      <div class="step-content">
+        <ul class="inst-list">
+          <li>Nsが見本を見せながら一緒に行う</li>
+          <li><strong>「パ」</strong>×10回：口唇をしっかり閉じてから開く。食べ物のこぼれ予防</li>
+          <li><strong>「タ」</strong>×10回：舌先を上の歯の裏に弾きつける。食塊送り込み</li>
+          <li><strong>「カ」</strong>×10回：舌の奥を上あごに押し付ける。嚥下反射</li>
+          <li><strong>「ラ」</strong>×10回：舌を巻く。食塊まとめ</li>
+          <li>連続して「パタカラ」×5〜10回</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-hd"><div class="step-num">2</div><div class="step-ttl">舌・頬・口唇運動</div><div class="step-time">⏱ 5〜6分</div></div>
+    <div class="step-body">
+      <div class="step-illus"><div class="photo-slot"><div class="ps-icon">👅</div>舌の<br>運動</div></div>
+      <div class="step-content">
+        <ul class="inst-list">
+          <li><strong>舌の突き出し・引っ込め</strong>：各5回ゆっくり大きく</li>
+          <li><strong>舌の左右移動</strong>：舌先で左右の口角を交互に触れる（5回）</li>
+          <li><strong>舌尖で口唇をなめる</strong>：時計回り・反時計回り各5回</li>
+          <li><strong>舌を上あごへ押し付ける</strong>：3〜5秒保持×5回（喉頭挙上筋の強化）</li>
+          <li><strong>頬のふくらませ・すぼめ</strong>：各10回</li>
+          <li><strong>口唇を横に引く・すぼめる</strong>：各10回</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-hd"><div class="step-num">3</div><div class="step-ttl">間接嚥下訓練</div><div class="step-time">⏱ 4〜5分</div></div>
+    <div class="step-body">
+      <div class="step-illus"><div class="photo-slot"><div class="ps-icon">💧</div>嚥下訓練<br>（間接）</div></div>
+      <div class="step-content">
+        <ul class="inst-list">
+          <li><strong>唾液嚥下の促し</strong>：「では唾を飲み込んでみましょう」（連続5回）</li>
+          <li><strong>喉頭挙上訓練</strong>：「ゴクン」と意識的に飲み込む動作を10〜20回繰り返す</li>
+          <li><strong>発声練習</strong>：「あーいーうーえーおー」と大きくはっきり声を出す（5回）</li>
+          <li><strong>ハミング</strong>：鼻歌で「んー」と声を出しながら唾液嚥下を促す</li>
+        </ul>
+        <div class="caution amber">⚠️ むせ込みが出現したら頸部前屈を促しながら休憩。改善しない場合は中止・医師へ連絡</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-hd"><div class="step-num">4</div><div class="step-ttl">上肢ROM（姿勢改善）</div><div class="step-time">⏱ 4〜5分</div></div>
+    <div class="step-body">
+      <div class="step-illus"><div class="photo-slot"><div class="ps-icon">🙆</div>頸部・<br>肩のほぐし</div></div>
+      <div class="step-content">
+        <ul class="inst-list">
+          <li>頸部ROM（前後屈・回旋・側屈 各3〜5回）：嚥下に関わる頸部筋群のほぐし</li>
+          <li>肩甲骨の動き（肩回し 各方向5回）</li>
+          <li>「食事の時の姿勢」を意識した体幹の伸展練習</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="step-card">
+    <div class="step-hd"><div class="step-num end">5</div><div class="step-ttl">終了後確認・記録</div><div class="step-time">⏱ 3〜4分</div></div>
+    <div class="step-body">
+      <div class="step-illus"><div class="photo-slot"><div class="ps-icon">📝</div>記録</div></div>
+      <div class="step-content">
+        <ul class="inst-list">
+          <li>口腔内の残渣・乾燥の状態を再確認</li>
+          <li>訓練中のむせ・咳込みの有無を記録</li>
+          <li>RSST の変化・パタカラ体操の発音明瞭度を記録</li>
+          <li>食事担当職員へ：当日の嚥下状態・注意点を必ず申し送り</li>
+          <li>変化（むせ増加・体重減少・発熱）があれば医師へ報告・ST紹介を検討</li>
+        </ul>
+        <div class="caution blue">📊 毎月1回：体重・BMI・食事摂取量（%）を記録。低栄養の早期発見に</div>
+      </div>
+    </div>
+  </div>
+</div><!-- /page-e -->
+
+</div><!-- /.main -->
+<footer class="ft">機能訓練 個別プログラム｜デイサービス看護師向け｜令和8年7月作成</footer>
+</div><!-- /.content -->
+</div><!-- /.layout -->
+
+<script>
+const pageTitles={
+  top:'パターン選択',
+  a:'パターンA：転倒予防・歩行改善',
+  b:'パターンB：片麻痺ADL向上',
+  c:'パターンC：認知症対応',
+  d:'パターンD：呼吸器・軽負荷',
+  e:'パターンE：口腔・嚥下機能'
+};
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(n=>n.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  const nb=document.querySelector('[data-p="'+id+'"]');
+  if(nb)nb.classList.add('active');
+  document.getElementById('page-title').textContent=pageTitles[id]||'';
+  document.getElementById('tb-title').textContent='💪 '+pageTitles[id];
+  closeSB();
+  window.scrollTo(0,0);
+}
+function toggleSB(){
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('show');
+}
+function closeSB(){
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('overlay').classList.remove('show');
+}
+</script>
+</body>
+</html>

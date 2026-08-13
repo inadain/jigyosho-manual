@@ -190,13 +190,12 @@ tr:nth-child(even) td { background: var(--gray-lt); }
   <div class="sidebar-nav">
     <div class="nav-group">基本</div>
     <button class="nav-item active" onclick="showPage('intro')" data-page="intro"><span class="nav-icon">🏠</span>はじめに・前提</button>
-    <button class="nav-item" onclick="showPage('flow')" data-page="flow"><span class="nav-icon">🔁</span>業務フロー・評価測定</button>
-    <button class="nav-item" onclick="showPage('addition')" data-page="addition"><span class="nav-icon">📋</span>加算・算定要件</button>
+    <button class="nav-item" onclick="showPage('start')" data-page="start"><span class="nav-icon">🆕</span>初めての方はここ</button>
 
     <div class="nav-group">訓練メニュー</div>
+    <button class="nav-item" onclick="showPage('practice')" data-page="practice"><span class="nav-icon">💪</span>運動メニュー（座位11種）</button>
+    <button class="nav-item" onclick="showPage('levelup')" data-page="levelup"><span class="nav-icon">📈</span>レベルアップ訓練</button>
     <button class="nav-item" onclick="showPage('rom')" data-page="rom"><span class="nav-icon">🔄</span>ROM（関節可動域）</button>
-    <button class="nav-item" onclick="showPage('strength')" data-page="strength"><span class="nav-icon">💪</span>筋力強化</button>
-    <button class="nav-item" onclick="showPage('balance')" data-page="balance"><span class="nav-icon">⚖️</span>バランス訓練</button>
     <button class="nav-item" onclick="showPage('gait')" data-page="gait"><span class="nav-icon">👣</span>歩行訓練</button>
     <button class="nav-item" onclick="showPage('adl')" data-page="adl"><span class="nav-icon">🛁</span>ADL訓練</button>
     <button class="nav-item" onclick="showPage('breath')" data-page="breath"><span class="nav-icon">🌬️</span>呼吸訓練</button>
@@ -204,8 +203,10 @@ tr:nth-child(even) td { background: var(--gray-lt); }
 
     <div class="nav-group">運用</div>
     <button class="nav-item" onclick="showPage('assess')" data-page="assess"><span class="nav-icon">📊</span>評価・個別計画</button>
+    <button class="nav-item" onclick="showPage('flow')" data-page="flow"><span class="nav-icon">🔁</span>業務フロー・評価測定</button>
     <button class="nav-item" onclick="showPage('record')" data-page="record"><span class="nav-icon">📝</span>記録・書類</button>
     <button class="nav-item" onclick="showPage('safety')" data-page="safety"><span class="nav-icon">🛡️</span>安全管理</button>
+    <button class="nav-item" onclick="showPage('addition')" data-page="addition"><span class="nav-icon">📋</span>加算・算定要件</button>
     <button class="nav-item" onclick="showPage('ref')" data-page="ref"><span class="nav-icon">📚</span>参考資料</button>
   </div>
 </nav>
@@ -266,13 +267,53 @@ tr:nth-child(even) td { background: var(--gray-lt); }
     <div class="card">
       <h3>🗂️ マニュアルの構成</h3>
       <ul class="list">
+        <li><strong>初めての方はここ</strong>：今日の流れ（6ステップ）だけ知りたい方はまずここ</li>
+        <li><strong>運動メニュー</strong>：日々使う座位運動 全11種・やり方とデモのコツ</li>
+        <li><strong>レベルアップ訓練</strong>：座位に慣れた方向けの発展種目（一部立位・見守り必須）</li>
+        <li><strong>ROM・歩行・ADL・呼吸・口腔嚥下</strong>：分野別の訓練メニュー詳細</li>
+        <li><strong>評価・個別計画</strong>：アセスメントツールと個別プログラム作成への入口</li>
         <li><strong>加算・算定要件</strong>：算定できる加算の種類と書類の全体像</li>
-        <li><strong>訓練メニュー7種</strong>：ROM・筋力・バランス・歩行・ADL・呼吸・口腔嚥下</li>
-        <li><strong>評価・個別計画</strong>：アセスメントツールと計画書の作り方</li>
         <li><strong>記録・書類</strong>：加算算定に必要な書類一覧と書き方</li>
         <li><strong>安全管理</strong>：中止基準・転倒対応・緊急時フロー</li>
       </ul>
     </div>
+
+    <div class="point">💡 <strong>初めて機能訓練をする方</strong>は、まず次の「初めての方はここ」ページだけ読めば今日から実施できます。制度・書類の話は後で大丈夫です。</div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- PAGE: start                                                   -->
+  <!-- ============================================================ -->
+  <div class="page" id="page-start">
+    <div class="sec-head"><div class="sec-icon">🆕</div><div><h2>初めての方はここ（今日の流れ）</h2><p>このページだけ読めば、今日の機能訓練が実施できます</p></div></div>
+
+    <div class="alert green">✅ 難しい制度や書類の話は後回しでOKです。まずは「今日、利用者と何をするか」を掴みましょう。</div>
+
+    <div class="card">
+      <h3>🔁 今日の流れ（1人あたり約5〜10分）</h3>
+      <ol class="list-num">
+        <li><strong>体調確認・声かけ</strong>：「今日の調子はいかがですか」と声をかけ、痛み・気分・（必要なら）血圧を確認。痛みや体調不良があれば無理に行わない。</li>
+        <li><strong>メニューを見せる</strong>：3つの区分（可動域・筋力・転倒予防）の運動一覧を利用者に見せる（次の「運動メニュー」ページ）。</li>
+        <li><strong>利用者に選んでもらう</strong>：各区分から1つずつ＝合計3種を、利用者自身に選んでもらう。「今日はどれをやってみましょうか？」——選ぶこと自体が意欲につながり、飽き防止になる。</li>
+        <li><strong>看護師がお手本（デモ）</strong>：まず看護師が実際にやって見せる。「運動メニュー」ページの「デモ・声かけのコツ」を使う。</li>
+        <li><strong>一緒に実施</strong>：各運動60〜90秒を目安に一緒に行う。声かけ・見守りをしながら、回数やレベルを利用者に合わせる。</li>
+        <li><strong>称賛・記録</strong>：「よくできました」と称賛。実施した種目・回数・様子・痛みの有無を記録する。</li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <h3>💡「選んでもらう」で飽きさせない</h3>
+      <ul class="list">
+        <li><strong>自分で選ぶ＝意欲・主体性</strong>につながり、続けやすい</li>
+        <li>毎回ちがう組み合わせになり<strong>マンネリ・飽きを防ぐ</strong></li>
+        <li>「今日はどれにしますか？」と<strong>会話のきっかけ</strong>にもなる</li>
+        <li>選べない・迷う方には、前回と違うものを看護師が2〜3個に絞って提示し、その中から選んでもらうとスムーズ</li>
+      </ul>
+    </div>
+
+    <div class="alert red">🛑 運動中に痛みが出たらその運動を中断・中止。体調不良・強い疲労時は無理に行わない。詳しい中止基準は「安全管理」ページを参照。</div>
+
+    <div class="point"><strong>次にすること</strong>：①「運動メニュー」ページで実際の運動（全11種・座位）を確認 → ②実施したら「記録・書類」ページのとおり記録</div>
   </div>
 
   <!-- ============================================================ -->
@@ -541,6 +582,8 @@ tr:nth-child(even) td { background: var(--gray-lt); }
   <div class="page" id="page-rom">
     <div class="sec-head"><div class="sec-icon">🔄</div><div><h2>ROM（関節可動域）訓練</h2><p>拘縮予防・関節可動域の維持・改善</p></div></div>
 
+    <div class="alert blue">📌 日々の下肢ROM運動（ロール運動・足すり運動）は「運動メニュー」ページのR1・R2で実施します。このページでは肩・肘・手指など<strong>他の関節も含めた詳細</strong>を扱います。</div>
+
     <div class="card">
       <h3>🎯 目的・対象</h3>
       <ul class="list">
@@ -602,33 +645,100 @@ tr:nth-child(even) td { background: var(--gray-lt); }
   </div>
 
   <!-- ============================================================ -->
-  <!-- PAGE: strength                                                -->
+  <!-- PAGE: practice                                                -->
   <!-- ============================================================ -->
-  <div class="page" id="page-strength">
-    <div class="sec-head"><div class="sec-icon">💪</div><div><h2>筋力強化訓練</h2><p>下肢・体幹筋力の維持・向上・転倒予防</p></div></div>
+  <div class="page" id="page-practice">
+    <div class="sec-head"><div class="sec-icon">💪</div><div><h2>運動メニュー（全11種・座位）</h2><p>「機能訓練表」を基にした日々の運動一覧　／　全種目イスに座ったまま安全に実施できます</p></div></div>
+
+    <div class="alert amber">🪑 全11種すべて座位で実施できるよう設計しています（立位運動なし）。3区分（可動域・筋力・転倒予防）から1つずつ＝計3種を選んで行います。1回 約5分（各運動60〜90秒×3種）。実施の流れは「初めての方はここ」ページ参照。</div>
 
     <div class="card">
-      <h3>🎯 目的・対象</h3>
-      <ul class="list">
-        <li><strong>目的</strong>：下肢・体幹筋力の維持・向上、転倒予防、起居動作の自立支援</li>
-        <li><strong>対象</strong>：起立・移乗に介助が必要な方、サルコペニアが疑われる方</li>
-        <li><strong>安全設計の方針</strong>：転倒リスクを避けるため、<strong>座位でできる種目を優先</strong>する。立位種目は「立ち上がり練習」など座位では代替できない動作に限定し、必ず手すり・見守りを確保する。</li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <h3>🪑 座位での下肢運動</h3>
+      <h3>🔄 日替わりローテーション表</h3>
+      <p style="font-size:12.5px;color:var(--text-sub);margin-bottom:8px">パターン①→⑩を順に回すと、毎回ちがう組み合わせになり飽きずに続けられます（2週間で一巡）。利用者の状態に合わせて種目・回数・レベルは調整してください。</p>
       <div class="tbl-wrap">
         <table>
-          <thead><tr><th>種目</th><th>回数</th><th>ポイント</th></tr></thead>
+          <thead><tr><th>パターン</th><th>① 可動域</th><th>② 筋力</th><th>③ 転倒予防</th></tr></thead>
           <tbody>
-            <tr><td><strong>膝伸展（5秒保持）</strong></td><td>10回×2セット</td><td>椅子に深く座り、膝をゆっくり伸ばして5秒保持してから戻す</td></tr>
-            <tr><td><strong>踵上げ（カーフレイズ）</strong></td><td>10〜20回×2セット</td><td>座位でつま先立ち。腓腹筋強化</td></tr>
-            <tr><td><strong>つま先上げ</strong></td><td>10〜20回×2セット</td><td>踵を床に付けたまま足先を上げる。前脛骨筋強化</td></tr>
-            <tr><td><strong>股関節屈曲（膝を上げる）</strong></td><td>10回×2セット</td><td>ゆっくり太ももを上げて3秒保持</td></tr>
+            <tr><td><strong>1</strong></td><td>R1 ロール運動</td><td>S1 脚の横上げ</td><td>F1 タオルギャザー</td></tr>
+            <tr><td><strong>2</strong></td><td>R2 足すり運動</td><td>S2 膝の開閉</td><td>F2 ボール踏み</td></tr>
+            <tr><td><strong>3</strong></td><td>R1 ロール運動</td><td>S3 ボールはさみ</td><td>F3 棒の上で板</td></tr>
+            <tr><td><strong>4</strong></td><td>R2 足すり運動</td><td>S4 かかと上げ</td><td>F4 膝伸ばし</td></tr>
+            <tr><td><strong>5</strong></td><td>R1 ロール運動</td><td>S5 座位ステップ</td><td>F1 タオルギャザー</td></tr>
+            <tr><td><strong>6</strong></td><td>R2 足すり運動</td><td>S1 脚の横上げ</td><td>F2 ボール踏み</td></tr>
+            <tr><td><strong>7</strong></td><td>R1 ロール運動</td><td>S2 膝の開閉</td><td>F3 棒の上で板</td></tr>
+            <tr><td><strong>8</strong></td><td>R2 足すり運動</td><td>S3 ボールはさみ</td><td>F4 膝伸ばし</td></tr>
+            <tr><td><strong>9</strong></td><td>R1 ロール運動</td><td>S4 かかと上げ</td><td>F1 タオルギャザー</td></tr>
+            <tr><td><strong>10</strong></td><td>R2 足すり運動</td><td>S5 座位ステップ</td><td>F2 ボール踏み</td></tr>
           </tbody>
         </table>
       </div>
+    </div>
+
+    <div class="card">
+      <h3>🟢 ① 関節可動域運動（準備運動）</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>種目</th><th>めやす</th><th>やり方</th><th>デモ・声かけのコツ</th><th>注意</th></tr></thead>
+          <tbody>
+            <tr><td><strong>R1<br>ロール運動</strong></td><td>10往復</td><td>仰向けに寝て踵の下にロールを置き、足の裏全体でロールを前後に転がす</td><td>「かかとの下の棒を、足の裏でコロコロ転がしましょう」。足首だけでなく脚全体が動くのを見せる</td><td>股関節の人工関節術後の方は屈曲角度により避ける</td></tr>
+            <tr><td><strong>R2<br>足すり運動</strong></td><td>3回くらい</td><td>座位で足を前後にこする（膝の準備）。腰は立膝で痛みのない範囲で軽くねじる</td><td>「油をさすように、すっすっと軽く動かしましょう」。力まないことを示す</td><td>3回くらいで十分。それ以上は効果が上がらない</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>🔵 ② 筋力増強運動</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>種目</th><th>めやす</th><th>やり方</th><th>デモ・声かけのコツ</th><th>注意</th></tr></thead>
+          <tbody>
+            <tr><td><strong>S1<br>座位 脚の横上げ運動</strong></td><td>左右10回ずつ</td><td>イスに深く座り座面の両端をつかみ、片脚をまっすぐ横に持ち上げて戻す。テンポよく左右交互に</td><td>「座ったまま、脚を横にスッと上げて戻しましょう」。上体が傾かないことを見せる</td><td>股関節に痛みがあれば上げる高さを控えめに</td></tr>
+            <tr><td><strong>S2<br>座位 膝の開閉運動</strong></td><td>20回めやす</td><td>イスに座り、両膝を軽く開いて閉じる。なるべく早く。慣れたら座面を持たずに</td><td>「両膝を開いて閉じて、肩は動かさずに」</td><td>最初はゆっくり、徐々に早く。体幹・肩が揺れる場合は回数か振幅を減らす</td></tr>
+            <tr><td><strong>S3<br>ボールはさみ運動</strong></td><td>2〜3秒×5回</td><td>仰向けで膝を立て、膝の間にボールをはさみ、潰すように2〜3秒保持</td><td>「息を吐きながら、内ももでギューっと2〜3秒」</td><td>腹圧性失禁の予防・改善にも。息を止めないよう声かけ</td></tr>
+            <tr><td><strong>S4<br>座位 かかと上げ運動</strong></td><td>10回めやす</td><td>イスに座り、両足のかかとを持ち上げてつま先立ちにし、ゆっくり下ろす</td><td>「座ったまま、かかとをスッと持ち上げましょう」</td><td>回数を多くできない運動。反動を使わずゆっくりと</td></tr>
+            <tr><td><strong>S5<br>座位ステップ運動（足踏み）</strong></td><td>左右計20回</td><td>イスに座り、腿を高く上げるように左右交互に足踏みする</td><td>「腿を高く上げて、その場で足踏みしましょう」</td><td>疲労が強く残るなら回数を減らす</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>🔴 ③ 転倒予防運動</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>種目</th><th>めやす</th><th>やり方</th><th>デモ・声かけのコツ</th><th>注意</th></tr></thead>
+          <tbody>
+            <tr><td><strong>F1<br>タオルギャザー</strong></td><td>左右各10回</td><td>イスに座り、足の下にタオルを敷き、足の指でたぐり寄せる。負荷は先端に重り</td><td>「足の指でタオルをたぐり寄せましょう」</td><td>初期は踵が浮いてもよいが徐々に踵をつけたまま。負荷はペットボトルで調節</td></tr>
+            <tr><td><strong>F2<br>ボール踏み</strong></td><td>前後10往復</td><td>イスに座り、足の下のボールが逃げないように踏む。慣れたら踏んだまま前後に動かす</td><td>「ボールを踏んで、そのまま前後にコロコロ」</td><td>力を入れすぎて足を捻じらない</td></tr>
+            <tr><td><strong>F3<br>棒の上で板を動かす</strong></td><td>前後10往復</td><td>2本の棒の上に板を置き、目印（ハンコ等）を倒さないように前後に動かす</td><td>「倒さないように、ゆっくり大きく」</td><td>神経を非常に使う。底面の大きいものから徐々に小さくしてレベルUP</td></tr>
+            <tr><td><strong>F4<br>座位 膝伸ばし運動</strong></td><td>左右各10回</td><td>イスに座り、片膝をゆっくり伸ばしてつま先を天井に向け2〜3秒保持し、ゆっくり戻す</td><td>「膝をゆっくり伸ばして、つま先を天井に向けましょう」</td><td>膝に痛みがあれば可動範囲を狭める。つまずき軽減に有効</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="point"><strong>記録すること</strong>：実施した種目（区分ごと）と回数・時間／実施時の様子（意欲・疲労）／痛みの有無・部位／次回への申し送り。詳しくは「記録・書類」ページ参照。</div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- PAGE: levelup                                                 -->
+  <!-- ============================================================ -->
+  <div class="page" id="page-levelup">
+    <div class="sec-head"><div class="sec-icon">📈</div><div><h2>レベルアップ訓練</h2><p>座位メニューに慣れ、状態が安定している方向け（一部立位・見守り必須）</p></div></div>
+
+    <div class="alert red">⚠️ 立位を含む種目は<strong>必ず手すり・見守りを確保</strong>してから実施してください。「運動メニュー」の座位種目に慣れ、状態が安定していることを確認したうえで導入すること。</div>
+
+    <div class="card">
+      <h3>🪑 座位でできる上級種目</h3>
+      <ul class="list">
+        <li><strong>座位ヒップリフト（骨盤挙上）</strong>：座面から軽くお尻を浮かせて戻す（5〜10秒保持×5回）。殿筋・体幹強化</li>
+        <li><strong>骨盤前後傾運動</strong>：座位で骨盤を前後に傾ける（体幹深部筋）</li>
+        <li><strong>ゴムバンド使用</strong>（Thera-band等）：Ns判断で実施可。強度は「ちょうどきつい」程度</li>
+        <li><strong>座位での上肢リーチ動作</strong>：手を前・横・斜め方向に伸ばす</li>
+        <li><strong>座位での体幹傾斜</strong>：反対側へ体幹を傾けてから戻す</li>
+        <li><strong>背もたれなし座位保持</strong>：手を膝に置いた状態で30秒〜</li>
+      </ul>
     </div>
 
     <div class="card">
@@ -642,55 +752,7 @@ tr:nth-child(even) td { background: var(--gray-lt); }
     </div>
 
     <div class="card">
-      <h3>⚙️ 体幹・その他</h3>
-      <ul class="list">
-        <li><strong>骨盤前後傾運動</strong>：座位で骨盤を前後に傾ける（体幹深部筋）</li>
-        <li><strong>ゴムバンド使用</strong>（Thera-band等）：Ns判断で実施可。強度は「ちょうどきつい」程度</li>
-        <li><strong>座位ヒップリフト（骨盤挙上）</strong>：イスに座り、座面から軽くお尻を浮かせて戻す（5〜10秒保持×5回）。殿筋・体幹強化。壁スクワットと同様の負荷を座位で得られる</li>
-      </ul>
-    </div>
-
-    <div class="alert red">🛑 <strong>中止基準</strong>：収縮期血圧 160mmHg以上 または 100mmHg未満 ／ 心拍数が安静時+30bpm超 ／ 不整脈出現 ／ 胸痛・強い動悸</div>
-
-    <div class="point"><strong>所要時間：1人あたり15〜20分</strong>。立ち上がり練習は座位では代替できない動作のため実施するが、椅子の高さ・手すりの有無を毎回確認してから開始すること。</div>
-  </div>
-
-  <!-- ============================================================ -->
-  <!-- PAGE: balance                                                 -->
-  <!-- ============================================================ -->
-  <div class="page" id="page-balance">
-    <div class="sec-head"><div class="sec-icon">⚖️</div><div><h2>バランス訓練</h2><p>立位バランス改善・転倒予防</p></div></div>
-
-    <div class="card">
-      <h3>🎯 目的・対象</h3>
-      <ul class="list">
-        <li><strong>目的</strong>：立位バランス改善、転倒予防、重心移動能力の向上</li>
-        <li><strong>対象</strong>：TUG ≧14秒 ／ 片脚立位保持困難 ／ 転倒既往のある方</li>
-      </ul>
-    </div>
-
-    <div class="alert red">⚠️ <strong>安全設計の方針</strong>：まずは座位バランス訓練で安定を確認し、問題なければ立位訓練へ段階的に進める。立位訓練を行う場合は、平行棒内 ／ 手すり前方 ／ 介助者近接のいずれかで必ず安全確保をしてから実施</div>
-
-    <div class="card">
-      <h3>🪑 座位バランス訓練（まずはここから）</h3>
-      <ul class="list">
-        <li>座位での<strong>上肢リーチ動作</strong>：手を前・横・斜め方向に伸ばす</li>
-        <li>座位での<strong>体幹傾斜</strong>：反対側へ体幹を傾けてから戻す</li>
-        <li>手を膝に置いた状態で<strong>背もたれなし座位保持</strong>（30秒〜）</li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <h3>🦶 足底感覚訓練</h3>
-      <ul class="list">
-        <li><strong>タオルギャザー</strong>：座位で足趾でタオルを手繰り寄せる（各足10回）</li>
-        <li><strong>ボール足裏転がし</strong>：座位でテニスボール等を足裏で転がす（各足30秒）</li>
-        <li>座位が基本。立位で実施する場合は必ず手すり把持</li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <h3>🧍 立位バランス訓練（段階的に・座位で安定を確認後）</h3>
+      <h3>🧍 立位バランス訓練（段階的に）</h3>
       <div class="step-grid">
         <div class="step-card"><div class="step-no">STEP 1</div><p><strong>両脚立位</strong><br>足幅を肩幅に開き、30秒〜1分保持</p></div>
         <div class="step-card"><div class="step-no">STEP 2</div><p><strong>半歩幅立位</strong><br>足を半歩前後にずらして保持</p></div>
@@ -708,7 +770,9 @@ tr:nth-child(even) td { background: var(--gray-lt); }
       </ul>
     </div>
 
-    <div class="point"><strong>所要時間：1人あたり10〜15分</strong>。起立性低血圧の既往がある方は、起立前後に血圧測定を実施すること。</div>
+    <div class="alert red">🛑 <strong>中止基準</strong>：収縮期血圧 160mmHg以上 または 100mmHg未満 ／ 心拍数が安静時+30bpm超 ／ 不整脈出現 ／ 胸痛・強い動悸</div>
+
+    <div class="point"><strong>所要時間：1人あたり10〜20分</strong>。立位訓練は平行棒内／手すり前方／介助者近接のいずれかで安全確保をしてから実施すること。起立性低血圧の既往がある方は、起立前後に血圧測定を実施すること。</div>
   </div>
 
   <!-- ============================================================ -->
@@ -932,6 +996,8 @@ tr:nth-child(even) td { background: var(--gray-lt); }
   <div class="page" id="page-assess">
     <div class="sec-head"><div class="sec-icon">📊</div><div><h2>評価・個別計画</h2><p>アセスメントツールと計画書の作り方</p></div></div>
 
+    <div class="alert blue">📌 評価結果から個別プログラムを作成する場合は「<a href="004_個別プログラム作成フォーム.html" style="color:var(--accent);font-weight:700">004_個別プログラム作成フォーム</a>」にて測定値を入力しパターンを選択。実施手順は「<a href="003_機能訓練_個別プログラム.html" style="color:var(--accent);font-weight:700">003_個別プログラム手順</a>」参照。</div>
+
     <div class="card">
       <h3>📋 評価ツール一覧</h3>
       <div class="tbl-wrap">
@@ -1152,18 +1218,19 @@ tr:nth-child(even) td { background: var(--gray-lt); }
 <script>
 const pages = {
   intro:    'はじめに・前提',
-  flow:     '業務フロー・評価測定',
-  addition: '加算・算定要件',
+  start:    '初めての方はここ',
+  practice: '運動メニュー（座位11種）',
+  levelup:  'レベルアップ訓練',
   rom:      'ROM（関節可動域）訓練',
-  strength: '筋力強化訓練',
-  balance:  'バランス訓練',
   gait:     '歩行訓練',
   adl:      'ADL訓練',
   breath:   '呼吸訓練',
   oral:     '口腔・嚥下機能訓練',
   assess:   '評価・個別計画',
+  flow:     '業務フロー・評価測定',
   record:   '記録・書類',
   safety:   '安全管理',
+  addition: '加算・算定要件',
   ref:      '参考資料'
 };
 

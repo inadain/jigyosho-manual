@@ -73,15 +73,18 @@ td.tag{font-weight:800; color:#78350f; white-space:nowrap}
 .vital-stop{color:var(--red); font-weight:700}
 
 /* ===== 運動アイコン ===== */
-.exrow{display:flex; gap:14px; align-items:center; padding:8px 0; border-bottom:1px solid var(--gray-lt)}
-.exrow:last-child{border-bottom:none}
-.exicon{flex:none; width:150px; height:120px; background:#fafbfc; border:1.5px solid var(--border); border-radius:10px; overflow:hidden}
+.exrow{display:flex; gap:16px; align-items:center; background:#fff; border:1px solid var(--border); border-radius:10px; padding:8px 14px; margin-bottom:7px}
+.exicon{flex:none; width:158px; height:132px; background:#fafbfc; border:1.5px solid var(--border); border-radius:10px; overflow:hidden}
 .exicon svg{width:100%; height:100%}
-.exicon img{width:100%; height:100%; object-fit:contain; padding:8px; box-sizing:border-box}
-.exbody{flex:1; font-size:12px; line-height:1.6}
-.exname{font-weight:800; color:#78350f; font-size:13px}
-.exreps{float:right; font-weight:700; font-size:11.5px; color:#b45309}
-.exbody .lb{font-weight:700; color:#334155; font-size:11px}
+.exicon img{width:100%; height:100%; object-fit:contain; padding:6px; box-sizing:border-box}
+.exbody{flex:1; font-size:12.5px; line-height:1.55}
+.exname{font-weight:800; color:#78350f; font-size:14px}
+.exreps{float:right; font-weight:700; font-size:12px; color:#b45309; background:var(--accent-lt); padding:2px 9px; border-radius:20px}
+.exline{margin:4px 0}
+.tag2{display:inline-block; font-size:10px; font-weight:800; padding:2px 7px; border-radius:4px; margin-right:7px; vertical-align:middle; letter-spacing:.02em; white-space:nowrap}
+.tag2.do{background:#f1f5f9; color:#475569}
+.tag2.tip{background:#fef3c7; color:#92400e}
+.tag2.warn{background:#fee2e2; color:#b91c1c}
 .ex-icon-lg{width:190px; height:150px}
 
 @media print{
@@ -146,7 +149,7 @@ td.tag{font-weight:800; color:#78350f; white-space:nowrap}
 <div class="a4page">
   <div class="pg-head"><div class="pg-icon">🟢</div><div><h1>運動メニュー ① 関節可動域運動（準備運動）</h1><p>全種目、イスに座ったまま安全に実施できます</p></div></div>
 
-  <div class="card">
+  <div class="card" style="border-left:4px solid var(--green)">
     <div style="display:flex;gap:16px;align-items:flex-start">
       <div class="exicon ex-icon-lg">
         <img src="000_資料/運動アイコン/R1.png" alt="ロール運動のイラスト" loading="lazy">
@@ -165,7 +168,7 @@ td.tag{font-weight:800; color:#78350f; white-space:nowrap}
     </div>
   </div>
 
-  <div class="card">
+  <div class="card" style="border-left:4px solid var(--green)">
     <div style="display:flex;gap:16px;align-items:flex-start">
       <div class="exicon ex-icon-lg">
         <img src="000_資料/運動アイコン/R2.png" alt="足すり運動のイラスト" loading="lazy">
@@ -195,58 +198,63 @@ td.tag{font-weight:800; color:#78350f; white-space:nowrap}
 <div class="a4page">
   <div class="pg-head"><div class="pg-icon">🔵</div><div><h1>運動メニュー ② 筋力増強運動</h1><p>全種目、イスに座ったまま安全に実施できます</p></div></div>
 
-  <div class="exrow">
+  <div class="exrow" style="border-left:4px solid var(--blue)">
     <div class="exicon">
       <img src="000_資料/運動アイコン/S1.png" alt="座位 脚の横上げ運動のイラスト" loading="lazy">
     </div>
     <div class="exbody">
-      <span class="exname">S1　座位 脚の横上げ運動</span><span class="exreps">左右10回ずつ</span><br>
-      <span class="lb">やり方</span>イスに深く座り座面の両端をつかみ、片脚をまっすぐ横に持ち上げて戻す。テンポよく左右交互に。<br>
-      <span class="lb">コツ</span>「座ったまま、脚を横にスッと上げて戻しましょう」。上体が傾かないことを見せる　<span class="lb">注意</span>股関節に痛みがあれば上げる高さを控えめに
+      <span class="exname">S1　座位 脚の横上げ運動</span><span class="exreps">左右10回ずつ</span>
+      <div class="exline"><span class="tag2 do">やり方</span>イスに深く座り座面の両端をつかみ、片脚をまっすぐ横に持ち上げて戻す。テンポよく左右交互に。</div>
+      <div class="exline"><span class="tag2 tip">コツ</span>「座ったまま、脚を横にスッと上げて戻しましょう」。上体が傾かないことを見せる</div>
+      <div class="exline"><span class="tag2 warn">注意</span>股関節に痛みがあれば上げる高さを控えめに</div>
     </div>
   </div>
 
-  <div class="exrow">
+  <div class="exrow" style="border-left:4px solid var(--blue)">
     <div class="exicon">
       <img src="000_資料/運動アイコン/S2.png" alt="座位 膝の開閉運動のイラスト" loading="lazy">
     </div>
     <div class="exbody">
-      <span class="exname">S2　座位 膝の開閉運動</span><span class="exreps">20回めやす</span><br>
-      <span class="lb">やり方</span>イスに座り、両膝を軽く開いて閉じる。なるべく早く。慣れたら座面を持たずに。<br>
-      <span class="lb">コツ</span>「両膝を開いて閉じて、肩は動かさずに」　<span class="lb">注意</span>最初はゆっくり、徐々に早く。揺れる場合は回数か振幅を減らす
+      <span class="exname">S2　座位 膝の開閉運動</span><span class="exreps">20回めやす</span>
+      <div class="exline"><span class="tag2 do">やり方</span>イスに座り、両膝を軽く開いて閉じる。なるべく早く。慣れたら座面を持たずに。</div>
+      <div class="exline"><span class="tag2 tip">コツ</span>「両膝を開いて閉じて、肩は動かさずに」</div>
+      <div class="exline"><span class="tag2 warn">注意</span>最初はゆっくり、徐々に早く。揺れる場合は回数か振幅を減らす</div>
     </div>
   </div>
 
-  <div class="exrow">
+  <div class="exrow" style="border-left:4px solid var(--blue)">
     <div class="exicon">
       <img src="000_資料/運動アイコン/S3.png" alt="ボールはさみ運動のイラスト" loading="lazy">
     </div>
     <div class="exbody">
-      <span class="exname">S3　ボールはさみ運動</span><span class="exreps">2〜3秒×5回</span><br>
-      <span class="lb">やり方</span>仰向けで膝を立て、膝の間にボールをはさみ、潰すように2〜3秒保持。<br>
-      <span class="lb">コツ</span>「息を吐きながら、内ももでギューっと2〜3秒」　<span class="lb">注意</span>腹圧性失禁の予防・改善にも。息を止めないよう声かけ
+      <span class="exname">S3　ボールはさみ運動</span><span class="exreps">2〜3秒×5回</span>
+      <div class="exline"><span class="tag2 do">やり方</span>仰向けで膝を立て、膝の間にボールをはさみ、潰すように2〜3秒保持。</div>
+      <div class="exline"><span class="tag2 tip">コツ</span>「息を吐きながら、内ももでギューっと2〜3秒」</div>
+      <div class="exline"><span class="tag2 warn">注意</span>腹圧性失禁の予防・改善にも。息を止めないよう声かけ</div>
     </div>
   </div>
 
-  <div class="exrow">
+  <div class="exrow" style="border-left:4px solid var(--blue)">
     <div class="exicon">
       <img src="000_資料/運動アイコン/S4.png" alt="座位 かかと上げ運動のイラスト" loading="lazy">
     </div>
     <div class="exbody">
-      <span class="exname">S4　座位 かかと上げ運動</span><span class="exreps">10回めやす</span><br>
-      <span class="lb">やり方</span>イスに座り、両足のかかとを持ち上げてつま先立ちにし、ゆっくり下ろす。<br>
-      <span class="lb">コツ</span>「座ったまま、かかとをスッと持ち上げましょう」　<span class="lb">注意</span>回数を多くできない運動。反動を使わずゆっくりと
+      <span class="exname">S4　座位 かかと上げ運動</span><span class="exreps">10回めやす</span>
+      <div class="exline"><span class="tag2 do">やり方</span>イスに座り、両足のかかとを持ち上げてつま先立ちにし、ゆっくり下ろす。</div>
+      <div class="exline"><span class="tag2 tip">コツ</span>「座ったまま、かかとをスッと持ち上げましょう」</div>
+      <div class="exline"><span class="tag2 warn">注意</span>回数を多くできない運動。反動を使わずゆっくりと</div>
     </div>
   </div>
 
-  <div class="exrow">
+  <div class="exrow" style="border-left:4px solid var(--blue)">
     <div class="exicon">
       <img src="000_資料/運動アイコン/S5.png" alt="座位ステップ運動（足踏み）のイラスト" loading="lazy">
     </div>
     <div class="exbody">
-      <span class="exname">S5　座位ステップ運動（足踏み）</span><span class="exreps">左右計20回</span><br>
-      <span class="lb">やり方</span>イスに座り、腿を高く上げるように左右交互に足踏みする。<br>
-      <span class="lb">コツ</span>「腿を高く上げて、その場で足踏みしましょう」　<span class="lb">注意</span>疲労が強く残るなら回数を減らす
+      <span class="exname">S5　座位ステップ運動（足踏み）</span><span class="exreps">左右計20回</span>
+      <div class="exline"><span class="tag2 do">やり方</span>イスに座り、腿を高く上げるように左右交互に足踏みする。</div>
+      <div class="exline"><span class="tag2 tip">コツ</span>「腿を高く上げて、その場で足踏みしましょう」</div>
+      <div class="exline"><span class="tag2 warn">注意</span>疲労が強く残るなら回数を減らす</div>
     </div>
   </div>
 
@@ -261,47 +269,51 @@ td.tag{font-weight:800; color:#78350f; white-space:nowrap}
 <div class="a4page">
   <div class="pg-head"><div class="pg-icon">🔴</div><div><h1>運動メニュー ③ 転倒予防運動</h1><p>全種目、イスに座ったまま安全に実施できます</p></div></div>
 
-  <div class="exrow">
+  <div class="exrow" style="border-left:4px solid var(--red)">
     <div class="exicon">
       <img src="000_資料/運動アイコン/F1.png" alt="タオルギャザーのイラスト" loading="lazy">
     </div>
     <div class="exbody">
-      <span class="exname">F1　タオルギャザー</span><span class="exreps">左右各10回</span><br>
-      <span class="lb">やり方</span>イスに座り、足の下にタオルを敷き、足の指でたぐり寄せる。負荷は先端に重り。<br>
-      <span class="lb">コツ</span>「足の指でタオルをたぐり寄せましょう」　<span class="lb">注意</span>初期は踵が浮いてもよいが徐々に踵をつけたまま。負荷はペットボトルで調節
+      <span class="exname">F1　タオルギャザー</span><span class="exreps">左右各10回</span>
+      <div class="exline"><span class="tag2 do">やり方</span>イスに座り、足の下にタオルを敷き、足の指でたぐり寄せる。負荷は先端に重り。</div>
+      <div class="exline"><span class="tag2 tip">コツ</span>「足の指でタオルをたぐり寄せましょう」</div>
+      <div class="exline"><span class="tag2 warn">注意</span>初期は踵が浮いてもよいが徐々に踵をつけたまま。負荷はペットボトルで調節</div>
     </div>
   </div>
 
-  <div class="exrow">
+  <div class="exrow" style="border-left:4px solid var(--red)">
     <div class="exicon">
       <img src="000_資料/運動アイコン/F2.png" alt="ボール踏みのイラスト" loading="lazy">
     </div>
     <div class="exbody">
-      <span class="exname">F2　ボール踏み</span><span class="exreps">前後10往復</span><br>
-      <span class="lb">やり方</span>イスに座り、足の下のボールが逃げないように踏む。慣れたら踏んだまま前後に動かす。<br>
-      <span class="lb">コツ</span>「ボールを踏んで、そのまま前後にコロコロ」　<span class="lb">注意</span>力を入れすぎて足を捻じらない
+      <span class="exname">F2　ボール踏み</span><span class="exreps">前後10往復</span>
+      <div class="exline"><span class="tag2 do">やり方</span>イスに座り、足の下のボールが逃げないように踏む。慣れたら踏んだまま前後に動かす。</div>
+      <div class="exline"><span class="tag2 tip">コツ</span>「ボールを踏んで、そのまま前後にコロコロ」</div>
+      <div class="exline"><span class="tag2 warn">注意</span>力を入れすぎて足を捻じらない</div>
     </div>
   </div>
 
-  <div class="exrow">
+  <div class="exrow" style="border-left:4px solid var(--red)">
     <div class="exicon">
       <img src="000_資料/運動アイコン/F3.png" alt="棒の上で板を動かすのイラスト" loading="lazy">
     </div>
     <div class="exbody">
-      <span class="exname">F3　棒の上で板を動かす</span><span class="exreps">前後10往復</span><br>
-      <span class="lb">やり方</span>2本の棒の上に板を置き、目印（ハンコ等）を倒さないように前後に動かす。<br>
-      <span class="lb">コツ</span>「倒さないように、ゆっくり大きく」　<span class="lb">注意</span>神経を非常に使う。底面の大きいものから徐々に小さくしてレベルUP
+      <span class="exname">F3　棒の上で板を動かす</span><span class="exreps">前後10往復</span>
+      <div class="exline"><span class="tag2 do">やり方</span>2本の棒の上に板を置き、目印（ハンコ等）を倒さないように前後に動かす。</div>
+      <div class="exline"><span class="tag2 tip">コツ</span>「倒さないように、ゆっくり大きく」</div>
+      <div class="exline"><span class="tag2 warn">注意</span>神経を非常に使う。底面の大きいものから徐々に小さくしてレベルUP</div>
     </div>
   </div>
 
-  <div class="exrow">
+  <div class="exrow" style="border-left:4px solid var(--red)">
     <div class="exicon">
       <img src="000_資料/運動アイコン/F4.png" alt="座位 膝伸ばし運動のイラスト" loading="lazy">
     </div>
     <div class="exbody">
-      <span class="exname">F4　座位 膝伸ばし運動</span><span class="exreps">左右各10回</span><br>
-      <span class="lb">やり方</span>イスに座り、片膝をゆっくり伸ばしてつま先を天井に向け2〜3秒保持し、ゆっくり戻す。<br>
-      <span class="lb">コツ</span>「膝をゆっくり伸ばして、つま先を天井に向けましょう」　<span class="lb">注意</span>膝に痛みがあれば可動範囲を狭める。つまずき軽減に有効
+      <span class="exname">F4　座位 膝伸ばし運動</span><span class="exreps">左右各10回</span>
+      <div class="exline"><span class="tag2 do">やり方</span>イスに座り、片膝をゆっくり伸ばしてつま先を天井に向け2〜3秒保持し、ゆっくり戻す。</div>
+      <div class="exline"><span class="tag2 tip">コツ</span>「膝をゆっくり伸ばして、つま先を天井に向けましょう」</div>
+      <div class="exline"><span class="tag2 warn">注意</span>膝に痛みがあれば可動範囲を狭める。つまずき軽減に有効</div>
     </div>
   </div>
 

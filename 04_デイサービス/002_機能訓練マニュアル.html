@@ -358,17 +358,55 @@ tr:nth-child(even) td { background: var(--gray-lt); }
     .cut-grn{background:#dcfce7;color:#14532d}
     </style>
 
+    <div class="card" style="border-left:4px solid var(--accent)">
+      <h3>✅ 現場看護師（機能訓練指導員）がすべきこと｜早見チェックリスト</h3>
+      <div class="alert blue" style="margin-bottom:12px">📌 デイサービス全体の運営基準（健康観察・サービス提供記録の保存義務など）とは別に、<strong>個別機能訓練加算の算定要件</strong>として看護師が押さえるべき内容だけをまとめています。</div>
+      <div class="assess-cards">
+        <div class="assess-card">
+          <div class="ac-head"><span class="ac-icon">🆕</span><span class="ac-name">初回・計画作成時</span></div>
+          <ul class="ac-steps">
+            <li>生活機能チェックシート・アセスメント測定（TUG・BI・RSST等）を実施</li>
+            <li>本人・家族の希望を聴取し、個別機能訓練計画書を作成</li>
+            <li>計画書を本人・家族に説明し、同意署名をもらう（交付は電磁的記録も可）</li>
+            <li>同意後、担当ケアマネジャーへ報告</li>
+          </ul>
+        </div>
+        <div class="assess-card">
+          <div class="ac-head"><span class="ac-icon">🔁</span><span class="ac-name">毎回の訓練</span></div>
+          <ul class="ac-steps">
+            <li>訓練前バイタル測定・体調確認（中止基準に該当しないか確認）</li>
+            <li>複数の訓練項目を準備し、本人の意欲が増進されるよう選んでもらい実施</li>
+            <li>訓練後バイタル・主訴確認</li>
+            <li>訓練項目・<strong>実施時間帯（開始〜終了の時刻）</strong>・実施者名を記録し保管</li>
+            <li>介護職員へ申し送り</li>
+          </ul>
+        </div>
+        <div class="assess-card">
+          <div class="ac-head"><span class="ac-icon">📅</span><span class="ac-name">3か月ごと</span></div>
+          <ul class="ac-steps">
+            <li>評価項目を再測定し、目標の達成状況を評価</li>
+            <li>（Ⅱ算定時）利用者宅を訪問し在宅の生活状況を確認</li>
+            <li>計画書を見直し・改訂し、本人・家族へ再説明・同意</li>
+            <li>（Ⅱ算定時）LIFEへ生活機能チェックシート・計画書を提出</li>
+          </ul>
+        </div>
+      </div>
+      <div class="point" style="margin-top:10px">くわしい手順は下記フロー、記録の書き方は「<a href="#" onclick="showPage('record'); return false;" style="color:var(--accent);font-weight:700">記録・書類</a>」ページを参照。</div>
+    </div>
+
     <!-- フロー：初回・月1回 -->
     <div class="flow-block">
       <div class="flow-block-title">① 計画書作成（初回 ／ 月1回更新）</div>
       <div class="flow-steps">
-        <div class="flow-step"><div class="flow-num blue">1</div><div class="flow-body"><div class="flow-name">アセスメント測定</div><div class="flow-detail">TUG・BI・RSST・握力・5m歩行などを測定（下記「評価測定」参照）</div></div></div>
+        <div class="flow-step"><div class="flow-num blue">1</div><div class="flow-body"><div class="flow-name">生活機能チェックシート・アセスメント測定</div><div class="flow-detail">生活状況を確認し生活課題を抽出。TUG・BI・RSST・握力・5m歩行などを測定（下記「評価測定」参照）</div></div></div>
         <div class="flow-arrow">↓</div>
         <div class="flow-step"><div class="flow-num blue">2</div><div class="flow-body"><div class="flow-name">パターン選択</div><div class="flow-detail">測定値・状態を「<a href="004_個別プログラム作成フォーム.html" style="color:var(--accent);font-weight:700">004_個別プログラム作成フォーム</a>」に入力 → A〜Eパターンを選択</div></div></div>
         <div class="flow-arrow">↓</div>
         <div class="flow-step"><div class="flow-num blue">3</div><div class="flow-body"><div class="flow-name">個別機能訓練計画書を作成</div><div class="flow-detail">目標（短期・長期）・訓練内容・禁忌事項・実施頻度を記載</div></div></div>
         <div class="flow-arrow">↓</div>
-        <div class="flow-step"><div class="flow-num blue">4</div><div class="flow-body"><div class="flow-name">本人・家族へ説明・同意取得</div><div class="flow-detail">計画書を読み合わせ、同意署名をもらう</div></div></div>
+        <div class="flow-step"><div class="flow-num blue">4</div><div class="flow-body"><div class="flow-name">本人・家族へ説明・同意取得</div><div class="flow-detail">計画書を読み合わせ、同意署名をもらう（交付は電磁的記録でも可）</div></div></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step"><div class="flow-num blue">5</div><div class="flow-body"><div class="flow-name">担当ケアマネジャーへ報告</div><div class="flow-detail">計画作成・同意取得の旨を報告</div></div></div>
       </div>
     </div>
 
@@ -388,7 +426,7 @@ tr:nth-child(even) td { background: var(--gray-lt); }
         <div class="flow-arrow">↓</div>
         <div class="flow-step"><div class="flow-num">6</div><div class="flow-body"><div class="flow-name">訓練後バイタル・主訴確認</div><div class="flow-detail">BP・脈拍・SpO2を再測定。「気分はいかがですか？」と声かけ</div></div></div>
         <div class="flow-arrow">↓</div>
-        <div class="flow-step"><div class="flow-num">7</div><div class="flow-body"><div class="flow-name">SOAP記録</div><div class="flow-detail"><strong>S</strong>：主訴 ／ <strong>O</strong>：バイタル・実施内容・達成度 ／ <strong>A</strong>：評価 ／ <strong>P</strong>：次回計画</div></div></div>
+        <div class="flow-step"><div class="flow-num">7</div><div class="flow-body"><div class="flow-name">SOAP記録</div><div class="flow-detail"><strong>S</strong>：主訴 ／ <strong>O</strong>：バイタル・実施内容・達成度 ／ <strong>A</strong>：評価 ／ <strong>P</strong>：次回計画<br><strong>訓練項目・実施者名に加え、実施時間帯は開始〜終了の時刻で記載</strong>（例：「20分」ではなく「10:00〜10:20」）</div></div></div>
         <div class="flow-arrow">↓</div>
         <div class="flow-step"><div class="flow-num">8</div><div class="flow-body"><div class="flow-name">介護職員へ申し送り</div><div class="flow-detail">良肢位・注意点・当日の様子を口頭または記録で伝える</div></div></div>
       </div>
@@ -1078,7 +1116,7 @@ tr:nth-child(even) td { background: var(--gray-lt); }
           </tbody>
         </table>
       </div>
-      <div class="alert blue">📌 最低限の記載：<strong>日付・開始時間・訓練内容（種目と回数）・バイタル・特記事項・実施者署名</strong></div>
+      <div class="alert blue">📌 最低限の記載：<strong>日付・訓練項目・実施時間帯（開始〜終了の時刻、例「10:00〜10:20」）・バイタル・特記事項・実施者署名</strong>。「20分」のような所要時間だけでなく、必ず時刻で記載する</div>
     </div>
 
     <div class="card">

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>座位運動メニュー かんたん版｜はじめての機能訓練</title>
+<style>
+:root{
+  --accent:#d97706; --accent-lt:#fef3c7; --accent-xl:#fffbeb;
+  --green:#16a34a; --green-lt:#dcfce7;
+  --red:#dc2626; --red-lt:#fee2e2;
+  --blue:#1558a0; --blue-lt:#dbeafe;
+  --text:#0f172a; --text-sub:#475569;
+  --border:#dbe3ec; --gray-lt:#f8fafc;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Noto Sans JP",sans-serif;
+  background:#94a3b8;color:var(--text);line-height:1.55}
+
+.viewer-note{max-width:210mm;margin:0 auto;padding:14px 5mm 4px;font-size:13px;color:#1e293b;
+  background:#fff;border-radius:8px 8px 0 0}
+.viewer-note b{color:var(--accent)}
+.viewer-note a{color:var(--blue);font-weight:700;text-decoration:none}
+
+.sheet{width:210mm;min-height:297mm;margin:0 auto 10mm;background:#fff;
+  padding:12mm 13mm; box-shadow:0 4px 18px rgba(0,0,0,.25)}
+
+.top{display:flex;align-items:center;gap:12px;border-bottom:4px solid var(--accent);padding-bottom:10px;margin-bottom:12px}
+.top .em{font-size:34px}
+.top h1{font-size:22px;color:#78350f;font-weight:800}
+.top p{font-size:12px;color:var(--text-sub);margin-top:2px}
+
+.when{background:var(--blue-lt);border:1px solid #bcd4ee;border-radius:10px;padding:8px 12px;margin-bottom:9px}
+.when-box{display:flex;align-items:baseline;gap:8px;font-size:11px;line-height:1.5;padding:2px 0}
+.when-box b{flex:none;color:#1e3a5f;font-size:11.5px;min-width:150px}
+.when-box span{color:#334155}
+.when-note{margin-top:4px;padding-top:5px;border-top:1px solid #bcd4ee;font-size:10.3px;color:#334155}
+.when-note b{color:#1e3a5f}
+
+.howto{display:flex;gap:8px;margin-bottom:12px}
+.howto .step{flex:1;background:var(--gray-lt);border:1px solid var(--border);border-radius:10px;padding:7px 10px;font-size:10.8px;line-height:1.45}
+.howto .step b{display:block;color:var(--accent);font-size:10.8px;margin-bottom:2px}
+
+.sec{margin-bottom:10px}
+.sec-head{display:flex;align-items:center;gap:8px;margin-bottom:6px;padding-bottom:4px;border-bottom:2px solid var(--gray-lt)}
+.sec-head .dot{width:14px;height:14px;border-radius:50%;flex:none}
+.sec-head h2{font-size:14px;font-weight:800}
+.sec-head span.cnt{margin-left:auto;font-size:10.5px;color:var(--text-sub);font-weight:700}
+
+.grid{display:grid;gap:7px}
+.grid-2{grid-template-columns:repeat(2,1fr)}
+.grid-4{grid-template-columns:repeat(4,1fr)}
+.grid-5{grid-template-columns:repeat(5,1fr)}
+.g-card{background:#fff;border:1px solid var(--border);border-radius:9px;padding:6px 5px;
+  display:flex;flex-direction:column;align-items:center;text-align:center;border-top:4px solid #ccc}
+.g-card.c-green{border-top-color:var(--green)}
+.g-card.c-blue{border-top-color:var(--blue)}
+.g-card.c-red{border-top-color:var(--red)}
+.g-card .ic{width:100%;height:64px;display:flex;align-items:center;justify-content:center;background:#fafbfc;border-radius:7px;margin-bottom:5px}
+.g-card .ic img{max-width:100%;max-height:100%;object-fit:contain}
+.g-card .nm{font-size:11px;font-weight:800;color:#1e293b;line-height:1.25;min-height:27px;display:flex;align-items:center;justify-content:center}
+.g-card .rep{display:inline-block;font-size:9.5px;font-weight:800;color:var(--accent);background:var(--accent-lt);
+  padding:1px 7px;border-radius:20px;margin:2px 0 4px}
+.g-card .how{font-size:9.6px;color:var(--text-sub);line-height:1.35}
+
+.foot-note{background:var(--red-lt);border-left:4px solid var(--red);border-radius:8px;padding:9px 13px;
+  font-size:12px;color:#7f1d1d;margin-top:4px}
+.more{margin-top:10px;font-size:11.5px;color:var(--text-sub);text-align:center}
+.more b{color:#78350f}
+
+@media print{
+  body{background:#fff}
+  .viewer-note{display:none}
+  .sheet{box-shadow:none;margin:0;width:auto;min-height:auto}
+  .g-card{break-inside:avoid}
+  .sec{break-inside:avoid}
+  @page{size:A4;margin:12mm}
+}
+</style>
+</head>
+<body>
+
+<div class="viewer-note">🔰 <b>座位運動メニュー かんたん版</b>｜はじめて機能訓練を担当する方向けの1枚シート。もっと詳しいやり方・注意点は <a href="002_機能訓練マニュアル.html">機能訓練マニュアル</a>、現場での運用・安全基準・記録は <a href="005_現場配布用A4ファイリング資料.html">現場配布用A4資料</a> を見てください。</div>
+
+<div class="sheet">
+  <div class="top">
+    <div class="em">🔰</div>
+    <div>
+      <h1>座位運動メニュー　かんたん版</h1>
+      <p>全11種、イスに座ったまま（一部は仰向けで）安全にできる運動です。むずかしく考えず、まずはこの1枚から。</p>
+    </div>
+  </div>
+
+  <div class="when">
+    <div class="when-box">
+      <b>🌅 午前　10:00〜11:30ごろ</b>
+      <span>「午前の作業」〜「バイク・メドマー／平行棒体操」の時間帯に、対象の利用者へ実施</span>
+    </div>
+    <div class="when-box">
+      <b>☀️ 午後　13:00〜14:30ごろ</b>
+      <span>「午後の作業」〜「テレビ体操」の時間帯に、対象の利用者へ実施</span>
+    </div>
+    <div class="when-note">1人あたり<b>1日1〜2回・5〜10分</b>が目安。1日のタイムスケジュール全体は<b>000_デイサービス業務マニュアル.html</b>を参照。</div>
+  </div>
+
+  <div class="howto">
+    <div class="step"><b>① 体調確認</b>「調子はいかがですか」と声かけ。痛み・体調不良があれば行わない</div>
+    <div class="step"><b>② 見せる・選んでもらう</b>この一覧を見せ、3区分から1つずつ計3種を選んでもらう</div>
+    <div class="step"><b>③ 一緒にやる</b>看護師がお手本→一緒に60〜90秒。終わったら称賛し記録する</div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-head"><div class="dot" style="background:var(--green)"></div><h2>① 可動域運動（準備運動）</h2><span class="cnt">2種</span></div>
+    <div class="grid grid-2">
+      <div class="g-card c-green">
+        <div class="ic"><img src="000_資料/運動アイコン/R1.png" alt="ロール運動"></div>
+        <div class="nm">R1　ロール運動</div>
+        <span class="rep">10往復</span>
+        <div class="how">仰向けで、かかとの下のロールを足でコロコロ転がす</div>
+      </div>
+      <div class="g-card c-green">
+        <div class="ic"><img src="000_資料/運動アイコン/R2.png" alt="足すり運動"></div>
+        <div class="nm">R2　足すり運動</div>
+        <span class="rep">3回くらい</span>
+        <div class="how">座ったまま、足を前後にすっすっとこする</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-head"><div class="dot" style="background:var(--blue)"></div><h2>② 筋力増強運動</h2><span class="cnt">5種</span></div>
+    <div class="grid grid-5">
+      <div class="g-card c-blue">
+        <div class="ic"><img src="000_資料/運動アイコン/S1.png" alt="座位 脚の横上げ運動"></div>
+        <div class="nm">S1　脚の横上げ運動</div>
+        <span class="rep">左右10回</span>
+        <div class="how">座ったまま、脚を横にスッと上げて戻す</div>
+      </div>
+      <div class="g-card c-blue">
+        <div class="ic"><img src="000_資料/運動アイコン/S2.png" alt="座位 膝の開閉運動"></div>
+        <div class="nm">S2　膝の開閉運動</div>
+        <span class="rep">20回</span>
+        <div class="how">座ったまま、両膝を開いて閉じる</div>
+      </div>
+      <div class="g-card c-blue">
+        <div class="ic"><img src="000_資料/運動アイコン/S3.png" alt="ボールはさみ運動"></div>
+        <div class="nm">S3　ボールはさみ運動</div>
+        <span class="rep">5回</span>
+        <div class="how">仰向けで膝の間のボールを2〜3秒ぎゅっと</div>
+      </div>
+      <div class="g-card c-blue">
+        <div class="ic"><img src="000_資料/運動アイコン/S4.png" alt="座位 かかと上げ運動"></div>
+        <div class="nm">S4　かかと上げ運動</div>
+        <span class="rep">10回</span>
+        <div class="how">座ったまま、かかとを持ち上げてつま先立ち</div>
+      </div>
+      <div class="g-card c-blue">
+        <div class="ic"><img src="000_資料/運動アイコン/S5.png" alt="座位ステップ運動"></div>
+        <div class="nm">S5　座位ステップ運動</div>
+        <span class="rep">左右20回</span>
+        <div class="how">座ったまま、腿を高く上げて足踏み</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-head"><div class="dot" style="background:var(--red)"></div><h2>③ 転倒予防運動</h2><span class="cnt">4種</span></div>
+    <div class="grid grid-4">
+      <div class="g-card c-red">
+        <div class="ic"><img src="000_資料/運動アイコン/F1.png" alt="タオルギャザー"></div>
+        <div class="nm">F1　タオルギャザー</div>
+        <span class="rep">左右10回</span>
+        <div class="how">座ったまま、足の指でタオルをたぐり寄せる</div>
+      </div>
+      <div class="g-card c-red">
+        <div class="ic"><img src="000_資料/運動アイコン/F2.png" alt="ボール踏み"></div>
+        <div class="nm">F2　ボール踏み</div>
+        <span class="rep">前後10往復</span>
+        <div class="how">座ったまま、足でボールを踏んでコロコロ</div>
+      </div>
+      <div class="g-card c-red">
+        <div class="ic"><img src="000_資料/運動アイコン/F3.png" alt="棒の上で板を動かす"></div>
+        <div class="nm">F3　棒の上で板を動かす</div>
+        <span class="rep">前後10往復</span>
+        <div class="how">座ったまま、板をゆっくり前後に動かす</div>
+      </div>
+      <div class="g-card c-red">
+        <div class="ic"><img src="000_資料/運動アイコン/F4.png" alt="座位 膝伸ばし運動"></div>
+        <div class="nm">F4　膝伸ばし運動</div>
+        <span class="rep">左右10回</span>
+        <div class="how">座ったまま、片膝を伸ばしてつま先を上に</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot-note">🛑 運動中に<b>痛みが出たらすぐ中断</b>。無理はさせない。回数はあくまで目安なので、利用者の様子に合わせて減らしてOKです。</div>
+
+  <div class="more">くわしいやり方・デモの声かけ・注意点は <b>002_機能訓練マニュアル.html</b>／現場での運用・安全基準・記録は <b>005_現場配布用A4ファイリング資料.html</b> を見てください。</div>
+</div>
+
+</body>
+</html>

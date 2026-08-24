@@ -1,0 +1,6 @@
+# 認証情報を含むため公開リポジトリにコミットしない
+deploy_worker.py
+jigyosho-worker.js
+
+.DS_Store
+**/.DS_Store

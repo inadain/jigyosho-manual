@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>事業所マニュアル アクセス案内</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+  @page { size: A4 portrait; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: "Hiragino Sans", "Noto Sans JP", sans-serif;
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .header {
+    background: #0d6640;
+    color: #fff;
+    padding: 16mm 18mm 12mm;
+  }
+  .header-org  { font-size: 11px; letter-spacing: .1em; opacity: .7; margin-bottom: 6px; }
+  .header-title{ font-size: 24px; font-weight: 800; letter-spacing: .04em; margin-bottom: 4px; }
+  .header-sub  { font-size: 12px; opacity: .75; }
+
+  .main {
+    flex: 1;
+    padding: 14mm 18mm 10mm;
+    display: flex;
+    flex-direction: column;
+    gap: 10mm;
+  }
+
+  /* QRカード（中央1枚） */
+  .qr-center {
+    display: flex;
+    justify-content: center;
+  }
+  .qr-card {
+    border: 2px solid #bbf7d0;
+    border-radius: 16px;
+    padding: 10mm 14mm;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5mm;
+    background: #f0fdf4;
+    width: 90mm;
+  }
+  .qr-card-title { font-size: 16px; font-weight: 800; color: #14532d; text-align: center; }
+  .qr-card-sub   { font-size: 12px; color: #4b5563; text-align: center; margin-top: -3mm; }
+  .qr-box { display: block; line-height: 0; }
+  .qr-url {
+    font-size: 10px;
+    font-family: monospace;
+    color: #374151;
+    background: #fff;
+    border: 1px solid #d1fae5;
+    border-radius: 6px;
+    padding: 5px 10px;
+    word-break: break-all;
+    width: 100%;
+    text-align: center;
+  }
+
+  /* 手順 */
+  .steps {
+    background: #f0fdf4;
+    border: 1.5px solid #86efac;
+    border-radius: 10px;
+    padding: 6mm 8mm;
+  }
+  .steps-title { font-size: 13px; font-weight: 800; color: #15803d; margin-bottom: 4mm; }
+  .step { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: #14532d; line-height: 1.7; margin-bottom: 3px; }
+  .step-num {
+    background: #0d6640; color: #fff; font-size: 10px; font-weight: 700;
+    width: 20px; height: 20px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 3px;
+  }
+
+  /* 対象事業所一覧 */
+  .services {
+    border: 1.5px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 6mm 8mm;
+  }
+  .services-title { font-size: 13px; font-weight: 800; color: #374151; margin-bottom: 4mm; }
+  .service-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3mm;
+  }
+  .service-item {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 3mm 4mm;
+    font-size: 12px;
+    color: #374151;
+    text-align: center;
+    font-weight: 600;
+  }
+
+  .footer {
+    border-top: 1px solid #e5e7eb;
+    padding: 5mm 18mm;
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color: #9ca3af;
+  }
+
+  @media screen { body { box-shadow: 0 0 40px rgba(0,0,0,.15); margin: 20px auto; } }
+  @media print  { body { margin: 0; } }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-org">医療法人 いなだ医院 ／ メディケアビレッジ</div>
+  <div class="header-title">事業所スタッフマニュアル</div>
+  <div class="header-sub">各事業所スタッフ専用 ／ スマートフォン・タブレットでご利用いただけます</div>
+</div>
+
+<div class="main">
+
+  <div class="qr-center">
+    <div class="qr-card">
+      <div class="qr-card-title">📋 マニュアルサイト</div>
+      <div class="qr-card-sub">カメラでQRを読み取って開く</div>
+      <div class="qr-box" id="qr-manual"></div>
+      <div class="qr-url">https://jigyosho-manual.t-inada1988.workers.dev/</div>
+    </div>
+  </div>
+
+  <div class="steps">
+    <div class="steps-title">📌 アクセス手順</div>
+    <div class="step">
+      <div class="step-num">1</div>
+      <div>スマートフォンのカメラアプリでQRコードを読み取る</div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div>表示されたURLをタップするとサイトが開く</div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div>ブラウザのブックマーク（お気に入り）に追加しておくと、次回から素早く開ける</div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div>スマートフォンのホーム画面に追加するとアプリのように使える（Safari：共有→「ホーム画面に追加」）</div>
+    </div>
+  </div>
+
+  <div class="services">
+    <div class="services-title">📂 掲載事業所</div>
+    <div class="service-grid">
+      <div class="service-item">🏥 訪問看護</div>
+      <div class="service-item">🏠 サ高住</div>
+      <div class="service-item">🏡 小規模多機能</div>
+      <div class="service-item">☀️ デイサービス</div>
+      <div class="service-item">🚶 訪問介護</div>
+      <div class="service-item">📋 居宅介護支援</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <span>医療法人 いなだ医院 ／ スタッフ専用資料　作成日：2026年7月</span>
+  <span>jigyosho-manual.t-inada1988.workers.dev</span>
+</div>
+
+<script>
+  new QRCode(document.getElementById("qr-manual"), {
+    text: "https://jigyosho-manual.t-inada1988.workers.dev/",
+    width: 180, height: 180,
+    colorDark: "#0d6640", colorLight: "#ffffff",
+    correctLevel: QRCode.CorrectLevel.M
+  });
+</script>
+</body>
+</html>

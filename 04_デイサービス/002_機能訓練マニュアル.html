@@ -350,41 +350,106 @@ tr:nth-child(even) td { background: var(--gray-lt); }
     .cut-grn{background:#dcfce7;color:#14532d}
     </style>
 
-    <div class="card" style="border-left:4px solid var(--accent)">
-      <h3>✅ 現場看護師（機能訓練指導員）がすべきこと｜早見チェックリスト</h3>
-      <div class="alert blue" style="margin-bottom:12px">📌 デイサービス全体の運営基準（健康観察・サービス提供記録の保存義務など）とは別に、<strong>個別機能訓練加算の算定要件</strong>として看護師が押さえるべき内容だけをまとめています。</div>
-      <div class="assess-cards">
-        <div class="assess-card">
-          <div class="ac-head"><span class="ac-icon">🆕</span><span class="ac-name">初回・計画作成時</span></div>
-          <ul class="ac-steps">
-            <li>生活機能チェックシート・アセスメント測定（TUG・BI・RSST等）を実施</li>
-            <li>本人・家族の希望を聴取し、個別機能訓練計画書を作成</li>
-            <li>計画書を本人・家族に説明し、同意署名をもらう（交付は電磁的記録も可）</li>
-            <li>同意後、担当ケアマネジャーへ報告</li>
-          </ul>
-        </div>
-        <div class="assess-card">
-          <div class="ac-head"><span class="ac-icon">🔁</span><span class="ac-name">毎回の訓練</span></div>
-          <ul class="ac-steps">
-            <li>訓練前バイタル測定・体調確認（中止基準に該当しないか確認）</li>
-            <li>複数の訓練項目を準備し、本人の意欲が増進されるよう選んでもらい実施</li>
-            <li>訓練後バイタル・主訴確認</li>
-            <li>訓練項目・<strong>実施時間帯（開始〜終了の時刻）</strong>・実施者名を記録し保管</li>
-            <li>介護職員へ申し送り</li>
-          </ul>
-        </div>
-        <div class="assess-card">
-          <div class="ac-head"><span class="ac-icon">📅</span><span class="ac-name">3か月ごと</span></div>
-          <ul class="ac-steps">
-            <li>評価項目を再測定し、目標の達成状況を評価</li>
-            <li>（Ⅱ算定時）利用者宅を訪問し在宅の生活状況を確認</li>
-            <li>計画書を見直し・改訂し、本人・家族へ再説明・同意</li>
-            <li>（Ⅱ算定時）LIFEへ生活機能チェックシート・計画書を提出</li>
-          </ul>
-        </div>
+    <div class="alert red">
+      <div>
+        <strong>🚨 よくある間違いTOP4（まずここだけ見る）</strong>
+        <ol class="list-num" style="margin-top:8px">
+          <li>訓練時間を「20分」とだけ書く → 必ず<strong>「10:00〜10:20」と開始〜終了の時刻</strong>で記録する</li>
+          <li>計画書の同意を取ったのに<strong>担当ケアマネジャーへの報告</strong>を忘れる</li>
+          <li>見直し時期を「毎月」と思い込む → 正しくは<strong>「概ね3か月ごと」</strong>（老企第36号）</li>
+          <li>計画書に「本人・家族の希望」だけ書いて<strong>長期目標・短期目標を区別して書かない</strong></li>
+        </ol>
       </div>
-      <div class="point" style="margin-top:10px">評価ツールのカットオフ値は「<a href="#" onclick="showPage('assess'); return false;" style="color:var(--accent);font-weight:700">評価・個別計画</a>」、記録の書き方は「<a href="#" onclick="showPage('record'); return false;" style="color:var(--accent);font-weight:700">記録・書類</a>」、訓練中止基準は「<a href="#" onclick="showPage('safety'); return false;" style="color:var(--accent);font-weight:700">安全管理</a>」ページを参照。</div>
     </div>
+
+    <!-- フロー：初回 -->
+    <div class="flow-block">
+      <div class="flow-block-title">① 初回（利用開始時）に行うこと</div>
+      <div class="flow-steps">
+        <div class="flow-step"><div class="flow-num blue">1</div><div class="flow-body">
+          <div class="flow-name">アセスメント測定</div>
+          <div class="flow-detail">TUG・BI・RSST等を測定。カットオフ値は「<a href="#" onclick="showPage('assess'); return false;" style="color:var(--accent);font-weight:700">評価・個別計画</a>」ページの表を見ながら判定する</div>
+        </div></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step"><div class="flow-num blue">2</div><div class="flow-body">
+          <div class="flow-name">個別機能訓練計画書の作成</div>
+          <div class="flow-detail">「<a href="004_個別プログラム作成フォーム.html" style="color:var(--accent);font-weight:700">004_個別プログラム作成フォーム</a>」を開き、利用者情報・測定値・<strong>長期目標／短期目標／医師の指示事項</strong>を入力 →「訓練計画書を作成」→ 印刷</div>
+          <div class="flow-stop">⚠️ 「本人・家族の希望」欄だけで済ませず、長期目標（6〜12か月）・短期目標（1〜3か月）を分けて必ず入力する</div>
+        </div></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step"><div class="flow-num blue">3</div><div class="flow-body">
+          <div class="flow-name">本人・家族へ説明・同意取得</div>
+          <div class="flow-detail">印刷した計画書を読み合わせ、下部の同意欄（説明日・説明者・本人または家族の署名）に記入してもらう</div>
+        </div></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step"><div class="flow-num blue">4</div><div class="flow-body">
+          <div class="flow-name">担当ケアマネジャーへ報告</div>
+          <div class="flow-detail">計画作成・同意取得の旨を報告し、計画書の同意欄のチェック欄に報告日を記入する</div>
+          <div class="flow-stop">⚠️ この報告を忘れるケースが多いので、同意取得と同じ日に済ませる</div>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- フロー：毎回の訓練 -->
+    <div class="flow-block">
+      <div class="flow-block-title">② 毎回の訓練（デイ利用ごと）</div>
+      <div class="flow-steps">
+        <div class="flow-step"><div class="flow-num">1</div><div class="flow-body">
+          <div class="flow-name">訓練前バイタル測定・体調確認</div>
+          <div class="flow-detail">「今日の体調は？」と声かけ。中止基準に該当しないか「<a href="#" onclick="showPage('safety'); return false;" style="color:var(--accent);font-weight:700">安全管理</a>」ページの表で確認</div>
+        </div></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step"><div class="flow-num">2</div><div class="flow-body">
+          <div class="flow-name">運動メニューから選んでもらい実施</div>
+          <div class="flow-detail">計画書のパターンに沿って、「<a href="006_座位運動メニュー_かんたん版.html" style="color:var(--accent);font-weight:700">006かんたん版</a>」または「<a href="005_現場配布用A4ファイリング資料.html" style="color:var(--accent);font-weight:700">005現場配布資料</a>」を見せながら実施</div>
+        </div></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step"><div class="flow-num">3</div><div class="flow-body">
+          <div class="flow-name">訓練後バイタル・主訴確認</div>
+          <div class="flow-detail">「気分はいかがですか？」と声かけしながら再測定</div>
+        </div></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step"><div class="flow-num">4</div><div class="flow-body">
+          <div class="flow-name">記録用紙に記入</div>
+          <div class="flow-detail">「<a href="007_毎回の訓練記録用紙.html" style="color:var(--accent);font-weight:700">007_毎回の訓練記録用紙</a>」（利用者ごとに1枚）に記入。記入例が1行目に入っています</div>
+          <div class="flow-stop">⚠️ 実施時間帯は「20分」ではなく必ず「10:00〜10:20」と時刻で書く</div>
+        </div></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step"><div class="flow-num">5</div><div class="flow-body">
+          <div class="flow-name">介護職員へ申し送り</div>
+          <div class="flow-detail">当日の様子・注意点を口頭または記録で伝える</div>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- フロー：3か月ごと -->
+    <div class="flow-block">
+      <div class="flow-block-title">③ 概ね3か月ごとに行うこと</div>
+      <div class="flow-steps">
+        <div class="flow-step"><div class="flow-num teal">1</div><div class="flow-body">
+          <div class="flow-name">再評価測定</div>
+          <div class="flow-detail">初回と同じ項目（TUG・BI・RSST等）を再測定し、目標の達成状況を確認</div>
+        </div></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step"><div class="flow-num teal">2</div><div class="flow-body">
+          <div class="flow-name">（Ⅱ算定時のみ）居宅訪問</div>
+          <div class="flow-detail">利用者宅を訪問し、在宅での生活状況を確認</div>
+        </div></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step"><div class="flow-num teal">3</div><div class="flow-body">
+          <div class="flow-name">計画書の見直し・再同意</div>
+          <div class="flow-detail">「004_個別プログラム作成フォーム」で目標・訓練内容を更新して再作成 → 印刷 → 本人・家族へ再説明・同意</div>
+          <div class="flow-stop">⚠️ 「毎月」ではなく「概ね3か月ごと」が正しいタイミング</div>
+        </div></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step"><div class="flow-num teal">4</div><div class="flow-body">
+          <div class="flow-name">（Ⅱ算定時のみ）LIFEへデータ提出</div>
+          <div class="flow-detail">生活機能チェックシート・個別機能訓練計画書を提出。提出期限を管理者と確認</div>
+        </div></div>
+      </div>
+    </div>
+
+    <div class="point">使う書類：計画書作成は「<strong>004</strong>」／毎回の記録は「<strong>007</strong>」／評価カットオフ値は「<a href="#" onclick="showPage('assess'); return false;" style="color:var(--accent);font-weight:700">評価・個別計画</a>」／訓練中止基準は「<a href="#" onclick="showPage('safety'); return false;" style="color:var(--accent);font-weight:700">安全管理</a>」ページを参照。</div>
   </div>
 
   <!-- ============================================================ -->

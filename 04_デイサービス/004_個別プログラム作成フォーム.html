@@ -461,8 +461,24 @@ select.form-input{appearance:none;background-image:url("data:image/svg+xml,%3Csv
         <input class="form-input" id="f-dx2" type="text" placeholder="例：高血圧、糖尿病">
       </div>
       <div class="form-group" style="grid-column:1/-1">
-        <label class="form-label">本人・家族の希望（短期目標の参考）</label>
+        <label class="form-label">本人・家族の希望</label>
         <input class="form-input" id="f-hope" type="text" placeholder="例：一人で歩けるようになりたい、転ばないようになってほしい">
+      </div>
+      <div class="form-group" style="grid-column:1/-1">
+        <label class="form-label">長期目標（6〜12か月・希望をふまえて記載）</label>
+        <input class="form-input" id="f-goal-long" type="text" placeholder="例：自宅の廊下を伝い歩きで自立移動できる">
+      </div>
+      <div class="form-group" style="grid-column:1/-1">
+        <label class="form-label">短期目標（1〜3か月・具体的・期限付きで記載）</label>
+        <input class="form-input" id="f-goal-short" type="text" placeholder="例：椅子から手すりを使って5回連続立てる（3か月以内）">
+      </div>
+      <div class="form-group" style="grid-column:1/-1">
+        <label class="form-label">医師（配置医・主治医）からの指示事項</label>
+        <input class="form-input" id="f-doctor" type="text" placeholder="例：収縮期血圧160以上は運動中止、右膝は屈曲90°まで">
+      </div>
+      <div class="form-group">
+        <label class="form-label">作成者（機能訓練指導員）</label>
+        <input class="form-input" id="f-author" type="text" placeholder="例：看護師 佐藤〇〇">
       </div>
     </div>
   </div>
@@ -572,6 +588,20 @@ select.form-input{appearance:none;background-image:url("data:image/svg+xml,%3Csv
       <tbody id="plan-tbody"></tbody>
     </table>
     <div class="caution amber" id="plan-caution" style="margin-top:0"></div>
+
+    <div style="margin-top:18px;padding-top:14px;border-top:2px solid var(--gray-mid)">
+      <div style="font-size:13px;font-weight:800;color:var(--sub);margin-bottom:10px">📝 説明・同意（本人・家族へ計画内容を説明し、同意を得たら記入）</div>
+      <div style="display:flex;gap:24px;flex-wrap:wrap;font-size:13px">
+        <div>説明日：　　　　年　　月　　日</div>
+        <div>説明者：＿＿＿＿＿＿＿＿＿＿</div>
+      </div>
+      <div style="display:flex;gap:24px;flex-wrap:wrap;font-size:13px;margin-top:14px">
+        <div>本人または家族 署名：＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿</div>
+        <div>続柄：＿＿＿＿＿＿</div>
+      </div>
+      <div style="font-size:12px;color:var(--sub);margin-top:10px">☐ 担当ケアマネジャーへ報告済み（報告日：　　年　　月　　日）</div>
+    </div>
+
     <div class="btn-row">
       <button class="btn btn-outline" onclick="window.print()">🖨️ 印刷</button>
     </div>
@@ -701,6 +731,10 @@ function generatePlan(){
   const dx1=document.getElementById('f-dx1').value||'—';
   const dx2=document.getElementById('f-dx2').value||'—';
   const hope=document.getElementById('f-hope').value||'—';
+  const goalLong=document.getElementById('f-goal-long').value||'（未入力）';
+  const goalShort=document.getElementById('f-goal-short').value||'（未入力）';
+  const doctorNote=document.getElementById('f-doctor').value||'特になし';
+  const author=document.getElementById('f-author').value||'（未入力）';
   const contra=document.getElementById('f-contraindication').value||'なし';
   const tug=document.getElementById('a-tug').value;
   const bi=document.getElementById('a-bi').value;
@@ -715,20 +749,25 @@ function generatePlan(){
 
   const now=new Date();
   const dateStr=`${now.getFullYear()}年${now.getMonth()+1}月${now.getDate()}日`;
+  const nextEval=new Date(now.getFullYear(),now.getMonth()+3,now.getDate());
+  const nextEvalStr=`${nextEval.getFullYear()}年${nextEval.getMonth()+1}月${nextEval.getDate()}日ごろ`;
 
   const meta=document.getElementById('plan-meta');
-  meta.innerHTML=`<span class="plan-meta-item">作成日：<strong>${dateStr}</strong></span><span class="plan-meta-item">氏名：<strong>${name}</strong></span>${age?`<span class="plan-meta-item">年齢：<strong>${age}歳 ${sex}</strong></span>`:''}${care?`<span class="plan-meta-item">要介護度：<strong>要介護${care}</strong></span>`:''}`;
+  meta.innerHTML=`<span class="plan-meta-item">作成日：<strong>${dateStr}</strong></span><span class="plan-meta-item">氏名：<strong>${name}</strong></span>${age?`<span class="plan-meta-item">年齢：<strong>${age}歳 ${sex}</strong></span>`:''}${care?`<span class="plan-meta-item">要介護度：<strong>要介護${care}</strong></span>`:''}<span class="plan-meta-item">作成者：<strong>${author}</strong></span>`;
 
   const rows=[
     ['主病名',dx1],
     ['副病名',dx2],
     ['本人・家族の希望',hope],
+    ['医師の指示事項',doctorNote],
     ['禁忌・注意事項',contra],
+    ['長期目標（6〜12か月）',goalLong],
+    ['短期目標（1〜3か月）',goalShort],
     ['アセスメント',`TUG：${tug||'—'}秒 ／ BI：${bi||'—'}点 ／ RSST：${rsst||'—'}回/30秒 ／ SpO2：${spo2||'—'}% ／ 握力：${grip||'—'}kg ／ 5m歩行：${walk||'—'}秒`],
     ['推奨パターン',recs.join(' ／ ')||'—'],
     ['訓練メニュー（週1回・20分以上）',menus.map((m,i)=>`<b>${i+1}.</b> ${m}`).join('<br>')],
-    ['担当機能訓練指導員','（記入）'],
-    ['次回評価予定','毎月1回（訓練開始から1か月後）'],
+    ['作成者（機能訓練指導員）',author],
+    ['次回評価予定','概ね3か月ごと（目安：'+nextEvalStr+'）'],
     ['特記事項',''],
   ];
   const tbody=document.getElementById('plan-tbody');

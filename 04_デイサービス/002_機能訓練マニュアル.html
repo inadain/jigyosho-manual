@@ -194,12 +194,6 @@ tr:nth-child(even) td { background: var(--gray-lt); }
 
     <div class="nav-group">訓練メニュー</div>
     <button class="nav-item" onclick="showPage('practice')" data-page="practice"><span class="nav-icon">💪</span>運動メニュー（座位11種）</button>
-    <button class="nav-item" onclick="showPage('levelup')" data-page="levelup"><span class="nav-icon">📈</span>レベルアップ訓練</button>
-    <button class="nav-item" onclick="showPage('rom')" data-page="rom"><span class="nav-icon">🔄</span>ROM（関節可動域）</button>
-    <button class="nav-item" onclick="showPage('gait')" data-page="gait"><span class="nav-icon">👣</span>歩行訓練</button>
-    <button class="nav-item" onclick="showPage('adl')" data-page="adl"><span class="nav-icon">🛁</span>ADL訓練</button>
-    <button class="nav-item" onclick="showPage('breath')" data-page="breath"><span class="nav-icon">🌬️</span>呼吸訓練</button>
-    <button class="nav-item" onclick="showPage('oral')" data-page="oral"><span class="nav-icon">👄</span>口腔・嚥下訓練</button>
 
     <div class="nav-group">運用</div>
     <button class="nav-item" onclick="showPage('assess')" data-page="assess"><span class="nav-icon">📊</span>評価・個別計画</button>
@@ -269,8 +263,6 @@ tr:nth-child(even) td { background: var(--gray-lt); }
       <ul class="list">
         <li><strong>初めての方はここ</strong>：今日の流れ（6ステップ）だけ知りたい方はまずここ</li>
         <li><strong>運動メニュー</strong>：日々使う座位運動 全11種への入口（詳細は006かんたん版・005現場資料）</li>
-        <li><strong>レベルアップ訓練</strong>：座位に慣れた方向けの発展種目（一部立位・見守り必須）</li>
-        <li><strong>ROM・歩行・ADL・呼吸・口腔嚥下</strong>：分野別の訓練メニュー詳細</li>
         <li><strong>評価・個別計画</strong>：アセスメントツールと個別プログラム作成への入口</li>
         <li><strong>加算・算定要件</strong>：算定できる加算の種類と書類の全体像</li>
         <li><strong>記録・書類</strong>：加算算定に必要な書類一覧と書き方</li>
@@ -469,27 +461,6 @@ tr:nth-child(even) td { background: var(--gray-lt); }
   </div>
 
   <!-- ============================================================ -->
-  <!-- PAGE: rom                                                     -->
-  <!-- ============================================================ -->
-  <div class="page" id="page-rom">
-    <div class="sec-head"><div class="sec-icon">🔄</div><div><h2>ROM（関節可動域）訓練</h2><p>拘縮予防・関節可動域の維持・改善</p></div></div>
-
-    <div class="alert blue">📌 日々の下肢ROM運動（ロール運動・足すり運動）は「運動メニュー」ページのR1・R2で実施します。このページでは肩・肘・手指など<strong>他の関節も含めた詳細</strong>を扱います。</div>
-
-    <div class="card">
-      <h3>🎯 目的・進め方</h3>
-      <ul class="list">
-        <li><strong>目的</strong>：拘縮予防、関節可動域の維持・改善</li>
-        <li><strong>基本</strong>：肩・肘・手指・股関節・膝・足関節・足趾の各関節を、痛みのない範囲で5〜10回×2セット、ゆっくり動かす</li>
-        <li>体幹は座位での回旋・側屈も5〜10回程度</li>
-        <li>所要時間：<strong>1人あたり15〜20分</strong></li>
-      </ul>
-    </div>
-
-    <div class="alert red">🛑 熱感・発赤・腫脹などの炎症所見がある関節、痛みが増強する動きは中止。人工関節置換術後4週間以内は必ず医師確認</div>
-  </div>
-
-  <!-- ============================================================ -->
   <!-- PAGE: practice                                                -->
   <!-- ============================================================ -->
   <div class="page" id="page-practice">
@@ -522,115 +493,6 @@ tr:nth-child(even) td { background: var(--gray-lt); }
     <div class="alert green">✅ 各運動のイラスト・やり方・声かけのコツは「<strong>006_座位運動メニュー_かんたん版.html</strong>」（現場での一目参照用）、印刷して手元に置く場合は「<strong>005_現場配布用A4ファイリング資料.html</strong>」を見てください。ここでは重複を避けるため一覧を省略しています。</div>
 
     <div class="point"><strong>記録すること</strong>：実施した種目（区分ごと）と回数・時間／実施時の様子（意欲・疲労）／痛みの有無・部位／次回への申し送り。詳しくは「記録・書類」ページ参照。</div>
-  </div>
-
-  <!-- ============================================================ -->
-  <!-- PAGE: levelup                                                 -->
-  <!-- ============================================================ -->
-  <div class="page" id="page-levelup">
-    <div class="sec-head"><div class="sec-icon">📈</div><div><h2>レベルアップ訓練</h2><p>座位メニューに慣れ、状態が安定している方向け（一部立位・見守り必須）</p></div></div>
-
-    <div class="alert red">⚠️ 立位を含む種目は<strong>必ず手すり・見守りを確保</strong>してから実施してください。「運動メニュー」の座位種目に慣れ、状態が安定していることを確認したうえで導入すること。</div>
-
-    <div class="card">
-      <h3>🪑 座位の上級種目</h3>
-      <ul class="list">
-        <li><strong>座位ヒップリフト</strong>：お尻を軽く浮かせて戻す（5〜10秒×5回）</li>
-        <li><strong>骨盤前後傾・上肢リーチ・体幹傾斜</strong>：座位のまま体幹まわりを動かす</li>
-        <li><strong>背もたれなし座位保持</strong>：手を膝に置き30秒〜</li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <h3>🧍 立ち上がり・立位バランス（段階的に）</h3>
-      <ul class="list">
-        <li>椅子からの<strong>立ち座り</strong>（5〜10回）。肘掛け使用・介助者を前方に配置</li>
-        <li>立位バランスは<strong>両脚立位 → 半歩幅立位 → タンデム立位 → 片脚立位</strong>の順に段階を上げる</li>
-      </ul>
-    </div>
-
-    <div class="alert red">🛑 <strong>中止基準</strong>：収縮期血圧160以上/100未満・心拍数が安静時+30bpm超・不整脈出現・胸痛や強い動悸</div>
-
-    <div class="point"><strong>所要時間：1人あたり10〜20分</strong>。立位訓練は必ず手すり・介助者近接で安全確保。起立性低血圧の既往がある方は起立前後に血圧測定。</div>
-  </div>
-
-  <!-- ============================================================ -->
-  <!-- PAGE: gait                                                    -->
-  <!-- ============================================================ -->
-  <div class="page" id="page-gait">
-    <div class="sec-head"><div class="sec-icon">👣</div><div><h2>歩行訓練</h2><p>歩行能力の維持・改善・屋内外自立歩行の獲得</p></div></div>
-
-    <div class="card">
-      <h3>🎯 進め方</h3>
-      <ul class="list">
-        <li><strong>目的</strong>：歩行能力の維持・改善</li>
-        <li>難易度は<strong>平行棒内 → 歩行器 → 杖 → 独歩</strong>の順で段階的に上げる</li>
-        <li>歩行補助具（歩行器・杖）は<strong>医師・ケアマネの情報をもとに選定</strong>し、装具がある場合は指示内容を確認</li>
-        <li>所要時間：<strong>1人あたり15〜20分</strong></li>
-      </ul>
-    </div>
-
-    <div class="alert red">🛑 訓練前後にバイタル確認。靴は滑り止め付きで足に合ったものを着用。転倒リスクが高い方（TUG14秒以上等）は常時見守り</div>
-  </div>
-
-  <!-- ============================================================ -->
-  <!-- PAGE: adl                                                     -->
-  <!-- ============================================================ -->
-  <div class="page" id="page-adl">
-    <div class="sec-head"><div class="sec-icon">🛁</div><div><h2>ADL訓練</h2><p>日常生活動作の自立支援・介護負担軽減</p></div></div>
-
-    <div class="card">
-      <h3>🎯 進め方</h3>
-      <ul class="list">
-        <li><strong>目的</strong>：更衣・食事・排泄・整容など日常生活動作の自立支援</li>
-        <li>動作を「手を通す→掴む→引き上げる」のように<strong>小さく分割して声かけ</strong>しながら練習する</li>
-        <li>握力低下・振戦・片麻痺には自助具（太柄スプーン、吸盤マット等）を活用</li>
-        <li>所要時間：<strong>1人あたり20〜30分</strong></li>
-      </ul>
-    </div>
-
-    <div class="alert amber">⚠️ 排泄動作は転倒リスクが高いため手すり・介助者の位置を事前確認。嚥下機能低下がある方の食事訓練は誤嚥リスクを事前評価し医師・管理者に相談</div>
-  </div>
-
-  <!-- ============================================================ -->
-  <!-- PAGE: breath                                                  -->
-  <!-- ============================================================ -->
-  <div class="page" id="page-breath">
-    <div class="sec-head"><div class="sec-icon">🌬️</div><div><h2>呼吸訓練</h2><p>呼吸効率改善・誤嚥性肺炎予防</p></div></div>
-
-    <div class="card">
-      <h3>🎯 進め方</h3>
-      <ul class="list">
-        <li><strong>目的</strong>：呼吸効率改善、誤嚥性肺炎予防</li>
-        <li><strong>口すぼめ呼吸</strong>：鼻からゆっくり吸い、口をすぼめて吸気の2〜3倍の時間で吐く（10回×2〜3セット）</li>
-        <li><strong>腹式呼吸</strong>：お腹に手を当て、膨らむ・へこむを意識しながら（10回×2セット）</li>
-        <li>所要時間：<strong>1人あたり10〜15分</strong></li>
-      </ul>
-    </div>
-
-    <div class="alert red">🛑 <strong>中止基準</strong>：SpO2 90%未満・胸部不快感や呼吸困難感・喘息や心疾患の増悪期は実施しない</div>
-  </div>
-
-  <!-- ============================================================ -->
-  <!-- PAGE: oral                                                    -->
-  <!-- ============================================================ -->
-  <div class="page" id="page-oral">
-    <div class="sec-head"><div class="sec-icon">👄</div><div><h2>口腔・嚥下機能訓練</h2><p>嚥下機能の維持・改善・誤嚥性肺炎予防</p></div></div>
-
-    <div class="alert amber">⚠️ 看護師が行える口腔機能訓練は<strong>間接訓練</strong>が主体です。食物を使った<strong>直接訓練</strong>はST・医師の指示下で行うことが原則です。</div>
-
-    <div class="card">
-      <h3>🎯 進め方</h3>
-      <ul class="list">
-        <li><strong>目的</strong>：嚥下機能の維持・改善、誤嚥性肺炎予防</li>
-        <li><strong>パタカラ体操</strong>：「パ・タ・カ・ラ」をはっきり大きく5〜10回ずつ</li>
-        <li><strong>舌・頬の運動</strong>：舌の突き出し・左右移動、頬のふくらまし（各5〜10回）</li>
-        <li><strong>唾液嚥下の促し</strong>：「唾を飲み込んでください」と声かけ</li>
-        <li>所要時間：<strong>1人あたり10〜15分</strong></li>
-      </ul>
-    </div>
-
-    <div class="alert red">🛑 むせ込みが出たら姿勢調整（頸部前屈）を試み、続く場合は中止。発熱・咳嗽・痰の変化があれば医療連携。精密評価が必要な場合はST・医師へ紹介</div>
   </div>
 
   <!-- ============================================================ -->
@@ -852,12 +714,6 @@ const pages = {
   intro:    'はじめに・前提',
   start:    '初めての方はここ',
   practice: '運動メニュー（座位11種）',
-  levelup:  'レベルアップ訓練',
-  rom:      'ROM（関節可動域）訓練',
-  gait:     '歩行訓練',
-  adl:      'ADL訓練',
-  breath:   '呼吸訓練',
-  oral:     '口腔・嚥下機能訓練',
   assess:   '評価・個別計画',
   flow:     '業務フロー・評価測定',
   record:   '記録・書類',

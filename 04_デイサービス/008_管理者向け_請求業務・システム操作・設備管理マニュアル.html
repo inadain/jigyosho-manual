@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>デイサービス管理者向け業務マニュアル｜請求・システム・設備管理</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --navy: #1e3a5f;
+  --teal: #0f766e;
+  --red: #b91c1c;
+  --border: #e5e7eb;
+  --gray: #374151;
+  --gray-l: #f9fafb;
+}
+body {
+  font-family: "Hiragino Sans", "Noto Sans JP", -apple-system, sans-serif;
+  background: #f1f5f9;
+  color: var(--gray);
+  font-size: 14px;
+  line-height: 1.8;
+}
+.header {
+  background: linear-gradient(120deg, var(--navy) 0%, #2c5282 100%);
+  color: #fff;
+  padding: 28px 36px 22px;
+}
+.header h1 { font-size: 1.4rem; font-weight: 900; }
+.header .sub { font-size: 12px; opacity: .8; margin-top: 6px; }
+.main { max-width: 960px; margin: 0 auto; padding: 28px 20px 80px; }
+.card { background: #fff; border-radius: 12px; padding: 26px 30px; box-shadow: 0 1px 4px rgba(0,0,0,.08); margin-bottom: 22px; }
+.section-title {
+  font-size: 1.05rem; font-weight: 900; color: var(--navy);
+  margin-bottom: 14px; padding-bottom: 8px; border-bottom: 2px solid var(--border);
+}
+.sub-title { font-size: .95rem; font-weight: 800; color: var(--teal); margin: 18px 0 8px; }
+p { margin-bottom: 10px; }
+ul, ol { padding-left: 1.4em; margin-bottom: 12px; }
+li { margin-bottom: 6px; }
+table { border-collapse: collapse; width: 100%; margin: 10px 0 18px; font-size: 13px; }
+th, td { border: 1px solid var(--border); padding: 7px 10px; text-align: left; vertical-align: top; }
+th { background: #dbeafe; font-weight: 800; white-space: nowrap; }
+tr:nth-child(even) td { background: var(--gray-l); }
+.note {
+  background: #fefce8; border: 1px solid #fde68a; border-radius: 8px;
+  padding: 10px 14px; font-size: 12.5px; margin: 10px 0; color: #92400e;
+}
+.warn {
+  background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px;
+  padding: 10px 14px; font-size: 12.5px; margin: 10px 0; color: var(--red);
+}
+.ref {
+  background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px;
+  padding: 10px 14px; font-size: 12.5px; margin: 10px 0; color: #1d4ed8;
+}
+.badge {
+  display: inline-block; background: var(--teal); color: #fff; font-size: 11px;
+  font-weight: 800; padding: 2px 8px; border-radius: 4px; margin-right: 6px;
+}
+code { background: #eef2f7; padding: 1px 5px; border-radius: 4px; font-size: 12px; }
+.shot { margin: 12px 0 18px; }
+.shot img { max-width: 100%; border: 1px solid var(--border); border-radius: 6px; display: block; }
+.shot figcaption { font-size: 12px; color: var(--gray); margin-top: 5px; }
+.shot-row { display: flex; flex-wrap: wrap; gap: 16px; margin: 12px 0 18px; }
+.shot-row .shot { margin: 0; flex: 1 1 260px; max-width: 320px; }
+.pii {
+  background: #f4f4f5; border: 1px dashed #a1a1aa; border-radius: 8px;
+  padding: 10px 14px; font-size: 12.5px; margin: 10px 0; color: #52525b;
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>デイサービス管理者向け業務マニュアル</h1>
+  <div class="sub">請求業務・システム操作・設備管理｜前管理者（前原氏）の資料をもとに作成・2026年8月26日</div>
+</div>
+
+<div class="main">
+
+<div class="card">
+<div class="section-title">はじめに</div>
+<p>このマニュアルは、前デイサービス管理者が実際に使用していた資料（Google共有ドライブ「08_居宅介護支援事業所／10_管理者⇔統括／マニュアル？」フォルダ内）をもとに、請求業務・システム操作・設備管理についてまとめたものです。</p>
+<p>ケアの手順（入浴・排泄・食事介助等）は別途「デイサービス業務マニュアル」（本フォルダの000番）を参照してください。本書は<strong>管理者が担う請求・システム・設備管理業務</strong>に特化しています。</p>
+<div class="ref">
+<strong>参照元ファイル一覧</strong>（Googleドライブ内）：デイ1日の流れ.xlsx／ナレッジ.xlsx／マニュ？.xlsx／機械浴記入リスト.xlsx／通所介護業務管理システム.xlsx／訪問介護業務管理システム.xlsx／フィルター清掃.pdf／機器殺菌.pdf／機器洗浄.pdf
+</div>
+</div>
+
+<div class="card">
+<div class="section-title">1. デイサービス 1日の流れ（現場運営の全体像）</div>
+<p>管理者として現場全体の流れを把握しておくための時間軸です。個別のケア手順は000番の業務マニュアルを参照してください。</p>
+<table>
+<tr><th>時刻</th><th>業務</th><th>注意点</th></tr>
+<tr><td>8:30</td><td>送迎／手洗い・うがい誘導</td><td>安全運転。特変があれば確認（※1）。転倒注意</td></tr>
+<tr><td>9:00</td><td>バイタル測定／入浴介助／見守り・記録</td><td>特変あれば報告（※1）。入浴は転倒注意・身体観察、問題あれば看護師・管理者へ報告（※2）</td></tr>
+<tr><td>9:30</td><td>朝礼→テレビ体操</td><td>転倒注意</td></tr>
+<tr><td>10:00</td><td>水分補給／トイレ誘導／午前の作業（コミュニケーション）／バイク・メドマー</td><td>誤嚥・誤薬注意、食事量・水分量記載（必要者）。トイレ誘導時は転倒注意、衣類・リハパン等汚染時交換、尿量記載（必要者）</td></tr>
+<tr><td>11:00</td><td>平行棒体操</td><td></td></tr>
+<tr><td>11:30</td><td>トイレ誘導</td><td>転倒注意</td></tr>
+<tr><td>12:00</td><td>配膳・食事介助</td><td></td></tr>
+<tr><td>12:30</td><td>服薬・口腔ケア／下膳／トイレ誘導</td><td></td></tr>
+<tr><td>13:00</td><td>水分補給／午後の作業（コミュニケーション）</td><td></td></tr>
+<tr><td>14:30</td><td>トイレ誘導／テレビ体操</td><td>転倒注意</td></tr>
+<tr><td>15:00</td><td>おやつ（介助）</td><td></td></tr>
+<tr><td>15:30</td><td>帰りの会</td><td></td></tr>
+<tr><td>16:00</td><td>トイレ誘導／帰宅準備／送迎</td><td>安全運転。今日の特変あれば報告</td></tr>
+<tr><td>16:30</td><td>清掃・翌日準備</td><td></td></tr>
+</table>
+<div class="note">
+※1　家族が居る場合は前日並びに当日の様子を確認<br>
+※2　体温37度以上、バイタルが極端に高い・低い、または前回と比べて明らかにおかしい場合<br>
+※3　傷・痣・出血（かさぶた）など見られる場合
+</div>
+</div>
+
+<div class="card">
+<div class="section-title">2. 請求業務（ナレッジでの個人請求作成）</div>
+
+<div class="sub-title">2-1. 基本方針</div>
+<ul>
+<li>いなだ医院でナレッジを起動し、「サービス実績」をクリック → 居宅療養管理指導の確認を行う</li>
+<li>各利用者ごとの個人請求を作成する</li>
+<li>基本的に、医療に関わる物（外部病院・歯科医など）は<strong>いなだ医院で処理</strong>する</li>
+<li>介護・医療保険が絡まない物（おむつ等、代理購入含む）を入力する</li>
+</ul>
+
+<div class="sub-title">2-2. 施設種別ごとの取り扱いの違い</div>
+<ul>
+<li>住宅利用者は、住宅で使った物・おむつ等出した物・代理購入（訪問含む）を入力する</li>
+<li>岡山ランドリー：請求書の原本は利用者へ渡すが、支払はいなだ医院になるため、コピーと合計金額をいなだ医院へ渡す</li>
+<li>小規模：小口での立て替えのため、医療費に関してもコピーを取り原本を小幡さんへ渡す</li>
+<li>メディケア入居者は小規模利用者でも「メディケアビレッジかしわじま」で作成する</li>
+<li>小規模の通い・泊りは「小規模」で内訳を作成する</li>
+</ul>
+
+<div class="sub-title">2-3. 商品登録・固定項目</div>
+<ul>
+<li>現在使われている商品等は登録済み。新規商品を登録する場合はデータシートへ入力する</li>
+<li>継続して出ない物は都度手打ちで対応する</li>
+<li>固定で変わらない部分（家賃、共益費など、利用者が個別に毎月受けているサービス）は、原則固定して改変できないようにしている。変更が必要な場合のみ、保護を解除して変更する</li>
+</ul>
+
+<div class="sub-title">2-4. 個人請求業務の操作手順</div>
+<ol>
+<li>どこの施設からでもよいのでログインし、「請求業務」タブから「個人請求業務」をクリック</li>
+<li>「請求明細編集」をクリックし、登録画面へ進む</li>
+<li>内訳の内容を入力していく</li>
+</ol>
+
+<div class="sub-title">2-5. 限度額オーバー時の対応</div>
+<ul>
+<li>限度額オーバーの場合、請求一覧の明細で「振る場所」の指定がある</li>
+<li>1か所のみの場合は実費をそのまま入力</li>
+<li>複数ある場合は、指定された場所の単位数合計から指定単位を引いた上で実費を追加入力すると額が一致する</li>
+<li>医療請求書の容器等はいなだ医院の自費へ組み込む</li>
+</ul>
+<div class="note">覚書：大島さんの15万円オーバー分は、食費と実費で割る</div>
+
+<div class="sub-title">2-6. 入院時の対応</div>
+<ul>
+<li>入居者が1週間以上入院した場合は、別途書類を使用し、生活支援と生活相談を日割りする</li>
+<li>小数点切り捨てで30日計算する</li>
+<li>一旦は全て徴収してから、退院（再入居）時に返金等の清算を行う</li>
+<li>1ヶ月利用がない場合、夜間パックは徴収しない</li>
+</ul>
+
+<div class="sub-title">2-7. 月次の請求・入金確認スケジュール</div>
+<ul>
+<li>20日頃に、代表へ先月の入金状況を確認する</li>
+<li>領収書を発行し、請求書と共に付けて出す</li>
+<li>月遅れなどの請求の場合は、行を追加してまとめて出す（2か月分の数字を忘れずに）</li>
+</ul>
+
+<div class="sub-title">2-8. 現金払い・領収書の発行</div>
+<ul>
+<li>現金払いの場合は、いなだでの現金払いとなるため、画面を人数分印刷し、領収書を請求書作成月の月末で印刷して1つにまとめ、いなだへ渡す</li>
+<li>通常の領収書は<strong>25日日付</strong>で出す</li>
+<li>現金の領収書は<strong>末日日付</strong>で出す</li>
+<li>請求済みで入金忘れなどがあった場合はそこへ入力。未請求なら当月請求とまとめて入力する</li>
+</ul>
+<div class="warn">重要：領収書・請求書ともに、税の（）を消すこと！</div>
+</div>
+
+<div class="card">
+<div class="section-title">3. システム操作（ナレッジ・業務管理システム）</div>
+<p>以下は、前管理者が使用していた画面のスクリーンショット（元データはキャプションなし）をもとに、操作の流れを再構成したものです。</p>
+<div class="pii"><strong>画像掲載についての注記：</strong>利用者の氏名・生年月日・住所・被保険者番号などの個人情報が表示されている画面は、プライバシー保護のため<strong>画像を掲載せず、文章で操作内容を説明</strong>しています。メニュー画面や入力フォームの枠組みなど、個人情報を含まない画面のみ実際の画像を掲載しています。</div>
+
+<div class="sub-title">3-1. ナレッジ・ケアマネージャ（サービス提供票の作成・請求）</div>
+<p>起動すると事業所を選択する画面が出るので、対象の事業所（例：デイサービスセンターこはる日和）を選び、通所介護のメニューに入ります。</p>
+<div class="shot-row">
+<figure class="shot"><img src="008_images/knowledge_新規プラン編_01.png" alt="事業所選択画面"><figcaption>①起動時の事業所選択画面</figcaption></figure>
+<figure class="shot"><img src="008_images/knowledge_新規プラン編_02.png" alt="通所介護メニュー"><figcaption>②通所介護メニュー（業務管理タブ）。「サービス提供票」から個々の提供票を作成・編集する</figcaption></figure>
+</div>
+
+<p><strong>提供票の作成・編集の流れ</strong></p>
+<div class="pii">「サービス提供票一覧」には利用者全員の氏名が一覧表示されます（個人情報のため画像省略）。対象者を選ぶと、被保険者番号・生年月日・要介護度・区分支給限度基準額などが入った「サービス提供票（基本情報）」画面が開きます（同じく個人情報のため画像省略）。</div>
+<p>基本情報を確認したら「月間スケジュール」タブでサービス内容を追加します。時間帯は下のような専用の数値入力画面で、サービス内容はコード検索画面で選びます。</p>
+<div class="shot-row">
+<figure class="shot"><img src="008_images/knowledge_新規プラン編_07.png" alt="提供時間帯の入力"><figcaption>③提供時間帯（開始時刻）の入力画面</figcaption></figure>
+<figure class="shot"><img src="008_images/knowledge_新規プラン編_08.png" alt="サービス内容選択"><figcaption>④サービス内容選択画面（要介護度・提供時間帯等で絞り込み検索できる）</figcaption></figure>
+</div>
+<p>サービス内容を選ぶと、加算内容にチェックを入れて予定・実績の日付マスを埋めていく画面が開きます。「週間利用状況入力」ボタンから曜日単位で一括入力することもできます。</p>
+<div class="shot-row">
+<figure class="shot"><img src="008_images/knowledge_新規プラン編_06.png" alt="加算内容・月間予定実績の入力"><figcaption>⑤加算内容のチェックと月間の予定・実績入力画面</figcaption></figure>
+<figure class="shot"><img src="008_images/knowledge_新規プラン編_11.jpg" alt="週間利用状況入力"><figcaption>⑥「週間利用状況入力」ポップアップ（曜日ごとに回数を指定して一括反映）</figcaption></figure>
+</div>
+<div class="pii">「サービス提供票別表」タブでは、区分支給限度基準額に対する単位数の集計（種類支給限度基準／利用者負担等）が確認できます。ここも利用者氏名が表示されるため画像は省略していますが、限度額オーバーの確認はこの画面で行います（詳細は「2-5 限度額オーバー時の対応」参照）。</div>
+
+<p><strong>提供票の一覧からの絞り込み・修正</strong></p>
+<div class="shot">
+<img src="008_images/knowledge_プラン変更編_04.png" alt="絞り込み検索条件（空欄）">
+<figcaption>⑦「サービス提供票一覧」の絞り込みタブ。個人コード・氏名等で対象者を検索できる（画面は未入力の状態）</figcaption>
+</div>
+<div class="pii">検索後の一覧・個別の提供票編集画面は氏名が表示されるため省略します。操作自体は新規作成時と同じ「基本情報→月間スケジュール」の流れです。プラン変更編・暫定プラン編もほぼ同じ画面構成で、要介護度の変更や暫定プラン期間の内容を編集する場合に使います。</div>
+
+<div class="sub-title">3-1-2. 実績の一括取込・国保請求</div>
+<p>月初の実績確定では、「サービス提供票（一括実績取込）」画面で対象年月と取込方法（実績を「実績」欄に取り込む／予定欄の内容を実績欄に複写する、など）を指定し、対象者を検索・選択してから一括取込を実行します。</p>
+<div class="shot">
+<img src="008_images/knowledge_実績取込_送出編_04.png" alt="一括実績取込の設定画面">
+<figcaption>⑧一括実績取込の設定画面（対象年月・取込方法の指定。検索結果欄が空の状態）</figcaption>
+</div>
+<div class="pii">対象者を選択すると氏名が一覧表示され、実行後は「複写成功者数」等の結果と、個人ごとの取込結果一覧（成功・失敗）が表示されます（いずれも個人情報のため画像省略）。</div>
+
+<p>実績取込が終わったら、請求業務メニューから国保請求業務に進みます。</p>
+<div class="shot-row">
+<figure class="shot"><img src="008_images/knowledge_実績取込_送出編_11.png" alt="請求業務メニュー"><figcaption>⑨請求業務メニュー（国保請求業務／統計請求／個人請求業務）</figcaption></figure>
+<figure class="shot"><img src="008_images/knowledge_実績取込_送出編_12.png" alt="国保請求業務トップ画面"><figcaption>⑩国保請求業務トップ画面（給付管理票／介護給付費明細書／請求書／送信データ送出し 等）</figcaption></figure>
+</div>
+<p>「介護給付費明細書」の作成一覧・作成履歴一覧を確認し、「作成」から様式（様式2＝居宅サービス等）を選んで対象者を選択、作成を実行します。</p>
+<div class="shot-row">
+<figure class="shot"><img src="008_images/knowledge_実績取込_送出編_13.png" alt="介護給付費明細書 作成一覧（空）"><figcaption>⑪介護給付費明細書の作成一覧・作成履歴一覧画面</figcaption></figure>
+<figure class="shot"><img src="008_images/knowledge_実績取込_送出編_14.png" alt="明細書作成 様式選択画面"><figcaption>⑫明細書作成画面。左で様式（様式2＝居宅サービス等）を選び、右で対象者を選択する（対象者欄は未選択の状態）</figcaption></figure>
+</div>
+<div class="pii">対象者を選択すると氏名が一覧表示されます（画像省略）。「作成実行」を押すと確認ダイアログが出て、作成された明細書は個人コード・被保険者番号・生年月日・請求額などが入った個人別の明細画面で確認できます（同じく画像省略）。</div>
+<div class="shot">
+<img src="008_images/knowledge_実績取込_送出編_18.png" alt="作成確認ダイアログ">
+<figcaption>⑬「介護給付費明細書を作成してよろしいですか？」の確認ダイアログ</figcaption>
+</div>
+<p>明細書の作成が終わったら、同じ要領で「介護給付費請求書」を様式（介護給付費／総合事業費）ごとに作成します。作成履歴一覧で、いつ・誰が・どの様式を作成したかを確認できます。</p>
+<div class="shot-row">
+<figure class="shot"><img src="008_images/knowledge_実績取込_送出編_21.png" alt="請求書 様式選択ダイアログ"><figcaption>⑭介護給付費請求書の様式選択ダイアログ（介護給付／介護予防／総合事業）</figcaption></figure>
+<figure class="shot"><img src="008_images/knowledge_実績取込_送出編_24.png" alt="請求書 作成履歴一覧"><figcaption>⑮請求書の作成履歴一覧（作成日時・作成者・様式ごとに記録される）</figcaption></figure>
+</div>
+<div class="note">請求書・明細書の作成後は「送信データ送出し」で国保連へのデータを出力します。送出し操作自体の画面キャプチャは元資料になかったため、実施時は前原さんまたはケアマネへ確認してください。</div>
+
+<div class="sub-title">3-2. 通所介護業務管理システム（BHS）</div>
+<p>ログイン後のメニューから、日々の業務日誌の入力、予定・実績の作成、実績送信までを行います。</p>
+<div class="shot-row">
+<figure class="shot"><img src="008_images/tsusho_マスター作成_01.jpg" alt="通所介護業務管理システム メインメニュー"><figcaption>①メインメニュー（業務管理／月次処理／マスター管理）</figcaption></figure>
+<figure class="shot"><img src="008_images/tsusho_日誌の入力_01.jpg" alt="業務日誌ボタン"><figcaption>②業務管理タブから「業務日誌」を開く</figcaption></figure>
+</div>
+<p><strong>業務日誌の入力</strong>：対象月を選ぶと日ごとの一覧（男女計・訓練・食事・入浴・送迎回数など）が表示されます。日付をダブルクリックすると、その日の詳細（要介護度別集計・職員配置状況・送迎車の状況・特記事項）を編集する画面が開きます。</p>
+<div class="shot-row">
+<figure class="shot"><img src="008_images/tsusho_日誌の入力_02.jpg" alt="業務日誌一覧"><figcaption>③業務日誌の月間一覧（日別の集計値）</figcaption></figure>
+<figure class="shot"><img src="008_images/tsusho_日誌の入力_03.jpg" alt="業務日誌編集画面"><figcaption>④業務日誌編集画面（要介護度別集計・職員配置状況・特記事項等）</figcaption></figure>
+</div>
+<div class="pii">「通所記録」タブでは、その日に利用した利用者ごとの出欠・利用時間・食事/入浴/送迎の有無が一覧表示されます（利用者氏名が並ぶため画像省略）。ここで日々の実績を確定させます。</div>
+
+<p><strong>予定・実績の作成</strong>：「通所記録～予定／実績作成」画面で対象月と作成区分（予定・実績）を選び、利用者を選択してサービス内容ごとの予定を月間カレンダー形式で入力します。</p>
+<div class="shot">
+<img src="008_images/tsusho_予定作成_01.png" alt="予定・実績作成画面（未選択）">
+<figcaption>⑤予定・実績作成画面（対象者未選択の状態）</figcaption>
+</div>
+<div class="pii">利用者を選択すると、氏名付きの一覧と「介護給付」「機能訓練」「食事」「入浴」「送迎」等の日別チェック表が表示されます（画像省略）。全選択して「作成実行」を押すと、既に作成済みの月は上書き確認のダイアログが出ます。</div>
+
+<p><strong>実績送信</strong>：マスター管理タブの「実績送出」から、給付形態（介護給付／介護予防／通所型 等）ごとに送出処理を行います。</p>
+<div class="shot-row">
+<figure class="shot"><img src="008_images/tsusho_実績送信_01.jpg" alt="実績送出メニュー"><figcaption>⑥実績送出メニュー（介護給付／介護予防／通所型 等、給付形態ごとにボタンが分かれる）</figcaption></figure>
+<figure class="shot"><img src="008_images/tsusho_実績送信_02.jpg" alt="実績送出画面（未選択）"><figcaption>⑦実績送出画面（対象者未選択の状態）</figcaption></figure>
+</div>
+<div class="pii">対象者を選択すると実績記録・提供票の内容が日別に一覧表示されます（画像省略）。内容を確認のうえ送出を実行します。</div>
+
+<div class="sub-title">3-3. 訪問介護業務管理システム（BSS／参考）</div>
+<div class="ref">前原さんは事務主任として訪問介護の請求業務も担当しているため参考として掲載しています。デイサービス管理者としての必須範囲ではありません。</div>
+<p>基本的な画面構成・操作の流れは通所介護業務管理システムとほぼ同じです（利用者管理→訪問計画の登録→実績の確認→実績送信）。</p>
+<div class="shot-row">
+<figure class="shot"><img src="008_images/homon_マスター作成_01.jpg" alt="訪問介護業務管理システム メインメニュー"><figcaption>①メインメニュー（利用者管理・職員管理・環境設定 等）</figcaption></figure>
+<figure class="shot"><img src="008_images/homon_マスター作成_02.jpg" alt="利用者管理 個人台帳（未入力）"><figcaption>②利用者管理・個人台帳情報の入力欄（未入力の状態）</figcaption></figure>
+</div>
+<div class="pii">利用者検索・個人台帳の編集・訪問計画（曜日×週の担当職員割当）・介護員選択などの画面はいずれも利用者氏名・職員氏名が表示されるため画像を省略しています。訪問計画は「利用者ごとに曜日・時間帯を指定し、担当の介護員を割り当てる」形式で、担当変更時に他の予定と時間帯が重複するとエラーダイアログが出ます。</div>
+<div class="shot">
+<img src="008_images/homon_マスター作成_05.jpg" alt="派遣状況の登録ポップアップ">
+<figcaption>③派遣状況の登録ポップアップ（適用区分・派遣状況・開始日・認知症専門ケア等の設定項目）</figcaption>
+</div>
+
+<p><strong>予定・実績の作成と送信</strong>：月次処理タブの「仮実績の作成」で対象年月・適用区分（訪問型・同行訪問等）を選び、対象者を選択して仮実績を作成します。「実績送出」も通所と同様、給付形態ごとにボタンが分かれています。</p>
+<div class="shot-row">
+<figure class="shot"><img src="008_images/homon_予定作成_01.jpg" alt="訪問介護 月次処理メニュー"><figcaption>④月次処理メニュー（仮実績の作成／実績送出 等）</figcaption></figure>
+<figure class="shot"><img src="008_images/homon_予定作成_02.jpg" alt="仮実績作成画面（未選択）"><figcaption>⑤仮実績作成画面（適用区分の選択メニューを表示した状態）</figcaption></figure>
+</div>
+<div class="shot-row">
+<figure class="shot"><img src="008_images/homon_記録の編集_01.jpg" alt="業務管理タブ メニュー"><figcaption>⑥業務管理タブのメニュー（訪問状況参照／訪問記録編集／業務日誌編集 等）</figcaption></figure>
+<figure class="shot"><img src="008_images/homon_記録の編集_02.jpg" alt="訪問状況参照 表示基準選択"><figcaption>⑦訪問状況参照画面を開いた際の「表示基準の選択」ダイアログ（介護員／利用者）</figcaption></figure>
+</div>
+<div class="pii">訪問状況参照画面では、介護員別または利用者別に日々の訪問予定（時間帯・サービス内容）が一覧表示されます（氏名が表示されるため画像省略）。予定をクリックすると「訪問区分の変更」（訪問／留守／中止／年休）を設定できます。</div>
+<div class="shot-row">
+<figure class="shot"><img src="008_images/homon_記録の編集_06.png" alt="訪問区分の変更ポップアップ"><figcaption>⑧訪問区分の変更ポップアップ</figcaption></figure>
+<figure class="shot"><img src="008_images/homon_実績送信_01.jpg" alt="訪問介護 実績送出メニュー"><figcaption>⑨実績送出メニュー（介護給付／介護予防／訪問型サービス 等）</figcaption></figure>
+</div>
+<div class="shot">
+<img src="008_images/homon_実績送信_02.jpg" alt="訪問実績送出画面（未選択）">
+<figcaption>⑩訪問実績送出画面（対象者未選択の状態。選択後は氏名付きの実績一覧が表示される）</figcaption>
+</div>
+</div>
+
+<div class="card">
+<div class="section-title">4. 機械浴設備（Adagio）の保守・点検</div>
+<p>浴槽・貯湯タンク一体型の機械浴設備（Adagio）の定期保守手順です。出典：メーカー取扱説明書「3. 保守・点検」。</p>
+
+<div class="sub-title">4-1. ろ過フィルターの清掃</div>
+<div class="note">交換時期の目安：約1年</div>
+<ol>
+<li>ろ過フィルターの扉を開ける（扉の内側に交換・洗浄について記載したシールあり。必要に応じて日付を記入）</li>
+<li>ろ過フィルターケースに水が入っていないことを確認（水がある場合はタンク排水スイッチ・浴槽排水スイッチで排水）</li>
+<li>排水ホースのカプラ部のツマミを握り、下へ引き抜く</li>
+<li>ろ過フィルターケースを回し、取りはずす（パッキンを落として紛失しないよう注意）</li>
+<li>ろ過フィルターをケースから取り出す</li>
+<li>ハンドシャワーや柔らかいブラシ・スポンジ・中性洗剤等で汚れを除去する</li>
+<li>清掃後、ろ過フィルターケースを取り付ける（パッキンの装着確認、突起部を下にして差し込み、いっぱいまで締め込む）</li>
+<li>カプラ部を下へ引っ張った状態で排水ホースを接続する</li>
+<li>ろ過フィルターの扉を閉める</li>
+</ol>
+<div class="warn">締め込みが緩いと水漏れが起きる可能性があります。</div>
+
+<div class="sub-title">4-2. 機器殺菌</div>
+<div class="note">実施頻度：月1回程度</div>
+<div class="warn">
+機器殺菌中は入浴できません。小児が近づかないよう管理し、作動前に入浴者がいないことを確認してください。約5時間半かかるため「入浴禁止：高濃度薬剤による浴槽殺菌中」等の警告タグを目立つ場所に掲示してください。次亜塩素酸ナトリウムが直接人体・衣服・装置にかからないよう注意。
+</div>
+<ol>
+<li>電源スイッチ「入」を押す</li>
+<li>自動貯湯スイッチとシャワースイッチを切る</li>
+<li>搬送車を浴槽に接続し、浴槽ドアを閉める（仮ロック→ドアロックランプ点滅を確認）</li>
+<li>殺菌スイッチを長押し（約3秒）→ 自動貯湯（約20分）→ 浴槽への湯の移動（約3分）→ 待機状態（「薬剤を投入してください」とアナウンス）</li>
+<li>薬剤を投入：市販の次亜塩素酸ナトリウム（濃度6%）を約70ml、浴槽中央付近の水面へ垂らす</li>
+<li>殺菌スイッチを押す（貯湯タンクへ湯移動120分放置→浴槽へ湯移動120分放置＋噴流1分動作→浴槽・貯湯タンクの湯排水約7分→自動貯湯・湯移動・殺菌後すすぎ約40分→排水・ドアロック解除約7分→スリープモード）</li>
+<li>機器殺菌終了後、スリープモード（殺菌ランプのみ点灯）になっているため、殺菌スイッチを押す</li>
+<li>浴槽、貯湯タンク、搬送車をハンドシャワーで洗い流す</li>
+</ol>
+<div class="note">殺菌終了後は残水を十分に洗い流すこと（残水があると機器のさびや故障の原因になる）。途中で停止したい場合は停止スイッチを押す（排水完了までスイッチ操作不可）。</div>
+
+<div class="sub-title">4-3. 機器洗浄</div>
+<div class="note">実施頻度：半年〜1年に1回（年末の大掃除の際に実施）</div>
+<div class="warn">
+機器洗浄中は入浴できません。約8時間かかるため、機器殺菌と同様に警告タグを掲示してください。洗浄剤（酸素系漂白剤）が直接人体・衣服・装置にかからないよう注意。
+</div>
+<ol>
+<li>電源スイッチ「入」を押す</li>
+<li>自動貯湯スイッチとシャワースイッチを切る（搬送車を同時に洗浄する場合はマット類を取りはずし、浴槽に接続）</li>
+<li>浴槽ドアを閉める</li>
+<li>洗浄スイッチを長押し（約3秒）→ 湯温50℃設定で貯湯タンクへ貯湯（約20分）→ 浴槽への湯移動（約3分）→ 待機状態（「薬剤を投入してください。浴槽の温度に注意してください」とアナウンス）</li>
+<li>洗浄剤（リニュー2.6kg）を投入する（<strong>酵素系粉ハイターでも代用可</strong>）</li>
+<li>洗浄スイッチを押す（湯移動約2分→貯湯タンクへ移動約5分→浴槽へ移動約185分→180分放置→湯排水約7分→自動貯湯・洗浄後すすぎ約40分→排水・ドアロック解除約7分→スリープモード）</li>
+<li>洗浄終了後、スリープモードから洗浄スイッチを押す</li>
+<li>「浴槽とタンクをすすいでください」とアナウンスされる</li>
+<li>浴槽、貯湯タンク、（搬送車）をハンドシャワーで洗い流す（浴槽縁やタンク縁に洗浄剤が残ることがあるので、きれいに洗い流す）</li>
+</ol>
+<div class="note">指定以外の洗浄剤を使用すると機器の故障・破損の原因になります。</div>
+
+<div class="sub-title">4-4. チェックリストの運用</div>
+<p>「機械浴清掃チェックリスト」で、機器殺菌・フィルタ清掃・ピューラックス確認・機器洗浄を月ごとに実施記録として管理する（1月〜12月の実施月に記録）。</p>
+</div>
+
+</div>
+</body>
+</html>

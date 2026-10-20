@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>入浴実施基準｜デイサービスセンターこはる日和</title>
+<meta name="theme-color" content="#d97706">
+<style>
+:root {
+  --amber:      #d97706;
+  --amber-mid:  #f59e0b;
+  --amber-lt:   #fef3c7;
+  --amber-xl:   #fffbeb;
+  --grad-from:  #78350f;
+  --blue:       #1558a0;
+  --blue-lt:    #dbeafe;
+  --green:      #16a34a;
+  --green-lt:   #dcfce7;
+  --red:        #dc2626;
+  --red-lt:     #fee2e2;
+  --gray:       #64748b;
+  --gray-lt:    #f1f5f9;
+  --gray-mid:   #e2e8f0;
+  --text:       #0f172a;
+  --text-sub:   #475569;
+  --bg:         #f0f4f8;
+  --white:      #ffffff;
+  --r:          10px;
+  --r-sm:       6px;
+  --sh:         0 1px 4px rgba(0,0,0,.08);
+  --sh-md:      0 4px 16px rgba(0,0,0,.12);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", sans-serif;
+  font-size: 15px; line-height: 1.7; color: var(--text); background: var(--bg); min-height: 100vh;
+}
+
+/* ===== TOPBAR ===== */
+.topbar {
+  background: linear-gradient(135deg, var(--grad-from) 0%, var(--amber) 60%, var(--amber-mid) 100%);
+  padding: 12px 16px; position: sticky; top: 0; z-index: 50;
+  box-shadow: 0 2px 10px rgba(120,53,15,.4);
+  display: flex; align-items: center; gap: 12px;
+}
+.topbar-back {
+  background: rgba(255,255,255,.18); border: 1px solid rgba(255,255,255,.3);
+  color: #fff; text-decoration: none; padding: 5px 12px;
+  border-radius: 20px; font-size: 13px; font-weight: 600; flex-shrink: 0;
+}
+.topbar-back:hover { background: rgba(255,255,255,.28); }
+.topbar-title { font-size: 15px; font-weight: 800; color: #fff; letter-spacing: .02em; }
+.topbar-sub   { font-size: 11px; color: rgba(255,255,255,.65); }
+
+/* ===== PAGE ===== */
+.page-wrap { max-width: 760px; margin: 0 auto; padding: 24px 16px 60px; }
+
+/* ===== POLICY HEADER ===== */
+.policy-header {
+  background: linear-gradient(135deg, var(--grad-from), var(--amber));
+  border-radius: var(--r);
+  padding: 20px 24px;
+  color: #fff;
+  margin-bottom: 20px;
+}
+.policy-header h1 { font-size: 20px; font-weight: 800; margin-bottom: 8px; letter-spacing: .02em; }
+.policy-meta { display: flex; gap: 16px; flex-wrap: wrap; font-size: 12px; opacity: .8; }
+
+/* ===== SECTION CARD ===== */
+.sec {
+  background: var(--white);
+  border-radius: var(--r);
+  box-shadow: var(--sh);
+  padding: 18px 20px;
+  margin-bottom: 14px;
+  border: 1px solid var(--gray-mid);
+}
+.sec-title {
+  font-size: 12px; font-weight: 800;
+  letter-spacing: .08em; text-transform: uppercase;
+  color: var(--amber);
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--amber-lt);
+  margin-bottom: 14px;
+}
+
+/* ===== POLICY CALLOUT ===== */
+.callout-ok {
+  background: var(--green-lt);
+  border-left: 4px solid var(--green);
+  border-radius: 0 var(--r-sm) var(--r-sm) 0;
+  padding: 12px 16px;
+  font-weight: 600; font-size: 14.5px;
+  color: #14532d;
+}
+
+/* ===== FLOW ===== */
+.flow { display: flex; flex-direction: column; gap: 2px; }
+.flow-step { display: flex; align-items: flex-start; gap: 12px; }
+.flow-num {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--blue); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 800; flex-shrink: 0; margin-top: 3px;
+}
+.flow-num.done { background: var(--green); }
+.flow-connector { width: 28px; display: flex; justify-content: center; flex-shrink: 0; }
+.flow-connector::before { content: ''; display: block; width: 2px; height: 18px; background: var(--gray-mid); }
+.flow-body { flex: 1; min-width: 0; padding-bottom: 4px; }
+.flow-q { font-weight: 700; font-size: 14px; margin-bottom: 4px; }
+.flow-detail { font-size: 13px; color: var(--text-sub); line-height: 1.65; }
+
+.tag {
+  display: inline-block; border-radius: 4px; padding: 1px 7px;
+  font-size: 11.5px; font-weight: 800; margin-right: 4px; vertical-align: middle;
+}
+.tag-red    { background: var(--red-lt);   color: var(--red);   border: 1px solid var(--red); }
+.tag-amber  { background: var(--amber-lt); color: #92400e;      border: 1px solid var(--amber); }
+.tag-green  { background: var(--green-lt); color: var(--green); border: 1px solid var(--green); }
+
+/* ===== CRITERIA GRID ===== */
+.crit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 12px; }
+@media (max-width: 560px) { .crit-grid { grid-template-columns: 1fr; } }
+
+.crit-card { border-radius: var(--r-sm); overflow: hidden; border: 1px solid; }
+.crit-card.red   { border-color: var(--red); }
+.crit-card.amber { border-color: var(--amber); }
+
+.crit-head {
+  padding: 9px 14px; font-weight: 800; font-size: 13.5px; color: #fff;
+  display: flex; align-items: center; gap: 8px;
+}
+.crit-head.red   { background: var(--red); }
+.crit-head.amber { background: var(--amber); }
+
+.crit-body { padding: 12px 14px; }
+.crit-body.red   { background: var(--red-lt); }
+.crit-body.amber { background: var(--amber-lt); }
+
+.crit-body ul { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+.crit-body li { display: flex; align-items: flex-start; gap: 8px; font-size: 13.5px; }
+.crit-body li::before { content: '▸'; flex-shrink: 0; margin-top: 2px; }
+.crit-body.red   li::before { color: var(--red); }
+.crit-body.amber li::before { color: var(--amber); }
+
+.crit-note { font-size: 12px; color: #92400e; margin-bottom: 8px; }
+
+table.vt { width: 100%; border-collapse: collapse; font-size: 13px; }
+table.vt th, table.vt td { padding: 6px 10px; text-align: left; border-bottom: 1px solid rgba(0,0,0,.1); }
+table.vt th { font-size: 11.5px; font-weight: 700; color: #92400e; letter-spacing: .04em; }
+table.vt td:last-child { font-weight: 600; }
+
+/* ===== ABOLISH ===== */
+.abolish-list { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
+.abolish-item {
+  background: var(--gray-lt); border-radius: var(--r-sm);
+  padding: 11px 16px; border: 1px solid var(--gray-mid);
+}
+.bad {
+  font-size: 13.5px; font-weight: 700; color: var(--red);
+  margin-bottom: 4px; display: flex; align-items: flex-start; gap: 6px;
+}
+.bad-x { flex-shrink: 0; font-size: 14px; margin-top: 1px; }
+.good {
+  font-size: 13px; color: var(--text-sub);
+  padding-left: 20px; display: flex; gap: 6px;
+}
+.good-arrow { color: var(--green); font-weight: 800; flex-shrink: 0; }
+
+/* ===== CONTACT ===== */
+.contact-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 10px; }
+.contact-card {
+  flex: 1; min-width: 180px;
+  background: var(--gray-lt); border: 1px solid var(--gray-mid);
+  border-radius: var(--r-sm); padding: 12px 16px;
+}
+.contact-role { font-size: 11.5px; font-weight: 700; letter-spacing: .04em; color: var(--gray); margin-bottom: 2px; }
+.contact-name { font-size: 15px; font-weight: 800; }
+
+/* ===== RECORD ===== */
+.record-note {
+  font-size: 13.5px; background: var(--amber-xl);
+  border: 1px solid var(--amber-lt); border-radius: var(--r-sm);
+  padding: 12px 16px; margin-top: 8px;
+  line-height: 1.8;
+}
+
+.doc-footer {
+  text-align: center; font-size: 12px; color: var(--gray);
+  margin-top: 24px; padding-top: 14px;
+  border-top: 1px solid var(--gray-mid);
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="000_デイサービス業務マニュアル.html" class="topbar-back">← 戻る</a>
+  <div>
+    <div class="topbar-title">入浴実施基準</div>
+    <div class="topbar-sub">デイサービスセンターこはる日和</div>
+  </div>
+</div>
+
+<div class="page-wrap">
+
+  <div class="policy-header">
+    <h1>🛁 入浴実施基準</h1>
+    <div class="policy-meta">
+      <span>制定：2026年10月20日</span>
+      <span>作成：医療法人稲田医院</span>
+      <span>対象：デイサービス全スタッフ</span>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-title">基本方針</div>
+    <div class="callout-ok">
+      来所した利用者には、原則として入浴サービスを提供する。<br>
+      以下に定める「入浴中止基準」に該当しない限り、スタッフ個人の判断で入浴を取りやめてはならない。
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-title">対応フロー</div>
+    <div class="flow">
+
+      <div class="flow-step">
+        <div class="flow-num">1</div>
+        <div class="flow-body">
+          <div class="flow-q">入浴前バイタルを測定・記録する</div>
+          <div class="flow-detail">体温・血圧（収縮期/拡張期）・脈拍・SpO₂ を全員に実施</div>
+        </div>
+      </div>
+      <div class="flow-step"><div class="flow-connector"></div></div>
+
+      <div class="flow-step">
+        <div class="flow-num">2</div>
+        <div class="flow-body">
+          <div class="flow-q">【絶対的中止基準】に該当するか？</div>
+          <div class="flow-detail">
+            <span class="tag tag-red">該当する</span>入浴中止。NS・管理者へ即報告し、必要に応じ医院へ連絡<br>
+            <span class="tag tag-green">該当しない</span>次のステップへ
+          </div>
+        </div>
+      </div>
+      <div class="flow-step"><div class="flow-connector"></div></div>
+
+      <div class="flow-step">
+        <div class="flow-num">3</div>
+        <div class="flow-body">
+          <div class="flow-q">【要確認バイタル基準】に該当するか？</div>
+          <div class="flow-detail">
+            <span class="tag tag-amber">該当する</span>NS・管理者に報告し、判断が難しければ医院（医師）へ連絡。指示に従う<br>
+            <span class="tag tag-green">該当しない</span>入浴を実施する
+          </div>
+        </div>
+      </div>
+      <div class="flow-step"><div class="flow-connector"></div></div>
+
+      <div class="flow-step">
+        <div class="flow-num done">✓</div>
+        <div class="flow-body">
+          <div class="flow-q">入浴実施</div>
+          <div class="flow-detail">バイタル値・実施の有無・特記事項を記録する</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-title">入浴中止基準</div>
+    <div class="crit-grid">
+
+      <div class="crit-card red">
+        <div class="crit-head red">⛔ 絶対的中止（即報告）</div>
+        <div class="crit-body red">
+          <ul>
+            <li>体温 38.0℃ 以上</li>
+            <li>収縮期血圧 200mmHg 以上</li>
+            <li>収縮期血圧 80mmHg 未満</li>
+            <li>拡張期血圧 110mmHg 以上</li>
+            <li>脈拍 120回/分 以上</li>
+            <li>脈拍 40回/分 以下</li>
+            <li>SpO₂ 92% 以下</li>
+            <li>意識・見当識の明らかな変化</li>
+            <li>胸痛・強い動悸・激しい息切れ</li>
+            <li>嘔吐・激しい下痢・強い腹痛</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="crit-card amber">
+        <div class="crit-head amber">⚠️ 要確認（NS・管理者へ報告）</div>
+        <div class="crit-body amber">
+          <p class="crit-note">以下の値はNS・管理者に報告し、医師への連絡が必要か判断する</p>
+          <table class="vt">
+            <thead>
+              <tr><th>項目</th><th>基準値</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>体温</td><td>37.0℃ 以上</td></tr>
+              <tr><td>収縮期血圧</td><td>140 以上 または 100 以下</td></tr>
+              <tr><td>拡張期血圧</td><td>90mmHg 以上</td></tr>
+              <tr><td>脈拍</td><td>100回/分 以上 または 50 以下</td></tr>
+              <tr><td>SpO₂</td><td>95% 以下</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-title">廃止する現場慣行</div>
+    <p style="font-size: 13px; color: var(--text-sub); margin-bottom: 10px;">以下は法人が定めたルールではありません。入浴を断る理由にはなりません。</p>
+
+    <div class="abolish-list">
+      <div class="abolish-item">
+        <div class="bad"><span class="bad-x">✕</span>「入浴前に水分をとっていないから入浴させない」</div>
+        <div class="good"><span class="good-arrow">→</span>入浴前の水分補給は促す。ただし水分摂取の有無は入浴の条件ではない。バイタルが基準内であれば入浴を実施する。</div>
+      </div>
+      <div class="abolish-item">
+        <div class="bad"><span class="bad-x">✕</span>「なんとなく元気がなさそうだから」</div>
+        <div class="good"><span class="good-arrow">→</span>主観的な印象は判断根拠にならない。バイタルを測定し、基準に照らして判断する。変化があればNSへ報告。</div>
+      </div>
+      <div class="abolish-item">
+        <div class="bad"><span class="bad-x">✕</span>「忙しいから今日は省略する」「手が足りないから」</div>
+        <div class="good"><span class="good-arrow">→</span>提供できない場合は管理者に報告し指示を受ける。スタッフ個人で入浴サービスを省略する判断はしない。</div>
+      </div>
+      <div class="abolish-item">
+        <div class="bad"><span class="bad-x">✕</span>その他、法人が定めていない理由による入浴スキップ</div>
+        <div class="good"><span class="good-arrow">→</span>判断に迷う場合は独断せず、必ずNS・管理者に相談する。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-title">報告・連絡先</div>
+    <div class="contact-row">
+      <div class="contact-card">
+        <div class="contact-role">第一報告先</div>
+        <div class="contact-name">NS・デイ管理者</div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-role">医療的判断が必要な場合</div>
+        <div class="contact-name">いなだ医院（医師）</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-title">記録</div>
+    <div class="record-note">
+      入浴前のバイタル値・実施または中止の判断・報告先と受けた指示を<strong>必ず記録</strong>する。<br>
+      「中止した」だけでなく「理由」「報告した相手」「受けた指示」まで記載すること。
+    </div>
+  </div>
+
+  <div class="doc-footer">
+    医療法人稲田医院　制定 2026年10月　—　不明点はNS・管理者へ必ず相談すること
+  </div>
+
+</div>
+</body>
+</html>

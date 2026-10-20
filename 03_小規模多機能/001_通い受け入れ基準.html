@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>通い受け入れ基準｜こはる日和（小規模多機能）</title>
+<meta name="theme-color" content="#0d9488">
+<style>
+:root {
+  --accent:     #0d9488;
+  --accent-mid: #14b8a6;
+  --accent-lt:  #ccfbf1;
+  --accent-xl:  #f0fdfa;
+  --grad-from:  #065f46;
+  --blue:       #1558a0;
+  --blue-lt:    #dbeafe;
+  --green:      #16a34a;
+  --green-lt:   #dcfce7;
+  --red:        #dc2626;
+  --red-lt:     #fee2e2;
+  --amber:      #d97706;
+  --amber-lt:   #fef3c7;
+  --gray:       #64748b;
+  --gray-lt:    #f1f5f9;
+  --gray-mid:   #e2e8f0;
+  --text:       #0f172a;
+  --text-sub:   #475569;
+  --bg:         #f0f4f8;
+  --white:      #ffffff;
+  --r:          10px;
+  --r-sm:       6px;
+  --sh:         0 1px 4px rgba(0,0,0,.08);
+  --sh-md:      0 4px 16px rgba(0,0,0,.12);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", sans-serif;
+  font-size: 15px; line-height: 1.7; color: var(--text); background: var(--bg); min-height: 100vh;
+}
+
+/* ===== TOPBAR ===== */
+.topbar {
+  background: linear-gradient(135deg, var(--grad-from) 0%, var(--accent) 60%, var(--accent-mid) 100%);
+  padding: 12px 16px; position: sticky; top: 0; z-index: 50;
+  box-shadow: 0 2px 10px rgba(6,95,70,.4);
+  display: flex; align-items: center; gap: 12px;
+}
+.topbar-back {
+  background: rgba(255,255,255,.18); border: 1px solid rgba(255,255,255,.3);
+  color: #fff; text-decoration: none; padding: 5px 12px;
+  border-radius: 20px; font-size: 13px; font-weight: 600; flex-shrink: 0;
+}
+.topbar-back:hover { background: rgba(255,255,255,.28); }
+.topbar-title { font-size: 15px; font-weight: 800; color: #fff; letter-spacing: .02em; }
+.topbar-sub   { font-size: 11px; color: rgba(255,255,255,.65); }
+
+/* ===== PAGE ===== */
+.page-wrap { max-width: 760px; margin: 0 auto; padding: 24px 16px 60px; }
+
+/* ===== POLICY HEADER ===== */
+.policy-header {
+  background: linear-gradient(135deg, var(--grad-from), var(--accent));
+  border-radius: var(--r);
+  padding: 20px 24px;
+  color: #fff;
+  margin-bottom: 20px;
+}
+.policy-header h1 { font-size: 20px; font-weight: 800; margin-bottom: 8px; letter-spacing: .02em; }
+.policy-meta { display: flex; gap: 16px; flex-wrap: wrap; font-size: 12px; opacity: .8; }
+
+/* ===== SECTION CARD ===== */
+.sec {
+  background: var(--white);
+  border-radius: var(--r);
+  box-shadow: var(--sh);
+  padding: 18px 20px;
+  margin-bottom: 14px;
+  border: 1px solid var(--gray-mid);
+}
+.sec-title {
+  font-size: 12px; font-weight: 800;
+  letter-spacing: .08em; text-transform: uppercase;
+  color: var(--accent);
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--accent-lt);
+  margin-bottom: 14px;
+}
+
+/* ===== POLICY CALLOUT ===== */
+.callout-ok {
+  background: var(--green-lt);
+  border-left: 4px solid var(--green);
+  border-radius: 0 var(--r-sm) var(--r-sm) 0;
+  padding: 12px 16px;
+  font-weight: 600; font-size: 14.5px;
+  color: #14532d;
+}
+
+/* ===== CATCHALL ===== */
+.catchall {
+  background: #eff6ff;
+  border-left: 4px solid var(--blue);
+  border-radius: 0 var(--r-sm) var(--r-sm) 0;
+  padding: 12px 16px;
+  font-size: 13.5px; color: #1e3a5f;
+  margin-top: 12px;
+}
+
+/* ===== CRITERIA GRID ===== */
+.crit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 12px; }
+@media (max-width: 560px) { .crit-grid { grid-template-columns: 1fr; } }
+
+.crit-card { border-radius: var(--r-sm); overflow: hidden; border: 1px solid; }
+.crit-card.red   { border-color: var(--red); }
+.crit-card.amber { border-color: var(--amber); }
+
+.crit-head {
+  padding: 9px 14px; font-weight: 800; font-size: 13.5px; color: #fff;
+  display: flex; align-items: center; gap: 8px;
+}
+.crit-head.red   { background: var(--red); }
+.crit-head.amber { background: var(--amber); }
+
+.crit-body { padding: 12px 14px; }
+.crit-body.red   { background: var(--red-lt); }
+.crit-body.amber { background: var(--amber-lt); }
+
+table.vt { width: 100%; border-collapse: collapse; font-size: 13px; }
+table.vt th, table.vt td { padding: 6px 10px; text-align: left; border-bottom: 1px solid rgba(0,0,0,.1); }
+table.vt th { font-size: 11.5px; font-weight: 700; letter-spacing: .04em; }
+table.vt.red   th { color: #b91c1c; }
+table.vt.amber th { color: #92400e; }
+table.vt td:last-child { font-weight: 600; }
+
+.crit-foot {
+  padding: 8px 14px; font-size: 12px; font-weight: 600;
+  border-top: 1px solid rgba(0,0,0,.1);
+}
+.crit-foot.red   { background: #fff0f0; color: #b91c1c; }
+.crit-foot.amber { background: #fffaed; color: #92400e; }
+
+/* ===== REFUSAL FLOW ===== */
+.flow { display: flex; flex-direction: column; gap: 2px; }
+.flow-step { display: flex; align-items: flex-start; gap: 12px; }
+.flow-num {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--blue); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 800; flex-shrink: 0; margin-top: 3px;
+}
+.flow-connector { width: 28px; display: flex; justify-content: center; flex-shrink: 0; }
+.flow-connector::before { content: ''; display: block; width: 2px; height: 18px; background: var(--gray-mid); }
+.flow-body { flex: 1; min-width: 0; padding-bottom: 4px; }
+.flow-q { font-weight: 700; font-size: 14px; margin-bottom: 4px; }
+.flow-detail { font-size: 13px; color: var(--text-sub); line-height: 1.65; }
+
+/* ===== CASES GRID ===== */
+.cases-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 14px; }
+@media (max-width: 560px) { .cases-grid { grid-template-columns: 1fr; } }
+.case-card { border-radius: var(--r-sm); padding: 12px 14px; border: 1px solid; }
+.case-card.green  { background: #f0fdf4; border-color: #86efac; }
+.case-card.yellow { background: #fefce8; border-color: #fde047; }
+.case-card.blue   { background: #eff6ff; border-color: #93c5fd; }
+.case-title { font-size: 12.5px; font-weight: 800; margin-bottom: 5px; }
+.case-card.green  .case-title { color: #166534; }
+.case-card.yellow .case-title { color: #854d0e; }
+.case-card.blue   .case-title { color: #1e40af; }
+.case-body { font-size: 13px; color: var(--text-sub); line-height: 1.6; }
+
+/* ===== ABOLISH ===== */
+.abolish-list { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
+.abolish-item {
+  background: var(--gray-lt); border-radius: var(--r-sm);
+  padding: 11px 16px; border: 1px solid var(--gray-mid);
+}
+.abolish-bad { font-weight: 700; color: var(--red); font-size: 13.5px; }
+.abolish-bad::before { content: '✕ '; }
+.abolish-good { font-size: 13px; color: var(--text-sub); margin-top: 4px; line-height: 1.6; }
+
+/* ===== FOOTER ===== */
+.doc-footer {
+  text-align: center; font-size: 12px; color: var(--gray);
+  margin-top: 24px; padding-top: 14px;
+  border-top: 1px solid var(--gray-mid);
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="manual_shokibo.html" class="topbar-back">← 戻る</a>
+  <div>
+    <div class="topbar-title">通い受け入れ基準</div>
+    <div class="topbar-sub">こはる日和（小規模多機能型居宅介護）</div>
+  </div>
+</div>
+
+<div class="page-wrap">
+
+  <div class="policy-header">
+    <h1>🚐 通い受け入れ基準</h1>
+    <div class="policy-meta">
+      <span>制定：2026年10月20日</span>
+      <span>作成：医療法人稲田医院</span>
+      <span>対象：小多機（通い）・デイサービス全スタッフ</span>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-title">基本方針</div>
+    <div class="callout-ok">
+      予定された通い利用者には、原則としてサービスを提供する。<br>
+      以下に定める「受け入れ禁止基準」に該当しない限り、スタッフ個人の判断で受け入れを断ってはならない。
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-title">バイタル判断基準</div>
+    <div class="crit-grid">
+
+      <div class="crit-card red">
+        <div class="crit-head red">表1 &nbsp;受け入れ禁止基準</div>
+        <div class="crit-body red">
+          <table class="vt red">
+            <thead><tr><th>項目</th><th>禁止となる値・状態</th></tr></thead>
+            <tbody>
+              <tr><td>体温</td><td>38.0℃ 以上</td></tr>
+              <tr><td>収縮期血圧</td><td>200mmHg 以上</td></tr>
+              <tr><td>収縮期血圧</td><td>80mmHg 未満</td></tr>
+              <tr><td>拡張期血圧</td><td>110mmHg 以上</td></tr>
+              <tr><td>脈拍</td><td>120回/分 以上</td></tr>
+              <tr><td>脈拍</td><td>40回/分 以下</td></tr>
+              <tr><td>SpO₂</td><td>92% 以下</td></tr>
+              <tr><td>意識・見当識</td><td>明らかな変化あり</td></tr>
+              <tr><td>症状</td><td>胸痛・激しい息切れ・強い動悸</td></tr>
+              <tr><td>感染症疑い</td><td>嘔吐・下痢・発熱等（他利用者への感染リスク）</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="crit-foot red">→ 受け入れ中止。NS・管理者へ即報告、必要に応じ医院へ連絡。</div>
+      </div>
+
+      <div class="crit-card amber">
+        <div class="crit-head amber">表2 &nbsp;医師確認基準</div>
+        <div class="crit-body amber">
+          <table class="vt amber">
+            <thead><tr><th>項目</th><th>確認が必要な値</th></tr></thead>
+            <tbody>
+              <tr><td>体温</td><td>37.5℃ 以上</td></tr>
+              <tr><td>収縮期血圧</td><td>165mmHg 以上</td></tr>
+              <tr><td>収縮期血圧</td><td>90mmHg 以下</td></tr>
+              <tr><td>拡張期血圧</td><td>105mmHg 以上</td></tr>
+              <tr><td>脈拍</td><td>100回/分 以上</td></tr>
+              <tr><td>脈拍</td><td>45回/分 以下</td></tr>
+              <tr><td>SpO₂</td><td>94% 以下</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="crit-foot amber">→ NS・管理者へ報告。必要に応じ医院（医師）へ連絡し指示を受ける。</div>
+      </div>
+
+    </div>
+
+    <div class="catchall">
+      <strong>【基準値以外で懸念がある場合】</strong>　上記の数値に該当しない場合でも懸念があるときは必ずNS・管理者に報告し、必要に応じて医師の確認を取ること。スタッフ個人の判断で中止せず、報告・確認を経て対応する。
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-title">本人が「行きたくない」と言った場合の対応</div>
+
+    <div class="flow">
+      <div class="flow-step">
+        <div class="flow-num">1</div>
+        <div class="flow-body">
+          <div class="flow-q">理由を傾聴する</div>
+          <div class="flow-detail">否定せず、何が嫌なのか・体の具合はどうかを確認する</div>
+        </div>
+      </div>
+      <div class="flow-connector"></div>
+      <div class="flow-step">
+        <div class="flow-num">2</div>
+        <div class="flow-body">
+          <div class="flow-q">バイタルを確認する</div>
+          <div class="flow-detail">身体的な原因が隠れていないかを確認する</div>
+        </div>
+      </div>
+      <div class="flow-connector"></div>
+      <div class="flow-step">
+        <div class="flow-num">3</div>
+        <div class="flow-body">
+          <div class="flow-q">NS・管理者へ報告する</div>
+          <div class="flow-detail">本人の言葉・バイタル値・状況を伝えて判断を仰ぐ</div>
+        </div>
+      </div>
+      <div class="flow-connector"></div>
+      <div class="flow-step">
+        <div class="flow-num">4</div>
+        <div class="flow-body">
+          <div class="flow-q">必ず記録に残す</div>
+          <div class="flow-detail">理由・報告先・最終的な対応内容を記録する</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cases-grid">
+      <div class="case-card green">
+        <div class="case-title">身体症状あり</div>
+        <div class="case-body">表1・表2に照らして判断。基準該当なら受け入れ中止。基準内でも症状訴えが続くときはNS・医師へ相談。</div>
+      </div>
+      <div class="case-card yellow">
+        <div class="case-title">一時的な気分・その日の都合</div>
+        <div class="case-body">本人意思を尊重しサービスを中止する。管理者・ケアマネへ報告。繰り返す場合はケアプラン見直しを検討。</div>
+      </div>
+      <div class="case-card blue">
+        <div class="case-title">継続的・繰り返す拒否</div>
+        <div class="case-body">ケアマネへ報告し、ケアプランの変更・見直しを行う。家族への情報共有も実施。スタッフ判断で中止を継続しない。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-title">受け入れ中止の理由として認められないもの</div>
+    <p style="font-size:13px; color:var(--text-sub); margin-bottom:10px;">法人が定めていない独自判断は中止理由になりません。</p>
+    <div class="abolish-list">
+      <div class="abolish-item">
+        <div class="abolish-bad">「前回来た後にぐったりしていたから今日は控える」</div>
+        <div class="abolish-good">→ 都度バイタルを測定して基準に照らして判断する。前回の様子は参考情報であり受け入れ中止の根拠にならない。</div>
+      </div>
+      <div class="abolish-item">
+        <div class="abolish-bad">「なんとなく元気がなさそう」などの主観的印象による中止</div>
+        <div class="abolish-good">→ バイタルを測定し、基準に照らして判断する。変化があればNSへ報告。</div>
+      </div>
+      <div class="abolish-item">
+        <div class="abolish-bad">「家族から『無理させないで』と言われているから来させない」</div>
+        <div class="abolish-good">→ 家族の意向はケアプランで対応する。スタッフ判断でサービスを省略せず、管理者・ケアマネへ相談する。</div>
+      </div>
+      <div class="abolish-item">
+        <div class="abolish-bad">「本人が行きたくないと言っていそうだから迎えに行かない」（確認せず）</div>
+        <div class="abolish-good">→ 実際に本人の意思を確認する。予測・憶測での中止は不可。確認後に管理者へ報告する。</div>
+      </div>
+      <div class="abolish-item">
+        <div class="abolish-bad">「人員不足・車の都合で今日は受け入れを減らす」</div>
+        <div class="abolish-good">→ 管理者に報告し指示を受ける。スタッフ個人で受け入れ調整の判断はしない。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="doc-footer">
+    医療法人稲田医院　制定 2026年10月20日　—　不明な場合はNS・管理者に必ず相談すること
+  </div>
+
+</div>
+</body>
+</html>

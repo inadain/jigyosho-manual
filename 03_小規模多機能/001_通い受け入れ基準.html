@@ -347,8 +347,110 @@ table.vt td:last-child { font-weight: 600; }
     </div>
   </div>
 
+  <!-- ===== 帰宅・帰所判断基準 ===== -->
+  <div class="sec">
+    <div class="sec-title">通い中の帰宅・帰所判断基準</div>
+    <p style="font-size:13px; color:var(--text-sub); margin-bottom:12px;">
+      来所後に体調変化・拒否が生じた場合の対応基準です。3段階で判断します。
+    </p>
+
+    <!-- 段階1: 即時帰所 -->
+    <div style="margin-bottom:12px;">
+      <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+        <span style="background:var(--red); color:#fff; font-size:11px; font-weight:800; padding:2px 10px; border-radius:4px;">段階1</span>
+        <span style="font-size:13.5px; font-weight:800; color:var(--red);">即時帰宅・帰所（NS・管理者に即報告）</span>
+      </div>
+      <div class="crit-card red" style="margin-bottom:0;">
+        <div class="crit-body red">
+          <table class="vt red">
+            <thead><tr><th>区分</th><th>該当する状態</th></tr></thead>
+            <tbody>
+              <tr><td>バイタル</td><td>表1「受け入れ禁止基準」に達した（体温38.0℃以上・SpO₂92%以下等）</td></tr>
+              <tr><td>意識・症状</td><td>意識変容・強い胸痛・激しい息切れ・転倒後の明らかな外傷</td></tr>
+              <tr><td>感染症状</td><td>嘔吐・下痢・発熱が来所後に判明（他利用者への感染リスク）</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="crit-foot red">→ 家族・ケアマネへ連絡、必要に応じ医院へ報告・救急対応</div>
+      </div>
+    </div>
+
+    <!-- 段階2: 管理者・NS相談 -->
+    <div style="margin-bottom:12px;">
+      <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+        <span style="background:var(--amber); color:#fff; font-size:11px; font-weight:800; padding:2px 10px; border-radius:4px;">段階2</span>
+        <span style="font-size:13.5px; font-weight:800; color:var(--amber);">管理者・NS相談のうえ判断</span>
+      </div>
+      <div class="crit-card amber" style="margin-bottom:0;">
+        <div class="crit-body amber">
+          <table class="vt amber">
+            <thead><tr><th>区分</th><th>該当する状態</th></tr></thead>
+            <tbody>
+              <tr><td>バイタル</td><td>表2「医師確認基準」に達した（体温37.5℃以上・SpO₂94%以下等）</td></tr>
+              <tr><td>身体症状</td><td>強い疼痛・倦怠感の訴えが続き、活動継続が困難（肩・腰・頭痛など）</td></tr>
+              <tr><td>強い拒否</td><td>スタッフの声かけ（2〜3回）でも解消しない帰宅希望・活動拒否</td></tr>
+              <tr><td>認知・BPSD</td><td>混乱・興奮・他者への影響が出ており、環境調整後も改善しない</td></tr>
+              <tr><td>不眠</td><td>前夜の重度不眠があり、覚醒状態・バランスに明らかな影響が出ている</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="crit-foot amber">→ 管理者・NSと協議して帰所か継続かを判断。必要に応じ医院・家族へ連絡。</div>
+      </div>
+    </div>
+
+    <!-- 段階3: スタッフ対応で継続 -->
+    <div style="margin-bottom:4px;">
+      <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+        <span style="background:var(--accent); color:#fff; font-size:11px; font-weight:800; padding:2px 10px; border-radius:4px;">段階3</span>
+        <span style="font-size:13.5px; font-weight:800; color:var(--accent);">スタッフ対応で継続（帰所させない）</span>
+      </div>
+      <div class="cases-grid">
+        <div class="case-card green">
+          <div class="case-title">気分・機嫌による一時的な拒否</div>
+          <div class="case-body">傾聴・気分転換・好きな活動への誘導で対応。落ち着いたら記録に残す。「機嫌が悪そう」だけでは帰所不可。</div>
+        </div>
+        <div class="case-card yellow">
+          <div class="case-title">思い込み・思い通りにならない不満</div>
+          <div class="case-body">気持ちを受容し、場面を変える。否定・説得はせずに気持ちに寄り添う。改善しない場合は管理者へ報告。</div>
+        </div>
+        <div class="case-card blue">
+          <div class="case-title">認知症状による状況理解の困難</div>
+          <div class="case-body">環境調整・なじみの職員が対応。バイタル確認を行い、身体的原因を除外してから関わり方で対応する。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="catchall" style="margin-top:12px;">
+      <strong>【記録の徹底】</strong>　帰所の有無にかかわらず、拒否・体調変化があった場合は必ず記録に残す。理由・対応内容・報告先を記入し、ケアマネへの情報共有につなげる。
+    </div>
+  </div>
+
+  <!-- ===== 帰所理由として認められないもの ===== -->
+  <div class="sec">
+    <div class="sec-title">帰所の理由として認められないもの</div>
+    <p style="font-size:13px; color:var(--text-sub); margin-bottom:10px;">法人が定めていない独自判断で帰所させることは不可です。</p>
+    <div class="abolish-list">
+      <div class="abolish-item">
+        <div class="abolish-bad">バイタル確認なしに「なんとなく今日は調子が悪そう」だけで帰所させる</div>
+        <div class="abolish-good">→ 必ずバイタルを測定し、段階1・2に照らして判断する。主観的印象だけでは帰所不可。</div>
+      </div>
+      <div class="abolish-item">
+        <div class="abolish-bad">「手がかかるから」「対応が大変だから」という理由での帰所</div>
+        <div class="abolish-good">→ 職員の都合でサービスを打ち切ることはしない。対応困難なら管理者へ相談し指示を受ける。</div>
+      </div>
+      <div class="abolish-item">
+        <div class="abolish-bad">声かけ1回で諦め、確認なしに「本人が嫌がっている」と判断する</div>
+        <div class="abolish-good">→ 2〜3回異なるアプローチで関わる。それでも解消しない場合に管理者へ相談する。</div>
+      </div>
+      <div class="abolish-item">
+        <div class="abolish-bad">「前回も帰りたがっていたから今日は早めに帰す」という先回り判断</div>
+        <div class="abolish-good">→ その日の状態をその日に確認する。過去の傾向は参考情報であり、判断根拠にしない。</div>
+      </div>
+    </div>
+  </div>
+
   <div class="doc-footer">
-    医療法人稲田医院　制定 2026年10月20日　—　不明な場合はNS・管理者に必ず相談すること
+    医療法人稲田医院　制定 2026年10月20日　改訂 2026年10月22日　—　不明な場合はNS・管理者に必ず相談すること
   </div>
 
 </div>

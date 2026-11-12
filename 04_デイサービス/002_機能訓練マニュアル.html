@@ -355,9 +355,9 @@ tr:nth-child(even) td { background: var(--gray-lt); }
         <strong>🚨 よくある間違いTOP4（まずここだけ見る）</strong>
         <ol class="list-num" style="margin-top:8px">
           <li>訓練時間を「20分」とだけ書く → 必ず<strong>「10:00〜10:20」と開始〜終了の時刻</strong>で記録する</li>
-          <li>計画書の同意を取ったのに<strong>担当ケアマネジャーへの報告</strong>を忘れる</li>
-          <li>見直し時期を「毎月」と思い込む → 正しくは<strong>「概ね3か月ごと」</strong>（老企第36号）</li>
-          <li>計画書に「本人・家族の希望」だけ書いて<strong>長期目標・短期目標を区別して書かない</strong></li>
+          <li><strong>居宅訪問</strong>を忘れる → 計画を作る前と、その後<strong>3か月に1回以上</strong>、利用者の居宅を訪問して生活状況を確認する（通知で、算定にあたって必要とされている）</li>
+          <li>同意を取ったあと、計画書の<strong>交付</strong>と<strong>担当ケアマネジャーへの報告</strong>を忘れる</li>
+          <li>目標を身体機能だけで書く → <strong>長期目標・短期目標を分け</strong>、トイレ・入浴・買い物など<strong>生活上の行為</strong>を含めて書く</li>
         </ol>
       </div>
     </div>
@@ -367,24 +367,29 @@ tr:nth-child(even) td { background: var(--gray-lt); }
       <div class="flow-block-title">① 初回（利用開始時）に行うこと</div>
       <div class="flow-steps">
         <div class="flow-step"><div class="flow-num blue">1</div><div class="flow-body">
-          <div class="flow-name">アセスメント測定</div>
-          <div class="flow-detail">TUG・BI・RSST等を測定。カットオフ値は「<a href="#" onclick="showPage('assess'); return false;" style="color:var(--accent);font-weight:700">評価・個別計画</a>」ページの表を見ながら判定する</div>
+          <div class="flow-name">居宅を訪問し、生活状況と希望を確認する</div>
+          <div class="flow-detail">・居宅の環境と、ADL・IADLの自立の程度や課題を確認 →「<a href="000_資料/様式_厚労省/別紙様式3-2_生活機能チェックシート.docx" style="color:var(--accent);font-weight:700">生活機能チェックシート（様式3-2）</a>」<br>・本人がしていること・してみたいことを、本人の記入か聞き取りで確認し、家族の希望も聞く →「<a href="000_資料/様式_厚労省/別紙様式3-1_興味関心チェックシート.docx" style="color:var(--accent);font-weight:700">興味・関心チェックシート（様式3-1）</a>」<br>・必要に応じて、医師（病名・治療経過・実施上の留意事項）とケアマネジャー（居宅サービス計画の意向・課題・目標）から情報を得る</div>
         </div></div>
         <div class="flow-arrow">↓</div>
         <div class="flow-step"><div class="flow-num blue">2</div><div class="flow-body">
-          <div class="flow-name">個別機能訓練計画書の作成</div>
-          <div class="flow-detail">「<a href="004_個別プログラム作成フォーム.html" style="color:var(--accent);font-weight:700">004_個別プログラム作成フォーム</a>」を開き、利用者情報・測定値・<strong>長期目標／短期目標／医師の指示事項</strong>を入力 →「訓練計画書を作成」→ 印刷</div>
-          <div class="flow-stop">⚠️ 「本人・家族の希望」欄だけで済ませず、長期目標（6〜12か月）・短期目標（1〜3か月）を分けて必ず入力する</div>
+          <div class="flow-name">アセスメント測定</div>
+          <div class="flow-detail">TUG・BI・RSST等を測定する。3か月後の再評価で比べるため、毎回同じ項目・同じ方法で測る。カットオフ値は「<a href="#" onclick="showPage('assess'); return false;" style="color:var(--accent);font-weight:700">評価・個別計画</a>」ページの表を見ながら判定</div>
         </div></div>
         <div class="flow-arrow">↓</div>
         <div class="flow-step"><div class="flow-num blue">3</div><div class="flow-body">
-          <div class="flow-name">本人・家族へ説明・同意取得</div>
-          <div class="flow-detail">印刷した計画書を読み合わせ、下部の同意欄（説明日・説明者・本人または家族の署名）に記入してもらう</div>
+          <div class="flow-name">個別機能訓練計画書の作成</div>
+          <div class="flow-detail">「<a href="004_個別プログラム作成フォーム.html" style="color:var(--accent);font-weight:700">004_個別プログラム作成フォーム</a>」を開き、国の様式3-3と同じ項目（基本情報／目標・訓練項目／実施後の対応）に沿って入力 →「訓練計画書を作成」→ 印刷</div>
+          <div class="flow-stop">⚠️ 目標は長期・短期に分け、機能（体の働き）だけでなく、活動（生活行為）・参加（役割や社会との関わり）も含めて書く</div>
         </div></div>
         <div class="flow-arrow">↓</div>
         <div class="flow-step"><div class="flow-num blue">4</div><div class="flow-body">
-          <div class="flow-name">担当ケアマネジャーへ報告</div>
-          <div class="flow-detail">計画作成・同意取得の旨を報告し、計画書の同意欄のチェック欄に報告日を記入する</div>
+          <div class="flow-name">本人・家族へ説明し、同意を得て、計画書を交付する</div>
+          <div class="flow-detail">印刷した計画書を読み合わせながら分かりやすく説明し、同意を得る。計画書は本人・家族に渡す（電磁的記録でも可）。計画書の下部に説明日・説明者を記入する</div>
+        </div></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step"><div class="flow-num blue">5</div><div class="flow-body">
+          <div class="flow-name">担当ケアマネジャーへ計画書を渡して報告する</div>
+          <div class="flow-detail">計画書を交付し、利用者・家族へ説明して同意を得たことを報告する。計画書下部のチェック欄に報告日を記入する</div>
           <div class="flow-stop">⚠️ この報告を忘れるケースが多いので、同意取得と同じ日に済ませる</div>
         </div></div>
       </div>
@@ -393,6 +398,7 @@ tr:nth-child(even) td { background: var(--gray-lt); }
     <!-- フロー：毎回の訓練 -->
     <div class="flow-block">
       <div class="flow-block-title">② 毎回の訓練（デイ利用ごと）</div>
+      <div class="alert blue" style="margin-bottom:10px">📌 個別機能訓練は<strong>機能訓練指導員が直接</strong>行う（補助として看護職員・介護職員が関わるのは可）。<strong>類似の目標を持ち、同じ訓練項目を選んだ5人程度以下の小集団（個別対応を含む）</strong>で行い、<strong>おおむね週1回以上</strong>実施する。</div>
       <div class="flow-steps">
         <div class="flow-step"><div class="flow-num">1</div><div class="flow-body">
           <div class="flow-name">訓練前バイタル測定・体調確認</div>
@@ -400,8 +406,8 @@ tr:nth-child(even) td { background: var(--gray-lt); }
         </div></div>
         <div class="flow-arrow">↓</div>
         <div class="flow-step"><div class="flow-num">2</div><div class="flow-body">
-          <div class="flow-name">運動メニューから選んでもらい実施</div>
-          <div class="flow-detail">計画書のパターンに沿って、「<a href="006_座位運動メニュー_かんたん版.html" style="color:var(--accent);font-weight:700">006かんたん版</a>」または「<a href="005_現場配布用A4ファイリング資料.html" style="color:var(--accent);font-weight:700">005現場配布資料</a>」を見せながら実施</div>
+          <div class="flow-name">複数の運動から、利用者に選んでもらって実施</div>
+          <div class="flow-detail">計画書の訓練項目に沿って、「<a href="006_座位運動メニュー_かんたん版.html" style="color:var(--accent);font-weight:700">006かんたん版</a>」または「<a href="005_現場配布用A4ファイリング資料.html" style="color:var(--accent);font-weight:700">005現場配布資料</a>」を見せながら実施。選ぶこと自体が意欲につながるので、複数の種類を用意して選んでもらう</div>
         </div></div>
         <div class="flow-arrow">↓</div>
         <div class="flow-step"><div class="flow-num">3</div><div class="flow-body">
@@ -427,29 +433,46 @@ tr:nth-child(even) td { background: var(--gray-lt); }
       <div class="flow-block-title">③ 概ね3か月ごとに行うこと</div>
       <div class="flow-steps">
         <div class="flow-step"><div class="flow-num teal">1</div><div class="flow-body">
-          <div class="flow-name">再評価測定</div>
-          <div class="flow-detail">初回と同じ項目（TUG・BI・RSST等）を再測定し、目標の達成状況を確認</div>
+          <div class="flow-name">評価する</div>
+          <div class="flow-detail">訓練項目と訓練時間が適切だったか、効果（ADL・IADLの改善状況）が出ているかを評価する。初回と同じ項目（TUG・BI・RSST等）を再測定して比べる</div>
         </div></div>
         <div class="flow-arrow">↓</div>
         <div class="flow-step"><div class="flow-num teal">2</div><div class="flow-body">
-          <div class="flow-name">（Ⅱ算定時のみ）居宅訪問</div>
-          <div class="flow-detail">利用者宅を訪問し、在宅での生活状況を確認</div>
+          <div class="flow-name">居宅を訪問する（3か月に1回以上）</div>
+          <div class="flow-detail">居宅での生活状況（起居動作・ADL・IADL）を確認する。利用者・家族に、訓練の実施状況と効果を説明して記録する。説明と記録は、居宅訪問の日とは別の日にICT等で行ってもよい</div>
+          <div class="flow-stop">⚠️ 初回の計画を作るときだけでなく、その後も3か月ごとに訪問が必要</div>
         </div></div>
         <div class="flow-arrow">↓</div>
         <div class="flow-step"><div class="flow-num teal">3</div><div class="flow-body">
-          <div class="flow-name">計画書の見直し・再同意</div>
-          <div class="flow-detail">「004_個別プログラム作成フォーム」で目標・訓練内容を更新して再作成 → 印刷 → 本人・家族へ再説明・同意</div>
-          <div class="flow-stop">⚠️ 「毎月」ではなく「概ね3か月ごと」が正しいタイミング</div>
+          <div class="flow-name">ケアマネジャーへ報告・相談する</div>
+          <div class="flow-detail">おおむね3か月ごとに1回以上、実施状況と効果を担当ケアマネジャーへ報告・相談し、利用者・家族の意向を確認する</div>
         </div></div>
         <div class="flow-arrow">↓</div>
         <div class="flow-step"><div class="flow-num teal">4</div><div class="flow-body">
-          <div class="flow-name">（Ⅱ算定時のみ）LIFEへデータ提出</div>
-          <div class="flow-detail">生活機能チェックシート・個別機能訓練計画書を提出。提出期限を管理者と確認</div>
+          <div class="flow-name">目標の見直し・訓練項目の変更 → 計画書を作り直す</div>
+          <div class="flow-detail">「004_個別プログラム作成フォーム」で目標と訓練項目を更新して再作成し、前回の目標達成度と「実施後の対応」を記入 → 印刷。初回と同じ手順で、本人・家族へ説明・同意・交付し、ケアマネジャーへ報告する</div>
+          <div class="flow-stop">⚠️ 見直しは「毎月」ではなく「概ね3か月ごと」。（再作成後の再説明・再同意は通知に明記がないが、初回と同じ手順で行う運用）</div>
+        </div></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-step"><div class="flow-num teal">5</div><div class="flow-body">
+          <div class="flow-name">（（Ⅰ）ロ・（Ⅱ）を算定する場合のみ）LIFEへデータ提出</div>
+          <div class="flow-detail">生活機能チェックシート・個別機能訓練計画書を提出する。提出期限は管理者と確認</div>
         </div></div>
       </div>
     </div>
 
-    <div class="point">使う書類：計画書作成は「<strong>004</strong>」／毎回の記録は「<strong>007</strong>」／評価カットオフ値は「<a href="#" onclick="showPage('assess'); return false;" style="color:var(--accent);font-weight:700">評価・個別計画</a>」／訓練中止基準は「<a href="#" onclick="showPage('safety'); return false;" style="color:var(--accent);font-weight:700">安全管理</a>」ページを参照。</div>
+    <div class="card">
+      <h3>📎 使う書類（国の様式があるものは、それを使う）</h3>
+      <ul class="list">
+        <li><strong>興味・関心チェックシート（様式3-1）</strong>・<strong>生活機能チェックシート（様式3-2）</strong>：国の様式をそのまま使う →
+          <a href="000_資料/様式_厚労省/別紙様式3-1_興味関心チェックシート.docx" style="color:var(--accent);font-weight:700">3-1</a>・<a href="000_資料/様式_厚労省/別紙様式3-2_生活機能チェックシート.docx" style="color:var(--accent);font-weight:700">3-2</a>（Word）</li>
+        <li><strong>個別機能訓練計画書（様式3-3）</strong>：「<a href="004_個別プログラム作成フォーム.html" style="color:var(--accent);font-weight:700">004</a>」で、国の様式と同じ項目に沿って作成する。国の様式（Excel）をそのまま使ってもよい →
+          <a href="000_資料/様式_厚労省/別紙様式3-3_個別機能訓練計画書.xlsx" style="color:var(--accent);font-weight:700">3-3</a></li>
+        <li><strong>毎回の訓練記録</strong>：国の様式がないため「<a href="007_毎回の訓練記録用紙.html" style="color:var(--accent);font-weight:700">007</a>」を使う</li>
+        <li><strong>口腔機能向上加算</strong>：事業所で使用中の様式を使う（様式の保管場所は事務主任に確認）</li>
+      </ul>
+      <div class="point" style="margin-top:8px">評価カットオフ値は「<a href="#" onclick="showPage('assess'); return false;" style="color:var(--accent);font-weight:700">評価・個別計画</a>」、訓練中止基準は「<a href="#" onclick="showPage('safety'); return false;" style="color:var(--accent);font-weight:700">安全管理</a>」ページを参照。</div>
+    </div>
   </div>
 
   <!-- ============================================================ -->
@@ -598,13 +621,13 @@ tr:nth-child(even) td { background: var(--gray-lt); }
     <div class="card">
       <h3>🔄 3か月ごとの評価・見直し手順</h3>
       <ol class="list-num">
-        <li>評価項目の再測定（BI・TUG・MMSE等）</li>
-        <li>本人・家族への説明（口頭＋書面で記録）</li>
-        <li>達成・未達成・新課題に応じて短期目標を更新</li>
-        <li>個別機能訓練計画書の改訂・本人署名</li>
+        <li>評価する（訓練項目・時間は適切か／ADL・IADLの改善など効果が出ているか）。評価項目を再測定（BI・TUG等）</li>
+        <li>利用者の居宅を訪問し、起居動作・ADL・IADLを確認。利用者・家族へ実施状況と効果を説明して記録</li>
+        <li>担当ケアマネジャーへ報告・相談し、利用者・家族の意向を確認</li>
+        <li>目標・訓練項目を見直して計画書を再作成（説明・同意・交付、ケアマネジャーへ報告）</li>
         <li>介護職員・相談員・管理者との多職種共有</li>
       </ol>
-      <div class="point"><strong>⚠️ 計画書は「概ね3か月ごとに効果を評価し、必要に応じて見直す」ことが老企第36号で義務付けられています。</strong></div>
+      <div class="point"><strong>⚠️ 「3月ごとに1回以上の居宅訪問」と「おおむね3月ごとの目標見直し」は、令和6年3月15日付通知（リハビリテーション・個別機能訓練、栄養、口腔の実施及び一体的取組について）で、個別機能訓練加算の算定にあたって必要とされています。</strong>手順は「業務フロー」ページ参照。</div>
     </div>
   </div>
 
@@ -615,13 +638,14 @@ tr:nth-child(even) td { background: var(--gray-lt); }
     <div class="sec-head"><div class="sec-icon">📝</div><div><h2>記録・書類</h2><p>加算算定に必要な書類と記録の書き方</p></div></div>
 
     <div class="card">
-      <h3>📄 個別機能訓練計画書の必須記載項目</h3>
+      <h3>📄 個別機能訓練計画書の記載項目（国の様式3-3に沿う）</h3>
       <ul class="list">
-        <li>基本情報・<strong>本人と家族の希望</strong>・病名と禁忌事項・医師からの指示事項</li>
-        <li>生活機能評価の結果、<strong>長期目標・短期目標</strong>（区別して明示）</li>
-        <li>具体的訓練内容（メニュー・頻度・所要時間）と評価時期（概ね3か月ごと）</li>
-        <li><strong>同意署名</strong>（本人または家族）、作成者氏名・作成日</li>
+        <li><strong>Ⅰ 基本情報</strong>：氏名・性別・生年月日・要介護度、日常生活自立度（障害・認知症）、<strong>本人の希望・家族の希望</strong>、社会参加の状況、居宅の環境、病名・治療経過・合併症、機能訓練実施上の留意事項</li>
+        <li><strong>Ⅱ 目標と訓練項目</strong>：<strong>長期目標・短期目標（今後3か月）</strong>を機能・活動・参加で記載／訓練項目（プログラム内容・留意点・頻度・時間・主な実施者）／サービス利用時間以外に実施すること</li>
+        <li><strong>Ⅲ 実施後の対応</strong>（見直しで再作成するとき）：実施による変化、課題とその要因、前回の目標の達成度</li>
+        <li>作成日・初回作成日・前回作成日、計画作成者・職種、<strong>説明日・説明者</strong>（計画書は本人・家族に交付する）</li>
       </ul>
+      <div class="alert blue">📌 国の様式3-3は「参考とする」様式です。上の項目が入っていれば、「004」で作る書式でも使えます（運用は所管の自治体に確認）。</div>
     </div>
 
     <div class="card">
@@ -646,12 +670,12 @@ tr:nth-child(even) td { background: var(--gray-lt); }
         <table>
           <thead><tr><th>加算</th><th>必要書類</th></tr></thead>
           <tbody>
-            <tr><td>個別機能訓練加算（Ⅰ）イ</td><td>個別機能訓練計画書 ＋ 訓練実施記録</td></tr>
-            <tr><td>個別機能訓練加算（Ⅰ）ロ</td><td>上記 ＋ LIFEへのデータ提出一式</td></tr>
-            <tr><td>個別機能訓練加算（Ⅱ）</td><td>上記 ＋ 興味関心チェックシート・生活機能チェックシート</td></tr>
+            <tr><td>個別機能訓練加算（Ⅰ）イ</td><td>個別機能訓練計画書（様式3-3）＋ 興味・関心チェックシート（3-1）・生活機能チェックシート（3-2）＋ 訓練実施記録（007）</td></tr>
+            <tr><td>個別機能訓練加算（Ⅰ）ロ</td><td>上記 ＋ LIFEへのデータ提出一式（提出する項目は管理者と確認）</td></tr>
+            <tr><td>個別機能訓練加算（Ⅱ）</td><td>上記 ＋ LIFEへのデータ提出一式（（Ⅰ）の算定が前提）</td></tr>
             <tr><td>ADL維持等加算</td><td>Barthel Index記録（開始月・7か月目）＋ LIFE提出</td></tr>
-            <tr><td>口腔機能向上加算</td><td>口腔機能向上計画書・スクリーニング・アセスメント記録</td></tr>
-            <tr><td>全加算共通</td><td><strong>本人同意書</strong>（個別機能訓練計画書への署名）</td></tr>
+            <tr><td>口腔機能向上加算</td><td>事業所で使用中の様式：①口腔機能向上サービスの管理指導計画・実施記録 ②課題把握・アセスメント・モニタリング・評価票（様式の保管場所は事務主任に確認）</td></tr>
+            <tr><td>個別機能訓練加算 共通</td><td>説明・同意の記録（計画書の説明日・説明者、本人または家族の署名）と、計画書の交付</td></tr>
           </tbody>
         </table>
       </div>

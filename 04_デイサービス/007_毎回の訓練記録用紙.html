@@ -31,6 +31,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Noto Sans JP"
 
 .meta-row{display:flex;gap:26px;flex-wrap:wrap;margin-bottom:12px;font-size:13px}
 .meta-row .blank{display:inline-block;border-bottom:1px solid #94a3b8;min-width:120px;padding:0 4px}
+.goals{display:flex;gap:26px;margin-bottom:12px;font-size:12.5px}
+.goals>div{flex:1;white-space:nowrap}
+.goals .blank{display:inline-block;border-bottom:1px solid #94a3b8;padding:0 4px}
+.goals .blank.wide{width:62%}
 
 table{width:100%;border-collapse:collapse;font-size:11px;table-layout:fixed}
 th{background:var(--accent);color:#fff;padding:6px 5px;text-align:center;font-weight:700;font-size:10.5px}
@@ -53,7 +57,7 @@ tr.example td b{color:#92400e}
 @media print{
   body{background:#fff}
   .viewer-note{display:none}
-  .sheet{box-shadow:none;margin:0;width:auto;min-height:auto}
+  .sheet{box-shadow:none;margin:0;width:auto;min-height:auto;padding:0}
   @page{size:A4 landscape;margin:10mm}
 }
 </style>
@@ -75,6 +79,10 @@ tr.example td b{color:#92400e}
     <div>利用者氏名：<span class="blank">&nbsp;</span></div>
     <div>年月：<span class="blank">&nbsp;</span>年<span class="blank">&nbsp;</span>月</div>
     <div>担当機能訓練指導員：<span class="blank">&nbsp;</span></div>
+  </div>
+  <div class="goals">
+    <div>個別機能訓練の目標　長期：<span class="blank wide">&nbsp;</span></div>
+    <div>短期（今後3か月）：<span class="blank wide">&nbsp;</span></div>
   </div>
 
   <table>
@@ -111,14 +119,13 @@ tr.example td b{color:#92400e}
       <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
       <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
       <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-      <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-      <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
     </tbody>
   </table>
 
   <div class="legend">
     <div><b>訓練項目の書き方</b>：運動メニューのコード（R1・R2／S1〜S5／F1〜F4）を選んだ順に書く。詳しくは006かんたん版参照</div>
     <div><b>実施時間帯</b>：「20分」ではなく必ず時刻で（例：10:00〜10:20）</div>
+    <div><b>目標</b>：個別機能訓練計画書（004で作成）の長期目標・短期目標を書き写す</div>
   </div>
 
   <div class="foot-note">🛑 バイタルが中止基準（005・7枚目「安全管理・中止基準」参照）に該当した場合は、実施せず「様子・特記事項」欄に理由を記載し、看護師・管理者へ報告してください。</div>

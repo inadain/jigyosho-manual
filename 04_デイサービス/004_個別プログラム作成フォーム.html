@@ -193,8 +193,40 @@ select.form-input{appearance:none;background-image:url("data:image/svg+xml,%3Csv
 .notice-box{background:var(--blue-lt);border:1px solid #93c5fd;border-radius:var(--r-sm);
   padding:10px 14px;font-size:12.5px;color:#1e3a5f;line-height:1.7;margin-bottom:16px}
 
+.fg-wide{grid-column:1/-1}
+.goal-ttl{font-size:13px;font-weight:800;color:var(--amber);border-bottom:2px solid var(--amber-lt);padding-bottom:4px;margin-top:6px}
+textarea.form-input{min-height:64px;resize:vertical;font-family:inherit;line-height:1.5}
+details.opt>summary{cursor:pointer;font-size:14px;font-weight:800;color:var(--amber)}
+.prog-row{border:1.5px solid var(--gray-mid);border-radius:var(--r-sm);padding:12px 14px;margin-bottom:12px;
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
+.prog-no{grid-column:1/-1;font-weight:800;color:var(--amber);font-size:13px}
+.plan-sec{font-size:13px;font-weight:800;color:#fff;background:var(--grad);padding:6px 10px;margin:16px 0 6px;border-radius:4px}
+.plan-table td.k{width:170px;font-weight:700;color:var(--sub);background:var(--gray-lt)}
+.plan-table th.c{text-align:center}
+.plan-warn{border-radius:var(--r-sm);padding:10px 14px;margin-bottom:12px;font-size:13px;line-height:1.7}
+.plan-warn.ng{background:var(--amber-lt);border-left:4px solid var(--amber);color:#78350f}
+.plan-warn.ok{background:var(--green-lt);border-left:4px solid var(--green);color:#14532d}
+.plan-hint{font-size:12px;color:var(--sub);padding:6px 2px}
+.consent{margin-top:16px;border:1.5px solid var(--gray-mid);border-radius:var(--r-sm);padding:12px 14px;font-size:13px}
+.consent .cl{margin:8px 0}
+.consent .sub{font-size:11px;color:var(--sub)}
+.plan-ref{margin-top:14px;font-size:11.5px;color:var(--sub);border-top:1px dashed var(--gray-mid);padding-top:8px}
 @media print{
-  .sidebar,.topbar,.ch,.btn-row,.form-card,.notice-box{display:none!important}
+  .plan-warn{display:none!important}
+  .plan-area{font-size:11px}
+  .plan-table{font-size:11px}
+  .plan-table td,.plan-table th{padding:5px 7px}
+  .plan-table td.k{width:150px;background:#f3f3f3!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .plan-sec{background:#333!important;color:#fff!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;margin:10px 0 4px;break-after:avoid}
+  .plan-table tr{break-inside:avoid}
+  .consent{break-inside:avoid}
+  .page .sec-head{display:none}
+  body,.content,.main{background:#fff!important}
+  footer{display:none!important}
+  @page{size:A4;margin:10mm}
+}
+@media print{
+  .sidebar,.topbar,.ch,.btn-row,.form-card,.notice-box,.no-print,.plan-warn{display:none!important}
   .content{margin-left:0}
   .plan-area{display:block!important;border:none;padding:0}
   .plan-table th{background:#333!important;color:#fff!important;-webkit-print-color-adjust:exact}
@@ -419,19 +451,23 @@ select.form-input{appearance:none;background-image:url("data:image/svg+xml,%3Csv
 <!-- ===== FORM ===== -->
 <div class="page" id="page-form">
   <div class="sec-head"><div class="sec-icon">✏️</div><div><h2>個別プログラム作成フォーム</h2><p>利用者情報を入力して適切なパターンを自動提案</p></div></div>
-  <div class="notice-box">📌 入力した内容をもとにパターンを推奨します。最終判断は個別機能訓練計画書の目標・禁忌事項に基づいてください。</div>
+  <div class="notice-box">📌 国の様式3-3（個別機能訓練計画書）と同じ項目で計画書を作ります。入力した内容はこの画面の中だけで使われ、保存・送信されません。「パターンの提案」は任意の参考です。</div>
 
   <!-- 利用者基本情報 -->
   <div class="form-card">
-    <div class="form-ttl">👤 利用者基本情報</div>
+    <div class="form-ttl">👤 Ⅰ 利用者の基本情報</div>
     <div class="form-grid">
-      <div class="form-group" style="grid-column:1/-1">
-        <label class="form-label">利用者氏名</label>
-        <input class="form-input" id="f-name" type="text" placeholder="例：山田 花子">
+      <div class="form-group fg-wide">
+        <label class="form-label">事業所名</label>
+        <input class="form-input" id="f-office" type="text" value="デイサービスセンターこはる日和">
       </div>
       <div class="form-group">
-        <label class="form-label">年齢</label>
-        <input class="form-input" id="f-age" type="number" placeholder="例：82" min="0" max="120">
+        <label class="form-label">ふりがな</label>
+        <input class="form-input" id="f-kana" type="text" placeholder="例：やまだ はなこ">
+      </div>
+      <div class="form-group">
+        <label class="form-label">氏名</label>
+        <input class="form-input" id="f-name" type="text" placeholder="例：山田 花子">
       </div>
       <div class="form-group">
         <label class="form-label">性別</label>
@@ -440,6 +476,10 @@ select.form-input{appearance:none;background-image:url("data:image/svg+xml,%3Csv
           <option value="F">女性</option>
           <option value="M">男性</option>
         </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">生年月日</label>
+        <input class="form-input" id="f-birth" type="date">
       </div>
       <div class="form-group">
         <label class="form-label">要介護度</label>
@@ -453,39 +493,89 @@ select.form-input{appearance:none;background-image:url("data:image/svg+xml,%3Csv
         </select>
       </div>
       <div class="form-group">
-        <label class="form-label">主病名（最重要）</label>
-        <input class="form-input" id="f-dx1" type="text" placeholder="例：廃用症候群、脳梗塞後遺症">
+        <label class="form-label">障害高齢者の日常生活自立度</label>
+        <select class="form-input" id="f-jiritsu1">
+          <option value="">選択</option>
+          <option>自立</option><option>J1</option><option>J2</option><option>A1</option><option>A2</option>
+          <option>B1</option><option>B2</option><option>C1</option><option>C2</option>
+        </select>
       </div>
       <div class="form-group">
-        <label class="form-label">副病名</label>
-        <input class="form-input" id="f-dx2" type="text" placeholder="例：高血圧、糖尿病">
-      </div>
-      <div class="form-group" style="grid-column:1/-1">
-        <label class="form-label">本人・家族の希望</label>
-        <input class="form-input" id="f-hope" type="text" placeholder="例：一人で歩けるようになりたい、転ばないようになってほしい">
-      </div>
-      <div class="form-group" style="grid-column:1/-1">
-        <label class="form-label">長期目標（6〜12か月・希望をふまえて記載）</label>
-        <input class="form-input" id="f-goal-long" type="text" placeholder="例：自宅の廊下を伝い歩きで自立移動できる">
-      </div>
-      <div class="form-group" style="grid-column:1/-1">
-        <label class="form-label">短期目標（1〜3か月・具体的・期限付きで記載）</label>
-        <input class="form-input" id="f-goal-short" type="text" placeholder="例：椅子から手すりを使って5回連続立てる（3か月以内）">
-      </div>
-      <div class="form-group" style="grid-column:1/-1">
-        <label class="form-label">医師（配置医・主治医）からの指示事項</label>
-        <input class="form-input" id="f-doctor" type="text" placeholder="例：収縮期血圧160以上は運動中止、右膝は屈曲90°まで">
+        <label class="form-label">認知症高齢者の日常生活自立度</label>
+        <select class="form-input" id="f-jiritsu2">
+          <option value="">選択</option>
+          <option>自立</option><option>Ⅰ</option><option>Ⅱa</option><option>Ⅱb</option>
+          <option>Ⅲa</option><option>Ⅲb</option><option>Ⅳ</option><option>M</option>
+        </select>
       </div>
       <div class="form-group">
-        <label class="form-label">作成者（機能訓練指導員）</label>
+        <label class="form-label">初回作成日</label>
+        <input class="form-input" id="f-date-first" type="date">
+      </div>
+      <div class="form-group">
+        <label class="form-label">前回作成日（見直しで作り直すときだけ）</label>
+        <input class="form-input" id="f-date-prev" type="date">
+      </div>
+      <div class="form-group">
+        <label class="form-label">計画作成者・職種</label>
         <input class="form-input" id="f-author" type="text" placeholder="例：看護師 佐藤〇〇">
+      </div>
+      <div class="form-group fg-wide">
+        <label class="form-label">利用者本人の希望</label>
+        <input class="form-input" id="f-hope" type="text" placeholder="例：自分で風呂に入れるようになりたい">
+      </div>
+      <div class="form-group fg-wide">
+        <label class="form-label">家族の希望</label>
+        <input class="form-input" id="f-hope-family" type="text" placeholder="例：転ばないでほしい">
+      </div>
+      <div class="form-group fg-wide">
+        <label class="form-label">利用者本人の社会参加の状況</label>
+        <input class="form-input" id="f-social" type="text" placeholder="例：近所の友人とのお茶会に参加していたが、最近は休みがち">
+      </div>
+      <div class="form-group fg-wide">
+        <label class="form-label">利用者の居宅の環境（使っている福祉用具・補助具を含む）</label>
+        <input class="form-input" id="f-home" type="text" placeholder="例：1階で生活。トイレまで廊下に手すりあり。杖を使用">
+      </div>
+    </div>
+  </div>
+
+  <div class="form-card">
+    <div class="form-ttl">🩺 Ⅰ 健康状態・経過</div>
+    <div class="form-grid">
+      <div class="form-group">
+        <label class="form-label">病名（主なもの）</label>
+        <input class="form-input" id="f-dx1" type="text" placeholder="例：脳梗塞後遺症">
+      </div>
+      <div class="form-group">
+        <label class="form-label">発症日・受傷日／直近の入院日・退院日</label>
+        <input class="form-input" id="f-dx-dates" type="text" placeholder="例：発症 R6.3.5／入院 R6.3.5〜退院 R6.5.20">
+      </div>
+      <div class="form-group fg-wide">
+        <label class="form-label">治療経過（手術がある場合は手術日・術式）</label>
+        <input class="form-input" id="f-course" type="text">
+      </div>
+      <div class="form-group fg-wide">
+        <label class="form-label">合併疾患のコントロール状態</label>
+        <input class="form-input" id="f-dx2" type="text" placeholder="例：高血圧（内服でコントロール良好）">
+      </div>
+    </div>
+    <div class="form-label" style="margin-bottom:6px">合併症（該当するものすべて）</div>
+    <div class="check-grid" id="comp-grid"></div>
+    <div class="form-grid" style="margin-top:14px">
+      <div class="form-group fg-wide">
+        <label class="form-label">医師（配置医・主治医）からの指示事項</label>
+        <input class="form-input" id="f-doctor" type="text" placeholder="例：収縮期血圧160以上は運動中止">
+      </div>
+      <div class="form-group fg-wide">
+        <label class="form-label">機能訓練実施上の留意事項（開始前・訓練中の留意事項、運動強度・負荷量、禁忌など）</label>
+        <input class="form-input" id="f-contraindication" type="text" placeholder="例：人工膝関節（屈曲130°制限）、直近3か月に骨折歴あり">
       </div>
     </div>
   </div>
 
   <!-- アセスメント値 -->
   <div class="form-card">
-    <div class="form-ttl">📊 アセスメント値（わかる範囲で入力）</div>
+    <div class="form-ttl">📊 アセスメント値（わかる範囲で入力・計画書の末尾に参考として載ります）</div>
     <div class="assess-grid">
       <div class="assess-box">
         <div class="assess-name">TUG（timed up and go）</div>
@@ -540,7 +630,7 @@ select.form-input{appearance:none;background-image:url("data:image/svg+xml,%3Csv
 
   <!-- 疾患・状態チェック -->
   <div class="form-card">
-    <div class="form-ttl">☑️ 対象状態（該当するものすべて選択）</div>
+    <div class="form-ttl">☑️ 対象状態（任意：「パターンを提案する」を使うときだけ入力）</div>
     <div class="check-grid" id="cond-grid">
       <label class="check-item" onclick="this.classList.toggle('checked')"><input type="checkbox" value="a1"> 廃用症候群・筋力低下</label>
       <label class="check-item" onclick="this.classList.toggle('checked')"><input type="checkbox" value="a2"> 転倒歴あり（直近1年）</label>
@@ -558,10 +648,6 @@ select.form-input{appearance:none;background-image:url("data:image/svg+xml,%3Csv
       <label class="check-item" onclick="this.classList.toggle('checked')"><input type="checkbox" value="e2"> 誤嚥性肺炎既往</label>
       <label class="check-item" onclick="this.classList.toggle('checked')"><input type="checkbox" value="e3"> 体重減少・低栄養</label>
     </div>
-    <div class="form-group" style="margin-top:14px">
-      <label class="form-label">禁忌事項・注意事項（医師指示・術後制限等）</label>
-      <input class="form-input" id="f-contraindication" type="text" placeholder="例：人工膝関節（屈曲130°制限）、直近3か月骨折歴">
-    </div>
     <div class="btn-row" style="margin-top:16px">
       <button class="btn btn-primary" onclick="recommend()">💡 パターンを提案する</button>
       <button class="btn btn-gray" onclick="clearAll()">リセット</button>
@@ -572,44 +658,99 @@ select.form-input{appearance:none;background-image:url("data:image/svg+xml,%3Csv
   <div class="result-card" id="result-area">
     <div class="result-hd">💡 推奨パターン</div>
     <ul class="rec-list" id="rec-list"></ul>
-    <div class="btn-row" style="margin-top:16px">
-      <button class="btn btn-primary" onclick="generatePlan()">📄 訓練計画書を作成</button>
+  </div>
+
+  <!-- 目標と訓練項目（様式Ⅱ） -->
+  <div class="form-card">
+    <div class="form-ttl">🎯 Ⅱ 個別機能訓練の目標</div>
+    <div class="notice-box" style="margin-bottom:12px">📌 目標は、体の働き（<b>機能</b>）だけでなく、生活上の行為（<b>活動</b>：トイレ・入浴・料理・買い物など）や、役割・社会との関わり（<b>参加</b>）も含めて書きます。短期目標は、長期目標のために必要な行為を細かく分けて、<b>今後3か月</b>で達成を目指すものを書きます（機能・活動・参加のうち、設定するものだけでかまいません）。</div>
+    <div class="form-grid">
+      <div class="form-group fg-wide goal-ttl">長期目標</div>
+      <div class="form-group">
+        <label class="form-label">期間の目安</label>
+        <input class="form-input" id="f-gl-period" type="text" value="6か月">
+      </div>
+      <div class="form-group fg-wide">
+        <label class="form-label">機能（心身機能）</label>
+        <input class="form-input" id="f-gl-func" type="text" placeholder="例：下肢の筋力を保つ">
+      </div>
+      <div class="form-group fg-wide">
+        <label class="form-label">活動（生活行為）</label>
+        <input class="form-input" id="f-gl-act" type="text" placeholder="例：自宅の風呂に一人で入れる">
+      </div>
+      <div class="form-group fg-wide">
+        <label class="form-label">参加（役割・社会との関わり）</label>
+        <input class="form-input" id="f-gl-part" type="text" placeholder="例：近所のお茶会に歩いて通える">
+      </div>
+      <div class="form-group fg-wide goal-ttl">短期目標（今後3か月）</div>
+      <div class="form-group fg-wide">
+        <label class="form-label">機能（心身機能）</label>
+        <input class="form-input" id="f-gs-func" type="text" placeholder="例：椅子から手すりを使って5回連続で立てる">
+      </div>
+      <div class="form-group fg-wide">
+        <label class="form-label">活動（生活行為）</label>
+        <input class="form-input" id="f-gs-act" type="text" placeholder="例：手すりを使って浴槽をまたげる">
+      </div>
+      <div class="form-group fg-wide">
+        <label class="form-label">参加（役割・社会との関わり）</label>
+        <input class="form-input" id="f-gs-part" type="text" placeholder="例：お茶会の会場まで休まず歩ける">
+      </div>
     </div>
+  </div>
+
+  <div class="form-card">
+    <div class="form-ttl">🏃 Ⅱ 個別機能訓練項目</div>
+    <div class="notice-box" style="margin-bottom:12px">📌 短期目標で目指す行為に合う訓練項目を、具体的に書きます。複数の種類の運動を用意し、利用者が選べるようにします。「座位運動メニューから選ぶ」と、目的と留意点の定型文が入ります（<b>利用者の目標に合わせて書き換えてください</b>）。頻度はおおむね週1回以上が目安です。</div>
+    <div id="prog-rows"></div>
+    <div class="form-grid">
+      <div class="form-group fg-wide">
+        <label class="form-label">利用者本人・家族等がサービス利用時間以外に実施すること（自宅でできる自主訓練）</label>
+        <input class="form-input" id="f-home-prog" type="text" placeholder="例：入浴前に椅子に座って、かかと上げを10回">
+      </div>
+      <div class="form-group fg-wide">
+        <label class="form-label">特記事項</label>
+        <input class="form-input" id="f-note" type="text">
+      </div>
+    </div>
+  </div>
+
+  <details class="form-card opt">
+    <summary>🔄 Ⅲ 個別機能訓練実施後の対応（3か月ごとに計画書を作り直すときだけ入力）</summary>
+    <div class="form-grid" style="margin-top:12px">
+      <div class="form-group">
+        <label class="form-label">前回の長期目標の達成度</label>
+        <select class="form-input" id="f-ach-long"><option value="">選択</option><option>達成</option><option>一部</option><option>未達</option></select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">前回の短期目標の達成度</label>
+        <select class="form-input" id="f-ach-short"><option value="">選択</option><option>達成</option><option>一部</option><option>未達</option></select>
+      </div>
+      <div class="form-group fg-wide">
+        <label class="form-label">個別機能訓練の実施による変化</label>
+        <textarea class="form-input" id="f-change" placeholder="例：椅子からの立ち上がりが3回から5回に増えた。歩行が安定した"></textarea>
+      </div>
+      <div class="form-group fg-wide">
+        <label class="form-label">個別機能訓練実施における課題とその要因</label>
+        <textarea class="form-input" id="f-issue" placeholder="例：浴槽をまたぐ動作はまだ不安定。膝の痛みで屈曲が十分でない"></textarea>
+      </div>
+    </div>
+  </details>
+
+  <div class="btn-row" style="margin-bottom:16px">
+    <button class="btn btn-primary" onclick="generatePlan()">📄 個別機能訓練計画書を作成</button>
+    <button class="btn btn-gray" onclick="clearAll()">すべてリセット</button>
   </div>
 
   <!-- 訓練計画書プレビュー -->
   <div class="plan-area" id="plan-area">
-    <div class="plan-hd">🗒️ 個別機能訓練計画書（プレビュー）</div>
-    <div class="plan-meta" id="plan-meta"></div>
-    <table class="plan-table">
-      <thead>
-        <tr><th>項目</th><th>内容</th></tr>
-      </thead>
-      <tbody id="plan-tbody"></tbody>
-    </table>
-    <div class="caution amber" id="plan-caution" style="margin-top:0"></div>
-
-    <div style="margin-top:18px;padding-top:14px;border-top:2px solid var(--gray-mid)">
-      <div style="font-size:13px;font-weight:800;color:var(--sub);margin-bottom:10px">📝 説明・同意（本人・家族へ計画内容を説明し、同意を得たら記入）</div>
-      <div style="display:flex;gap:24px;flex-wrap:wrap;font-size:13px">
-        <div>説明日：　　　　年　　月　　日</div>
-        <div>説明者：＿＿＿＿＿＿＿＿＿＿</div>
-      </div>
-      <div style="display:flex;gap:24px;flex-wrap:wrap;font-size:13px;margin-top:14px">
-        <div>本人または家族 署名：＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿</div>
-        <div>続柄：＿＿＿＿＿＿</div>
-      </div>
-      <div style="font-size:12px;color:var(--sub);margin-top:10px">☐ 担当ケアマネジャーへ報告済み（報告日：　　年　　月　　日）</div>
-    </div>
-
-    <div class="btn-row">
-      <button class="btn btn-outline" onclick="window.print()">🖨️ 印刷</button>
-    </div>
+    <div class="plan-warn no-print" id="plan-warn"></div>
+    <div id="plan-doc"></div>
+    <div class="no-print" style="font-size:12px;color:var(--sub);margin-top:12px">印刷は、ブラウザの印刷（Macは ⌘+P、Windowsは Ctrl+P）。用紙はA4・縦。</div>
   </div>
 </div><!-- /page-form -->
 
 </div><!-- /.main -->
-<footer style="text-align:center;padding:20px;font-size:11px;color:var(--sub);border-top:1px solid var(--gray-mid);background:var(--white)">個別プログラム作成フォーム｜デイサービス機能訓練｜令和8年7月作成</footer>
+<footer style="text-align:center;padding:20px;font-size:11px;color:var(--sub);border-top:1px solid var(--gray-mid);background:var(--white)">個別プログラム作成フォーム｜デイサービス機能訓練｜令和8年7月作成・令和8年11月12日改訂</footer>
 </div><!-- /.content -->
 </div><!-- /.layout -->
 
@@ -636,13 +777,12 @@ function getChecked(){
   return Array.from(document.querySelectorAll('#cond-grid input[type=checkbox]:checked')).map(c=>c.value);
 }
 function clearAll(){
-  document.querySelectorAll('#cond-grid input[type=checkbox]').forEach(c=>c.checked=false);
+  document.querySelectorAll('.form-card input[type=checkbox]').forEach(c=>c.checked=false);
   document.querySelectorAll('.check-item').forEach(c=>c.classList.remove('checked'));
-  ['f-name','f-age','f-sex','f-care','f-dx1','f-dx2','f-hope','f-contraindication',
-   'a-tug','a-bi','a-rsst','a-spo2','a-grip','a-walk'].forEach(id=>{
-    const el=document.getElementById(id);
-    if(el)el.value='';
-  });
+  document.querySelectorAll('.form-card input:not([type=checkbox]), .form-card select, .form-card textarea').forEach(el=>{el.value='';});
+  document.getElementById('f-office').value=DEFAULT_OFFICE;
+  document.getElementById('f-gl-period').value='6か月';
+  [1,2,3,4].forEach(i=>{const w=document.getElementById('who-'+i);if(w)w.value=DEFAULT_WHO;});
   document.getElementById('result-area').classList.remove('show');
   document.getElementById('plan-area').classList.remove('show');
 }
@@ -723,66 +863,203 @@ function recommend(){
   area.scrollIntoView({behavior:'smooth',block:'start'});
 }
 
+const DEFAULT_OFFICE='デイサービスセンターこはる日和';
+const DEFAULT_WHO='機能訓練指導員（看護師）';
+
+const COMPS=['脳血管疾患','骨折','誤嚥性肺炎','うっ血性心不全','尿路感染症','糖尿病','高血圧症','骨粗しょう症','関節リウマチ','がん','うつ病','認知症','褥瘡','神経疾患','運動器疾患','呼吸器疾患','循環器疾患','消化器疾患','腎疾患','内分泌疾患','皮膚疾患','精神疾患','その他'];
+
+// 座位運動メニュー11種（006かんたん版・005現場配布資料と同じ）。目的の文は、利用者の目標に合わせて書き換える前提の定型文
+const PROGRAMS={
+  R1:{n:'R1 ロール運動',aim:'股関節・膝・足首を同時に動かして関節をほぐすために',how:'仰向けでかかとの下のロールを足の裏で前後に転がす',amt:'10往復',note:'股関節の人工関節術後の方は屈曲角度により避ける'},
+  R2:{n:'R2 足すり運動',aim:'膝・腰を動きやすくするために',how:'座って足を前後にこする',amt:'3回くらい',note:'3回くらいで十分。力を入れすぎない'},
+  S1:{n:'S1 座位 脚の横上げ運動',aim:'立ち座りや歩行を支える脚の筋力を保つために',how:'座ったまま、片脚をまっすぐ横に持ち上げて戻す',amt:'左右10回ずつ',note:'股関節に痛みがあれば上げる高さを控えめに'},
+  S2:{n:'S2 座位 膝の開閉運動',aim:'立ち座りや歩行を支える股関節まわりの筋力を保つために',how:'座って両膝を軽く開いて閉じる',amt:'20回めやす',note:'最初はゆっくり。体幹や肩が揺れる場合は回数か振幅を減らす'},
+  S3:{n:'S3 ボールはさみ運動',aim:'内ももの筋力をつけ、腹圧性失禁の予防・改善にもつなげるために',how:'仰向けで膝を立て、膝の間のボールを2〜3秒つぶす',amt:'2〜3秒×5回',note:'息を止めないよう声かけする'},
+  S4:{n:'S4 座位 かかと上げ運動',aim:'歩くときの踏み出す力を保つために',how:'座ったまま、両足のかかとを持ち上げて、ゆっくり下ろす',amt:'10回めやす',note:'反動を使わず、ゆっくり行う'},
+  S5:{n:'S5 座位ステップ運動（足踏み）',aim:'脚を上げる力を保ち、つまずきにくくするために',how:'座って、腿を高く上げるように左右交互に足踏みする',amt:'左右計20回',note:'疲労が強く残るなら回数を減らす'},
+  F1:{n:'F1 タオルギャザー',aim:'足の指の力をつけ、転びにくくするために',how:'座って、足の下のタオルを足の指でたぐり寄せる',amt:'左右各10回',note:'初期は踵が浮いてもよいが、徐々に踵をつけたまま行う'},
+  F2:{n:'F2 ボール踏み',aim:'足裏の感覚とバランスを保つために',how:'座って、足の下のボールを踏み、慣れたら踏んだまま前後に動かす',amt:'前後10往復',note:'力を入れすぎて足をひねらない'},
+  F3:{n:'F3 棒の上で板を動かす',aim:'足の細かなコントロールを高めるために',how:'座って、2本の棒の上の板を、目印を倒さないように前後に動かす',amt:'前後10往復',note:'神経を使う。底面の大きいものから徐々に小さくする'},
+  F4:{n:'F4 座位 膝伸ばし運動',aim:'つまずきを減らすために',how:'座って、片膝をゆっくり伸ばしてつま先を上に向け、2〜3秒保って戻す',amt:'左右各10回',note:'膝に痛みがあれば可動範囲を狭める'}
+};
+
+function buildComps(){
+  document.getElementById('comp-grid').innerHTML=COMPS.map(c=>
+    `<label class="check-item"><input type="checkbox" value="${c}" onchange="this.parentNode.classList.toggle('checked',this.checked)"> ${c}</label>`
+  ).join('');
+}
+
+function buildProgRows(){
+  const opts='<option value="">（選ばず自由に書く）</option>'+Object.keys(PROGRAMS).map(k=>`<option value="${k}">${PROGRAMS[k].n}</option>`).join('');
+  document.getElementById('prog-rows').innerHTML=[1,2,3,4].map(i=>`
+    <div class="prog-row">
+      <div class="prog-no">訓練項目 ${'①②③④'[i-1]}</div>
+      <div class="form-group fg-wide">
+        <label class="form-label">座位運動メニューから選ぶ（選ぶと下の内容と留意点に定型文が入ります）</label>
+        <select class="form-input" id="sp-${i}" onchange="onProgSelect(${i})">${opts}</select>
+      </div>
+      <div class="form-group fg-wide">
+        <label class="form-label">プログラム内容（何を目的に（〜のために）〜する）</label>
+        <input class="form-input" id="prog-${i}" type="text">
+      </div>
+      <div class="form-group fg-wide">
+        <label class="form-label">留意点</label>
+        <input class="form-input" id="note-${i}" type="text">
+      </div>
+      <div class="form-group">
+        <label class="form-label">頻度（週に何回）</label>
+        <input class="form-input" id="freq-${i}" type="number" min="1" max="7" placeholder="例：1">
+      </div>
+      <div class="form-group">
+        <label class="form-label">時間（1回何分）</label>
+        <input class="form-input" id="min-${i}" type="number" min="1" placeholder="例：10">
+      </div>
+      <div class="form-group">
+        <label class="form-label">主な実施者</label>
+        <input class="form-input" id="who-${i}" type="text" value="${DEFAULT_WHO}">
+      </div>
+    </div>`).join('');
+}
+
+function onProgSelect(i){
+  const k=document.getElementById('sp-'+i).value;
+  if(!k)return;
+  const p=PROGRAMS[k];
+  document.getElementById('prog-'+i).value=`${p.aim}、${p.how}（めやす：${p.amt}）`;
+  document.getElementById('note-'+i).value=p.note;
+}
+
+function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function nl(s){return esc(s).replace(/\n/g,'<br>');}
+function gv(id){const el=document.getElementById(id);return el?el.value.trim():'';}
+function dash(s){return s?nl(s):'—';}
+function fmtDate(v){const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(v||'');return m?`${m[1]}年${+m[2]}月${+m[3]}日`:'';}
+function calcAge(v,now){
+  const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(v||'');
+  if(!m)return '';
+  let a=now.getFullYear()-(+m[1]);
+  const mo=now.getMonth()+1;
+  if(mo<+m[2]||(mo===+m[2]&&now.getDate()<+m[3]))a--;
+  return a;
+}
+function row(k,v){return `<tr><td class="k">${k}</td><td>${v}</td></tr>`;}
+
 function generatePlan(){
-  const name=document.getElementById('f-name').value||'（未入力）';
-  const age=document.getElementById('f-age').value;
-  const sex={F:'女性',M:'男性','':''}[document.getElementById('f-sex').value]||'';
-  const care=document.getElementById('f-care').value;
-  const dx1=document.getElementById('f-dx1').value||'—';
-  const dx2=document.getElementById('f-dx2').value||'—';
-  const hope=document.getElementById('f-hope').value||'—';
-  const goalLong=document.getElementById('f-goal-long').value||'（未入力）';
-  const goalShort=document.getElementById('f-goal-short').value||'（未入力）';
-  const doctorNote=document.getElementById('f-doctor').value||'特になし';
-  const author=document.getElementById('f-author').value||'（未入力）';
-  const contra=document.getElementById('f-contraindication').value||'なし';
-  const tug=document.getElementById('a-tug').value;
-  const bi=document.getElementById('a-bi').value;
-  const rsst=document.getElementById('a-rsst').value;
-  const spo2=document.getElementById('a-spo2').value;
-  const grip=document.getElementById('a-grip').value;
-  const walk=document.getElementById('a-walk').value;
-
-  const recs=Array.from(document.querySelectorAll('#rec-list .rec-name')).map(el=>el.textContent.trim());
-  const topKey=recs.length?Object.keys(PATTERNS).find(k=>recs[0].includes(PATTERNS[k].name.slice(0,4)))||null:null;
-  const menus=topKey?PATTERNS[topKey].menus:['（パターンを選択して再実行してください）'];
-
   const now=new Date();
-  const dateStr=`${now.getFullYear()}年${now.getMonth()+1}月${now.getDate()}日`;
-  const nextEval=new Date(now.getFullYear(),now.getMonth()+3,now.getDate());
-  const nextEvalStr=`${nextEval.getFullYear()}年${nextEval.getMonth()+1}月${nextEval.getDate()}日ごろ`;
+  const today=`${now.getFullYear()}年${now.getMonth()+1}月${now.getDate()}日`;
+  const sexMap={F:'女性',M:'男性'};
+  const name=gv('f-name'), kana=gv('f-kana'), birth=gv('f-birth'), age=calcAge(birth,now), care=gv('f-care');
+  const author=gv('f-author');
+  const first=gv('f-date-first'), prev=gv('f-date-prev');
+  const comps=Array.from(document.querySelectorAll('#comp-grid input:checked')).map(c=>c.value);
+  const GL=[['機能（心身機能）',gv('f-gl-func')],['活動（生活行為）',gv('f-gl-act')],['参加（役割・社会との関わり）',gv('f-gl-part')]];
+  const GS=[['機能（心身機能）',gv('f-gs-func')],['活動（生活行為）',gv('f-gs-act')],['参加（役割・社会との関わり）',gv('f-gs-part')]];
+  const progsAll=[1,2,3,4].map(i=>({c:gv('prog-'+i),n:gv('note-'+i),f:gv('freq-'+i),m:gv('min-'+i),w:gv('who-'+i)}));
+  const progs=progsAll.filter(p=>p.c);
+  const change=gv('f-change'), issue=gv('f-issue'), achL=gv('f-ach-long'), achS=gv('f-ach-short');
+  const isRevision=!!(prev||change||issue||achL||achS);
 
-  const meta=document.getElementById('plan-meta');
-  meta.innerHTML=`<span class="plan-meta-item">作成日：<strong>${dateStr}</strong></span><span class="plan-meta-item">氏名：<strong>${name}</strong></span>${age?`<span class="plan-meta-item">年齢：<strong>${age}歳 ${sex}</strong></span>`:''}${care?`<span class="plan-meta-item">要介護度：<strong>要介護${care}</strong></span>`:''}<span class="plan-meta-item">作成者：<strong>${author}</strong></span>`;
+  // ---- 印刷前の確認（未入力の警告）
+  const warn=[];
+  if(!name)warn.push('氏名');
+  if(!birth)warn.push('生年月日');
+  if(!care)warn.push('要介護度');
+  if(!author)warn.push('計画作成者・職種');
+  if(!first)warn.push('初回作成日');
+  if(!gv('f-hope'))warn.push('利用者本人の希望');
+  if(!GL.some(g=>g[1]))warn.push('長期目標（機能・活動・参加のどれか）');
+  if(!GS.some(g=>g[1]))warn.push('短期目標（機能・活動・参加のどれか）');
+  const allGoals=GL.concat(GS);
+  const hasLifeGoal=allGoals.some(g=>g[1]&&(g[0].startsWith('活動')||g[0].startsWith('参加')));
+  if(allGoals.some(g=>g[1])&&!hasLifeGoal){
+    warn.push('生活上の行為（活動・参加）の目標（身体機能だけになっています）');
+  }
+  if(!progs.length)warn.push('訓練項目（1つ以上）');
+  progs.forEach((p,i)=>{if(!p.f||!p.m)warn.push(`訓練項目${i+1}の頻度・時間`);});
+  if(prev&&!(change||issue))warn.push('Ⅲ 実施後の対応（変化・課題）');
+  const wEl=document.getElementById('plan-warn');
+  if(warn.length){wEl.className='plan-warn no-print ng';wEl.innerHTML='⚠️ <b>印刷の前に確認：</b>次が未入力です → '+warn.map(esc).join('、');}
+  else{wEl.className='plan-warn no-print ok';wEl.innerHTML='✅ 必須の項目はそろっています。内容を読み返してから印刷してください。';}
 
-  const rows=[
-    ['主病名',dx1],
-    ['副病名',dx2],
-    ['本人・家族の希望',hope],
-    ['医師の指示事項',doctorNote],
-    ['禁忌・注意事項',contra],
-    ['長期目標（6〜12か月）',goalLong],
-    ['短期目標（1〜3か月）',goalShort],
-    ['アセスメント',`TUG：${tug||'—'}秒 ／ BI：${bi||'—'}点 ／ RSST：${rsst||'—'}回/30秒 ／ SpO2：${spo2||'—'}% ／ 握力：${grip||'—'}kg ／ 5m歩行：${walk||'—'}秒`],
-    ['推奨パターン',recs.join(' ／ ')||'—'],
-    ['訓練メニュー（週1回・20分以上）',menus.map((m,i)=>`<b>${i+1}.</b> ${m}`).join('<br>')],
-    ['作成者（機能訓練指導員）',author],
-    ['次回評価予定','概ね3か月ごと（目安：'+nextEvalStr+'）'],
-    ['特記事項',''],
-  ];
-  const tbody=document.getElementById('plan-tbody');
-  tbody.innerHTML=rows.map(([k,v])=>`<tr><td style="width:180px;font-weight:700;color:var(--sub)">${k}</td><td>${v}</td></tr>`).join('');
+  // ---- Ⅰ 基本情報
+  const medNote=[];
+  if(gv('f-doctor'))medNote.push('【医師の指示】'+gv('f-doctor'));
+  if(gv('f-contraindication'))medNote.push(gv('f-contraindication'));
+  const rowsI=[
+    row('ふりがな・氏名',(kana?esc(kana)+'<br>':'')+'<b>'+(name?esc(name):'（未入力）')+'</b>'),
+    row('性別',sexMap[gv('f-sex')]||'—'),
+    row('生年月日',birth?`${fmtDate(birth)}（${age}歳）`:'—'),
+    row('要介護度',care?`要介護${esc(care)}`:'—'),
+    row('障害高齢者の日常生活自立度',dash(gv('f-jiritsu1'))),
+    row('認知症高齢者の日常生活自立度',dash(gv('f-jiritsu2'))),
+    row('利用者本人の希望',dash(gv('f-hope'))),
+    row('家族の希望',dash(gv('f-hope-family'))),
+    row('利用者本人の社会参加の状況',dash(gv('f-social'))),
+    row('利用者の居宅の環境',dash(gv('f-home'))),
+    row('病名',dash(gv('f-dx1'))+(gv('f-dx-dates')?`<br><small>${nl(gv('f-dx-dates'))}</small>`:'')),
+    row('治療経過',dash(gv('f-course'))),
+    row('合併症',(comps.length?esc(comps.join('、')):'—')+(gv('f-dx2')?`<br><small>コントロール状態：${nl(gv('f-dx2'))}</small>`:'')),
+    row('機能訓練実施上の留意事項',medNote.length?nl(medNote.join('\n')):'—')
+  ].join('');
 
-  const pc=document.getElementById('plan-caution');
-  if(contra&&contra!=='なし'){
-    pc.innerHTML=`⚠️ <strong>禁忌・注意事項：${contra}</strong>　訓練前に必ず確認してください。`;
-    pc.style.display='flex';
-  }else{pc.style.display='none';}
+  // ---- Ⅱ 目標・訓練項目
+  const goalRows=(label,arr)=>arr.map((g,i)=>`<tr><td class="k">${i===0?label:''}</td><td style="width:150px"><b>${g[0]}</b></td><td>${dash(g[1])}</td></tr>`).join('');
+  const rowsGoal=
+    goalRows(`長期目標<br><small>（期間：${esc(gv('f-gl-period'))||'—'}）</small>`,GL)+
+    goalRows('短期目標<br><small>（今後3か月）</small>',GS);
+  const ach=(prev||achL||achS)?`<tr><td class="k">前回の目標の達成度</td><td colspan="2">長期目標：${esc(achL)||'—'}　／　短期目標：${esc(achS)||'—'}</td></tr>`:'';
+  const progTbl=progs.length?`
+    <table class="plan-table" style="margin-top:8px">
+      <thead><tr><th>プログラム内容<br><small>（何を目的に（〜のために）〜する）</small></th><th>留意点</th><th class="c">頻度</th><th class="c">時間</th><th>主な実施者</th></tr></thead>
+      <tbody>${progs.map(p=>`<tr><td>${nl(p.c)}</td><td>${dash(p.n)}</td><td style="text-align:center">${p.f?'週'+esc(p.f)+'回':'—'}</td><td style="text-align:center">${p.m?esc(p.m)+'分/回':'—'}</td><td>${dash(p.w)}</td></tr>`).join('')}</tbody>
+    </table>`:'<div class="plan-hint">（訓練項目が未入力です）</div>';
+  const rowsEtc=[
+    row('プログラム立案者',dash(author)),
+    row('利用者本人・家族等がサービス利用時間以外に実施すること',dash(gv('f-home-prog'))),
+    row('特記事項',dash(gv('f-note')))
+  ].join('');
+
+  // ---- Ⅲ 実施後の対応
+  const rowsIII=isRevision?`<table class="plan-table"><tbody>${row('個別機能訓練の実施による変化',dash(change))}${row('個別機能訓練実施における課題とその要因',dash(issue))}</tbody></table>`
+    :'<div class="plan-hint">（初回作成時は記載不要）</div>';
+
+  // ---- 参考（様式外）
+  const A=[['TUG','a-tug','秒'],['BI','a-bi','点'],['RSST','a-rsst','回/30秒'],['SpO2','a-spo2','%'],['握力','a-grip','kg'],['5m歩行','a-walk','秒']]
+    .filter(a=>gv(a[1])).map(a=>`${a[0]}：${esc(gv(a[1]))}${a[2]}`);
+  const ref=A.length?`<div class="plan-ref">アセスメント値（参考）：${A.join(' ／ ')}</div>`:'';
+
+  document.getElementById('plan-doc').innerHTML=`
+    <div class="plan-hd">【個別機能訓練計画書】</div>
+    <div class="plan-meta">
+      <span class="plan-meta-item">事業所名：<strong>${esc(gv('f-office'))||'—'}</strong></span>
+      <span class="plan-meta-item">作成日：<strong>${today}</strong></span>
+      <span class="plan-meta-item">前回作成日：<strong>${fmtDate(prev)||'—'}</strong></span>
+      <span class="plan-meta-item">初回作成日：<strong>${fmtDate(first)||'—'}</strong></span>
+      <span class="plan-meta-item">計画作成者・職種：<strong>${esc(author)||'—'}</strong></span>
+    </div>
+    <div class="plan-sec">Ⅰ 利用者の基本情報</div>
+    <table class="plan-table"><tbody>${rowsI}</tbody></table>
+    <div class="plan-sec">Ⅱ 個別機能訓練の目標・個別機能訓練項目の設定</div>
+    <table class="plan-table"><tbody>${rowsGoal}${ach}</tbody></table>
+    ${progTbl}
+    <table class="plan-table" style="margin-top:8px"><tbody>${rowsEtc}</tbody></table>
+    <div class="plan-sec">Ⅲ 個別機能訓練実施後の対応</div>
+    ${rowsIII}
+    <div class="consent">
+      <div style="font-weight:800;margin-bottom:4px">📝 説明・同意・交付（本人・家族へ分かりやすく説明し、同意を得て、計画書を渡す）</div>
+      <div class="cl">説明日：　　　　年　　月　　日　　　　説明者：＿＿＿＿＿＿＿＿＿＿＿＿</div>
+      <div class="cl">計画書の交付日：　　　　年　　月　　日　　<span class="sub">（電磁的記録の提供でも可）</span></div>
+      <div class="cl">本人または家族 署名：＿＿＿＿＿＿＿＿＿＿＿＿　　続柄：＿＿＿＿＿　<span class="sub">（同意を得た記録）</span></div>
+      <div class="cl">☐ 担当ケアマネジャーへ計画書を交付し、説明・同意を得たことを報告済み　（報告日：　　　年　　月　　日）</div>
+    </div>
+    ${ref}`;
 
   const plan=document.getElementById('plan-area');
   plan.classList.add('show');
   plan.scrollIntoView({behavior:'smooth',block:'start'});
 }
+
+document.addEventListener('DOMContentLoaded',function(){buildComps();buildProgRows();});
 </script>
 </body>
 </html>

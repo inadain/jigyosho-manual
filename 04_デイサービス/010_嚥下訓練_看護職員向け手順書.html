@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>嚥下訓練の手順書｜デイサービスセンターこはる日和</title>
+<meta name="theme-color" content="#d97706">
+<style>
+:root {
+  --amber:      #d97706;
+  --amber-mid:  #f59e0b;
+  --amber-lt:   #fef3c7;
+  --amber-xl:   #fffbeb;
+  --grad-from:  #78350f;
+  --blue:       #1558a0;
+  --blue-lt:    #dbeafe;
+  --green:      #16a34a;
+  --green-lt:   #dcfce7;
+  --red:        #dc2626;
+  --red-lt:     #fee2e2;
+  --gray:       #64748b;
+  --gray-lt:    #f1f5f9;
+  --gray-mid:   #e2e8f0;
+  --text:       #0f172a;
+  --text-sub:   #475569;
+  --bg:         #f0f4f8;
+  --white:      #ffffff;
+  --r:          10px;
+  --r-sm:       6px;
+  --sh:         0 1px 4px rgba(0,0,0,.08);
+  --sh-md:      0 4px 16px rgba(0,0,0,.12);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", sans-serif;
+  font-size: 15px; line-height: 1.7; color: var(--text); background: var(--bg); min-height: 100vh;
+}
+
+/* ===== TOPBAR ===== */
+.topbar {
+  background: linear-gradient(135deg, var(--grad-from) 0%, var(--amber) 60%, var(--amber-mid) 100%);
+  padding: 12px 16px; position: sticky; top: 0; z-index: 50;
+  box-shadow: 0 2px 10px rgba(120,53,15,.4);
+  display: flex; align-items: center; gap: 12px;
+}
+.topbar-back {
+  background: rgba(255,255,255,.18); border: 1px solid rgba(255,255,255,.3);
+  color: #fff; text-decoration: none; padding: 5px 12px;
+  border-radius: 20px; font-size: 13px; font-weight: 600; flex-shrink: 0;
+}
+.topbar-back:hover { background: rgba(255,255,255,.28); }
+.topbar-title { font-size: 15px; font-weight: 800; color: #fff; letter-spacing: .02em; }
+.topbar-sub   { font-size: 11px; color: rgba(255,255,255,.65); }
+
+/* ===== PAGE ===== */
+.page-wrap { max-width: 760px; margin: 0 auto; padding: 24px 16px 60px; }
+
+/* ===== POLICY HEADER ===== */
+.policy-header {
+  background: linear-gradient(135deg, var(--grad-from), var(--amber));
+  border-radius: var(--r);
+  padding: 20px 24px;
+  color: #fff;
+  margin-bottom: 20px;
+}
+.policy-header h1 { font-size: 20px; font-weight: 800; margin-bottom: 8px; letter-spacing: .02em; }
+.policy-meta { display: flex; gap: 16px; flex-wrap: wrap; font-size: 12px; opacity: .8; }
+
+/* ===== SECTION CARD ===== */
+.sec {
+  background: var(--white);
+  border-radius: var(--r);
+  box-shadow: var(--sh);
+  padding: 18px 20px;
+  margin-bottom: 14px;
+  border: 1px solid var(--gray-mid);
+}
+.sec-title {
+  font-size: 12px; font-weight: 800;
+  letter-spacing: .08em; text-transform: uppercase;
+  color: var(--amber);
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--amber-lt);
+  margin-bottom: 14px;
+}
+
+/* ===== POLICY CALLOUT ===== */
+.callout-ok {
+  background: var(--green-lt);
+  border-left: 4px solid var(--green);
+  border-radius: 0 var(--r-sm) var(--r-sm) 0;
+  padding: 12px 16px;
+  font-weight: 600; font-size: 14.5px;
+  color: #14532d;
+}
+
+/* ===== FLOW ===== */
+.flow { display: flex; flex-direction: column; gap: 2px; }
+.flow-step { display: flex; align-items: flex-start; gap: 12px; }
+.flow-num {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--blue); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 800; flex-shrink: 0; margin-top: 3px;
+}
+.flow-num.done { background: var(--green); }
+.flow-connector { width: 28px; display: flex; justify-content: center; flex-shrink: 0; }
+.flow-connector::before { content: ''; display: block; width: 2px; height: 18px; background: var(--gray-mid); }
+.flow-body { flex: 1; min-width: 0; padding-bottom: 4px; }
+.flow-q { font-weight: 700; font-size: 14px; margin-bottom: 4px; }
+.flow-detail { font-size: 13px; color: var(--text-sub); line-height: 1.65; }
+
+.tag {
+  display: inline-block; border-radius: 4px; padding: 1px 7px;
+  font-size: 11.5px; font-weight: 800; margin-right: 4px; vertical-align: middle;
+}
+.tag-red    { background: var(--red-lt);   color: var(--red);   border: 1px solid var(--red); }
+.tag-amber  { background: var(--amber-lt); color: #92400e;      border: 1px solid var(--amber); }
+.tag-green  { background: var(--green-lt); color: var(--green); border: 1px solid var(--green); }
+
+/* ===== CRITERIA GRID ===== */
+.crit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 12px; }
+@media (max-width: 560px) { .crit-grid { grid-template-columns: 1fr; } }
+
+.crit-card { border-radius: var(--r-sm); overflow: hidden; border: 1px solid; }
+.crit-card.red   { border-color: var(--red); }
+.crit-card.amber { border-color: var(--amber); }
+
+.crit-head {
+  padding: 9px 14px; font-weight: 800; font-size: 13.5px; color: #fff;
+  display: flex; align-items: center; gap: 8px;
+}
+.crit-head.red   { background: var(--red); }
+.crit-head.amber { background: var(--amber); }
+
+.crit-body { padding: 12px 14px; }
+.crit-body.red   { background: var(--red-lt); }
+.crit-body.amber { background: var(--amber-lt); }
+
+.crit-body ul { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+.crit-body li { display: flex; align-items: flex-start; gap: 8px; font-size: 13.5px; }
+.crit-body li::before { content: '▸'; flex-shrink: 0; margin-top: 2px; }
+.crit-body.red   li::before { color: var(--red); }
+.crit-body.amber li::before { color: var(--amber); }
+
+.crit-note { font-size: 12px; color: #92400e; margin-bottom: 8px; }
+
+table.vt { width: 100%; border-collapse: collapse; font-size: 13px; }
+table.vt th, table.vt td { padding: 6px 10px; text-align: left; border-bottom: 1px solid rgba(0,0,0,.1); }
+table.vt th { font-size: 11.5px; font-weight: 700; color: #92400e; letter-spacing: .04em; }
+table.vt td:last-child { font-weight: 600; }
+
+/* ===== ABOLISH ===== */
+.abolish-list { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
+.abolish-item {
+  background: var(--gray-lt); border-radius: var(--r-sm);
+  padding: 11px 16px; border: 1px solid var(--gray-mid);
+}
+.bad {
+  font-size: 13.5px; font-weight: 700; color: var(--red);
+  margin-bottom: 4px; display: flex; align-items: flex-start; gap: 6px;
+}
+.bad-x { flex-shrink: 0; font-size: 14px; margin-top: 1px; }
+.good {
+  font-size: 13px; color: var(--text-sub);
+  padding-left: 20px; display: flex; gap: 6px;
+}
+.good-arrow { color: var(--green); font-weight: 800; flex-shrink: 0; }
+
+/* ===== CONTACT ===== */
+.contact-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 10px; }
+.contact-card {
+  flex: 1; min-width: 180px;
+  background: var(--gray-lt); border: 1px solid var(--gray-mid);
+  border-radius: var(--r-sm); padding: 12px 16px;
+}
+.contact-role { font-size: 11.5px; font-weight: 700; letter-spacing: .04em; color: var(--gray); margin-bottom: 2px; }
+.contact-name { font-size: 15px; font-weight: 800; }
+
+/* ===== RECORD ===== */
+.record-note {
+  font-size: 13.5px; background: var(--amber-xl);
+  border: 1px solid var(--amber-lt); border-radius: var(--r-sm);
+  padding: 12px 16px; margin-top: 8px;
+  line-height: 1.8;
+}
+
+.doc-footer {
+  text-align: center; font-size: 12px; color: var(--gray);
+  margin-top: 24px; padding-top: 14px;
+  border-top: 1px solid var(--gray-mid);
+}
+
+/* ===== 010 追加 ===== */
+table.mt { width:100%; border-collapse:collapse; font-size:13.5px; }
+table.mt th { background:var(--amber-lt); color:#92400e; font-size:12px; font-weight:800; text-align:left; padding:7px 10px; border-bottom:2px solid var(--amber); }
+table.mt td { padding:8px 10px; border-bottom:1px solid var(--gray-mid); vertical-align:top; line-height:1.6; }
+table.mt td.n { white-space:nowrap; font-weight:800; color:var(--amber); text-align:center; }
+.note { font-size:12.5px; color:var(--text-sub); margin-top:8px; }
+.tr-card { border:1px solid var(--gray-mid); border-radius:var(--r-sm); padding:12px 14px; margin-top:10px; }
+.tr-card h3 { font-size:14.5px; font-weight:800; margin-bottom:4px; }
+.tr-card .who { font-size:12px; color:var(--blue); font-weight:700; margin-bottom:6px; }
+.tr-card .how { font-size:13.5px; }
+.tr-card .ng { font-size:12.5px; color:var(--red); margin-top:6px; }
+details.fold { margin-top:10px; border:1px solid var(--gray-mid); border-radius:var(--r-sm); background:var(--gray-lt); }
+details.fold summary { cursor:pointer; padding:9px 14px; font-weight:700; font-size:13.5px; }
+details.fold > div { padding:4px 14px 12px; font-size:13px; }
+details.fold li { margin-left:1.2em; margin-bottom:4px; }
+.callout-warn { background:var(--red-lt); border-left:4px solid var(--red); border-radius:0 var(--r-sm) var(--r-sm) 0; padding:12px 16px; font-size:14px; color:#7f1d1d; }
+@media print { .topbar{display:none} body{background:#fff} .sec{break-inside:avoid} details.fold{display:block} details.fold > div{display:block} }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="000_デイサービス業務マニュアル.html" class="topbar-back">← 戻る</a>
+  <div>
+    <div class="topbar-title">嚥下訓練の手順書（看護職員向け）</div>
+    <div class="topbar-sub">デイサービスセンターこはる日和</div>
+  </div>
+</div>
+
+<div class="page-wrap">
+
+  <div class="policy-header">
+    <h1>👄 嚥下訓練の手順書（看護職員向け）</h1>
+    <div class="policy-meta">
+      <span>制定：2026年11月17日</span>
+      <span>作成：医療法人いなだ医院</span>
+      <span>対象：デイの看護職員（口腔機能向上加算の担当）</span>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-title">基本方針</div>
+    <div class="callout-ok">
+      食べ物や水を使わない訓練（間接訓練）だけを行う。<br>
+      対象者全員に同じ標準メニューを使い、座ったまま・まねをするだけでできる形にする。<br>
+      1人1回 約30分：<b>昼食前の集団20分＋個別10分</b>。要介護の方は月2回、要支援の方は月1回。
+    </div>
+    <p class="note">食べ物を使う訓練（直接訓練）や、水を飲ませるテストは、デイでは行わない。必要と思われる方は、医師・歯科・言語聴覚士につなぐ。</p>
+  </div>
+
+  <div class="sec">
+    <div class="sec-title">その日の流れ</div>
+    <div class="flow">
+      <div class="flow-step"><div class="flow-num">1</div><div class="flow-body">
+        <div class="flow-q">体調を確かめる</div>
+        <div class="flow-detail">バイタル測定（入浴前の測定と兼ねてよい）。<a href="009_入浴実施基準.html">入浴実施基準</a>の「絶対的中止」に当たる日は訓練をしない。痰が多い・ゼロゼロした声・息苦しさがある日も見合わせる</div>
+      </div></div>
+      <div class="flow-step"><div class="flow-connector"></div></div>
+      <div class="flow-step"><div class="flow-num">2</div><div class="flow-body">
+        <div class="flow-q">個別10分（午前の空き時間に1人ずつ）</div>
+        <div class="flow-detail">口の中を見る → 歯みがき・義歯の清掃を1つ直す → その人の課題を1つ練習 → 記録</div>
+      </div></div>
+      <div class="flow-step"><div class="flow-connector"></div></div>
+      <div class="flow-step"><div class="flow-num">3</div><div class="flow-body">
+        <div class="flow-q">集団20分（11:30〜11:50、昼食前）</div>
+        <div class="flow-detail">標準メニューを看護職員が前に立って進める。対象者以外も参加してよい。看護職員がいない日は介護職員が進める（その日は加算の実施日にしない）</div>
+      </div></div>
+      <div class="flow-step"><div class="flow-connector"></div></div>
+      <div class="flow-step"><div class="flow-num">4</div><div class="flow-body">
+        <div class="flow-q">昼食を見る</div>
+        <div class="flow-detail">むせ・食べこぼし・飲み込みにかかる時間を見る。気になることは介護職員にも聞く</div>
+      </div></div>
+      <div class="flow-step"><div class="flow-connector"></div></div>
+      <div class="flow-step"><div class="flow-num done">✓</div><div class="flow-body">
+        <div class="flow-q">記録する（1回1行）</div>
+        <div class="flow-detail">日付・実施した人と職種・集団に参加（○）・個別でしたこと（口腔清掃の指導／嚥下の訓練／発声）・気づいたこと1行</div>
+      </div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-title">集団20分の標準メニュー（毎回同じ）</div>
+    <table class="mt">
+      <tr><th style="width:12%">分</th><th>内容</th><th style="width:34%">ねらい</th></tr>
+      <tr><td class="n">2</td><td>今日の話（口の清潔・むせ・口の乾燥・肺炎予防などから1つ）</td><td>なぜ続けるかを知ってもらう</td></tr>
+      <tr><td class="n">3</td><td>深呼吸、首・肩のほぐし（前後・左右・ゆっくり回す）</td><td>飲み込みに使う首の筋をゆるめる</td></tr>
+      <tr><td class="n">4</td><td>頬をふくらませる・すぼめる、口唇を横に引く・すぼめる（各10回）</td><td>口を閉じる力、食べこぼし予防</td></tr>
+      <tr><td class="n">4</td><td>舌を出す・引く、左右の口角にさわる、上あごに押しつける（3〜5秒×5回）</td><td>食べ物をまとめて送り込む力</td></tr>
+      <tr><td class="n">3</td><td>「パ」「タ」「カ」「ラ」を各10回、続けて「パタカラ」×5回</td><td>口唇・舌の前・舌の奥の動き</td></tr>
+      <tr><td class="n">2</td><td>唾液腺のマッサージ（耳の下、あごの下を指の腹でやさしく）</td><td>口の乾燥を防ぐ</td></tr>
+      <tr><td class="n">2</td><td>つばを意識して飲み込む（2〜3回）、「あーいーうーえーおー」と大きく声を出す</td><td>飲み込みの練習と発声</td></tr>
+    </table>
+    <p class="note">首は痛みの出ない範囲で。頸椎の病気がある方は、首を後ろへ反らす・ひねる動きを省く。よだれが多い方・唾液でむせる方は、唾液腺のマッサージを省く。</p>
+  </div>
+
+  <div class="sec">
+    <div class="sec-title">個別10分の流れ（毎回同じ）</div>
+    <table class="mt">
+      <tr><th style="width:12%">分</th><th>内容</th></tr>
+      <tr><td class="n">2</td><td>体調と、家や食事でのむせを聞く。口の中を見る（食べかす・汚れ・乾燥・義歯の合い方・傷や痛み）</td></tr>
+      <tr><td class="n">4</td><td>歯みがき・義歯の清掃のやり方を見て、<b>1つだけ</b>直す。本人が自分でできるようにする（できない部分は介護職員の食後の口腔ケアで補う）</td></tr>
+      <tr><td class="n">3</td><td>下の「個別の課題」から、その人に合うものを<b>1つ</b>練習する。家でもできるよう紙を渡す</td></tr>
+      <tr><td class="n">1</td><td>記録にチェックをつける</td></tr>
+    </table>
+  </div>
+
+  <div class="sec">
+    <div class="sec-title">個別の課題（1人1つ選ぶ）</div>
+
+    <div class="tr-card">
+      <h3>① 嚥下おでこ体操</h3>
+      <div class="who">向く人：飲み込んだ後にのどに残る感じがある、むせる。円背で寝て行う訓練ができない人</div>
+      <div class="how">額に自分の手のひらを当てて押し返しながら、おへそをのぞき込むように強く下を向く。<br>持続：ゆっくり5つ数える間、力を入れ続ける／反復：「1・2・3・4・5」と唱えながら、数に合わせて下を向くように力を入れる。あごの下に指を当てると、筋肉が固くなるのが分かる。食前に行うとよい</div>
+      <div class="ng">注意：負荷が大きい人がいるので、強さと回数を加減する。頸椎の病気・高血圧の方は様子を見ながら</div>
+    </div>
+
+    <div class="tr-card">
+      <h3>② 開口訓練</h3>
+      <div class="who">向く人：のどに残る・むせる人で、指示が分かる人</div>
+      <div class="how">口をできるだけ大きく開け、あごの下の筋肉に力が入っているのを意識して<b>10秒保つ → 10秒休む</b>。これを<b>5回で1セット</b>。学会の方法は1日2セット（デイで1セット、家で1セット）</div>
+      <div class="ng">注意：顎関節症の方、あごが外れたことがある方には行わない</div>
+    </div>
+
+    <div class="tr-card">
+      <h3>③ 舌の押しつけ（舌の力の訓練）</h3>
+      <div class="who">向く人：食べ物を口の中でまとめにくい、飲み込みに時間がかかる、口に残る人</div>
+      <div class="how">舌全体を上あごに強く押しつけて<b>3〜5秒保つ × 5回</b>。慣れたら、舌圧子やスプーンの背で舌を軽く押し、押し返してもらう</div>
+      <div class="ng">注意：回数や強さの決まった基準はない。疲れが出ない範囲で</div>
+    </div>
+
+    <div class="tr-card">
+      <h3>④ 息こらえ嚥下（つばで練習）</h3>
+      <div class="who">向く人：飲み込むときにむせる人で、指示が分かる人</div>
+      <div class="how">鼻から大きく息を吸う → しっかり息をこらえる → つばを強く飲み込む → 口から勢いよく息を吐く。<b>食べ物は使わず、つばで練習する</b>（呼吸と飲み込みの順番を体に覚えてもらう）</div>
+      <div class="ng">注意：鼻から吸って口から吐く。口に物を入れたまま行わない</div>
+    </div>
+
+    <div class="tr-card">
+      <h3>⑤ プッシング（押しながら声を出す）</h3>
+      <div class="who">向く人：声が弱い・かすれる、むせたときの咳が弱い人</div>
+      <div class="how">机を両手で押しながら、または椅子の座面を引っぱりながら、「エイッ」と強く声を出す。響く声が出るようになったら、動作を少しずつ減らす</div>
+      <div class="ng">注意：高血圧・不整脈など心臓や血圧に心配のある方には行わない。やりすぎない</div>
+    </div>
+
+    <details class="fold">
+      <summary>デイでは行わない訓練</summary>
+      <div><ul>
+        <li>頭部挙上訓練（シャキア法）：あお向けで行い負荷が大きい。代わりに①嚥下おでこ体操を使う</li>
+        <li>のどのアイスマッサージ・冷圧刺激：口の奥に器具を入れるため。必要なら医師・言語聴覚士と相談</li>
+        <li>唾液腺のアイスマッサージ：よだれを減らすためのもの。集団メニューの唾液腺マッサージとは目的が逆</li>
+        <li>食べ物・水・ゼリーを使う訓練やテスト（直接訓練、水飲みテスト）</li>
+      </ul></div>
+    </details>
+  </div>
+
+  <div class="sec">
+    <div class="sec-title">すぐやめる・報告するとき</div>
+    <div class="callout-warn">
+      むせが止まらない／息苦しそう・顔色が悪い／SpO₂が下がる／ゼロゼロした声が続く／痛みを訴える<br>
+      → <b>訓練をやめ</b>、前かがみで休ませ、強く咳をしてもらう。続くときは管理者と<b>いなだ医院（医師）</b>へ連絡する
+    </div>
+    <p class="note">むせが増えた・食事の量が減った・体重が減った・熱が出た、が続くときは、ケアマネを通じて主治医・歯科の受診を勧める。</p>
+  </div>
+
+  <div class="sec">
+    <div class="sec-title">初回と3か月ごとの評価</div>
+    <table class="mt">
+      <tr><th style="width:30%">測ること</th><th>やり方</th><th style="width:26%">目安</th></tr>
+      <tr><td>反復唾液嚥下テスト（RSST）</td><td>椅子に座ってもらい「できるだけ何回もつばを飲み込んでください」。のどぼとけに指を当て、30秒で何回飲み込めたか数える</td><td>30秒で3回未満は要注意</td></tr>
+      <tr><td>オーラルディアドコキネシス</td><td>「パ」「タ」「カ」をそれぞれ5秒間できるだけ速く言ってもらい、回数を5で割る（1秒あたりの回数）</td><td>どれかが1秒に6回未満なら低下</td></tr>
+      <tr><td>口の中の状態</td><td>食べかす・舌の汚れ・乾燥・義歯の合い方・痛み</td><td>前回と比べる</td></tr>
+      <tr><td>食事の様子</td><td>むせ、食べこぼし、食事にかかる時間、食事の量、体重</td><td>前回と比べる</td></tr>
+    </table>
+    <p class="note">RSSTは看護職員が行ってよい（診療の補助）。ただし誤嚥の心配がとても強い方は、医師が行うのが適当とされている。指示が入りにくい方は無理に測らず、食事のむせなどの様子で評価する。</p>
+    <p class="note">評価の結果は計画に書き、ケアマネに伝える。3か月を過ぎて続けるときは、課題を選び直す。</p>
+  </div>
+
+  <div class="sec">
+    <div class="sec-title">介護職員にお願いすること</div>
+    <div class="record-note">
+      ・昼食前の口腔体操を毎日行う（看護職員がいない日も）<br>
+      ・食後の口腔ケア（歯みがき・義歯の清掃）。本人ができるところは本人に<br>
+      ・食事中のむせ・食べこぼし・飲み込みにくそうな様子を看護職員に伝える
+    </div>
+  </div>
+
+  <details class="fold">
+    <summary>この手順書の根拠</summary>
+    <div><ul>
+      <li>日本摂食嚥下リハビリテーション学会 医療検討委員会「訓練法のまとめ（2014版）」日摂食嚥下リハ会誌 18(1):55-89, 2014（頸部可動域訓練、開口訓練、口唇・舌・頬の訓練、舌抵抗訓練、頭部挙上訓練と嚥下おでこ体操、息こらえ嚥下法、プッシング・プリング訓練、唾液腺のアイスマッサージ）</li>
+      <li>厚生労働省「口腔機能向上マニュアル（改訂版）」平成21年3月（専門職のサービスは月1〜2回・各30分程度、RSST 3回未満、RSSTは看護師も実施可）</li>
+      <li>日本老年歯科医学会「口腔機能低下症 保険診療における検査と診断」Ver.5.0（オーラルディアドコキネシス：5秒間の発音数から1秒あたりを出し、パ・タ・カいずれかで6回未満）</li>
+      <li>デイ 機能訓練 個別プログラム「パターンE：口腔・嚥下機能コース」（舌の押しつけ 3〜5秒×5回 など）</li>
+    </ul></div>
+  </details>
+
+  <div class="doc-footer">
+    医療法人いなだ医院　制定 2026年11月17日　—　迷ったときは管理者・いなだ医院へ相談すること
+  </div>
+
+</div>
+<script>window.addEventListener("beforeprint",function(){document.querySelectorAll("details").forEach(function(d){d.open=true})});</script>
+</body>
+</html>

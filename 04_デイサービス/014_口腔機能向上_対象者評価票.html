@@ -23,6 +23,8 @@ td > .box:first-child { margin-left: 0; }
 .sec { font-weight: 800; font-size: 10pt; margin: 2.2mm 0 1mm; }
 .sec .note { font-weight: 400; }
 .note { font-size: 7.8pt; color: #444; }
+.tag { display: inline-block; font-size: 8pt; font-weight: 700; background: #fef3c7; border: 1px solid #f59e0b; border-radius: 3mm; padding: 0 2mm; margin-left: 1.5mm; vertical-align: 1px; }
+.skip { font-size: 8.4pt; color: #1558a0; font-weight: 700; margin: -1mm 0 1.4mm; }
 .res { background: #fff7ed; }
 .cut { border-top: 1.5px dashed #b45309; margin: 2.6mm 0 1.6mm; text-align: center; font-size: 8pt; color: #b45309; line-height: 0; }
 .cut span { background: #fff; padding: 0 2mm; }
@@ -35,42 +37,43 @@ td > .box:first-child { margin-left: 0; }
 
 <div class="sheet">
 <h1>【口腔機能向上加算　対象者評価票】</h1>
-<p class="how">1人1枚。看護職員が口の中を見て、デイ管理者と相談して判定する。対象の方は、この用紙の写しをケアマネに渡す</p>
+<p class="how">1人1枚。1・3は看護職員、2と点線より下はデイ管理者。1で当てはまれば2は飛ばしてよい。対象の方は写しをケアマネに渡す</p>
 
 <table>
   <tr><th>評価日</th><td style="white-space:nowrap">令和　　年　　月　　日</td><th>氏名</th><td style="width:32%">　　　　　　　　　　様</td><th>介護度</th><td style="white-space:nowrap">要支援 1・2 ／ 要介護 1・2・3・4・5</td></tr>
-  <tr><th>評価者</th><td colspan="5">看護職員　＿＿＿＿＿＿＿＿＿＿　　相談したデイ管理者　＿＿＿＿＿＿＿＿＿＿</td></tr>
+  <tr><th>記入者</th><td colspan="5">看護職員　＿＿＿＿＿＿＿＿＿＿　　デイ管理者　＿＿＿＿＿＿＿＿＿＿</td></tr>
 </table>
 
-<div class="sec">1　口の中を見る　<span class="note">（昼食の前後に。食べこぼし・むせは食事のときに見る）</span></div>
+<div class="sec">1　口の中を見る<span class="tag">看護職員</span>　<span class="note">（昼食の前後に。食べこぼし・むせは食事のときに見る）</span></div>
 <table>
   <tr><th style="width:15%">口腔衛生</th><td>口臭 なし・あり　　歯の汚れ なし・あり　　義歯の汚れ なし・あり　　舌苔 なし・あり</td></tr>
   <tr><th>口腔機能</th><td>奥歯のかみ合わせ なし・あり　　食べこぼし なし・あり　　むせ なし・あり<br>口腔乾燥 なし・あり　　舌の動きが悪い なし・あり　　ぶくぶくうがい できる・できない</td></tr>
 </table>
+<p class="skip">→「あり」「できない」が1つでもあれば、2は飛ばして3へ（ハで対象）</p>
 
-<div class="sec">2　ケアマネに聞く　<span class="note">（電話でよい）</span></div>
+<div class="sec">2　ケアマネに聞く<span class="tag">デイ管理者</span>　<span class="note">（1で何もなかった方だけ。電話でよい）</span></div>
 <table>
   <tr><th style="width:15%">認定調査票</th><td>嚥下 自立・自立以外　　食事摂取 自立・自立以外　　口腔清潔 自立・自立以外</td></tr>
   <tr><th>基本チェック<br>リスト<br><span class="note">要支援・事業対象者</span></th><td>(13) 半年前に比べて固いものが食べにくくなった　はい・いいえ<br>(14) お茶や汁物などでむせることがある　はい・いいえ<br>(15) 口の渇きが気になる　はい・いいえ</td></tr>
 </table>
 
-<div class="sec">3　判定</div>
+<div class="sec">3　判定<span class="tag">看護職員</span></div>
 <table>
   <tr><th style="width:15%">対象の理由<br><span class="note">1つでよい</span></th><td>
-    <span class="box l0"></span>イ　認定調査票で「自立以外」が1つ以上<br>
-    <span class="box l0"></span>ロ　基本チェックリストで「はい」が2つ以上<br>
-    <span class="box l0"></span>ハ　1で「あり」「できない」が1つ以上（項目：＿＿＿＿＿＿＿＿＿＿＿＿＿＿）</td></tr>
+    <span class="box l0"></span>ハ　1で「あり」「できない」が1つ以上（項目：＿＿＿＿＿＿＿＿＿＿＿＿＿＿）<br>
+    <span class="box l0"></span>イ　2の認定調査票で「自立以外」が1つ以上<br>
+    <span class="box l0"></span>ロ　2の基本チェックリストで「はい」が2つ以上</td></tr>
   <tr><th>対象外の確認</th><td>歯科で医療保険の摂食機能療法を受けている　なし・あり<br>他の事業所で口腔機能向上加算を算定している　なし・あり<br><span class="note">どちらかが「あり」なら算定しない。歯科に通っているだけなら対象外にならない</span></td></tr>
-  <tr class="res"><th>結果</th><td><span class="box"></span><b>対象</b> → 下の欄を書き、写しをケアマネへ　　<span class="box"></span><b>対象外</b> → 体操には参加。算定しない</td></tr>
+  <tr class="res"><th>結果</th><td><span class="box"></span><b>対象</b> → 下の「口腔の課題」「目標」に✓をつけ、管理者へ　　<span class="box"></span><b>対象外</b> → 体操のみ参加（算定しない）</td></tr>
 </table>
 
-<div class="cut"><span>ここから下はケアマネへ（対象の理由と課題）</span></div>
+<div class="cut"><span>ここから下はデイ管理者が書いてケアマネへ（「口腔の課題」「目標」の✓だけ看護職員）</span></div>
 
 <table>
   <tr><th style="width:15%">宛先</th><td>＿＿＿＿＿＿＿＿＿＿＿＿ 居宅介護支援事業所／地域包括支援センター　＿＿＿＿＿＿ 様</td></tr>
   <tr><td colspan="2" style="font-size:9pt">上の評価のとおり、口腔機能の低下（またはそのおそれ）がみられるため、口腔機能向上加算の対象と考えます。<b>ケアプランへの反映</b>をお願いします。反映の時期（土曜日への移行・認定更新など）と担当者会議の持ち方はお任せします。</td></tr>
   <tr><th>口腔の課題</th><td><span class="box"></span>口の中の清潔が保ちにくい <span class="box"></span>むせがある <span class="box"></span>食べこぼしがある <span class="box"></span>口が乾く <span class="box"></span>かみにくい<br>その他・具体的に（　　　　　　　　　　　　　　　　　　　　　　　　　　　）</td></tr>
-  <tr><th>目標の例</th><td><span class="box"></span>口の中を清潔に保つ <span class="box"></span>むせずに食事を続ける <span class="box"></span>今の食事の形を続ける <span class="box"></span>誤嚥性肺炎を防ぐ</td></tr>
+  <tr><th>目標</th><td><span class="box"></span>口の中を清潔に保つ <span class="box"></span>むせずに食事を続ける <span class="box"></span>今の食事の形を続ける <span class="box"></span>誤嚥性肺炎を防ぐ</td></tr>
   <tr><th>サービスの例</th><td>通所介護：口腔機能向上サービス（看護職員が、口腔体操・嚥下体操と口腔清掃の指導を行う）　月2回（要支援は月1回）</td></tr>
   <tr><th>個別機能訓練</th><td>あわせて検討：<span class="box"></span>希望する（理由：＿＿＿＿＿＿＿＿＿＿＿＿＿＿）<span class="box"></span>今回はしない</td></tr>
   <tr><th>渡した記録</th><td>渡した日　　／　　　渡した人（デイ管理者）＿＿＿＿＿＿＿　　変更の連絡を受けた日　　／　　</td></tr>

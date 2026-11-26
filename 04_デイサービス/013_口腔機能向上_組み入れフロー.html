@@ -7,27 +7,28 @@
 <style>
 @page { size: A4; margin: 9mm 10mm; }
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: -apple-system, "Hiragino Sans", "Noto Sans JP", sans-serif; font-size: 9.6pt; line-height: 1.5; color: #111; background: #f0f4f8; }
+body { font-family: -apple-system, "Hiragino Sans", "Noto Sans JP", sans-serif; font-size: 9.8pt; line-height: 1.55; color: #111; background: #f0f4f8; }
 .sheet { max-width: 190mm; margin: 12px auto; background: #fff; padding: 8mm; box-shadow: 0 1px 4px rgba(0,0,0,.1); }
 .wrap { max-width: 190mm; margin: 0 auto; }
 .back { font-size: 9pt; color: #b45309; display: inline-block; margin-top: 8px; }
-h1 { font-size: 13.5pt; text-align: center; margin-bottom: 1mm; letter-spacing: .04em; }
-.how { text-align: center; font-size: 8.6pt; color: #444; margin-bottom: 3mm; }
+h1 { font-size: 14pt; text-align: center; margin-bottom: 1mm; letter-spacing: .04em; }
+.how { text-align: center; font-size: 8.8pt; color: #444; margin-bottom: 3.4mm; }
 .step { display: flex; border: 1.5px solid #b45309; border-radius: 2mm; overflow: hidden; }
-.num { background: #d97706; color: #fff; font-weight: 800; font-size: 12pt; width: 11mm; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-.body { padding: 1.6mm 2.4mm; flex: 1; }
-.head { display: flex; justify-content: space-between; align-items: baseline; gap: 2mm; }
-.ttl { font-weight: 800; font-size: 10.4pt; }
-.who { font-size: 8.2pt; background: #fef3c7; border: 1px solid #f59e0b; border-radius: 3mm; padding: 0 2mm; white-space: nowrap; }
-.txt { font-size: 9pt; }
+.num { background: #d97706; color: #fff; font-weight: 800; font-size: 14pt; width: 12mm; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.body { padding: 2mm 2.8mm; flex: 1; }
+.head { display: flex; justify-content: space-between; align-items: baseline; gap: 2mm; margin-bottom: .6mm; }
+.ttl { font-weight: 800; font-size: 11pt; }
+.who { font-size: 8.4pt; background: #fef3c7; border: 1px solid #f59e0b; border-radius: 3mm; padding: 0 2mm; white-space: nowrap; }
+.txt { font-size: 9.2pt; }
 .txt ul { margin-left: 4.5mm; }
-.arrow { text-align: center; color: #b45309; font-size: 10pt; line-height: 1; margin: .6mm 0; }
-.no { font-size: 8.6pt; color: #7f1d1d; background: #fee2e2; border-radius: 1mm; padding: .4mm 1.6mm; margin-top: .8mm; display: inline-block; }
-.box { border: 1px solid #555; border-radius: 1.5mm; padding: 1.8mm 2.6mm; margin-top: 2.4mm; font-size: 8.8pt; }
-.box b.h { display: block; font-size: 9.6pt; margin-bottom: .6mm; }
-.two { display: flex; gap: 2.4mm; }
+.doc { display: inline-block; font-size: 8.4pt; font-weight: 700; color: #1558a0; border: 1px solid #1558a0; border-radius: 1mm; padding: 0 1.4mm; margin-left: 1mm; }
+.arrow { text-align: center; color: #b45309; font-size: 11pt; line-height: 1; margin: .8mm 0; }
+.no { font-size: 8.8pt; color: #7f1d1d; background: #fee2e2; border-radius: 1mm; padding: .4mm 1.6mm; margin-top: 1mm; display: inline-block; }
+.box { border: 1px solid #555; border-radius: 1.5mm; padding: 2mm 2.8mm; margin-top: 3mm; font-size: 9pt; }
+.box b.h { display: block; font-size: 9.8pt; margin-bottom: .6mm; }
+.two { display: flex; gap: 2.6mm; }
 .two .box { flex: 1; }
-.foot { font-size: 8pt; display: flex; justify-content: space-between; border-top: 1px solid #555; padding-top: 1.5mm; margin-top: 2.4mm; }
+.foot { font-size: 8pt; display: flex; justify-content: space-between; border-top: 1px solid #555; padding-top: 1.5mm; margin-top: 3mm; }
 @media print { body { background: #fff; } .sheet { box-shadow: none; margin: 0; padding: 0; max-width: none; } .back { display: none; } }
 </style>
 </head>
@@ -35,70 +36,58 @@ h1 { font-size: 13.5pt; text-align: center; margin-bottom: 1mm; letter-spacing: 
 <div class="wrap"><a class="back" href="000_デイサービス業務マニュアル.html">← 戻る</a></div>
 
 <div class="sheet">
-<h1>口腔機能向上加算　対象者の組み入れフロー</h1>
-<p class="how">1人ずつ、この順で進める。体操はその日に来ている全員で行う。算定するのは⑥まで済んだ方だけ</p>
+<h1>口腔機能向上加算　組み入れの流れ</h1>
+<p class="how">1人ずつ、この4つの順で進める。体操はその日に来ている全員で行い、算定するのはケアプランが変わった方だけ</p>
 
-<div class="step"><div class="num">①</div><div class="body">
-  <div class="head"><span class="ttl">口の中を見る</span><span class="who">看護職員　利用開始時（12月は全員）</span></div>
-  <div class="txt">011の評価欄で見る：口臭・歯の汚れ・義歯の汚れ・舌苔・奥歯のかみ合わせ・食べこぼし・むせ・口腔乾燥・舌の動き・ぶくぶくうがい</div>
-</div></div>
-<div class="arrow">▼</div>
-
-<div class="step"><div class="num">②</div><div class="body">
-  <div class="head"><span class="ttl">対象かどうかを決める（どれか1つで対象）</span><span class="who">看護職員</span></div>
+<div class="step"><div class="num">1</div><div class="body">
+  <div class="head"><span class="ttl">加算の対象かどうかを評価する</span><span class="who">看護職員</span></div>
   <div class="txt"><ul>
-    <li>イ　認定調査票の「嚥下」「食事摂取」「口腔清潔」のどれかが自立以外（ケアマネに聞く）</li>
-    <li>ロ　基本チェックリストの口腔3項目（13〜15）で2つ以上（要支援・事業対象者）</li>
-    <li>ハ　①で「あり」が1つ以上（例：口臭・舌苔があり口腔衛生が低下）。<b>根拠を011に書く</b></li>
+    <li>口の中を見る（口臭・汚れ・舌苔・むせ・食べこぼし・乾燥など10項目）<span class="doc">014 評価票</span></li>
+    <li>ケアマネに、認定調査票の口腔3項目（要支援の方は基本チェックリスト）を聞く</li>
+    <li>イ・ロ・ハのどれか1つに当てはまり、対象外（摂食機能療法・他の事業所で算定）でなければ「対象」</li>
   </ul></div>
-  <span class="no">どれもない → 体操には参加。算定はしない。状態が変わったら①へ</span>
+  <span class="no">対象外 → 体操には参加。算定しない。状態が変わったらもう一度評価する</span>
 </div></div>
 <div class="arrow">▼</div>
 
-<div class="step"><div class="num">③</div><div class="body">
-  <div class="head"><span class="ttl">対象外でないかを確かめる</span><span class="who">看護職員</span></div>
-  <div class="txt">次に当てはまれば算定しない：歯科で医療保険の「摂食機能療法」を受けている／他の事業所で口腔機能向上加算を算定している（011の欄）<br><span style="font-size:8.4pt">※歯科に通っているだけなら対象外にならない</span></div>
+<div class="step"><div class="num">2</div><div class="body">
+  <div class="head"><span class="ttl">対象の方は、ケアマネへ依頼する</span><span class="who">相談員</span></div>
+  <div class="txt">014の下半分（依頼欄）を書き、<b>写しをケアマネに送る</b>。課題・目標・サービスの例に✓をつけておくと、ケアプランに書きやすい<span class="doc">014 依頼欄</span></div>
 </div></div>
 <div class="arrow">▼</div>
 
-<div class="step"><div class="num">④</div><div class="body">
-  <div class="head"><span class="ttl">ケアマネに依頼する</span><span class="who">相談員（011の評価欄の写しを添える）</span></div>
-  <div class="txt">ケアプランに、口腔の<b>課題・目標・デイでの口腔機能向上サービス</b>を載せてもらう。「口腔機能向上加算」とだけ書いたプランでは足りない</div>
-</div></div>
-<div class="arrow">▼</div>
-
-<div class="step"><div class="num">⑤</div><div class="body">
-  <div class="head"><span class="ttl">ケアプランに載ったことを確かめる</span><span class="who">相談員</span></div>
-  <div class="txt">新しいケアプラン（第2表）が届いたら、口腔の課題・目標・サービスが入っているかを見る</div>
-</div></div>
-<div class="arrow">▼</div>
-
-<div class="step"><div class="num">⑥</div><div class="body">
-  <div class="head"><span class="ttl">計画書を作り、説明して同意をもらう</span><span class="who">看護職員</span></div>
-  <div class="txt">011の計画欄を書き、本人・家族に説明して署名をもらう。<b>自己負担が増える金額も伝える</b>。同意しなければ算定しない（体操には参加）</div>
-</div></div>
-<div class="arrow">▼</div>
-
-<div class="step"><div class="num">⑦</div><div class="body">
-  <div class="head"><span class="ttl">実施と記録、見直し</span><span class="who">看護職員</span></div>
+<div class="step"><div class="num">3</div><div class="body">
+  <div class="head"><span class="ttl">ケアマネが担当者会議を開き、ケアプランを変える</span><span class="who">ケアマネ（デイは参加）</span></div>
   <div class="txt"><ul>
-    <li>実施：第1・3週の火水、入浴後〜昼食前に全員で（010の手順）。記録は計画のある方だけ（実施日・担当者・内容）</li>
-    <li>月1回ほど：口の状態を見直す（011）　／　3か月ごと：見直してケアマネへ報告。続けるか終えるかを本人・家族に説明</li>
-    <li>LIFEへの提出：デイ管理者のパソコンから</li>
+    <li>会議の日程・持ち方（集まる／照会／オンライン）はケアマネが決める。次の更新や定例の会議に合わせてもらってよい</li>
+    <li>デイは、看護職員が書いた011の計画（案）を持って参加する<span class="doc">011 計画書</span></li>
+  </ul></div>
+</div></div>
+<div class="arrow">▼</div>
+
+<div class="step"><div class="num">4</div><div class="body">
+  <div class="head"><span class="ttl">ケアプランが変わったら、加算を取る</span><span class="who">看護職員</span></div>
+  <div class="txt"><ul>
+    <li>新しいケアプラン（第2表）に口腔の課題・目標・サービスが入っているかを確かめる（相談員）</li>
+    <li>011で本人・家族に説明し、署名をもらう。<b>自己負担が増える金額も伝える</b></li>
+    <li>その月から算定する。実施：第1・3週の火水、入浴後〜昼食前に全員で<span class="doc">010 手順書</span></li>
+    <li>月1回ほど口の状態を見直す（011の2枚目）。3か月ごとに見直し、ケアマネへ報告。LIFEへはデイ管理者のパソコンから提出</li>
   </ul></div>
 </div></div>
 
 <div class="two">
-  <div class="box"><b class="h">担当者会議は要る？</b>
-    ケアプランを変えるので、<b>原則としてケアマネが開く</b>（照会やオンラインでもよい）。開くかどうかを決めるのはケアマネ。デイは①〜③の結果を渡し、<b>算定を始める前に</b>済ませてもらう。次の更新や定例の会議に合わせてもらうと負担が少ない。
+  <div class="box"><b class="h">使う書類は3つだけ</b>
+    014　対象者評価票（評価と、ケアマネへの依頼）<br>
+    011　計画書・評価表（計画・同意・毎月の見直し）<br>
+    010　嚥下訓練の手順書（当日のやり方）
   </div>
-  <div class="box"><b class="h">12月からの目安</b>
-    12月：全員の①〜③を済ませ、対象の方は④の依頼まで進める<br>
-    ケアプランへの記載と同意がそろった方から算定する（1月からの見込み）
+  <div class="box"><b class="h">算定しない方</b>
+    評価で対象外の方／同意がない方／ケアプランがまだ変わっていない方。<br>
+    この方たちも、体操には一緒に参加してもらう。
   </div>
 </div>
 
-<div class="foot"><span>デイサービスセンターこはる日和（通所介護・事業所番号 3370207304）</span><span>2026年11月 制定</span></div>
+<div class="foot"><span>デイサービスセンターこはる日和（通所介護・事業所番号 3370207304）</span><span>2026年11月26日 制定</span></div>
 </div>
 </body>
 </html>
